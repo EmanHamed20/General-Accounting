@@ -1,0 +1,17 @@
+country_code,group_code_prefix_start,group_code_prefix_end,code,name,account_type,reconcile,deprecated
+US,1100,1199,1100,Cash,asset,false,false
+US,1100,1199,1110,Bank,asset,true,false
+US,1100,1199,1120,Accounts Receivable,asset,true,false
+US,1100,1199,1130,Inventory,asset,false,false
+US,1200,1299,1200,Equipment,asset,false,false
+US,1200,1299,1210,Accumulated Depreciation,asset,false,false
+US,2100,2199,2100,Accounts Payable,liability,true,false
+US,2100,2199,2110,Accrued Expenses,liability,false,false
+US,2100,2199,2120,Sales Tax Payable,liability,false,false
+US,3000,3999,3000,Owner Equity,equity,false,false
+US,4000,4999,4000,Sales Revenue,income,false,false
+US,4000,4999,4100,Service Revenue,income,false,false
+US,5000,5999,5000,Cost of Goods Sold,expense,false,false
+US,5000,5999,5100,Rent Expense,expense,false,false
+US,5000,5999,5200,Salaries Expense,expense,false,false
+US,5000,5999,5300,Utilities Expense,expense,false,false

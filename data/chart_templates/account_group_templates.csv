@@ -1,0 +1,9 @@
+country_code,code_prefix_start,code_prefix_end,name,parent_code_prefix_start,parent_code_prefix_end
+US,1000,1999,Assets,,
+US,1100,1199,Current Assets,1000,1999
+US,1200,1299,Fixed Assets,1000,1999
+US,2000,2999,Liabilities,,
+US,2100,2199,Current Liabilities,2000,2999
+US,3000,3999,Equity,,
+US,4000,4999,Income,,
+US,5000,5999,Expenses,,

@@ -1,0 +1,3863 @@
+country_code,code,name,active
+AD,07,Andorra la Vella,true
+AD,02,Canillo,true
+AD,03,Encamp,true
+AD,08,Escaldes-Engordany,true
+AD,04,La Massana,true
+AD,05,Ordino,true
+AD,06,Sant Julià de Loria,true
+AE,01,Abu Dhabi,true
+AE,02,Ajman,true
+AE,03,Dubai,true
+AE,04,Fujairah,true
+AE,05,Ras Al Khaimah,true
+AE,06,Sharjah,true
+AE,07,Umm al Qaywayn,true
+AF,01,Badakhshan,true
+AF,02,Badghis,true
+AF,03,Baghlan,true
+AF,30,Balkh,true
+AF,05,Bamyan,true
+AF,41,Daykundi,true
+AF,06,Farah,true
+AF,07,Faryab,true
+AF,08,Ghazni,true
+AF,09,Ghowr,true
+AF,10,Helmand,true
+AF,11,Herat,true
+AF,31,Jowzjan,true
+AF,13,Kabul,true
+AF,23,Kandahar,true
+AF,14,Kapisa,true
+AF,37,Khowst,true
+AF,34,Kunar,true
+AF,24,Kunduz,true
+AF,35,Laghman,true
+AF,17,Logar,true
+AF,27,Maidan Wardak Province,true
+AF,18,Nangarhar,true
+AF,19,Nimroz,true
+AF,38,Nuristan,true
+AF,39,Oruzgan,true
+AF,36,Paktia,true
+AF,29,Paktika,true
+AF,42,Panjshir,true
+AF,40,Parwan,true
+AF,32,Samangan,true
+AF,33,Sar-e Pol Province,true
+AF,26,Takhar,true
+AF,28,Zabul,true
+AG,01,Barbuda,true
+AG,09,Redonda,true
+AG,03,Saint George Parish,true
+AG,04,Saint John Parish,true
+AG,05,Saint Mary Parish,true
+AG,06,Saint Paul Parish,true
+AG,07,Saint Peter Parish,true
+AG,08,Saint Philip Parish,true
+AI,11205389,Blowing Point,true
+AI,11205433,East End,true
+AI,11205442,George Hill,true
+AI,11205441,Island Harbour,true
+AI,11205436,North Hill,true
+AI,11205440,North Side,true
+AI,11205392,Sandy Ground,true
+AI,11205393,Sandy Hill,true
+AI,11205438,South Hill,true
+AI,11205443,Stoney Ground,true
+AI,11205444,The Farrington,true
+AI,11205439,The Quarter,true
+AI,11205396,The Valley,true
+AI,11205437,West End,true
+AL,40,Berat County,true
+AL,41,Dibër County,true
+AL,42,Durrës County,true
+AL,43,Elbasan County,true
+AL,44,Fier County,true
+AL,45,Gjirokastër County,true
+AL,46,Korçë County,true
+AL,47,Kukës County,true
+AL,48,Lezhë County,true
+AL,49,Shkodër County,true
+AL,50,Tirana,true
+AL,51,Vlorë County,true
+AM,01,Aragatsotn,true
+AM,02,Ararat,true
+AM,03,Armavir,true
+AM,04,Gegharkunik,true
+AM,05,Kotayk,true
+AM,06,Lori,true
+AM,07,Shirak,true
+AM,08,Syunik,true
+AM,09,Tavush,true
+AM,10,Vayots Dzor,true
+AM,11,Yerevan,true
+AO,19,Bengo,true
+AO,01,Benguela,true
+AO,02,Bíe,true
+AO,03,Cabinda,true
+AO,04,Cuando Cobango,true
+AO,05,Cuanza Norte,true
+AO,07,Cunene,true
+AO,08,Huambo,true
+AO,09,Huíla,true
+AO,06,Kwanza Sul,true
+AO,20,Luanda,true
+AO,17,Luanda Norte,true
+AO,18,Lunda Sul,true
+AO,12,Malanje,true
+AO,14,Moxico,true
+AO,13,Namibe,true
+AO,15,Uíge,true
+AO,16,Zaire,true
+AR,01,Buenos Aires,true
+AR,07,Buenos Aires F.D.,true
+AR,02,Catamarca,true
+AR,03,Chaco,true
+AR,04,Chubut,true
+AR,05,Cordoba,true
+AR,06,Corrientes,true
+AR,08,Entre Rios,true
+AR,09,Formosa,true
+AR,10,Jujuy,true
+AR,11,La Pampa,true
+AR,12,La Rioja,true
+AR,13,Mendoza,true
+AR,14,Misiones,true
+AR,15,Neuquen,true
+AR,16,Rio Negro,true
+AR,17,Salta,true
+AR,18,San Juan,true
+AR,19,San Luis,true
+AR,20,Santa Cruz,true
+AR,21,Santa Fe,true
+AR,22,Santiago del Estero,true
+AR,23,Tierra del Fuego,true
+AR,24,Tucuman,true
+AS,010,Eastern District,true
+AS,020,Manu'a,true
+AS,030,Rose Island,true
+AS,040,Swains Island,true
+AS,050,Western District,true
+AT,01,Burgenland,true
+AT,02,Carinthia,true
+AT,03,Lower Austria,true
+AT,05,Salzburg,true
+AT,06,Styria,true
+AT,07,Tyrol,true
+AT,04,Upper Austria,true
+AT,09,Vienna,true
+AT,08,Vorarlberg,true
+AU,01,Australian Capital Territory,true
+AU,02,New South Wales,true
+AU,03,Northern Territory,true
+AU,04,Queensland,true
+AU,05,South Australia,true
+AU,06,Tasmania,true
+AU,07,Victoria,true
+AU,08,Western Australia,true
+AX,211,Mariehamns stad,true
+AX,212,Ålands landsbygd,true
+AX,213,Ålands skärgård,true
+AZ,01,Abşeron,true
+AZ,06,Agsu District,true
+AZ,08,Astara,true
+AZ,02,Ağcabǝdi,true
+AZ,03,Ağdam,true
+AZ,04,Ağdaş,true
+AZ,05,Ağstafa,true
+AZ,09,Baki,true
+AZ,10,Balakan District,true
+AZ,11,Barda,true
+AZ,12,Beyləqan,true
+AZ,13,Bilasuvar District,true
+AZ,16,Daşkǝsǝn,true
+AZ,18,Fuzuli District,true
+AZ,19,Gadabay District,true
+AZ,21,Goranboy District,true
+AZ,62,Goygol Rayon,true
+AZ,22,Göyçay,true
+AZ,20,Gǝncǝ,true
+AZ,23,Hacıqabul,true
+AZ,25,Ismayilli District,true
+AZ,14,Jabrayil,true
+AZ,15,Jalilabad,true
+AZ,26,Kalbajar,true
+AZ,64,Khojaly,true
+AZ,65,Khojavend,true
+AZ,27,Kurdamir District,true
+AZ,28,Lachin Rayon,true
+AZ,30,Lankaran Sahari,true
+AZ,31,Lerik District,true
+AZ,29,Lənkəran,true
+AZ,32,Masally,true
+AZ,33,Mingǝcevir,true
+AZ,34,Naftalan,true
+AZ,35,Nakhchivan,true
+AZ,36,Neftçala,true
+AZ,37,Oğuz,true
+AZ,38,Qabala District,true
+AZ,39,Qax,true
+AZ,40,Qazax,true
+AZ,41,Qobustan,true
+AZ,42,Quba,true
+AZ,43,Qubadlı,true
+AZ,44,Qusar District,true
+AZ,45,Saatlı,true
+AZ,46,Sabirabad District,true
+AZ,49,Salyan District,true
+AZ,52,Samux,true
+AZ,17,Shabran,true
+AZ,47,Shaki,true
+AZ,48,Shaki City,true
+AZ,07,Shirvan,true
+AZ,55,Shusha,true
+AZ,56,Shusha City,true
+AZ,53,Siyǝzǝn,true
+AZ,54,Sumqayit,true
+AZ,57,Tartar District,true
+AZ,58,Tovuz District,true
+AZ,59,Ucar,true
+AZ,61,Xankǝndi,true
+AZ,60,Xaçmaz,true
+AZ,63,Xızı,true
+AZ,66,Yardimli District,true
+AZ,67,Yevlax,true
+AZ,68,Yevlax City,true
+AZ,69,Zangilan District,true
+AZ,70,Zaqatala District,true
+AZ,71,Zərdab,true
+AZ,24,İmişli,true
+AZ,50,Şamaxı,true
+AZ,51,Şǝmkir,true
+BA,BRC,Brčko,true
+BA,01,Federation of B&H,true
+BA,02,Srpska,true
+BB,01,Christ Church,true
+BB,02,Saint Andrew,true
+BB,03,Saint George,true
+BB,04,Saint James,true
+BB,05,Saint John,true
+BB,06,Saint Joseph,true
+BB,07,Saint Lucy,true
+BB,08,Saint Michael,true
+BB,09,Saint Peter,true
+BB,10,Saint Philip,true
+BB,11,Saint Thomas,true
+BD,85,Barisal Division,true
+BD,84,Chittagong,true
+BD,81,Dhaka Division,true
+BD,82,Khulna Division,true
+BD,H,Mymensingh Division,true
+BD,83,Rajshahi Division,true
+BD,87,Rangpur Division,true
+BD,86,Sylhet Division,true
+BE,BRU,Brussels Capital,true
+BE,VLG,Flanders,true
+BE,WAL,Wallonia,true
+BF,01,Boucle du Mouhoun,true
+BF,02,Cascades Region,true
+BF,03,Centre,true
+BF,04,Centre-Est,true
+BF,05,Centre-Nord,true
+BF,06,Centre-Ouest,true
+BF,07,Centre-Sud,true
+BF,08,Est,true
+BF,09,Hauts-Bassins,true
+BF,10,Nord,true
+BF,11,Plateau-Central,true
+BF,12,Sahel,true
+BF,13,Sud-Ouest,true
+BG,38,Blagoevgrad,true
+BG,39,Burgas,true
+BG,40,Dobrich,true
+BG,41,Gabrovo,true
+BG,43,Haskovo,true
+BG,44,Kardzhali,true
+BG,45,Kyustendil,true
+BG,46,Lovech,true
+BG,47,Montana,true
+BG,48,Pazardzhik,true
+BG,49,Pernik,true
+BG,50,Pleven,true
+BG,51,Plovdiv,true
+BG,52,Razgrad,true
+BG,53,Ruse,true
+BG,54,Shumen,true
+BG,55,Silistra,true
+BG,56,Sliven,true
+BG,57,Smolyan,true
+BG,58,Sofia,true
+BG,42,Sofia-Capital,true
+BG,59,Stara Zagora,true
+BG,60,Targovishte,true
+BG,61,Varna,true
+BG,62,Veliko Tarnovo,true
+BG,63,Vidin,true
+BG,64,Vratsa,true
+BG,65,Yambol,true
+BH,16,Manama,true
+BH,15,Muharraq,true
+BH,19,Northern,true
+BH,17,Southern Governorate,true
+BI,09,Bubanza,true
+BI,24,Bujumbura Mairie,true
+BI,25,Bujumbura Rural,true
+BI,10,Bururi,true
+BI,11,Cankuzo,true
+BI,12,Cibitoke,true
+BI,13,Gitega,true
+BI,15,Kayanza,true
+BI,16,Kirundo,true
+BI,17,Makamba,true
+BI,22,Muramvya,true
+BI,18,Muyinga,true
+BI,19,Ngozi,true
+BI,26,Rumonge,true
+BI,20,Rutana,true
+BI,21,Ruyigi,true
+BJ,07,Alibori,true
+BJ,08,Atakora,true
+BJ,09,Atlantique,true
+BJ,10,Borgou,true
+BJ,11,Collines,true
+BJ,13,Donga,true
+BJ,12,Kouffo,true
+BJ,14,Littoral,true
+BJ,15,Mono,true
+BJ,16,Ouémé,true
+BJ,17,Plateau,true
+BJ,18,Zou,true
+BM,01,Devonshire,true
+BM,02,Hamilton,true
+BM,03,Hamilton city,true
+BM,04,Paget,true
+BM,05,Pembroke,true
+BM,06,Saint George,true
+BM,07,Saint Georgeʼs,true
+BM,08,Sandys,true
+BM,09,Smithʼs,true
+BM,10,Southampton,true
+BM,11,Warwick,true
+BN,01,Belait,true
+BN,02,Brunei-Muara District,true
+BN,03,Temburong,true
+BN,04,Tutong,true
+BO,03,Beni Department,true
+BO,01,Chuquisaca Department,true
+BO,02,Cochabamba,true
+BO,04,La Paz Department,true
+BO,05,Oruro,true
+BO,06,Pando,true
+BO,07,Potosí Department,true
+BO,08,Santa Cruz Department,true
+BO,09,Tarija Department,true
+BQ,BO,Bonaire,true
+BQ,SB,Saba,true
+BQ,SE,Sint Eustatius,true
+BR,01,Acre,true
+BR,02,Alagoas,true
+BR,03,Amapá,true
+BR,04,Amazonas,true
+BR,05,Bahia,true
+BR,06,Ceará,true
+BR,08,Espírito Santo,true
+BR,07,Federal District,true
+BR,29,Goiás,true
+BR,13,Maranhão,true
+BR,14,Mato Grosso,true
+BR,11,Mato Grosso do Sul,true
+BR,15,Minas Gerais,true
+BR,18,Paraná,true
+BR,17,Paraíba,true
+BR,16,Pará,true
+BR,30,Pernambuco,true
+BR,20,Piauí,true
+BR,22,Rio Grande do Norte,true
+BR,23,Rio Grande do Sul,true
+BR,21,Rio de Janeiro,true
+BR,24,Rondônia,true
+BR,25,Roraima,true
+BR,26,Santa Catarina,true
+BR,28,Sergipe,true
+BR,27,São Paulo,true
+BR,31,Tocantins,true
+BS,24,Acklins,true
+BS,32,Berry Islands,true
+BS,05,Bimini,true
+BS,36,Black Point,true
+BS,06,Cat Island,true
+BS,37,Central Abaco,true
+BS,38,Central Andros,true
+BS,39,Central Eleuthera,true
+BS,40,Crooked Island and Long Cay,true
+BS,41,East Grand Bahama,true
+BS,10,Exuma,true
+BS,25,Freeport,true
+BS,42,Grand Cay,true
+BS,22,Harbour Island,true
+BS,43,Hope Town,true
+BS,13,Inagua,true
+BS,15,Long Island,true
+BS,44,Mangrove Cay,true
+BS,16,Mayaguana,true
+BS,45,Moore’s Island,true
+BS,23,New Providence,true
+BS,46,North Abaco,true
+BS,47,North Andros,true
+BS,48,North Eleuthera,true
+BS,18,Ragged Island,true
+BS,49,Rum Cay,true
+BS,35,San Salvador,true
+BS,50,South Abaco,true
+BS,51,South Andros,true
+BS,52,South Eleuthera,true
+BS,53,Spanish Wells,true
+BS,54,West Grand Bahama,true
+BT,05,Bumthang District,true
+BT,06,Chukha,true
+BT,08,Dagana,true
+BT,23,Gasa,true
+BT,10,Haa,true
+BT,11,Lhuntse,true
+BT,12,Mongar,true
+BT,13,Paro,true
+BT,14,Pemagatshel,true
+BT,15,Punakha,true
+BT,17,Samdrup Jongkhar,true
+BT,16,Samtse District,true
+BT,09,Sarpang District,true
+BT,20,Thimphu District,true
+BT,21,Tongsa,true
+BT,24,Trashi Yangste,true
+BT,19,Trashigang District,true
+BT,07,Tsirang District,true
+BT,22,Wangdi Phodrang,true
+BT,18,Zhemgang District,true
+BW,01,Central,true
+BW,12,Chobe,true
+BW,13,City of Francistown,true
+BW,14,Gaborone,true
+BW,03,Ghanzi,true
+BW,15,Jwaneng,true
+BW,04,Kgalagadi,true
+BW,05,Kgatleng,true
+BW,06,Kweneng,true
+BW,16,Lobatse,true
+BW,10,Ngwaketsi,true
+BW,08,North-East,true
+BW,11,North-West,true
+BW,17,Selibe Phikwe,true
+BW,09,South-East,true
+BW,18,Sowa Town,true
+BY,01,Brest,true
+BY,03,Grodnenskaya,true
+BY,02,Homyel’ Voblasc’,true
+BY,05,Minsk,true
+BY,04,Minsk City,true
+BY,06,Mogilev,true
+BY,07,Vitebsk,true
+BZ,01,Belize District,true
+BZ,02,Cayo District,true
+BZ,03,Corozal District,true
+BZ,04,Orange Walk District,true
+BZ,05,Southern District,true
+BZ,06,Toledo District,true
+CA,01,Alberta,true
+CA,02,British Columbia,true
+CA,03,Manitoba,true
+CA,04,New Brunswick,true
+CA,05,Newfoundland and Labrador,true
+CA,13,Northwest Territories,true
+CA,07,Nova Scotia,true
+CA,14,Nunavut,true
+CA,08,Ontario,true
+CA,09,Prince Edward Island,true
+CA,10,Quebec,true
+CA,11,Saskatchewan,true
+CA,12,Yukon,true
+CD,08,Bas-Congo,true
+CD,13,Bas-Uele,true
+CD,04,East Kasai,true
+CD,14,Haut-Katanga,true
+CD,15,Haut-Lomami,true
+CD,16,Haut-Uele,true
+CD,17,Ituri,true
+CD,18,Kasai,true
+CD,23,Kasai-Central,true
+CD,06,Kinshasa,true
+CD,19,Kwango,true
+CD,20,Kwilu,true
+CD,21,Lomami,true
+CD,22,Lualaba,true
+CD,24,Mai-Ndombe,true
+CD,10,Maniema,true
+CD,25,Mongala,true
+CD,26,Nord-Ubangi,true
+CD,11,North Kivu,true
+CD,27,Sankuru,true
+CD,12,South Kivu,true
+CD,28,Sud-Ubangi,true
+CD,29,Tanganyika,true
+CD,30,Tshopo,true
+CD,31,Tshuapa,true
+CD,02,Équateur,true
+CF,01,Bamingui-Bangoran,true
+CF,18,Bangui,true
+CF,02,Basse-Kotto,true
+CF,05,Haut-Mbomou,true
+CF,03,Haute-Kotto,true
+CF,06,Kémo,true
+CF,21,Lim-Pendé,true
+CF,07,Lobaye,true
+CF,19,Mambéré,true
+CF,04,Mambéré-Kadéï,true
+CF,08,Mbomou,true
+CF,15,Nana-Grébizi,true
+CF,09,Nana-Mambéré,true
+CF,17,Ombella-M'Poko,true
+CF,11,Ouaka,true
+CF,12,Ouham,true
+CF,20,Ouham-Fafa,true
+CF,13,Ouham-Pendé,true
+CF,16,Sangha-Mbaéré,true
+CF,14,Vakaga,true
+CG,01,Bouenza,true
+CG,12,Brazzaville,true
+CG,13,Cuvette,true
+CG,14,Cuvette-Ouest,true
+CG,04,Kouilou,true
+CG,06,Likouala,true
+CG,05,Lékoumou,true
+CG,07,Niari,true
+CG,08,Plateaux,true
+CG,15,Pointe-Noire,true
+CG,11,Pool,true
+CG,10,Sangha,true
+CH,AG,Aargau,true
+CH,AR,Appenzell Ausserrhoden,true
+CH,AI,Appenzell Innerrhoden,true
+CH,BS,Basel-City,true
+CH,BL,Basel-Landschaft,true
+CH,BE,Bern,true
+CH,FR,Fribourg,true
+CH,GE,Geneva,true
+CH,GL,Glarus,true
+CH,GR,Grisons,true
+CH,JU,Jura,true
+CH,LU,Lucerne,true
+CH,NE,Neuchâtel,true
+CH,NW,Nidwalden,true
+CH,OW,Obwalden,true
+CH,SG,Saint Gallen,true
+CH,SH,Schaffhausen,true
+CH,SZ,Schwyz,true
+CH,SO,Solothurn,true
+CH,TG,Thurgau,true
+CH,TI,Ticino,true
+CH,UR,Uri,true
+CH,VS,Valais,true
+CH,VD,Vaud,true
+CH,ZG,Zug,true
+CH,ZH,Zurich,true
+CI,93,Abidjan Autonomous District,true
+CI,76,Bas-Sassandra District,true
+CI,94,Comoé District,true
+CI,77,Denguélé District,true
+CI,95,Gôh-Djiboua,true
+CI,81,Lacs District,true
+CI,82,Lagunes District,true
+CI,78,Montagnes,true
+CI,96,Sassandra-Marahoué,true
+CI,87,Savanes District,true
+CI,90,Vallée du Bandama District,true
+CI,97,Woroba,true
+CI,98,Yamoussoukro,true
+CI,92,Zanzan District,true
+CK,11695124,Aitutaki,true
+CK,11695126,Atiu,true
+CK,11695385,Ma'uke,true
+CK,11695127,Mangaia,true
+CK,11695384,Manihiki,true
+CK,11695386,Mitiaro,true
+CK,11695387,Palmerston,true
+CK,11695388,Penrhyn,true
+CK,11695389,Pukapuka,true
+CK,11695390,Rakahanga,true
+CK,11695425,Rarotonga,true
+CL,03,Antofagasta,true
+CL,04,Araucanía,true
+CL,16,Arica y Parinacota Region,true
+CL,05,Atacama,true
+CL,02,Aysén,true
+CL,06,Biobío,true
+CL,07,Coquimbo Region,true
+CL,14,Los Lagos Region,true
+CL,17,Los Ríos Region,true
+CL,11,Maule Region,true
+CL,08,O'Higgins Region,true
+CL,10,Region of Magallanes,true
+CL,12,Santiago Metropolitan,true
+CL,15,Tarapacá,true
+CL,01,Valparaíso,true
+CL,18,Ñuble,true
+CM,10,Adamaoua,true
+CM,11,Centre,true
+CM,04,East,true
+CM,12,Far North,true
+CM,05,Littoral,true
+CM,13,North,true
+CM,07,North-West,true
+CM,14,South,true
+CM,09,South-West,true
+CM,08,West,true
+CN,01,Anhui,true
+CN,22,Beijing,true
+CN,33,Chongqing,true
+CN,07,Fujian,true
+CN,15,Gansu,true
+CN,30,Guangdong,true
+CN,16,Guangxi,true
+CN,18,Guizhou,true
+CN,31,Hainan,true
+CN,10,Hebei,true
+CN,08,Heilongjiang,true
+CN,09,Henan,true
+CN,12,Hubei,true
+CN,11,Hunan,true
+CN,20,Inner Mongolia,true
+CN,04,Jiangsu,true
+CN,03,Jiangxi,true
+CN,05,Jilin,true
+CN,19,Liaoning,true
+CN,21,Ningxia,true
+CN,06,Qinghai,true
+CN,26,Shaanxi,true
+CN,25,Shandong,true
+CN,23,Shanghai,true
+CN,24,Shanxi,true
+CN,32,Sichuan,true
+CN,28,Tianjin,true
+CN,14,Tibet,true
+CN,13,Xinjiang,true
+CN,29,Yunnan,true
+CN,02,Zhejiang,true
+CO,01,Amazonas Department,true
+CO,02,Antioquia,true
+CO,03,Arauca Department,true
+CO,04,Atlántico,true
+CO,34,Bogota D.C.,true
+CO,35,Bolívar,true
+CO,36,Boyacá,true
+CO,37,Caldas Department,true
+CO,08,Caquetá,true
+CO,32,Casanare Department,true
+CO,09,Cauca Department,true
+CO,10,Cesar Department,true
+CO,11,Chocó,true
+CO,33,Cundinamarca,true
+CO,12,Córdoba,true
+CO,15,Guainía Department,true
+CO,14,Guaviare Department,true
+CO,16,Huila Department,true
+CO,17,La Guajira Department,true
+CO,38,Magdalena Department,true
+CO,19,Meta Department,true
+CO,20,Nariño,true
+CO,21,Norte de Santander Department,true
+CO,22,Putumayo Department,true
+CO,23,Quindío Department,true
+CO,24,Risaralda Department,true
+CO,25,San Andres y Providencia,true
+CO,26,Santander Department,true
+CO,27,Sucre Department,true
+CO,28,Tolima Department,true
+CO,29,Valle del Cauca Department,true
+CO,30,Vaupés,true
+CO,31,Vichada Department,true
+CR,01,Alajuela Province,true
+CR,02,Cartago Province,true
+CR,03,Guanacaste Province,true
+CR,04,Heredia Province,true
+CR,06,Limón Province,true
+CR,07,Puntarenas Province,true
+CR,08,San José,true
+CU,AR,Artemisa,true
+CU,05,Camagüey,true
+CU,07,Ciego de Ávila Province,true
+CU,08,Cienfuegos Province,true
+CU,09,Granma Province,true
+CU,10,Guantánamo Province,true
+CU,02,Havana,true
+CU,12,Holguín Province,true
+CU,04,Isla de la Juventud,true
+CU,13,Las Tunas Province,true
+CU,03,Matanzas Province,true
+CU,MA,Mayabeque,true
+CU,01,Pinar del Río,true
+CU,14,Sancti Spíritus Province,true
+CU,15,Santiago de Cuba Province,true
+CU,16,Villa Clara Province,true
+CV,01,Boa Vista,true
+CV,02,Brava,true
+CV,04,Maio,true
+CV,13,Mosteiros,true
+CV,05,Paul,true
+CV,21,Porto Novo,true
+CV,14,Praia,true
+CV,22,Ribeira Brava,true
+CV,07,Ribeira Grande,true
+CV,23,Ribeira Grande de Santiago,true
+CV,08,Sal,true
+CV,15,Santa Catarina,true
+CV,24,Santa Catarina do Fogo,true
+CV,16,Santa Cruz,true
+CV,17,São Domingos,true
+CV,18,São Filipe,true
+CV,25,São Lourenço dos Órgãos,true
+CV,19,São Miguel,true
+CV,26,São Salvador do Mundo,true
+CV,11,São Vicente,true
+CV,20,Tarrafal,true
+CV,27,Tarrafal de São Nicolau,true
+CY,01,Ammochostos,true
+CY,02,Keryneia,true
+CY,03,Larnaka,true
+CY,05,Limassol,true
+CY,04,Nicosia,true
+CY,06,Pafos,true
+CZ,88,Central Bohemia,true
+CZ,79,Jihočeský kraj,true
+CZ,81,Karlovarský kraj,true
+CZ,82,Královéhradecký kraj,true
+CZ,83,Liberecký kraj,true
+CZ,85,Moravskoslezský,true
+CZ,84,Olomoucký,true
+CZ,86,Pardubický,true
+CZ,87,Plzeň Region,true
+CZ,52,Prague,true
+CZ,78,South Moravian,true
+CZ,80,Vysočina,true
+CZ,90,Zlín,true
+CZ,89,Ústecký kraj,true
+DE,01,Baden-Wurttemberg,true
+DE,02,Bavaria,true
+DE,11,Brandenburg,true
+DE,03,City state Bremen,true
+DE,04,Hamburg,true
+DE,05,Hesse,true
+DE,06,Lower Saxony,true
+DE,12,Mecklenburg-Vorpommern,true
+DE,07,North Rhine-Westphalia,true
+DE,08,Rheinland-Pfalz,true
+DE,09,Saarland,true
+DE,13,Saxony,true
+DE,14,Saxony-Anhalt,true
+DE,10,Schleswig-Holstein,true
+DE,16,State of Berlin,true
+DE,15,Thuringia,true
+DJ,01,Ali Sabieh,true
+DJ,08,Arta,true
+DJ,06,Dikhil,true
+DJ,07,Djibouti,true
+DJ,04,Obock,true
+DJ,05,Tadjourah,true
+DK,17,Capital Region,true
+DK,18,Central Jutland,true
+DK,19,North Denmark,true
+DK,21,South Denmark,true
+DK,20,Zealand,true
+DM,02,Saint Andrew Parish,true
+DM,03,Saint David Parish,true
+DM,04,Saint George Parish,true
+DM,05,Saint John Parish,true
+DM,06,Saint Joseph Parish,true
+DM,07,Saint Luke Parish,true
+DM,08,Saint Mark Parish,true
+DM,09,Saint Patrick Parish,true
+DM,10,Saint Paul Parish,true
+DM,11,Saint Peter Parish,true
+DO,01,Azua Province,true
+DO,02,Baoruco Province,true
+DO,03,Barahona Province,true
+DO,04,Dajabón,true
+DO,06,Duarte Province,true
+DO,28,El Seíbo,true
+DO,11,Elías Piña,true
+DO,08,Espaillat Province,true
+DO,29,Hato Mayor Province,true
+DO,19,Hermanas Mirabal,true
+DO,09,Independencia,true
+DO,10,La Altagracia Province,true
+DO,12,La Romana,true
+DO,30,La Vega,true
+DO,14,María Trinidad Sánchez,true
+DO,31,Monseñor Nouel,true
+DO,15,Monte Cristi Province,true
+DO,32,Monte Plata Province,true
+DO,34,Nacional,true
+DO,16,Pedernales Province,true
+DO,35,Peravia,true
+DO,18,Puerto Plata,true
+DO,20,Samaná,true
+DO,33,San Cristóbal,true
+DO,36,San José de Ocoa,true
+DO,23,San Juan Province,true
+DO,24,San Pedro de Macorís,true
+DO,25,Santiago Province,true
+DO,26,Santiago Rodríguez,true
+DO,37,Santo Domingo Province,true
+DO,21,Sánchez Ramírez,true
+DO,27,Valverde Province,true
+DZ,34,Adrar,true
+DZ,01,Algiers,true
+DZ,37,Annaba,true
+DZ,35,Aïn Defla,true
+DZ,36,Aïn Témouchent,true
+DZ,03,Batna,true
+DZ,BA,Beni Abbes,true
+DZ,19,Biskra,true
+DZ,20,Blida,true
+DZ,BB,Bordj Badji Mokhtar,true
+DZ,39,Bordj Bou Arréridj,true
+DZ,21,Bouira,true
+DZ,40,Boumerdes,true
+DZ,38,Béchar,true
+DZ,18,Béjaïa,true
+DZ,41,Chlef,true
+DZ,04,Constantine,true
+DZ,DJ,Djanet,true
+DZ,22,Djelfa,true
+DZ,42,El Bayadh,true
+DZ,EM,El Menia,true
+DZ,MG,El Mghair,true
+DZ,43,El Oued,true
+DZ,44,El Tarf,true
+DZ,45,Ghardaia,true
+DZ,23,Guelma,true
+DZ,46,Illizi,true
+DZ,IG,In Guezzam,true
+DZ,IS,In Salah,true
+DZ,24,Jijel,true
+DZ,47,Khenchela,true
+DZ,25,Laghouat,true
+DZ,27,M'Sila,true
+DZ,26,Mascara,true
+DZ,06,Medea,true
+DZ,48,Mila,true
+DZ,07,Mostaganem,true
+DZ,49,Naama,true
+DZ,09,Oran,true
+DZ,50,Ouargla,true
+DZ,OD,Ouled Djellal,true
+DZ,29,Oum el Bouaghi,true
+DZ,51,Relizane,true
+DZ,10,Saida,true
+DZ,30,Sidi Bel Abbès,true
+DZ,31,Skikda,true
+DZ,52,Souk Ahras,true
+DZ,12,Sétif,true
+DZ,53,Tamanrasset,true
+DZ,13,Tiaret,true
+DZ,TM,Timimoun,true
+DZ,54,Tindouf,true
+DZ,55,Tipaza,true
+DZ,56,Tissemsilt,true
+DZ,14,Tizi Ouzou,true
+DZ,15,Tlemcen,true
+DZ,TG,Touggourt,true
+DZ,33,Tébessa,true
+EC,02,Azuay,true
+EC,03,Bolívar,true
+EC,05,Carchi,true
+EC,04,Cañar,true
+EC,06,Chimborazo Province,true
+EC,07,Cotopaxi,true
+EC,08,El Oro,true
+EC,09,Esmeraldas,true
+EC,01,Galápagos,true
+EC,10,Guayas,true
+EC,11,Imbabura,true
+EC,12,Loja,true
+EC,13,Los Ríos,true
+EC,14,Manabí,true
+EC,15,Morona-Santiago Province,true
+EC,23,Napo,true
+EC,24,Orellana Province,true
+EC,17,Pastaza Province,true
+EC,18,Pichincha,true
+EC,25,Santa Elena,true
+EC,26,Santo Domingo de los Tsáchilas,true
+EC,22,Sucumbíos,true
+EC,19,Tungurahua Province,true
+EC,20,Zamora Chinchipe,true
+EE,01,Harjumaa,true
+EE,02,Hiiumaa,true
+EE,03,Ida-Virumaa,true
+EE,04,Järvamaa,true
+EE,05,Jõgevamaa,true
+EE,07,Lääne,true
+EE,08,Lääne-Virumaa,true
+EE,11,Pärnumaa,true
+EE,12,Põlvamaa,true
+EE,13,Raplamaa,true
+EE,14,Saare,true
+EE,18,Tartu,true
+EE,19,Valgamaa,true
+EE,20,Viljandimaa,true
+EE,21,Võrumaa,true
+EG,06,Alexandria,true
+EG,16,Aswan,true
+EG,17,Asyut,true
+EG,03,Beheira,true
+EG,18,Beni Suweif,true
+EG,11,Cairo,true
+EG,01,Dakahlia,true
+EG,20,Damietta,true
+EG,04,Faiyum,true
+EG,05,Gharbia,true
+EG,08,Giza,true
+EG,07,Ismailia,true
+EG,21,Kafr el-Sheikh,true
+EG,28,Luxor,true
+EG,22,Matruh,true
+EG,10,Minya,true
+EG,09,Monufia,true
+EG,13,New Valley,true
+EG,27,North Sinai,true
+EG,19,Port Said,true
+EG,12,Qalyubia,true
+EG,23,Qena,true
+EG,02,Red Sea,true
+EG,14,Sharqia,true
+EG,24,Sohag,true
+EG,26,South Sinai,true
+EG,15,Suez,true
+ER,01,Anseba,true
+ER,02,Debub,true
+ER,04,Gash-Barka,true
+ER,05,Maekel,true
+ER,06,Northern Red Sea,true
+ER,03,Southern Red Sea,true
+ES,51,Andalusia,true
+ES,52,Aragon,true
+ES,34,Asturias,true
+ES,07,Balearic Islands,true
+ES,59,Basque Country,true
+ES,53,Canary Islands,true
+ES,39,Cantabria,true
+ES,55,Castille and León,true
+ES,54,Castille-La Mancha,true
+ES,56,Catalonia,true
+ES,CE,Ceuta,true
+ES,57,Extremadura,true
+ES,58,Galicia,true
+ES,27,La Rioja,true
+ES,29,Madrid,true
+ES,ML,Melilla,true
+ES,31,Murcia,true
+ES,32,Navarre,true
+ES,60,Valencia,true
+ET,44,Addis Ababa,true
+ET,46,Amhara,true
+ET,47,Bīnshangul Gumuz,true
+ET,55,Central Ethiopia Regional State,true
+ET,48,Dire Dawa,true
+ET,49,Gambela,true
+ET,50,Harari,true
+ET,51,Oromiya,true
+ET,SI,Sidama Region,true
+ET,52,Somali,true
+ET,56,South Ethiopia Regional State,true
+ET,SW,South West Ethiopia Peoples' Region,true
+ET,53,Tigray,true
+ET,45,Āfar,true
+FI,13,Central Finland,true
+FI,16,Central Ostrobothnia,true
+FI,18,Kainuu,true
+FI,05,Kanta-Häme,true
+FI,08,Kymenlaakso,true
+FI,19,Lapland,true
+FI,12,North Karelia,true
+FI,17,North Ostrobothnia,true
+FI,11,North Savo,true
+FI,15,Ostrobothnia,true
+FI,07,Paijat-Hame,true
+FI,06,Pirkanmaa,true
+FI,04,Satakunta,true
+FI,09,South Karelia,true
+FI,14,South Ostrobothnia,true
+FI,10,South Savo,true
+FI,02,Southwest Finland,true
+FI,01,Uusimaa,true
+FJ,01,Central,true
+FJ,02,Eastern,true
+FJ,03,Northern,true
+FJ,04,Rotuma,true
+FJ,05,Western,true
+FM,03,Chuuk,true
+FM,01,Kosrae,true
+FM,02,Pohnpei State,true
+FM,04,Yap State,true
+FO,OS,Eysturoy,true
+FO,NO,Norðoyar,true
+FO,SA,Sandoy,true
+FO,ST,Streymoy,true
+FO,SU,Suðuroy,true
+FO,VG,Vágar,true
+FR,27,Bourgogne,true
+FR,53,Brittany,true
+FR,24,Centre-Val de Loire,true
+FR,94,Corsica,true
+FR,44,Grand Est,true
+FR,32,Hauts-de-France,true
+FR,28,Normandy,true
+FR,75,Nouvelle-Aquitaine,true
+FR,76,Occitanie,true
+FR,52,Pays de la Loire,true
+FR,93,Provence-Alpes-Côte d'Azur,true
+FR,84,Rhône-Alpes,true
+FR,11,Île-de-France,true
+GA,01,Estuaire,true
+GA,02,Haut-Ogooué,true
+GA,03,Moyen-Ogooué,true
+GA,04,Ngouni,true
+GA,05,Nyanga,true
+GA,06,Ogooué-Ivindo,true
+GA,07,Ogooué-Lolo,true
+GA,08,Ogooué-Maritime,true
+GA,09,Woleu-Ntem,true
+GB,ENG,England,true
+GB,NIR,Northern Ireland,true
+GB,SCT,Scotland,true
+GB,WLS,Wales,true
+GD,10,Carriacou and Petite Martinique,true
+GD,01,Saint Andrew Parish,true
+GD,02,Saint David Parish,true
+GD,03,Saint George Parish,true
+GD,04,Saint John Parish,true
+GD,05,Saint Mark Parish,true
+GD,06,Saint Patrick Parish,true
+GE,02,Abkhazia,true
+GE,04,Adjara,true
+GE,65,Guria,true
+GE,66,Imereti,true
+GE,67,Kakheti,true
+GE,68,Kvemo Kartli,true
+GE,69,Mtskheta-Mtianeti,true
+GE,70,Racha-Lechkhumi and Kvemo Svaneti,true
+GE,71,Samegrelo and Zemo Svaneti,true
+GE,72,Samtskhe-Javakheti,true
+GE,73,Shida Kartli,true
+GE,51,Tbilisi,true
+GF,GF,Guyane,true
+GG,8989934,Alderney,true
+GG,6417229,Castel,true
+GG,6417223,Forest,true
+GG,6417226,Saint Andrew,true
+GG,6417215,Saint Saviour,true
+GG,6417224,St Martin,true
+GG,6417228,St Peter Port,true
+GG,6417213,St Pierre du Bois,true
+GG,6417233,St Sampson,true
+GG,6417214,Torteval,true
+GG,6417230,Vale,true
+GH,12,Ahafo,true
+GH,02,Ashanti,true
+GH,13,Bono,true
+GH,14,Bono East,true
+GH,04,Central,true
+GH,05,Eastern,true
+GH,01,Greater Accra,true
+GH,15,North East,true
+GH,06,Northern,true
+GH,16,Oti,true
+GH,17,Savannah,true
+GH,10,Upper East,true
+GH,11,Upper West,true
+GH,08,Volta,true
+GH,09,Western,true
+GH,18,Western North,true
+GL,11839537,Avannaata,true
+GL,04,Kujalleq,true
+GL,11839534,Qeqertalik,true
+GL,06,Qeqqata,true
+GL,07,Sermersooq,true
+GM,01,Banjul,true
+GM,03,Central River,true
+GM,02,Lower River,true
+GM,07,North Bank,true
+GM,04,Upper River,true
+GM,05,Western,true
+GN,B,Boké Region,true
+GN,04,Conakry,true
+GN,F,Faranah,true
+GN,K,Kankan Region,true
+GN,D,Kindia,true
+GN,L,Labé Region,true
+GN,M,Mamou Region,true
+GN,N,Nzérékoré Region,true
+GP,GP,Guadeloupe,true
+GQ,03,Annobon,true
+GQ,04,Bioko Norte,true
+GQ,05,Bioko Sur,true
+GQ,06,Centro Sur,true
+GQ,10,Djibloho,true
+GQ,07,Kié-Ntem,true
+GQ,08,Litoral,true
+GQ,09,Wele-Nzas,true
+GR,ESYE31,Attica,true
+GR,ESYE24,Central Greece,true
+GR,ESYE12,Central Macedonia,true
+GR,ESYE43,Crete,true
+GR,ESYE11,East Macedonia and Thrace,true
+GR,ESYE21,Epirus,true
+GR,ESYE22,Ionian Islands,true
+GR,736572,Mount Athos,true
+GR,ESYE41,North Aegean,true
+GR,ESYE25,Peloponnese,true
+GR,ESYE42,South Aegean,true
+GR,ESYE14,Thessaly,true
+GR,ESYE23,West Greece,true
+GR,ESYE13,West Macedonia,true
+GT,01,Alta Verapaz,true
+GT,02,Baja Verapaz,true
+GT,03,Chimaltenango,true
+GT,04,Chiquimula,true
+GT,05,El Progreso,true
+GT,06,Escuintla,true
+GT,07,Guatemala,true
+GT,08,Huehuetenango,true
+GT,09,Izabal Department,true
+GT,10,Jalapa,true
+GT,11,Jutiapa,true
+GT,12,Petén,true
+GT,13,Quetzaltenango,true
+GT,14,Quiché,true
+GT,15,Retalhuleu,true
+GT,16,Sacatepéquez,true
+GT,17,San Marcos,true
+GT,18,Santa Rosa Department,true
+GT,19,Sololá,true
+GT,20,Suchitepeque,true
+GT,21,Totonicapán,true
+GT,22,Zacapa,true
+GU,AH,Agana Heights,true
+GU,AT,Agat,true
+GU,AS,Asan,true
+GU,BA,Barrigada,true
+GU,CP,Chalan Pago-Ordot,true
+GU,DD,Dededo,true
+GU,AN,Hagatna,true
+GU,IN,Inarajan,true
+GU,MA,Mangilao,true
+GU,ME,Merizo,true
+GU,MT,Mongmong-Toto-Maite,true
+GU,PI,Piti,true
+GU,SR,Santa Rita,true
+GU,SJ,Sinajana,true
+GU,TF,Talofofo,true
+GU,TM,Tamuning,true
+GU,UM,Umatac,true
+GU,YG,Yigo,true
+GU,YN,Yona,true
+GW,01,Bafatá,true
+GW,12,Biombo,true
+GW,11,Bissau,true
+GW,05,Bolama,true
+GW,06,Cacheu,true
+GW,10,Gabú,true
+GW,04,Oio,true
+GW,02,Quinara,true
+GW,07,Tombali,true
+GY,10,Barima-Waini,true
+GY,11,Cuyuni-Mazaruni,true
+GY,12,Demerara-Mahaica,true
+GY,13,East Berbice-Corentyne,true
+GY,14,Essequibo Islands-West Demerara,true
+GY,15,Mahaica-Berbice,true
+GY,16,Pomeroon-Supenaam,true
+GY,17,Potaro-Siparuni,true
+GY,18,Upper Demerara-Berbice,true
+GY,19,Upper Takutu-Upper Essequibo,true
+HK,HCW,Central and Western,true
+HK,HEA,Eastern District,true
+HK,NIS,Islands,true
+HK,KKC,Kowloon City,true
+HK,NKT,Kwai Tsing District,true
+HK,KKT,Kwun Tong District,true
+HK,NNO,North District,true
+HK,NSK,Sai Kung District,true
+HK,NST,Sha Tin,true
+HK,KSS,Sham Shui Po District,true
+HK,HSO,Southern District,true
+HK,NTP,Tai Po,true
+HK,NTW,Tsuen Wan,true
+HK,NTM,Tuen Mun,true
+HK,HWC,Wan Chai,true
+HK,KWT,Wong Tai Sin District,true
+HK,KYT,Yau Tsim Mong District,true
+HK,NYL,Yuen Long,true
+HN,01,Atlántida Department,true
+HN,11,Bay Islands,true
+HN,02,Choluteca Department,true
+HN,03,Colón Department,true
+HN,04,Comayagua Department,true
+HN,05,Copán Department,true
+HN,06,Cortés Department,true
+HN,07,El Paraíso Department,true
+HN,08,Francisco Morazán Department,true
+HN,09,Gracias a Dios Department,true
+HN,10,Intibucá Department,true
+HN,12,La Paz Department,true
+HN,13,Lempira Department,true
+HN,14,Ocotepeque Department,true
+HN,15,Olancho Department,true
+HN,16,Santa Bárbara Department,true
+HN,17,Valle Department,true
+HN,18,Yoro Department,true
+HR,01,Bjelovar-Bilogora,true
+HR,02,Brod-Posavina,true
+HR,10,County of Osijek-Baranja,true
+HR,03,Dubrovnik-Neretva,true
+HR,04,Istria,true
+HR,05,Karlovac,true
+HR,06,Koprivnica-Križevci,true
+HR,07,Krapina-Zagorje,true
+HR,08,Lika-Senj,true
+HR,09,Međimurje,true
+HR,11,Požega-Slavonia,true
+HR,12,Primorje-Gorski Kotar,true
+HR,14,Sisak-Moslavina,true
+HR,15,Split-Dalmatia,true
+HR,16,Varaždin,true
+HR,17,Virovitica-Podravina,true
+HR,18,Vukovar-Srijem,true
+HR,19,Zadar,true
+HR,21,Zagreb,true
+HR,20,Zagreb County,true
+HR,13,Šibenik-Knin,true
+HT,06,Artibonite,true
+HT,07,Centre,true
+HT,14,Grand'Anse,true
+HT,15,Nippes,true
+HT,09,Nord,true
+HT,10,Nord-Est,true
+HT,03,Nord-Ouest,true
+HT,11,Ouest,true
+HT,12,Sud,true
+HT,13,Sud-Est,true
+HU,02,Baranya,true
+HU,03,Bekes County,true
+HU,04,Borsod-Abaúj-Zemplén,true
+HU,05,Budapest,true
+HU,01,Bács-Kiskun,true
+HU,06,Csongrád,true
+HU,08,Fejér,true
+HU,09,Győr-Moson-Sopron,true
+HU,10,Hajdú-Bihar,true
+HU,11,Heves County,true
+HU,20,Jász-Nagykun-Szolnok,true
+HU,12,Komárom-Esztergom,true
+HU,14,Nógrád,true
+HU,16,Pest County,true
+HU,17,Somogy County,true
+HU,18,Szabolcs-Szatmár-Bereg,true
+HU,21,Tolna County,true
+HU,22,Vas County,true
+HU,23,Veszprém,true
+HU,24,Zala County,true
+ID,01,Aceh,true
+ID,02,Bali,true
+ID,35,Bangka–Belitung Islands,true
+ID,33,Banten,true
+ID,03,Bengkulu,true
+ID,07,Central Java,true
+ID,13,Central Kalimantan,true
+ID,PT,Central Papua,true
+ID,21,Central Sulawesi,true
+ID,08,East Java,true
+ID,14,East Kalimantan,true
+ID,18,East Nusa Tenggara,true
+ID,34,Gorontalo,true
+ID,PE,Highland Papua,true
+ID,04,Jakarta,true
+ID,05,Jambi,true
+ID,15,Lampung,true
+ID,28,Maluku,true
+ID,42,North Kalimantan,true
+ID,29,North Maluku,true
+ID,31,North Sulawesi,true
+ID,26,North Sumatra,true
+ID,36,Papua,true
+ID,37,Riau,true
+ID,40,Riau Islands,true
+ID,12,South Kalimantan,true
+ID,PS,South Papua,true
+ID,38,South Sulawesi,true
+ID,32,South Sumatra,true
+ID,22,Southeast Sulawesi,true
+ID,PD,Southwest Papua,true
+ID,30,West Java,true
+ID,11,West Kalimantan,true
+ID,17,West Nusa Tenggara,true
+ID,39,West Papua,true
+ID,41,West Sulawesi,true
+ID,24,West Sumatra,true
+ID,10,Yogyakarta,true
+IE,C,Connacht,true
+IE,L,Leinster,true
+IE,M,Munster,true
+IE,U,Ulster,true
+IL,02,Central District,true
+IL,04,Haifa,true
+IL,06,Jerusalem,true
+IL,WE,Judea and Samaria Area,true
+IL,03,Northern District,true
+IL,01,Southern District,true
+IL,05,Tel Aviv,true
+IM,9782164,Andreas,true
+IM,9782165,Arbory,true
+IM,9782166,Ballaugh,true
+IM,9782167,Braddan,true
+IM,9782168,Bride,true
+IM,9782169,Castletown,true
+IM,9782170,Douglas,true
+IM,9782171,German,true
+IM,9782172,Jurby,true
+IM,9782173,Laxey,true
+IM,9782176,Lezayre,true
+IM,9782180,Lonan,true
+IM,9782182,Malew,true
+IM,9782183,Marown,true
+IM,9782184,Maughold,true
+IM,9782185,Michael,true
+IM,9782186,Onchan,true
+IM,9782187,Patrick,true
+IM,9782188,Peel,true
+IM,9782189,Port Erin,true
+IM,9782190,Port St Mary,true
+IM,9782191,Ramsey,true
+IM,9782192,Rushen,true
+IM,9782193,Santon,true
+IN,01,Andaman and Nicobar,true
+IN,02,Andhra Pradesh,true
+IN,30,Arunachal Pradesh,true
+IN,03,Assam,true
+IN,34,Bihar,true
+IN,05,Chandigarh,true
+IN,37,Chhattisgarh,true
+IN,52,Dadra and Nagar Haveli and Daman and Diu,true
+IN,07,Delhi,true
+IN,33,Goa,true
+IN,09,Gujarat,true
+IN,10,Haryana,true
+IN,11,Himachal Pradesh,true
+IN,12,Jammu and Kashmir,true
+IN,38,Jharkhand,true
+IN,19,Karnataka,true
+IN,13,Kerala,true
+IN,41,Ladakh,true
+IN,14,Lakshadweep,true
+IN,35,Madhya Pradesh,true
+IN,16,Maharashtra,true
+IN,17,Manipur,true
+IN,18,Meghalaya,true
+IN,31,Mizoram,true
+IN,20,Nagaland,true
+IN,21,Odisha,true
+IN,22,Puducherry,true
+IN,23,Punjab,true
+IN,24,Rajasthan,true
+IN,29,Sikkim,true
+IN,25,Tamil Nadu,true
+IN,40,Telangana,true
+IN,26,Tripura,true
+IN,36,Uttar Pradesh,true
+IN,39,Uttarakhand,true
+IN,28,West Bengal,true
+IQ,04,Al-Qadisiyah,true
+IQ,17,An Najaf,true
+IQ,01,Anbar,true
+IQ,06,Babil,true
+IQ,07,Baghdad,true
+IQ,02,Basra,true
+IQ,09,Dhi Qar,true
+IQ,10,Diyala,true
+IQ,08,Duhok,true
+IQ,11,Erbil,true
+IQ,19,Halabja,true
+IQ,12,Karbala,true
+IQ,13,Kirkuk,true
+IQ,14,Maysan,true
+IQ,03,Muthanna,true
+IQ,15,Nineveh,true
+IQ,18,Salah ad Din,true
+IQ,05,Sulaymaniyah,true
+IQ,16,Wasit,true
+IR,44,Alborz Province,true
+IR,32,Ardabil Province,true
+IR,22,Bushehr,true
+IR,03,Chaharmahal and Bakhtiari,true
+IR,33,East Azerbaijan,true
+IR,07,Fars,true
+IR,08,Gilan Province,true
+IR,37,Golestan,true
+IR,09,Hamadan Province,true
+IR,11,Hormozgan,true
+IR,10,Ilam Province,true
+IR,28,Isfahan,true
+IR,29,Kerman,true
+IR,13,Kermanshah Province,true
+IR,15,Khuzestan,true
+IR,05,Kohgiluyeh and Boyer-Ahmad,true
+IR,16,Kurdistan Province,true
+IR,23,Lorestan Province,true
+IR,34,Markazi,true
+IR,35,Māzandarān,true
+IR,43,North Khorasan,true
+IR,38,Qazvin Province,true
+IR,39,Qom Province,true
+IR,42,Razavi Khorasan,true
+IR,25,Semnan,true
+IR,04,Sistan and Baluchestan,true
+IR,41,South Khorasan Province,true
+IR,26,Tehran,true
+IR,01,West Azerbaijan,true
+IR,40,Yazd Province,true
+IR,36,Zanjan,true
+IS,39,Capital Region,true
+IS,38,East,true
+IS,40,Northeast,true
+IS,41,Northwest,true
+IS,42,South,true
+IS,43,Southern Peninsula,true
+IS,45,West,true
+IS,44,Westfjords,true
+IT,01,Abruzzo,true
+IT,19,Aosta Valley,true
+IT,13,Apulia,true
+IT,02,Basilicate,true
+IT,03,Calabria,true
+IT,04,Campania,true
+IT,05,Emilia-Romagna,true
+IT,06,Friuli Venezia Giulia,true
+IT,07,Lazio,true
+IT,08,Liguria,true
+IT,09,Lombardy,true
+IT,11,Molise,true
+IT,12,Piedmont,true
+IT,14,Sardinia,true
+IT,15,Sicily,true
+IT,10,The Marches,true
+IT,17,Trentino-Alto Adige,true
+IT,16,Tuscany,true
+IT,18,Umbria,true
+IT,20,Veneto,true
+JE,3237203,Grouville,true
+JE,3237072,St Clement,true
+JE,3237864,St Helier,true
+JE,3237497,St John,true
+JE,3237214,St Lawrence,true
+JE,3237716,St Martîn,true
+JE,3237212,St Mary,true
+JE,3237229,St Ouen,true
+JE,3237221,St Peter,true
+JE,3237073,St Saviour,true
+JE,3237200,St. Brelade,true
+JE,3237530,Trinity,true
+JM,01,Clarendon,true
+JM,02,Hanover,true
+JM,17,Kingston,true
+JM,04,Manchester,true
+JM,07,Portland Parish,true
+JM,08,Saint Andrew Parish,true
+JM,09,Saint Ann Parish,true
+JM,10,Saint Catherine Parish,true
+JM,12,Saint James Parish,true
+JM,13,Saint Mary Parish,true
+JM,14,Saint Thomas Parish,true
+JM,11,St. Elizabeth,true
+JM,15,Trelawny Parish,true
+JM,16,Westmoreland,true
+JO,20,Ajloun,true
+JO,16,Amman,true
+JO,21,Aqaba,true
+JO,02,Balqa,true
+JO,18,Irbid,true
+JO,22,Jerash,true
+JO,09,Karak,true
+JO,23,Madaba,true
+JO,15,Mafraq,true
+JO,19,Ma’an,true
+JO,12,Tafielah,true
+JO,17,Zarqa,true
+JP,01,Aichi,true
+JP,02,Akita,true
+JP,03,Aomori,true
+JP,04,Chiba,true
+JP,05,Ehime,true
+JP,06,Fukui,true
+JP,07,Fukuoka,true
+JP,08,Fukushima,true
+JP,09,Gifu,true
+JP,10,Gunma,true
+JP,11,Hiroshima,true
+JP,12,Hokkaido,true
+JP,13,Hyōgo,true
+JP,14,Ibaraki,true
+JP,15,Ishikawa,true
+JP,16,Iwate,true
+JP,17,Kagawa,true
+JP,18,Kagoshima,true
+JP,19,Kanagawa,true
+JP,20,Kochi,true
+JP,21,Kumamoto,true
+JP,22,Kyoto,true
+JP,23,Mie,true
+JP,24,Miyagi,true
+JP,25,Miyazaki,true
+JP,26,Nagano,true
+JP,27,Nagasaki,true
+JP,28,Nara,true
+JP,29,Niigata,true
+JP,30,Oita,true
+JP,31,Okayama,true
+JP,47,Okinawa,true
+JP,32,Osaka,true
+JP,33,Saga,true
+JP,34,Saitama,true
+JP,35,Shiga,true
+JP,36,Shimane,true
+JP,37,Shizuoka,true
+JP,38,Tochigi,true
+JP,39,Tokushima,true
+JP,40,Tokyo,true
+JP,41,Tottori,true
+JP,42,Toyama,true
+JP,43,Wakayama,true
+JP,44,Yamagata,true
+JP,45,Yamaguchi,true
+JP,46,Yamanashi,true
+KE,10,Baringo,true
+KE,11,Bomet County,true
+KE,12,Bungoma County,true
+KE,13,Busia County,true
+KE,14,Elegeyo-Marakwet,true
+KE,15,Embu County,true
+KE,16,Garissa County,true
+KE,17,Homa Bay County,true
+KE,18,Isiolo County,true
+KE,19,Kajiado County,true
+KE,20,Kakamega County,true
+KE,21,Kericho County,true
+KE,22,Kiambu County,true
+KE,23,Kilifi County,true
+KE,24,Kirinyaga County,true
+KE,25,Kisii County,true
+KE,26,Kisumu County,true
+KE,27,Kitui County,true
+KE,28,Kwale County,true
+KE,29,Laikipia,true
+KE,30,Lamu,true
+KE,31,Machakos County,true
+KE,32,Makueni County,true
+KE,33,Mandera County,true
+KE,34,Marsabit County,true
+KE,35,Meru County,true
+KE,36,Migori County,true
+KE,37,Mombasa County,true
+KE,38,Murang'A,true
+KE,05,Nairobi County,true
+KE,39,Nakuru County,true
+KE,40,Nandi,true
+KE,41,Narok County,true
+KE,42,Nyamira county,true
+KE,43,Nyandarua County,true
+KE,44,Nyeri County,true
+KE,45,Samburu County,true
+KE,46,Siaya County,true
+KE,47,Taita Taveta,true
+KE,48,Tana River County,true
+KE,49,Tharaka - Nithi,true
+KE,50,Trans Nzoia,true
+KE,51,Turkana County,true
+KE,52,Uasin Gishu County,true
+KE,53,Vihiga County,true
+KE,54,Wajir County,true
+KE,55,West Pokot County,true
+KG,09,Batken,true
+KG,01,Bishkek,true
+KG,02,Chuy Region,true
+KG,07,Issyk-Kul,true
+KG,03,Jalal-Abad Region,true
+KG,04,Naryn Region,true
+KG,10,Osh City,true
+KG,08,Osh Region,true
+KG,06,Talas Region,true
+KH,25,Banteay Meanchey,true
+KH,29,Battambang,true
+KH,02,Kampong Cham,true
+KH,03,Kampong Chhnang,true
+KH,04,Kampong Speu Province,true
+KH,05,Kampong Thom,true
+KH,21,Kampot,true
+KH,07,Kandal,true
+KH,26,Kep,true
+KH,08,Koh Kong,true
+KH,09,Kratie,true
+KH,10,Mondolkiri,true
+KH,30,Pailin,true
+KH,22,Phnom Penh,true
+KH,28,Preah Sihanouk,true
+KH,13,Preah Vihear,true
+KH,14,Prey Veng,true
+KH,12,Pursat,true
+KH,23,Ratanakiri,true
+KH,24,Siem Reap,true
+KH,17,Stung Treng,true
+KH,18,Svay Rieng,true
+KH,19,Takeo,true
+KH,31,Tboung Khmum,true
+KH,27,Ŏtâr Méanchey,true
+KI,01,Gilbert Islands,true
+KI,02,Line Islands,true
+KI,03,Phoenix Islands,true
+KM,01,Anjouan,true
+KM,02,Grande Comore,true
+KM,03,Mohéli,true
+KN,01,Christ Church Nichola Town,true
+KN,13,Middle Island,true
+KN,02,Saint Anne Sandy Point,true
+KN,03,Saint George Basseterre,true
+KN,04,Saint George Gingerland,true
+KN,05,Saint James Windwa,true
+KN,06,Saint John Capesterre,true
+KN,07,Saint John Figtree,true
+KN,08,Saint Mary Cayon,true
+KN,09,Saint Paul Capesterre,true
+KN,10,Saint Paul Charlestown,true
+KN,11,Saint Peter Basseterre,true
+KN,12,Saint Thomas Lowland,true
+KN,15,Trinity Palmetto Point,true
+KP,01,Chagang,true
+KP,19,Kaesong,true
+KP,09,Kangwŏn-do,true
+KP,14,Nampo,true
+KP,17,North Hamgyong,true
+KP,07,North Hwanghae,true
+KP,11,P'yŏngan-bukto,true
+KP,12,Pyongyang,true
+KP,18,Rason,true
+KP,03,South Hamgyong,true
+KP,06,South Hwanghae,true
+KP,15,South Pyongan,true
+KP,13,Yanggang-do,true
+KR,10,Busan,true
+KR,17,Chungcheongnam-do,true
+KR,15,Daegu,true
+KR,19,Daejeon,true
+KR,06,Gangwon-do,true
+KR,18,Gwangju,true
+KR,13,Gyeonggi-do,true
+KR,14,Gyeongsangbuk-do,true
+KR,20,Gyeongsangnam-do,true
+KR,12,Incheon,true
+KR,01,Jeju-do,true
+KR,03,Jeollabuk-do,true
+KR,16,Jeollanam-do,true
+KR,05,North Chungcheong,true
+KR,22,Sejong-si,true
+KR,11,Seoul,true
+KR,21,Ulsan,true
+KW,02,Al Asimah,true
+KW,04,Al Aḩmadī,true
+KW,07,Al Farwaniyah,true
+KW,05,Al Jahra Governorate,true
+KW,08,Hawalli,true
+KW,09,Mubārak al Kabīr,true
+KY,10375969,Bodden Town,true
+KY,10375971,East End,true
+KY,10346796,George Town,true
+KY,10375970,North Side,true
+KY,10375972,Sister Island,true
+KY,10375968,West Bay,true
+KZ,12510143,Abai Region,true
+KZ,04,Aktyubinskaya Oblast’,true
+KZ,02,Almaty,true
+KZ,01,Almaty Region,true
+KZ,03,Aqmola,true
+KZ,05,Astana,true
+KZ,06,Atyrau Oblisi,true
+KZ,08,Baikonur,true
+KZ,07,Batys Qazaqstan,true
+KZ,15,East Kazakhstan,true
+KZ,12510144,Jetisu Region,true
+KZ,12,Karaganda,true
+KZ,09,Mangghystaū,true
+KZ,16,North Kazakhstan,true
+KZ,11,Pavlodar Region,true
+KZ,13,Qostanay,true
+KZ,14,Qyzylorda,true
+KZ,1537272,Shymkent,true
+KZ,10,Turkistan,true
+KZ,12510145,Ulytau Region,true
+KZ,17,Zhambyl,true
+LA,01,Attapu,true
+LA,22,Bokeo,true
+LA,23,Bolikhamsai,true
+LA,02,Champasak Province,true
+LA,03,Houaphan,true
+LA,15,Khammouane Province,true
+LA,16,Loungnamtha,true
+LA,17,Luang Prabang Province,true
+LA,07,Oudômxai,true
+LA,18,Phôngsali,true
+LA,19,Salavan Province,true
+LA,20,Savannakhet Province,true
+LA,27,Vientiane,true
+LA,24,Vientiane Prefecture,true
+LA,28,Xaisomboun,true
+LA,13,Xiagnabouli,true
+LA,14,Xiangkhoang,true
+LA,26,Xékong,true
+LB,10,Aakkâr,true
+LB,11,Baalbek-Hermel Governorate,true
+LB,04,Beyrouth,true
+LB,08,Béqaa,true
+LB,09,Liban-Nord,true
+LB,05,Mont-Liban,true
+LB,07,Nabatîyé,true
+LB,06,South Governorate,true
+LC,01,Anse-la-Raye,true
+LC,12,Canaries,true
+LC,03,Castries,true
+LC,04,Choiseul,true
+LC,05,Dennery,true
+LC,06,Gros-Islet,true
+LC,07,Laborie,true
+LC,08,Micoud,true
+LC,09,Soufrière,true
+LC,10,Vieux-Fort,true
+LI,01,Balzers,true
+LI,02,Eschen,true
+LI,03,Gamprin,true
+LI,04,Mauren,true
+LI,05,Planken,true
+LI,06,Ruggell,true
+LI,07,Schaan,true
+LI,08,Schellenberg,true
+LI,09,Triesen,true
+LI,10,Triesenberg,true
+LI,11,Vaduz,true
+LK,29,Central Province,true
+LK,37,Eastern Province,true
+LK,30,North Central Province,true
+LK,32,North Western Province,true
+LK,38,Northern Province,true
+LK,33,Sabaragamuwa Province,true
+LK,34,Southern Province,true
+LK,35,Uva Province,true
+LK,36,Western Province,true
+LR,15,Bomi County,true
+LR,01,Bong County,true
+LR,21,Gbarpolu County,true
+LR,11,Grand Bassa County,true
+LR,12,Grand Cape Mount County,true
+LR,19,Grand Gedeh County,true
+LR,16,Grand Kru County,true
+LR,20,Lofa County,true
+LR,17,Margibi County,true
+LR,13,Maryland County,true
+LR,14,Montserrado County,true
+LR,09,Nimba,true
+LR,18,River Cess County,true
+LR,22,River Gee County,true
+LR,10,Sinoe County,true
+LS,10,Berea,true
+LS,11,Butha-Buthe,true
+LS,12,Leribe,true
+LS,13,Mafeteng District,true
+LS,14,Maseru District,true
+LS,15,Mohale's Hoek District,true
+LS,16,Mokhotlong District,true
+LS,17,Qacha's Nek District,true
+LS,18,Quthing,true
+LS,19,Thaba-Tseka,true
+LT,56,Alytus,true
+LT,57,Kaunas,true
+LT,58,Klaipėda County,true
+LT,59,Marijampolė County,true
+LT,60,Panevėžys,true
+LT,61,Siauliai,true
+LT,62,Tauragė County,true
+LT,63,Telsiai,true
+LT,64,Utena,true
+LT,65,Vilnius,true
+LU,CA,Capellen,true
+LU,CL,Clervaux,true
+LU,DI,Diekirch,true
+LU,EC,Echternach,true
+LU,ES,Esch-sur-Alzette,true
+LU,GR,Grevenmacher,true
+LU,LU,Luxembourg,true
+LU,ME,Mersch,true
+LU,RD,Redange,true
+LU,RM,Remich,true
+LU,VD,Vianden,true
+LU,WI,Wiltz,true
+LV,01,Aizkraukle Municipality,true
+LV,02,Alūksne Municipality,true
+LV,AN,Augšdaugava Municipality,true
+LV,03,Balvi Municipality,true
+LV,04,Bauska Municipality,true
+LV,05,Cēsis Municipality,true
+LV,06,Daugavpils,true
+LV,08,Dobele Municipality,true
+LV,09,Gulbene Municipality,true
+LV,11,Jelgava,true
+LV,12,Jelgava Municipality,true
+LV,10,Jēkabpils Municipality,true
+LV,13,Jūrmala,true
+LV,14,Krāslava Municipality,true
+LV,15,Kuldīga Municipality,true
+LV,16,Liepāja,true
+LV,18,Limbaži Municipality,true
+LV,19,Ludza Municipality,true
+LV,90,Līvāni,true
+LV,20,Madonas novads,true
+LV,95,Mārupe,true
+LV,21,Ogre,true
+LV,A2,Olaine,true
+LV,22,Preiļu novads,true
+LV,25,Riga,true
+LV,B5,Ropaži Municipality,true
+LV,23,Rēzekne,true
+LV,24,Rēzekne Municipality,true
+LV,C3,Salaspils Municipality,true
+LV,27,Saldus Rajons,true
+LV,C5,Saulkrasti Municipality,true
+LV,C7,Sigulda Municipality,true
+LV,D1,Smiltene Municipality,true
+LV,DN,South Kurzeme Municipality,true
+LV,28,Talsu novads,true
+LV,29,Tukums Municipality,true
+LV,30,Valka,true
+LV,31,Valmiera,true
+LV,E1,Varakļāni Municipality,true
+LV,32,Ventspils,true
+LV,33,Ventspils Municipality,true
+LV,34,Ādaži,true
+LV,80,Ķekava,true
+LY,79,Al Buţnān,true
+LY,63,Al Jabal al Akhḑar,true
+LY,81,Al Jafārah,true
+LY,64,Al Jufrah,true
+LY,65,Al Kufrah,true
+LY,66,Al Marj,true
+LY,82,Al Marqab,true
+LY,83,Al Wāḩāt,true
+LY,67,An Nuqāţ al Khams,true
+LY,78,Ash Shāţiʼ,true
+LY,68,Az Zāwiyah,true
+LY,69,Banghāzī,true
+LY,70,Darnah,true
+LY,71,Ghāt,true
+LY,80,Jabal al Gharbi,true
+LY,72,Mişrātah,true
+LY,73,Murzuq District,true
+LY,74,Nālūt,true
+LY,75,Sabha District,true
+LY,76,Surt,true
+LY,77,Tripoli,true
+LY,84,Wādī al Ḩayāt,true
+MA,05,Béni Mellal-Khénifra,true
+MA,06,Casablanca-Settat,true
+MA,12,Dakhla-Oued Ed-Dahab,true
+MA,08,Drâa-Tafilalet,true
+MA,03,Fès-Meknès,true
+MA,10,Guelmim-Oued Noun,true
+MA,11,Laâyoune-Sakia El Hamra,true
+MA,07,Marrakesh-Safi,true
+MA,02,Oriental,true
+MA,04,Rabat-Salé-Kénitra,true
+MA,09,Souss-Massa,true
+MA,01,Tanger-Tetouan-Al Hoceima,true
+MC,00,Municipality of Monaco,true
+MD,59,Anenii Noi,true
+MD,61,Basarabeasca,true
+MD,62,Bender Municipality,true
+MD,63,Briceni,true
+MD,60,Bălţi,true
+MD,64,Cahul,true
+MD,65,Cantemir,true
+MD,57,Chișinău Municipality,true
+MD,68,Cimişlia,true
+MD,69,Criuleni,true
+MD,66,Călăraşi,true
+MD,67,Căuşeni,true
+MD,70,Donduşeni,true
+MD,71,Drochia,true
+MD,72,Dubăsari District,true
+MD,75,Floreşti,true
+MD,74,Fălești,true
+MD,51,Gagauzia,true
+MD,76,Glodeni,true
+MD,77,Hînceşti,true
+MD,78,Ialoveni,true
+MD,79,Leova,true
+MD,80,Nisporeni,true
+MD,82,Orhei,true
+MD,73,Raionul Edineţ,true
+MD,81,Raionul Ocniţa,true
+MD,83,Rezina,true
+MD,84,Rîşcani,true
+MD,87,Soroca District,true
+MD,89,Strășeni,true
+MD,85,Sîngerei,true
+MD,90,Taraclia,true
+MD,91,Teleneşti,true
+MD,58,Transnistria,true
+MD,92,Ungheni,true
+MD,86,Şoldăneşti,true
+MD,88,Ştefan-Vodă,true
+ME,01,Andrijevica,true
+ME,02,Bar,true
+ME,03,Berane,true
+ME,04,Bijelo Polje,true
+ME,05,Budva,true
+ME,06,Cetinje,true
+ME,07,Danilovgrad,true
+ME,22,Gusinje Municipality,true
+ME,08,Herceg Novi,true
+ME,10,Kotor,true
+ME,11,Mojkovac,true
+ME,09,Opština Kolašin,true
+ME,12,Opština Nikšić,true
+ME,13,Opština Plav,true
+ME,15,Opština Plužine,true
+ME,18,Opština Šavnik,true
+ME,21,Opština Žabljak,true
+ME,23,Petnjica Municipality,true
+ME,14,Pljevlja,true
+ME,16,Podgorica,true
+ME,17,Rožaje Municipality,true
+ME,19,Tivat,true
+ME,24,Tuzi Municipality,true
+ME,20,Ulcinj,true
+ME,25,Zeta,true
+MG,33,Alaotra Mangoro,true
+MG,22,Amoron'i Mania,true
+MG,11,Analamanga,true
+MG,32,Analanjirofo,true
+MG,52,Androy,true
+MG,53,Anosy,true
+MG,51,Atsimo-Andrefana,true
+MG,25,Atsimo-Atsinanana,true
+MG,31,Atsinanana,true
+MG,43,Betsiboka,true
+MG,41,Boeny,true
+MG,14,Bongolava,true
+MG,71,Diana,true
+MG,26,Fitovinany Region,true
+MG,24,Ihorombe,true
+MG,13,Itasy,true
+MG,44,Melaky,true
+MG,54,Menabe,true
+MG,72,Sava,true
+MG,42,Sofia,true
+MG,21,Upper Matsiatra,true
+MG,12,Vakinankaratra,true
+MG,27,Vatovavy Region,true
+MH,007,Ailinginae Atoll,true
+MH,010,Ailinglaplap Atoll,true
+MH,030,Ailuk Atoll,true
+MH,040,Arno Atoll,true
+MH,050,Aur Atoll,true
+MH,060,Bikar Atoll,true
+MH,070,Bikini Atoll,true
+MH,073,Bokak Atoll,true
+MH,080,Ebon Atoll,true
+MH,090,Enewetak Atoll,true
+MH,100,Erikub Atoll,true
+MH,110,Jabat Island,true
+MH,120,Jaluit Atoll,true
+MH,130,Jemo Island,true
+MH,140,Kili Island,true
+MH,150,Kwajalein Atoll,true
+MH,160,Lae Atoll,true
+MH,170,Lib Island,true
+MH,180,Likiep Atoll,true
+MH,190,Majuro Atoll,true
+MH,300,Maloelap Atoll,true
+MH,310,Mejit Island,true
+MH,320,Mili Atoll,true
+MH,330,Namdrik Atoll,true
+MH,340,Namu Atoll,true
+MH,350,Rongelap Atoll,true
+MH,360,Rongrik Atoll,true
+MH,385,Taka Atoll,true
+MH,390,Ujae Atoll,true
+MH,400,Ujelang,true
+MH,410,Utrik Atoll,true
+MH,420,Wotho Atoll,true
+MH,430,Wotje Atoll,true
+MK,01,Arachinovo,true
+MK,04,Berovo,true
+MK,06,Bitola,true
+MK,08,Bogdanci,true
+MK,C7,Bogovinje,true
+MK,11,Bosilovo,true
+MK,12,Brvenica,true
+MK,18,Centar Zhupa,true
+MK,C9,Chashka,true
+MK,20,Chucher Sandevo,true
+MK,D2,Debar,true
+MK,F5,Debarca,true
+MK,22,Delchevo,true
+MK,D3,Demir Hisar,true
+MK,25,Demir Kapija,true
+MK,E5,Dojran,true
+MK,28,Dolneni,true
+MK,33,Gevgelija,true
+MK,D4,Gostivar,true
+MK,F6,Grad Skopje,true
+MK,35,Gradsko,true
+MK,36,Ilinden,true
+MK,D5,Jegunovce,true
+MK,40,Karbinci,true
+MK,D6,Kavadarci,true
+MK,43,Kichevo,true
+MK,46,Kochani,true
+MK,47,Konche,true
+MK,51,Kratovo,true
+MK,52,Kriva Palanka,true
+MK,53,Krivogashtani,true
+MK,54,Krushevo,true
+MK,D7,Kumanovo,true
+MK,59,Lipkovo,true
+MK,60,Lozovo,true
+MK,62,Makedonska Kamenica,true
+MK,D8,Makedonski Brod,true
+MK,E4,Mavrovo and Rostuša,true
+MK,D9,Mogila,true
+MK,69,Negotino,true
+MK,E1,Novaci,true
+MK,72,Novo Selo,true
+MK,E2,Ohrid,true
+MK,78,Pehchevo,true
+MK,79,Petrovec,true
+MK,80,Plasnica,true
+MK,E3,Prilep,true
+MK,83,Probishtip,true
+MK,84,Radovish,true
+MK,85,Rankovce,true
+MK,86,Resen,true
+MK,87,Rosoman,true
+MK,98,Shtip,true
+MK,92,Sopište,true
+MK,97,Staro Nagorichane,true
+MK,E6,Struga,true
+MK,E7,Strumica,true
+MK,A2,Studenichani,true
+MK,A4,Sveti Nikole,true
+MK,A5,Tearce,true
+MK,E8,Tetovo,true
+MK,E9,Valandovo,true
+MK,A9,Vasilevo,true
+MK,F1,Veles,true
+MK,B3,Vevchani,true
+MK,B4,Vinica,true
+MK,B7,Vrapchishte,true
+MK,C2,Zelenikovo,true
+MK,C3,Zhelino,true
+MK,C6,Zrnovci,true
+MK,19,Češinovo-Obleševo,true
+ML,01,Bamako,true
+ML,09,Gao,true
+ML,03,Kayes,true
+ML,10,Kidal,true
+ML,07,Koulikoro,true
+ML,04,Mopti,true
+ML,12070577,Ménaka,true
+ML,06,Sikasso,true
+ML,05,Ségou,true
+ML,12070575,Taoudénit,true
+ML,08,Tombouctou,true
+MM,03,Ayeyarwady,true
+MM,16,Bago Region,true
+MM,02,Chin State,true
+MM,04,Kachin State,true
+MM,06,Kayah State,true
+MM,05,Kayin State,true
+MM,15,Magway,true
+MM,08,Mandalay Region,true
+MM,13,Mon,true
+MM,18,Nay Pyi Taw,true
+MM,01,Rakhine,true
+MM,10,Sagaing Region,true
+MM,11,Shan State,true
+MM,12,Tanintharyi Region,true
+MM,17,Yangon,true
+MN,01,Arkhangai Province,true
+MN,03,Bayan-Ölgii Province,true
+MN,02,Bayanhongor,true
+MN,21,Bulgan,true
+MN,18,Central Aimak,true
+MN,23,Darhan Uul,true
+MN,09,Dzabkhan,true
+MN,06,East Aimak,true
+MN,07,East Gobi Aymag,true
+MN,10,Govi-Altai Province,true
+MN,24,Govĭ-Sumber,true
+MN,11,Hentiy,true
+MN,12,Hovd,true
+MN,13,Khövsgöl Province,true
+MN,08,Middle Govĭ,true
+MN,25,Orhon,true
+MN,16,Selenge Province,true
+MN,17,Sühbaatar,true
+MN,20,Ulaanbaatar,true
+MN,19,Uvs Province,true
+MN,14,Ömnögovĭ,true
+MN,15,Övörhangay,true
+MO,11875160,Cotai,true
+MO,11875154,Nossa Senhora de Fátima,true
+MO,11875159,Nossa Senhora do Carmo,true
+MO,11875155,Santo António,true
+MO,11875161,São Francisco Xavier,true
+MO,11875158,São Lourenço,true
+MO,11875156,São Lázaro,true
+MO,11875157,Sé,true
+MP,085,Northern Islands,true
+MP,100,Rota,true
+MP,110,Saipan,true
+MP,120,Tinian,true
+MQ,MQ,Martinique,true
+MR,07,Adrar,true
+MR,03,Assaba,true
+MR,05,Brakna,true
+MR,08,Dakhlet Nouadhibou,true
+MR,04,Gorgol,true
+MR,10,Guidimaka,true
+MR,01,Hodh Ech Chargi,true
+MR,02,Hodh El Gharbi,true
+MR,12,Inchiri,true
+MR,14,Nouakchott Nord,true
+MR,13,Nouakchott Ouest,true
+MR,15,Nouakchott Sud,true
+MR,09,Tagant,true
+MR,11,Tiris Zemmour,true
+MR,06,Trarza,true
+MS,01,Saint Anthony,true
+MS,02,Saint Georges,true
+MS,03,Saint Peter,true
+MT,01,Attard,true
+MT,02,Balzan,true
+MT,04,Birkirkara,true
+MT,05,Birżebbuġa,true
+MT,06,Bormla,true
+MT,07,Dingli,true
+MT,09,Floriana,true
+MT,11,Għajnsielem,true
+MT,03,Il-Birgu,true
+MT,08,Il-Fgura,true
+MT,10,Il-Fontana,true
+MT,16,Il-Gudja,true
+MT,17,Il-Gżira,true
+MT,26,Il-Kalkara,true
+MT,31,Il-Marsa,true
+MT,34,Il-Mellieħa,true
+MT,35,Il-Mosta,true
+MT,36,Il-Munxar,true
+MT,42,Il-Qala,true
+MT,44,Il-Qrendi,true
+MT,18,Il-Ħamrun,true
+MT,37,In-Nadur,true
+MT,38,In-Naxxar,true
+MT,45,Ir-Rabat,true
+MT,55,Is-Siġġiewi,true
+MT,57,Is-Swieqi,true
+MT,61,Ix-Xagħra,true
+MT,62,Ix-Xewkija,true
+MT,63,Ix-Xgħajra,true
+MT,66,Iż-Żebbuġ,true
+MT,67,Iż-Żejtun,true
+MT,68,Iż-Żurrieq,true
+MT,28,Kirkop,true
+MT,12,L-Għarb,true
+MT,14,L-Għasri,true
+MT,19,L-Iklin,true
+MT,20,L-Imdina,true
+MT,22,L-Imqabba,true
+MT,23,L-Imsida,true
+MT,21,L-Imġarr,true
+MT,29,Lija,true
+MT,30,Luqa,true
+MT,32,Marsaskala,true
+MT,33,Marsaxlokk,true
+MT,24,Mtarfa,true
+MT,39,Paola,true
+MT,40,Pembroke,true
+MT,43,Qormi,true
+MT,47,Safi,true
+MT,48,Saint John,true
+MT,49,Saint Julian,true
+MT,50,Saint Lawrence,true
+MT,51,Saint Lucia,true
+MT,52,Saint Paul’s Bay,true
+MT,53,Saint Venera,true
+MT,54,Sannat,true
+MT,25,Senglea,true
+MT,41,Tal-Pietà,true
+MT,58,Tarxien,true
+MT,56,Tas-Sliema,true
+MT,27,Ta’ Kerċem,true
+MT,59,Ta’ Xbiex,true
+MT,60,Valletta,true
+MT,46,Victoria,true
+MT,13,Ħal Għargħur,true
+MT,15,Ħal Għaxaq,true
+MT,64,Ħaż-Żabbar,true
+MT,65,Ħaż-Żebbuġ,true
+MU,21,Agalega Islands,true
+MU,12,Black River,true
+MU,22,Cargados Carajos,true
+MU,13,Flacq,true
+MU,14,Grand Port,true
+MU,15,Moka,true
+MU,16,Pamplemousses,true
+MU,17,Plaines Wilhems,true
+MU,18,Port Louis,true
+MU,19,Rivière du Rempart,true
+MU,23,Rodrigues,true
+MU,20,Savanne,true
+MV,31,Baa Atholhu,true
+MV,32,Dhaalu Atholhu,true
+MV,39,Faadhippolhu Atoll,true
+MV,33,Faafu Atholhu,true
+MV,34,Gaafu Alif Atoll,true
+MV,35,Gaafu Dhaalu Atoll,true
+MV,42,Gnyaviyani Atoll,true
+MV,36,Haa Alifu Atholhu,true
+MV,37,Haa Dhaalu Atholhu,true
+MV,38,Kaafu Atoll,true
+MV,05,Laamu,true
+MV,40,Male,true
+MV,41,Meemu Atholhu,true
+MV,43,Noonu Atoll,true
+MV,30,Northern Ari Atoll,true
+MV,44,Raa Atoll,true
+MV,01,Seenu,true
+MV,45,Shaviyani Atholhu,true
+MV,10346475,Southern Ari Atoll,true
+MV,46,Thaa Atholhu,true
+MV,47,Vaavu Atholhu,true
+MW,C,Central Region,true
+MW,N,Northern Region,true
+MW,S,Southern Region,true
+MX,01,Aguascalientes,true
+MX,02,Baja California,true
+MX,03,Baja California Sur,true
+MX,04,Campeche,true
+MX,05,Chiapas,true
+MX,06,Chihuahua,true
+MX,07,Coahuila,true
+MX,08,Colima,true
+MX,10,Durango,true
+MX,11,Guanajuato,true
+MX,12,Guerrero,true
+MX,13,Hidalgo,true
+MX,14,Jalisco,true
+MX,09,Mexico City,true
+MX,16,Michoacán,true
+MX,17,Morelos,true
+MX,15,México,true
+MX,18,Nayarit,true
+MX,19,Nuevo León,true
+MX,20,Oaxaca,true
+MX,21,Puebla,true
+MX,22,Querétaro,true
+MX,23,Quintana Roo,true
+MX,24,San Luis Potosí,true
+MX,25,Sinaloa,true
+MX,26,Sonora,true
+MX,27,Tabasco,true
+MX,28,Tamaulipas,true
+MX,29,Tlaxcala,true
+MX,30,Veracruz,true
+MX,31,Yucatán,true
+MX,32,Zacatecas,true
+MY,01,Johor,true
+MY,02,Kedah,true
+MY,03,Kelantan,true
+MY,14,Kuala Lumpur,true
+MY,15,Labuan,true
+MY,04,Melaka,true
+MY,05,Negeri Sembilan,true
+MY,06,Pahang,true
+MY,09,Penang,true
+MY,07,Perak,true
+MY,08,Perlis,true
+MY,17,Putrajaya,true
+MY,16,Sabah,true
+MY,11,Sarawak,true
+MY,12,Selangor,true
+MY,13,Terengganu,true
+MZ,01,Cabo Delgado Province,true
+MZ,02,Gaza Province,true
+MZ,03,Inhambane Province,true
+MZ,10,Manica,true
+MZ,11,Maputo City,true
+MZ,04,Maputo Province,true
+MZ,06,Nampula,true
+MZ,07,Niassa Province,true
+MZ,05,Sofala,true
+MZ,08,Tete,true
+MZ,09,Zambezia Province,true
+NA,29,Erongo Region,true
+NA,30,Hardap Region,true
+NA,31,Karas Region,true
+NA,40,Kavango East,true
+NA,41,Kavango West,true
+NA,21,Khomas Region,true
+NA,32,Kunene Region,true
+NA,33,Ohangwena Region,true
+NA,35,Omaheke Region,true
+NA,36,Omusati Region,true
+NA,37,Oshana Region,true
+NA,38,Oshikoto Region,true
+NA,39,Otjozondjupa Region,true
+NA,28,Zambezi Region,true
+NC,03,Loyalty Islands,true
+NC,01,North Province,true
+NC,02,South Province,true
+NE,01,Agadez,true
+NE,02,Diffa,true
+NE,03,Dosso Region,true
+NE,04,Maradi Region,true
+NE,08,Niamey,true
+NE,06,Tahoua Region,true
+NE,09,Tillabéri Region,true
+NE,07,Zinder Region,true
+NG,45,Abia State,true
+NG,35,Adamawa,true
+NG,21,Akwa Ibom State,true
+NG,25,Anambra,true
+NG,46,Bauchi,true
+NG,52,Bayelsa State,true
+NG,26,Benue State,true
+NG,27,Borno State,true
+NG,22,Cross River State,true
+NG,36,Delta,true
+NG,53,Ebonyi State,true
+NG,37,Edo State,true
+NG,54,Ekiti State,true
+NG,47,Enugu State,true
+NG,11,FCT,true
+NG,55,Gombe State,true
+NG,28,Imo State,true
+NG,39,Jigawa State,true
+NG,23,Kaduna State,true
+NG,29,Kano State,true
+NG,24,Katsina State,true
+NG,40,Kebbi,true
+NG,41,Kogi State,true
+NG,30,Kwara State,true
+NG,05,Lagos,true
+NG,56,Nasarawa State,true
+NG,31,Niger State,true
+NG,16,Ogun State,true
+NG,48,Ondo State,true
+NG,42,Osun State,true
+NG,32,Oyo State,true
+NG,49,Plateau State,true
+NG,50,Rivers State,true
+NG,51,Sokoto,true
+NG,43,Taraba State,true
+NG,44,Yobe State,true
+NG,57,Zamfara State,true
+NI,01,Boaco Department,true
+NI,02,Carazo Department,true
+NI,03,Chinandega Department,true
+NI,04,Chontales Department,true
+NI,05,Estelí Department,true
+NI,06,Granada Department,true
+NI,07,Jinotega Department,true
+NI,08,León Department,true
+NI,09,Madriz Department,true
+NI,10,Managua Department,true
+NI,11,Masaya Department,true
+NI,12,Matagalpa Department,true
+NI,17,North Caribbean Coast,true
+NI,13,Nueva Segovia Department,true
+NI,15,Rivas Department,true
+NI,14,Río San Juan Department,true
+NI,18,South Caribbean Coast,true
+NL,01,Drenthe,true
+NL,16,Flevoland,true
+NL,02,Friesland,true
+NL,03,Gelderland,true
+NL,04,Groningen,true
+NL,05,Limburg,true
+NL,06,North Brabant,true
+NL,07,North Holland,true
+NL,15,Overijssel,true
+NL,11,South Holland,true
+NL,09,Utrecht,true
+NL,10,Zeeland,true
+NO,42,Agder,true
+NO,01,Akershus,true
+NO,04,Buskerud,true
+NO,05,Finnmark,true
+NO,34,Innlandet,true
+NO,08,Møre og Romsdal,true
+NO,09,Nordland,true
+NO,12,Oslo,true
+NO,14,Rogaland,true
+NO,17,Telemark,true
+NO,18,Troms,true
+NO,21,Trøndelag,true
+NO,20,Vestfold,true
+NO,46,Vestland,true
+NO,13,Østfold,true
+NP,3,Bagmati Province,true
+NP,4,Gandaki Pradesh,true
+NP,6,Karnali Pradesh,true
+NP,1,Koshi,true
+NP,5,Lumbini Province,true
+NP,2,Madhesh,true
+NP,7,Sudurpashchim Pradesh,true
+NR,01,Aiwo District,true
+NR,02,Anabar District,true
+NR,03,Anetan District,true
+NR,04,Anibare District,true
+NR,05,Baiti District,true
+NR,06,Boe District,true
+NR,07,Buada District,true
+NR,08,Denigomodu District,true
+NR,09,Ewa District,true
+NR,10,Ijuw District,true
+NR,11,Meneng District,true
+NR,12,Nibok District,true
+NR,13,Uaboe District,true
+NR,14,Yaren District,true
+NZ,E7,Auckland,true
+NZ,E8,Bay of Plenty,true
+NZ,E9,Canterbury,true
+NZ,10,Chatham Islands,true
+NZ,F1,Gisborne,true
+NZ,F2,Hawke's Bay Region,true
+NZ,F3,Manawatu-Wanganui,true
+NZ,F4,Marlborough,true
+NZ,F5,Nelson Region,true
+NZ,F6,Northland,true
+NZ,F7,Otago,true
+NZ,F8,Southland,true
+NZ,F9,Taranaki Region,true
+NZ,TAS,Tasman District,true
+NZ,G1,Waikato Region,true
+NZ,G2,Wellington Region,true
+NZ,G3,West Coast,true
+OM,01,Ad Dakhiliyah,true
+OM,09,Ad Dhahirah,true
+OM,11,Al Batinah North,true
+OM,02,Al Batinah South,true
+OM,10,Al Buraimi,true
+OM,03,Al Wusta Governorate,true
+OM,08,Dhofar,true
+OM,07,Musandam Governorate,true
+OM,06,Muscat,true
+OM,12,Northeastern Governorate,true
+OM,04,Southeastern Governorate,true
+PA,01,Bocas del Toro Province,true
+PA,02,Chiriquí Province,true
+PA,03,Coclé,true
+PA,04,Colón,true
+PA,05,Darién,true
+PA,11,Emberá,true
+PA,09,Guna Yala,true
+PA,06,Herrera Province,true
+PA,07,Los Santos Province,true
+PA,NT,Naso Tjër Di,true
+PA,12,Ngöbe-Buglé Comarca,true
+PA,08,Panamá,true
+PA,13,Panamá Oeste Province,true
+PA,10,Veraguas Province,true
+PE,01,Amazonas,true
+PE,02,Ancash,true
+PE,03,Apurímac Department,true
+PE,04,Arequipa,true
+PE,05,Ayacucho,true
+PE,06,Cajamarca Department,true
+PE,07,Callao,true
+PE,08,Cuzco Department,true
+PE,09,Huancavelica,true
+PE,10,Huánuco Department,true
+PE,11,Ica,true
+PE,12,Junin,true
+PE,13,La Libertad,true
+PE,14,Lambayeque,true
+PE,LMA,Lima Province,true
+PE,15,Lima region,true
+PE,16,Loreto,true
+PE,17,Madre de Dios,true
+PE,18,Moquegua Department,true
+PE,19,Pasco,true
+PE,20,Piura,true
+PE,21,Puno,true
+PE,22,San Martín Department,true
+PE,23,Tacna,true
+PE,24,Tumbes,true
+PE,25,Ucayali,true
+PF,02,Leeward Islands,true
+PF,05,Îles Australes,true
+PF,04,Îles Marquises,true
+PF,03,Îles Tuamotu-Gambier,true
+PF,01,Îles du Vent,true
+PG,07,Bougainville,true
+PG,01,Central Province,true
+PG,08,Chimbu Province,true
+PG,10,East New Britain Province,true
+PG,11,East Sepik Province,true
+PG,09,Eastern Highlands Province,true
+PG,19,Enga Province,true
+PG,02,Gulf Province,true
+PG,21,Hela Province,true
+PG,22,Jiwaka Province,true
+PG,12,Madang Province,true
+PG,13,Manus Province,true
+PG,03,Milne Bay Province,true
+PG,14,Morobe Province,true
+PG,20,National Capital,true
+PG,15,New Ireland,true
+PG,04,Oro Province,true
+PG,18,Sandaun Province,true
+PG,05,Southern Highlands Province,true
+PG,17,West New Britain Province,true
+PG,16,Western Highlands Province,true
+PG,06,Western Province,true
+PH,14,Autonomous Region in Muslim Mindanao,true
+PH,05,Bicol Region,true
+PH,02,Cagayan Valley,true
+PH,40,Calabarzon,true
+PH,13,Caraga,true
+PH,03,Central Luzon,true
+PH,07,Central Visayas,true
+PH,15,Cordillera,true
+PH,11,Davao Region,true
+PH,08,Eastern Visayas,true
+PH,01,Ilocos,true
+PH,41,Mimaropa,true
+PH,NCR,National Capital Region,true
+PH,10,Northern Mindanao,true
+PH,12,Soccsksargen,true
+PH,06,Western Visayas,true
+PH,09,Zamboanga Peninsula,true
+PK,06,Azad Kashmir,true
+PK,02,Balochistan,true
+PK,07,Gilgit-Baltistan,true
+PK,08,Islamabad,true
+PK,03,Khyber Pakhtunkhwa,true
+PK,04,Punjab,true
+PK,05,Sindh,true
+PL,86,Greater Poland,true
+PL,73,Kujawsko-Pomorskie,true
+PL,77,Lesser Poland,true
+PL,72,Lower Silesia,true
+PL,75,Lublin,true
+PL,76,Lubusz,true
+PL,78,Mazovia,true
+PL,79,Opole Voivodeship,true
+PL,81,Podlasie,true
+PL,82,Pomerania,true
+PL,83,Silesia,true
+PL,80,Subcarpathia,true
+PL,85,Warmia-Masuria,true
+PL,87,West Pomerania,true
+PL,74,Łódź Voivodeship,true
+PL,84,Świętokrzyskie,true
+PM,97501,Miquelon-Langlade,true
+PM,97502,Saint-Pierre,true
+PR,001,Adjuntas,true
+PR,003,Aguada,true
+PR,005,Aguadilla,true
+PR,007,Aguas Buenas,true
+PR,009,Aibonito,true
+PR,013,Arecibo,true
+PR,015,Arroyo,true
+PR,011,Añasco,true
+PR,017,Barceloneta,true
+PR,019,Barranquitas,true
+PR,021,Bayamón,true
+PR,023,Cabo Rojo,true
+PR,025,Caguas,true
+PR,027,Camuy,true
+PR,029,Canóvanas,true
+PR,031,Carolina,true
+PR,033,Cataño,true
+PR,035,Cayey,true
+PR,037,Ceiba,true
+PR,039,Ciales,true
+PR,041,Cidra,true
+PR,043,Coamo,true
+PR,045,Comerío,true
+PR,047,Corozal,true
+PR,049,Culebra,true
+PR,051,Dorado,true
+PR,053,Fajardo,true
+PR,054,Florida,true
+PR,057,Guayama,true
+PR,059,Guayanilla,true
+PR,061,Guaynabo,true
+PR,063,Gurabo,true
+PR,055,Guánica,true
+PR,065,Hatillo,true
+PR,067,Hormigueros,true
+PR,069,Humacao,true
+PR,071,Isabela,true
+PR,073,Jayuya,true
+PR,075,Juana Díaz,true
+PR,077,Juncos,true
+PR,079,Lajas,true
+PR,081,Lares,true
+PR,083,Las Marías,true
+PR,085,Las Piedras,true
+PR,087,Loíza,true
+PR,089,Luquillo,true
+PR,091,Manatí,true
+PR,093,Maricao,true
+PR,095,Maunabo,true
+PR,097,Mayagüez,true
+PR,099,Moca,true
+PR,101,Morovis,true
+PR,103,Naguabo,true
+PR,105,Naranjito,true
+PR,107,Orocovis,true
+PR,109,Patillas,true
+PR,111,Peñuelas,true
+PR,113,Ponce,true
+PR,115,Quebradillas,true
+PR,117,Rincón,true
+PR,119,Río Grande,true
+PR,121,Sabana Grande,true
+PR,123,Salinas,true
+PR,125,San Germán,true
+PR,127,San Juan,true
+PR,129,San Lorenzo,true
+PR,131,San Sebastián,true
+PR,133,Santa Isabel,true
+PR,135,Toa Alta,true
+PR,137,Toa Baja,true
+PR,139,Trujillo Alto,true
+PR,141,Utuado,true
+PR,143,Vega Alta,true
+PR,145,Vega Baja,true
+PR,147,Vieques,true
+PR,149,Villalba,true
+PR,151,Yabucoa,true
+PR,153,Yauco,true
+PS,GZ,Gaza Strip,true
+PS,WE,West Bank,true
+PT,02,Aveiro,true
+PT,23,Azores,true
+PT,03,Beja,true
+PT,04,Braga,true
+PT,05,Bragança,true
+PT,06,Castelo Branco,true
+PT,07,Coimbra,true
+PT,09,Faro,true
+PT,11,Guarda,true
+PT,13,Leiria,true
+PT,14,Lisbon,true
+PT,10,Madeira,true
+PT,16,Portalegre,true
+PT,17,Porto,true
+PT,18,Santarém,true
+PT,19,Setúbal,true
+PT,20,Viana do Castelo,true
+PT,21,Vila Real,true
+PT,22,Viseu,true
+PT,08,Évora,true
+PW,01,Aimeliik,true
+PW,02,Airai,true
+PW,03,Angaur,true
+PW,04,Hatohobei,true
+PW,05,Kayangel,true
+PW,06,Koror,true
+PW,07,Melekeok,true
+PW,08,Ngaraard,true
+PW,09,Ngarchelong,true
+PW,10,Ngardmau,true
+PW,11,Ngatpang,true
+PW,12,Ngchesar,true
+PW,13,Ngeremlengui,true
+PW,14,Ngiwal,true
+PW,15,Peleliu,true
+PW,16,Sonsorol,true
+PY,23,Alto Paraguay,true
+PY,01,Alto Paraná Department,true
+PY,02,Amambay Department,true
+PY,22,Asunción,true
+PY,24,Boquerón Department,true
+PY,04,Caaguazú Department,true
+PY,05,Caazapá,true
+PY,19,Canindeyú,true
+PY,06,Central Department,true
+PY,07,Concepción,true
+PY,08,Cordillera Department,true
+PY,10,Guairá,true
+PY,11,Itapúa,true
+PY,12,Misiones Department,true
+PY,15,Paraguarí,true
+PY,16,Presidente Hayes,true
+PY,17,San Pedro Department,true
+PY,13,Ñeembucú Department,true
+QA,13,Al Daayen,true
+QA,04,Al Khor,true
+QA,10,Al Wakrah,true
+QA,14,Al-Shahaniya,true
+QA,01,Baladīyat ad Dawḩah,true
+QA,06,Baladīyat ar Rayyān,true
+QA,08,Madīnat ash Shamāl,true
+QA,09,Umm Salal,true
+RE,RE,Réunion,true
+RO,01,Alba County,true
+RO,02,Arad County,true
+RO,03,Arges,true
+RO,04,Bacău County,true
+RO,05,Bihor County,true
+RO,06,Bistrița-Năsăud County,true
+RO,07,Botoșani County,true
+RO,09,Brașov County,true
+RO,08,Brăila County,true
+RO,10,București,true
+RO,11,Buzău County,true
+RO,12,Caraș-Severin County,true
+RO,13,Cluj County,true
+RO,14,Constanța County,true
+RO,15,Covasna County,true
+RO,41,Călărași County,true
+RO,17,Dolj,true
+RO,16,Dâmbovița County,true
+RO,18,Galați County,true
+RO,42,Giurgiu County,true
+RO,19,Gorj County,true
+RO,20,Harghita County,true
+RO,21,Hunedoara County,true
+RO,22,Ialomița County,true
+RO,23,Iași County,true
+RO,43,Ilfov,true
+RO,25,Maramureş,true
+RO,26,Mehedinți County,true
+RO,27,Mureș County,true
+RO,28,Neamț County,true
+RO,29,Olt,true
+RO,30,Prahova,true
+RO,32,Satu Mare County,true
+RO,33,Sibiu County,true
+RO,34,Suceava,true
+RO,31,Sălaj County,true
+RO,35,Teleorman County,true
+RO,36,Timiș County,true
+RO,37,Tulcea County,true
+RO,38,Vaslui County,true
+RO,40,Vrancea,true
+RO,39,Vâlcea County,true
+RS,SE,Central Serbia,true
+RS,VO,Vojvodina,true
+RU,01,Adygeya Republic,true
+RU,03,Altai,true
+RU,04,Altai Krai,true
+RU,05,Amur Oblast,true
+RU,06,Arkhangelskaya,true
+RU,07,Astrakhan Oblast,true
+RU,08,Bashkortostan Republic,true
+RU,09,Belgorod Oblast,true
+RU,10,Bryansk Oblast,true
+RU,11,Buryatiya Republic,true
+RU,12,Chechnya,true
+RU,13,Chelyabinsk,true
+RU,15,Chukotka,true
+RU,16,Chuvash Republic,true
+RU,17,Dagestan,true
+RU,19,Ingushetiya Republic,true
+RU,20,Irkutsk Oblast,true
+RU,21,Ivanovo Oblast,true
+RU,89,Jewish Autonomous Oblast,true
+RU,22,Kabardino-Balkariya Republic,true
+RU,23,Kaliningrad Oblast,true
+RU,24,Kalmykiya Republic,true
+RU,25,Kaluga Oblast,true
+RU,92,Kamchatka,true
+RU,27,Karachayevo-Cherkesiya Republic,true
+RU,28,Karelia,true
+RU,30,Khabarovsk,true
+RU,31,Khakasiya Republic,true
+RU,32,Khanty-Mansia,true
+RU,33,Kirov Oblast,true
+RU,34,Komi,true
+RU,37,Kostroma Oblast,true
+RU,38,Krasnodar Krai,true
+RU,91,Krasnoyarsk Krai,true
+RU,40,Kurgan Oblast,true
+RU,41,Kursk Oblast,true
+RU,29,Kuzbass,true
+RU,42,Leningradskaya Oblast',true
+RU,43,Lipetsk Oblast,true
+RU,44,Magadan Oblast,true
+RU,45,Mariy-El Republic,true
+RU,46,Mordoviya Republic,true
+RU,48,Moscow,true
+RU,47,Moscow Oblast,true
+RU,49,Murmansk,true
+RU,50,Nenets,true
+RU,51,Nizhny Novgorod Oblast,true
+RU,68,North Ossetia–Alania,true
+RU,52,Novgorod Oblast,true
+RU,53,Novosibirsk Oblast,true
+RU,54,Omsk Oblast,true
+RU,55,Orenburg Oblast,true
+RU,56,Oryol oblast,true
+RU,57,Penza Oblast,true
+RU,90,Perm Krai,true
+RU,59,Primorye,true
+RU,60,Pskov Oblast,true
+RU,79,Republic of Tyva,true
+RU,61,Rostov,true
+RU,62,Ryazan Oblast,true
+RU,63,Sakha,true
+RU,64,Sakhalin Oblast,true
+RU,65,Samara Oblast,true
+RU,67,Saratov Oblast,true
+RU,69,Smolensk Oblast,true
+RU,66,St.-Petersburg,true
+RU,70,Stavropol Kray,true
+RU,71,Sverdlovsk Oblast,true
+RU,72,Tambov Oblast,true
+RU,73,Tatarstan Republic,true
+RU,75,Tomsk Oblast,true
+RU,76,Tula Oblast,true
+RU,77,Tver Oblast,true
+RU,78,Tyumen Oblast,true
+RU,80,Udmurtiya Republic,true
+RU,81,Ulyanovsk,true
+RU,83,Vladimir Oblast,true
+RU,84,Volgograd Oblast,true
+RU,85,Vologda Oblast,true
+RU,86,Voronezh Oblast,true
+RU,87,Yamalo-Nenets,true
+RU,88,Yaroslavl Oblast,true
+RU,93,Zabaykalskiy (Transbaikal) Kray,true
+RW,11,Eastern Province,true
+RW,12,Kigali,true
+RW,13,Northern Province,true
+RW,15,Southern Province,true
+RW,14,Western Province,true
+SA,11,'Asir Region,true
+SA,02,Al Bahah Region,true
+SA,20,Al Jawf Region,true
+SA,08,Al-Qassim Region,true
+SA,06,Eastern Province,true
+SA,13,Ha'il Region,true
+SA,17,Jazan Region,true
+SA,14,Mecca Region,true
+SA,05,Medina Region,true
+SA,16,Najran Region,true
+SA,15,Northern Borders Region,true
+SA,10,Riyadh Region,true
+SA,19,Tabuk Region,true
+SB,10,Central Province,true
+SB,12,Choiseul Province,true
+SB,06,Guadalcanal Province,true
+SB,14,Honiara,true
+SB,07,Isabel Province,true
+SB,08,Makira-Ulawa Province,true
+SB,03,Malaita Province,true
+SB,13,Rennell and Bellona Province,true
+SB,09,Temotu Province,true
+SB,11,Western Province,true
+SC,02,Anse Boileau,true
+SC,03,Anse Etoile,true
+SC,05,Anse Royale,true
+SC,01,Anse-aux-Pins,true
+SC,28,Au Cap,true
+SC,06,Baie Lazare,true
+SC,07,Baie Sainte Anne,true
+SC,08,Beau Vallon,true
+SC,09,Bel Air,true
+SC,10,Bel Ombre,true
+SC,11,Cascade,true
+SC,12,Glacis,true
+SC,24,Grand Anse Mahe,true
+SC,14,Grand Anse Praslin,true
+SC,12200079,Ile Perseverance I,true
+SC,12200080,Ile Perseverance II,true
+SC,25,La Digue and Inner Islands,true
+SC,26,La Rivière Anglaise,true
+SC,29,Les Mamelles,true
+SC,17,Mont Buxton,true
+SC,18,Mont Fleuri,true
+SC,11876017,Outer Islands,true
+SC,19,Plaisance,true
+SC,20,Pointe La Rue,true
+SC,27,Port Glaud,true
+SC,30,Roche Caiman,true
+SC,22,Saint Louis,true
+SC,23,Takamaka,true
+SD,38,Al Jazirah,true
+SD,39,Al Qaḑārif,true
+SD,42,Blue Nile,true
+SD,61,Central Darfur,true
+SD,60,Eastern Darfur,true
+SD,52,Kassala,true
+SD,29,Khartoum,true
+SD,56,North Kordofan,true
+SD,55,Northern Darfur,true
+SD,43,Northern State,true
+SD,36,Red Sea,true
+SD,53,River Nile,true
+SD,58,Sennar,true
+SD,49,Southern Darfur,true
+SD,50,Southern Kordofan,true
+SD,62,West Kordofan,true
+SD,47,Western Darfur,true
+SD,41,White Nile,true
+SE,02,Blekinge,true
+SE,10,Dalarna,true
+SE,05,Gotland,true
+SE,03,Gävleborg,true
+SE,06,Halland,true
+SE,07,Jämtland,true
+SE,08,Jönköping,true
+SE,09,Kalmar,true
+SE,12,Kronoberg,true
+SE,14,Norrbotten,true
+SE,27,Skåne,true
+SE,26,Stockholm,true
+SE,18,Södermanland,true
+SE,21,Uppsala,true
+SE,22,Värmland,true
+SE,23,Västerbotten,true
+SE,24,Västernorrland,true
+SE,25,Västmanland,true
+SE,28,Västra Götaland,true
+SE,15,Örebro,true
+SE,16,Östergötland,true
+SH,01,Ascension,true
+SH,02,Saint Helena,true
+SH,03,Tristan da Cunha,true
+SI,01,Ajdovščina Municipality,true
+SI,P9,Ankaran Municipality,true
+SI,N9,Apače,true
+SI,02,Beltinci,true
+SI,F4,Benedikt,true
+SI,F5,Bistrica ob Sotli,true
+SI,03,Bled,true
+SI,F6,Bloke,true
+SI,04,Bohinj Municipality,true
+SI,05,Borovnica,true
+SI,06,Bovec,true
+SI,F7,Braslovče,true
+SI,07,Brda,true
+SI,09,Brezovica,true
+SI,08,Brežice,true
+SI,F8,Cankova,true
+SI,11,Celje,true
+SI,12,Cerklje na Gorenjskem,true
+SI,13,Cerknica,true
+SI,14,Cerkno,true
+SI,F9,Cerkvenjak,true
+SI,O1,Cirkulane,true
+SI,G1,Destrnik,true
+SI,19,Divača,true
+SI,G2,Dobje,true
+SI,20,Dobrepolje,true
+SI,G3,Dobrna,true
+SI,G4,Dobrova-Horjul-Polhov Gradec,true
+SI,G5,Dobrovnik-Dobronak,true
+SI,22,Dol pri Ljubljani,true
+SI,G6,Dolenjske Toplice,true
+SI,G7,Domžale,true
+SI,24,Dornava,true
+SI,25,Dravograd,true
+SI,26,Duplek,true
+SI,28,Gorišnica,true
+SI,O2,Gorje,true
+SI,29,Gornja Radgona,true
+SI,30,Gornji Grad,true
+SI,31,Gornji Petrovci,true
+SI,G8,Grad,true
+SI,32,Grosuplje,true
+SI,G9,Hajdina,true
+SI,H2,Hodoš-Hodos,true
+SI,H3,Horjul,true
+SI,H1,Hoče-Slivnica,true
+SI,34,Hrastnik Municipality,true
+SI,35,Hrpelje-Kozina,true
+SI,36,Idrija,true
+SI,37,Ig Municipality,true
+SI,38,Ilirska Bistrica,true
+SI,39,Ivančna Gorica,true
+SI,40,Izola-Isola,true
+SI,H4,Jesenice,true
+SI,H5,Jezersko,true
+SI,42,Juršinci,true
+SI,H6,Kamnik,true
+SI,44,Kanal ob Soči Municipality,true
+SI,45,Kidričevo,true
+SI,46,Kobarid Municipality,true
+SI,47,Kobilje,true
+SI,49,Komen,true
+SI,H8,Komenda,true
+SI,50,Koper-Capodistria,true
+SI,O3,Kostanjevica na Krki,true
+SI,H9,Kostel,true
+SI,51,Kozje,true
+SI,H7,Kočevje,true
+SI,52,Kranj,true
+SI,53,Kranjska Gora,true
+SI,I1,Križevci,true
+SI,54,Krško,true
+SI,55,Kungota,true
+SI,I2,Kuzma,true
+SI,57,Laško Municipality,true
+SI,I3,Lenart,true
+SI,I4,Lendava-Lendva,true
+SI,I5,Litija,true
+SI,61,Ljubljana,true
+SI,62,Ljubno,true
+SI,I6,Ljutomer,true
+SI,64,Logatec,true
+SI,O4,Log–Dragomer,true
+SI,I8,Lovrenc na Pohorju,true
+SI,I7,Loška Dolina Municipality,true
+SI,66,Loški Potok,true
+SI,68,Lukovica,true
+SI,I9,Luče,true
+SI,J1,Majšperk,true
+SI,O5,Makole,true
+SI,J2,Maribor City Municipality,true
+SI,J3,Markovci,true
+SI,71,Medvode,true
+SI,72,Mengeš,true
+SI,73,Metlika,true
+SI,74,Mežica,true
+SI,J4,Miklavž na Dravskem Polju,true
+SI,J5,Miren-Kostanjevica,true
+SI,O6,Mirna,true
+SI,J6,Mirna Peč Municipality,true
+SI,76,Mislinja,true
+SI,O7,Mokronog-Trebelno Municipality,true
+SI,78,Moravske Toplice,true
+SI,77,Moravče,true
+SI,79,Mozirje,true
+SI,80,Murska Sobota,true
+SI,81,Muta,true
+SI,82,Naklo,true
+SI,83,Nazarje,true
+SI,84,Nova Gorica,true
+SI,J7,Novo Mesto,true
+SI,27,Občina Gorenja vas-Poljane,true
+SI,86,Odranci,true
+SI,J8,Oplotnica Municipality,true
+SI,87,Ormož,true
+SI,88,Osilnica,true
+SI,89,Pesnica,true
+SI,J9,Piran-Pirano,true
+SI,91,Pivka,true
+SI,K1,Podlehnik,true
+SI,K2,Podvelka,true
+SI,92,Podčetrtek,true
+SI,O8,Poljčane,true
+SI,K3,Polzela,true
+SI,94,Postojna,true
+SI,K4,Prebold,true
+SI,K5,Preddvor,true
+SI,K6,Prevalje,true
+SI,K7,Ptuj,true
+SI,97,Puconci,true
+SI,A1,Radenci,true
+SI,99,Radeče Municipality,true
+SI,A2,Radlje ob Dravi,true
+SI,A3,Radovljica,true
+SI,K8,Ravne na Koroškem,true
+SI,K9,Razkrižje,true
+SI,98,Rače-Fram,true
+SI,P1,Renče-Vogrsko,true
+SI,O9,Rečica ob Savinji,true
+SI,L1,Ribnica,true
+SI,L2,Ribnica na Pohorju,true
+SI,A8,Rogatec,true
+SI,A7,Rogaška Slatina,true
+SI,A6,Rogašovci,true
+SI,L3,Ruše Municipality,true
+SI,L5,Selnica ob Dravi,true
+SI,B1,Semič,true
+SI,L7,Sentjur,true
+SI,B6,Sevnica Municipality,true
+SI,B7,Sežana,true
+SI,C2,Slovenj Gradec,true
+SI,L8,Slovenska Bistrica,true
+SI,C4,Slovenska Konjice,true
+SI,M1,Sodražica,true
+SI,M2,Solčava Municipality,true
+SI,P4,Središče ob Dravi,true
+SI,C8,Starše,true
+SI,P5,Straža,true
+SI,P6,Sv. Trojica v Slov. Goricah,true
+SI,M3,Sveta Ana Municipality,true
+SI,M4,Sveti Andraž v Slovenskih Goricah,true
+SI,D1,Sveti Jurij,true
+SI,P7,Sveti Jurij v Slovenskih Goricah,true
+SI,P8,Sveti Tomaž,true
+SI,M5,Tabor,true
+SI,M6,Tišina,true
+SI,D2,Tolmin,true
+SI,D3,Trbovlje,true
+SI,D4,Trebnje,true
+SI,M7,Trnovska Vas,true
+SI,M8,Trzin,true
+SI,D5,Tržič,true
+SI,D6,Turnišče,true
+SI,D7,Velenje,true
+SI,M9,Velika Polana,true
+SI,D8,Velike Lašče,true
+SI,N1,Veržej,true
+SI,N2,Videm,true
+SI,E1,Vipava,true
+SI,E2,Vitanje,true
+SI,E3,Vodice,true
+SI,N3,Vojnik,true
+SI,N4,Vransko,true
+SI,E5,Vrhnika,true
+SI,E6,Vuzenica,true
+SI,E7,Zagorje ob Savi Municipality,true
+SI,E9,Zavrč,true
+SI,F3,Zreče Municipality,true
+SI,15,Črenšovci,true
+SI,16,Črna na Koroškem Municipality,true
+SI,17,Črnomelj Municipality,true
+SI,L4,Šalovci,true
+SI,L6,Šempeter-Vrtojba,true
+SI,B3,Šentilj,true
+SI,B4,Šentjernej,true
+SI,P2,Šentrupert,true
+SI,B2,Šenčur,true
+SI,B8,Škocjan,true
+SI,B9,Škofja Loka,true
+SI,C1,Škofljica,true
+SI,C5,Šmarje pri Jelšah,true
+SI,P3,Šmarješke Toplice,true
+SI,C6,Šmartno ob Paki,true
+SI,L9,Šmartno pri Litiji,true
+SI,C7,Šoštanj,true
+SI,C9,Štore,true
+SI,N5,Žalec,true
+SI,F1,Železniki Municipality,true
+SI,N6,Žetale,true
+SI,F2,Žiri,true
+SI,N7,Žirovnica,true
+SI,N8,Žužemberk,true
+SJ,22,Jan Mayen,true
+SJ,21,Svalbard,true
+SK,01,Banská Bystrica Region,true
+SK,02,Bratislava Region,true
+SK,03,Košice Region,true
+SK,04,Nitra Region,true
+SK,05,Prešov Region,true
+SK,06,Trenčín Region,true
+SK,07,Trnava Region,true
+SK,08,Žilina Region,true
+SL,01,Eastern Province,true
+SL,05,North West,true
+SL,02,Northern Province,true
+SL,03,Southern Province,true
+SL,04,Western Area,true
+SM,01,Acquaviva,true
+SM,06,Borgo Maggiore,true
+SM,02,Chiesanuova,true
+SM,03,Domagnano,true
+SM,04,Faetano,true
+SM,05,Fiorentino,true
+SM,08,Montegiardino,true
+SM,07,San Marino,true
+SM,09,Serravalle,true
+SN,01,Dakar,true
+SN,03,Diourbel Region,true
+SN,09,Fatick,true
+SN,16,Kaffrine,true
+SN,10,Kaolack,true
+SN,11,Kolda,true
+SN,17,Kédougou,true
+SN,13,Louga,true
+SN,15,Matam,true
+SN,14,Saint-Louis,true
+SN,18,Sédhiou,true
+SN,05,Tambacounda,true
+SN,07,Thiès,true
+SN,12,Ziguinchor,true
+SO,21,Awdal,true
+SO,01,Bakool,true
+SO,02,Banaadir,true
+SO,03,Bari,true
+SO,04,Bay,true
+SO,05,Galguduud,true
+SO,06,Gedo,true
+SO,07,Hiiraan,true
+SO,09,Lower Juba,true
+SO,14,Lower Shabeelle,true
+SO,08,Middle Juba,true
+SO,13,Middle Shabele,true
+SO,10,Mudug,true
+SO,18,Nugaal,true
+SO,12,Sanaag,true
+SO,22,Sool,true
+SO,19,Togdheer,true
+SO,20,Woqooyi Galbeed,true
+SR,10,Brokopondo District,true
+SR,11,Commewijne District,true
+SR,12,Coronie District,true
+SR,13,Marowijne District,true
+SR,14,Nickerie District,true
+SR,15,Para District,true
+SR,16,Paramaribo District,true
+SR,17,Saramacca District,true
+SR,18,Sipaliwini District,true
+SR,19,Wanica District,true
+SS,01,Central Equatoria,true
+SS,02,Eastern Equatoria,true
+SS,03,Jonglei,true
+SS,04,Lakes,true
+SS,05,Northern Bahr al Ghazal,true
+SS,06,Unity,true
+SS,07,Upper Nile,true
+SS,08,Warrap,true
+SS,09,Western Bahr al Ghazal,true
+SS,10,Western Equatoria,true
+ST,01,Príncipe,true
+ST,02,São Tomé Island,true
+SV,01,Ahuachapán,true
+SV,02,Cabañas,true
+SV,03,Chalatenango Department,true
+SV,04,Cuscatlán,true
+SV,05,La Libertad Department,true
+SV,06,La Paz Department,true
+SV,07,La Unión,true
+SV,08,Morazán,true
+SV,09,San Miguel Department,true
+SV,10,San Salvador Department,true
+SV,12,San Vicente Department,true
+SV,11,Santa Ana Department,true
+SV,13,Sonsonate Department,true
+SV,14,Usulután,true
+SY,01,Al-Hasakah,true
+SY,09,Aleppo,true
+SY,13,Damascus Governorate,true
+SY,06,Daraa,true
+SY,07,Deir ez-Zor,true
+SY,10,Hama,true
+SY,11,Homs,true
+SY,12,Idlib,true
+SY,02,Latakia,true
+SY,03,Quneitra,true
+SY,04,Raqqa,true
+SY,08,Rif-dimashq,true
+SY,05,Suwayda,true
+SY,14,Tartus,true
+SZ,01,Hhohho Region,true
+SZ,02,Lubombo Region,true
+SZ,03,Manzini Region,true
+SZ,04,Shiselweni,true
+TD,22,Barh el Gazel,true
+TD,01,Batha,true
+TD,23,Borkou,true
+TD,15,Chari-Baguirmi,true
+TD,27,Ennedi-Est,true
+TD,28,Ennedi-Ouest,true
+TD,05,Guéra,true
+TD,18,Hadjer-Lamis,true
+TD,06,Kanem,true
+TD,07,Lac,true
+TD,08,Logone Occidental,true
+TD,09,Logone Oriental,true
+TD,19,Mandoul,true
+TD,16,Mayo-Kebbi Est,true
+TD,20,Mayo-Kebbi Ouest,true
+TD,17,Moyen-Chari,true
+TD,21,N’Djaména,true
+TD,12,Ouadaï,true
+TD,13,Salamat,true
+TD,25,Sila,true
+TD,14,Tandjilé,true
+TD,26,Tibesti,true
+TD,02,Wadi Fira,true
+TF,02,Crozet,true
+TF,03,Kerguelen,true
+TF,01,Saint-Paul-et-Amsterdam,true
+TF,04,Terre-Adélie,true
+TF,05,Îles Éparses,true
+TG,22,Centrale,true
+TG,23,Kara,true
+TG,24,Maritime,true
+TG,25,Plateaux,true
+TG,26,Savanes,true
+TH,77,Amnat Charoen,true
+TH,35,Ang Thong,true
+TH,40,Bangkok,true
+TH,81,Bueng Kan,true
+TH,28,Buriram,true
+TH,44,Chachoengsao,true
+TH,32,Chai Nat,true
+TH,26,Chaiyaphum,true
+TH,48,Chanthaburi,true
+TH,02,Chiang Mai,true
+TH,03,Chiang Rai,true
+TH,46,Chon Buri,true
+TH,58,Chumphon,true
+TH,23,Kalasin,true
+TH,11,Kamphaeng Phet,true
+TH,50,Kanchanaburi,true
+TH,22,Khon Kaen,true
+TH,63,Krabi,true
+TH,06,Lampang,true
+TH,05,Lamphun,true
+TH,18,Loei,true
+TH,34,Lopburi,true
+TH,01,Mae Hong Son,true
+TH,24,Maha Sarakham,true
+TH,78,Mukdahan,true
+TH,43,Nakhon Nayok,true
+TH,53,Nakhon Pathom,true
+TH,73,Nakhon Phanom,true
+TH,27,Nakhon Ratchasima,true
+TH,16,Nakhon Sawan,true
+TH,64,Nakhon Si Thammarat,true
+TH,04,Nan,true
+TH,31,Narathiwat,true
+TH,79,Nong Bua Lamphu,true
+TH,17,Nong Khai,true
+TH,38,Nonthaburi,true
+TH,39,Pathum Thani,true
+TH,69,Pattani,true
+TH,61,Phang Nga,true
+TH,66,Phatthalung,true
+TH,41,Phayao,true
+TH,14,Phetchabun,true
+TH,56,Phetchaburi,true
+TH,13,Phichit,true
+TH,12,Phitsanulok,true
+TH,36,Phra Nakhon Si Ayutthaya,true
+TH,07,Phrae,true
+TH,62,Phuket,true
+TH,74,Prachin Buri,true
+TH,57,Prachuap Khiri Khan,true
+TH,59,Ranong province,true
+TH,52,Ratchaburi,true
+TH,47,Rayong,true
+TH,25,Roi Et,true
+TH,80,Sa Kaeo,true
+TH,20,Sakon Nakhon,true
+TH,42,Samut Prakan,true
+TH,55,Samut Sakhon,true
+TH,54,Samut Songkhram,true
+TH,37,Saraburi,true
+TH,67,Satun,true
+TH,30,Si Sa Ket,true
+TH,33,Sing Buri,true
+TH,68,Songkhla,true
+TH,09,Sukhothai,true
+TH,51,Suphan Buri,true
+TH,60,Surat Thani,true
+TH,29,Surin,true
+TH,08,Tak,true
+TH,65,Trang,true
+TH,49,Trat,true
+TH,75,Ubon Ratchathani,true
+TH,76,Udon Thani,true
+TH,15,Uthai Thani,true
+TH,10,Uttaradit,true
+TH,70,Yala,true
+TH,72,Yasothon,true
+TJ,04,Dushanbe,true
+TJ,01,Gorno-Badakhshan,true
+TJ,02,Khatlon Province,true
+TJ,RR,Republican Subordination,true
+TJ,03,Sughd,true
+TK,A,Atafu,true
+TK,F,Fakaofo,true
+TK,N,Nukunonu,true
+TL,AL,Aileu,true
+TL,AN,Ainaro,true
+TL,BA,Baucau,true
+TL,BO,Bobonaro,true
+TL,CO,Cova Lima,true
+TL,DI,Dili Municipality,true
+TL,ER,Ermera,true
+TL,LA,Lautém,true
+TL,LI,Liquiçá,true
+TL,MT,Manatuto,true
+TL,MF,Manufahi,true
+TL,OE,Oecusse,true
+TL,VI,Viqueque,true
+TM,01,Ahal,true
+TM,S,Ashgabat,true
+TM,02,Balkan,true
+TM,03,Daşoguz,true
+TM,04,Lebap,true
+TM,05,Mary,true
+TN,38,Ariana Governorate,true
+TN,27,Ben Arous Governorate,true
+TN,18,Bizerte Governorate,true
+TN,17,Béja Governorate,true
+TN,29,Gabès Governorate,true
+TN,30,Gafsa,true
+TN,06,Jendouba Governorate,true
+TN,03,Kairouan,true
+TN,02,Kasserine Governorate,true
+TN,31,Kebili Governorate,true
+TN,14,Kef Governorate,true
+TN,15,Mahdia Governorate,true
+TN,39,Manouba,true
+TN,28,Medenine Governorate,true
+TN,16,Monastir Governorate,true
+TN,19,Nabeul Governorate,true
+TN,32,Sfax Governorate,true
+TN,33,Sidi Bouzid Governorate,true
+TN,22,Siliana Governorate,true
+TN,23,Sousse Governorate,true
+TN,34,Tataouine,true
+TN,35,Tozeur Governorate,true
+TN,36,Tunis Governorate,true
+TN,37,Zaghouan Governorate,true
+TO,01,Ha‘apai,true
+TO,NI,Niuas,true
+TO,02,Tongatapu,true
+TO,03,Vava‘u,true
+TO,EU,ʻEua,true
+TR,81,Adana,true
+TR,02,Adıyaman Province,true
+TR,03,Afyonkarahisar Province,true
+TR,75,Aksaray,true
+TR,05,Amasya,true
+TR,68,Ankara,true
+TR,07,Antalya,true
+TR,86,Ardahan,true
+TR,08,Artvin,true
+TR,09,Aydın,true
+TR,04,Ağrı,true
+TR,10,Balıkesir,true
+TR,87,Bartın,true
+TR,76,Batman,true
+TR,77,Bayburt Province,true
+TR,11,Bilecik,true
+TR,12,Bingöl,true
+TR,13,Bitlis,true
+TR,14,Bolu,true
+TR,15,Burdur,true
+TR,16,Bursa Province,true
+TR,17,Canakkale,true
+TR,20,Denizli,true
+TR,21,Diyarbakır Province,true
+TR,93,Düzce,true
+TR,22,Edirne,true
+TR,23,Elazığ,true
+TR,24,Erzincan,true
+TR,25,Erzurum,true
+TR,26,Eskişehir,true
+TR,83,Gaziantep,true
+TR,28,Giresun,true
+TR,69,Gümüşhane Province,true
+TR,70,Hakkâri,true
+TR,31,Hatay,true
+TR,33,Isparta,true
+TR,34,Istanbul,true
+TR,88,Iğdır,true
+TR,46,Kahramanmaraş,true
+TR,89,Karabük Province,true
+TR,78,Karaman,true
+TR,84,Kars Province,true
+TR,37,Kastamonu,true
+TR,38,Kayseri,true
+TR,90,Kilis,true
+TR,41,Kocaeli,true
+TR,71,Konya,true
+TR,43,Kütahya,true
+TR,39,Kırklareli,true
+TR,79,Kırıkkale,true
+TR,40,Kırşehir,true
+TR,44,Malatya,true
+TR,45,Manisa,true
+TR,72,Mardin,true
+TR,32,Mersin,true
+TR,48,Muğla,true
+TR,49,Muş,true
+TR,50,Nevşehir Province,true
+TR,73,Niğde Province,true
+TR,52,Ordu,true
+TR,91,Osmaniye,true
+TR,53,Rize Province,true
+TR,54,Sakarya,true
+TR,55,Samsun,true
+TR,74,Siirt,true
+TR,57,Sinop,true
+TR,58,Sivas,true
+TR,59,Tekirdağ,true
+TR,60,Tokat Province,true
+TR,61,Trabzon,true
+TR,62,Tunceli,true
+TR,64,Uşak,true
+TR,65,Van,true
+TR,92,Yalova,true
+TR,66,Yozgat,true
+TR,85,Zonguldak Province,true
+TR,82,Çankırı,true
+TR,19,Çorum,true
+TR,35,İzmir Province,true
+TR,63,Şanlıurfa,true
+TR,80,Şırnak,true
+TT,01,Borough of Arima,true
+TT,CHA,Chaguanas,true
+TT,CTT,Couva-Tabaquite-Talparo,true
+TT,DMN,Diego Martin Regional Corporation,true
+TT,03,Mayaro,true
+TT,PED,Penal/Debe,true
+TT,PTF,Point Fortin,true
+TT,05,Port of Spain,true
+TT,PRT,Princes Town,true
+TT,10,San Fernando,true
+TT,SJL,San Juan/Laventille,true
+TT,SGE,Sangre Grande Regional Corporation,true
+TT,SIP,Siparia Regional Corporation,true
+TT,11,Tobago,true
+TT,TUP,Tunapuna/Piarco,true
+TV,FUN,Funafuti,true
+TV,NMG,Nanumanga,true
+TV,NMA,Nanumea,true
+TV,NIT,Niutao,true
+TV,NUI,Nui,true
+TV,NKF,Nukufetau,true
+TV,NKL,Nukulaelae,true
+TV,VAI,Vaitupu,true
+TW,01,Fukien,true
+TW,03,Taipei,true
+TW,04,Taiwan,true
+TW,02,Takao,true
+TZ,26,Arusha,true
+TZ,23,Dar es Salaam Region,true
+TZ,03,Dodoma,true
+TZ,28,Geita,true
+TZ,04,Iringa,true
+TZ,19,Kagera,true
+TZ,29,Katavi,true
+TZ,05,Kigoma,true
+TZ,06,Kilimanjaro,true
+TZ,07,Lindi,true
+TZ,27,Manyara,true
+TZ,08,Mara,true
+TZ,09,Mbeya,true
+TZ,10,Morogoro,true
+TZ,11,Mtwara,true
+TZ,12,Mwanza,true
+TZ,30,Njombe,true
+TZ,13,Pemba North,true
+TZ,20,Pemba South,true
+TZ,02,Pwani,true
+TZ,24,Rukwa,true
+TZ,14,Ruvuma,true
+TZ,15,Shinyanga,true
+TZ,31,Simiyu,true
+TZ,16,Singida,true
+TZ,32,Songwe,true
+TZ,17,Tabora,true
+TZ,18,Tanga,true
+TZ,21,Zanzibar Central/South,true
+TZ,22,Zanzibar North,true
+TZ,25,Zanzibar Urban/West,true
+UA,01,Cherkasy,true
+UA,02,Chernihiv,true
+UA,03,Chernivtsi,true
+UA,11,Crimea,true
+UA,04,Dnipropetrovsk,true
+UA,05,Donetsk,true
+UA,06,Ivano-Frankivsk,true
+UA,07,Kharkivs’ka Oblast’,true
+UA,08,Kherson,true
+UA,09,Khmelnytskyi,true
+UA,10,Kirovohrad,true
+UA,13,Kyiv,true
+UA,12,Kyiv City,true
+UA,14,Luhansk,true
+UA,15,Lviv,true
+UA,16,Mykolaiv,true
+UA,17,Odesa,true
+UA,18,Poltava,true
+UA,19,Rivne,true
+UA,20,Sevastopol City,true
+UA,21,Sumy,true
+UA,22,Ternopil,true
+UA,23,Vinnytsia,true
+UA,24,Volyn,true
+UA,25,Zakarpattia,true
+UA,26,Zaporizhzhia,true
+UA,27,Zhytomyr,true
+UG,C,Central Region,true
+UG,E,Eastern Region,true
+UG,N,Northern Region,true
+UG,W,Western Region,true
+UM,050,Baker Island,true
+UM,100,Howland Island,true
+UM,150,Jarvis Island,true
+UM,200,Johnston Atoll,true
+UM,250,Kingman Reef,true
+UM,300,Midway Islands,true
+UM,350,Navassa Island,true
+UM,400,Palmyra Atoll,true
+UM,450,Wake Island,true
+US,AL,Alabama,true
+US,AK,Alaska,true
+US,AZ,Arizona,true
+US,AR,Arkansas,true
+US,CA,California,true
+US,CO,Colorado,true
+US,CT,Connecticut,true
+US,DE,Delaware,true
+US,DC,District of Columbia,true
+US,FL,Florida,true
+US,GA,Georgia,true
+US,HI,Hawaii,true
+US,ID,Idaho,true
+US,IL,Illinois,true
+US,IN,Indiana,true
+US,IA,Iowa,true
+US,KS,Kansas,true
+US,KY,Kentucky,true
+US,LA,Louisiana,true
+US,ME,Maine,true
+US,MD,Maryland,true
+US,MA,Massachusetts,true
+US,MI,Michigan,true
+US,MN,Minnesota,true
+US,MS,Mississippi,true
+US,MO,Missouri,true
+US,MT,Montana,true
+US,NE,Nebraska,true
+US,NV,Nevada,true
+US,NH,New Hampshire,true
+US,NJ,New Jersey,true
+US,NM,New Mexico,true
+US,NY,New York,true
+US,NC,North Carolina,true
+US,ND,North Dakota,true
+US,OH,Ohio,true
+US,OK,Oklahoma,true
+US,OR,Oregon,true
+US,PA,Pennsylvania,true
+US,RI,Rhode Island,true
+US,SC,South Carolina,true
+US,SD,South Dakota,true
+US,TN,Tennessee,true
+US,TX,Texas,true
+US,UT,Utah,true
+US,VT,Vermont,true
+US,VA,Virginia,true
+US,WA,Washington,true
+US,WV,West Virginia,true
+US,WI,Wisconsin,true
+US,WY,Wyoming,true
+UY,01,Artigas,true
+UY,02,Canelones,true
+UY,03,Cerro Largo,true
+UY,04,Colonia,true
+UY,05,Durazno Department,true
+UY,06,Flores Department,true
+UY,07,Florida,true
+UY,08,Lavalleja,true
+UY,09,Maldonado,true
+UY,10,Montevideo Department,true
+UY,11,Paysandú Department,true
+UY,13,Rivera Department,true
+UY,14,Rocha Department,true
+UY,12,Río Negro Department,true
+UY,15,Salto Department,true
+UY,16,San José Department,true
+UY,17,Soriano,true
+UY,18,Tacuarembó Department,true
+UY,19,Treinta y Tres Department,true
+UZ,01,Andijan Region,true
+UZ,02,Bukhara,true
+UZ,03,Fergana,true
+UZ,15,Jizzakh Region,true
+UZ,09,Karakalpakstan,true
+UZ,06,Namangan,true
+UZ,07,Navoiy Region,true
+UZ,08,Qashqadaryo,true
+UZ,10,Samarqand Region,true
+UZ,16,Sirdaryo Region,true
+UZ,12,Surxondaryo Region,true
+UZ,13,Tashkent,true
+UZ,14,Tashkent Region,true
+UZ,05,Xorazm Region,true
+VC,01,Charlotte Parish,true
+VC,06,Grenadines Parish,true
+VC,02,Saint Andrew Parish,true
+VC,03,Saint David Parish,true
+VC,04,Saint George Parish,true
+VC,05,Saint Patrick Parish,true
+VE,01,Amazonas,true
+VE,02,Anzoátegui,true
+VE,03,Apure,true
+VE,04,Aragua,true
+VE,05,Barinas,true
+VE,06,Bolívar,true
+VE,07,Carabobo,true
+VE,08,Cojedes,true
+VE,09,Delta Amacuro,true
+VE,24,Dependencias Federales,true
+VE,25,Distrito Federal,true
+VE,11,Falcón,true
+VE,12,Guárico,true
+VE,13,Lara,true
+VE,15,Miranda,true
+VE,16,Monagas,true
+VE,14,Mérida,true
+VE,17,Nueva Esparta,true
+VE,18,Portuguesa,true
+VE,19,Sucre,true
+VE,21,Trujillo,true
+VE,20,Táchira,true
+VE,26,Vargas,true
+VE,22,Yaracuy,true
+VE,23,Zulia,true
+VI,010,Saint Croix Island,true
+VI,020,Saint John Island,true
+VI,030,Saint Thomas Island,true
+VN,91,An Giang,true
+VN,24,Bac Ninh,true
+VN,96,Ca Mau,true
+VN,92,Can Tho City,true
+VN,04,Cao Bằng Province,true
+VN,48,Da Nang City,true
+VN,66,Dak Lak,true
+VN,75,Dong Nai,true
+VN,82,Dong Thap,true
+VN,52,Gia Lai,true
+VN,31,Hai Phong,true
+VN,01,Hanoi,true
+VN,79,Ho Chi Minh City (HCMC),true
+VN,42,Hà Tĩnh Province,true
+VN,33,Hưng Yên Province,true
+VN,56,Khanh Hoa,true
+VN,12,Lai Châu Province,true
+VN,68,Lam Dong,true
+VN,15,Lao Cai,true
+VN,20,Lạng Sơn Province,true
+VN,40,Nghệ An Province,true
+VN,37,Ninh Binh,true
+VN,25,Phu Tho,true
+VN,51,Quang Ngai,true
+VN,44,Quang Tri,true
+VN,22,Quảng Ninh,true
+VN,14,Sơn La Province,true
+VN,80,Tay Ninh,true
+VN,19,Thai Nguyen,true
+VN,38,Thanh Hóa Province,true
+VN,46,Thừa Thiên Huế Province,true
+VN,08,Tuyen Quang,true
+VN,86,Vinh Long,true
+VN,11,Điện Biên Province,true
+VU,16,Malampa,true
+VU,17,Penama,true
+VU,13,Sanma,true
+VU,18,Shefa,true
+VU,15,Tafea,true
+VU,07,Torba,true
+WF,98611,Alo,true
+WF,98612,Sigave,true
+WF,98613,Uvea,true
+WS,01,A'ana,true
+WS,02,Aiga-i-le-Tai,true
+WS,03,Atua,true
+WS,04,Fa'asaleleaga,true
+WS,05,Gaga'emauga,true
+WS,07,Gaga'ifomauga,true
+WS,08,Palauli,true
+WS,09,Satupa'itea,true
+WS,10,Tuamasaga,true
+WS,06,Va'a-o-Fonoti,true
+WS,11,Vaisigano,true
+XK,10096138,Ferizaj,true
+XK,10096859,Gjakova,true
+XK,10097357,Gjilan,true
+XK,10097358,Mitrovica,true
+XK,10097359,Pec,true
+XK,10097360,Pristina,true
+XK,10097361,Prizren,true
+YE,01,Abyan Governorate,true
+YE,02,Aden,true
+YE,20,Al Bayda,true
+YE,08,Al Hudaydah,true
+YE,21,Al Jawf,true
+YE,03,Al Mahrah Governorate,true
+YE,10,Al Mahwit Governorate,true
+YE,26,Amanat Alasimah,true
+YE,18,Aḑ Ḑāli‘,true
+YE,11,Dhamār,true
+YE,23,Ibb Governorate,true
+YE,24,Laḩij,true
+YE,14,Ma’rib,true
+YE,04,Muhafazat Hadramaout,true
+YE,19,Omran,true
+YE,27,Raymah,true
+YE,16,Sanaa Governorate,true
+YE,05,Shabwah,true
+YE,28,Soqatra,true
+YE,25,Ta‘izz,true
+YE,15,Şa‘dah,true
+YE,22,Ḩajjah,true
+YT,97601,Acoua,true
+YT,97602,Bandraboua,true
+YT,97603,Bandrele,true
+YT,97604,Bouéni,true
+YT,97605,Chiconi,true
+YT,97606,Chirongui,true
+YT,97607,Dembeni,true
+YT,97608,Dzaoudzi,true
+YT,97609,Kani-Kéli,true
+YT,97610,Koungou,true
+YT,97613,M'Tsangamouji,true
+YT,97611,Mamoudzou,true
+YT,97612,Mtsamboro,true
+YT,97614,Ouangani,true
+YT,97615,Pamandzi,true
+YT,97616,Sada,true
+YT,97617,Tsingoni,true
+ZA,05,Eastern Cape,true
+ZA,03,Free State,true
+ZA,06,Gauteng,true
+ZA,02,KwaZulu-Natal,true
+ZA,09,Limpopo,true
+ZA,07,Mpumalanga,true
+ZA,10,North West,true
+ZA,08,Northern Cape,true
+ZA,11,Western Cape,true
+ZM,02,Central Province,true
+ZM,08,Copperbelt,true
+ZM,03,Eastern Province,true
+ZM,04,Luapula Province,true
+ZM,09,Lusaka Province,true
+ZM,10,Muchinga,true
+ZM,06,North-Western,true
+ZM,05,Northern Province,true
+ZM,07,Southern Province,true
+ZM,01,Western Province,true
+ZW,09,Bulawayo,true
+ZW,10,Harare,true
+ZW,01,Manicaland,true
+ZW,03,Mashonaland Central,true
+ZW,04,Mashonaland East Province,true
+ZW,05,Mashonaland West,true
+ZW,08,Masvingo Province,true
+ZW,06,Matabeleland North,true
+ZW,07,Matabeleland South Province,true
+ZW,02,Midlands Province,true

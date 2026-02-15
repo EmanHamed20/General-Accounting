@@ -20,7 +20,7 @@ class Currency(AccountingBaseModel):
 class Country(AccountingBaseModel):
     name = models.CharField(max_length=128, unique=True)
     code = models.CharField(max_length=2, unique=True)
-    phone_code = models.CharField(max_length=8, blank=True)
+    phone_code = models.CharField(max_length=64, blank=True)
     active = models.BooleanField(default=True)
 
     class Meta:
@@ -78,3 +78,26 @@ class CountryCity(AccountingBaseModel):
     def clean(self) -> None:
         if self.state_id and self.state.country_id != self.country_id:
             raise ValidationError("City state must belong to the selected country.")
+
+
+class CountryCurrency(AccountingBaseModel):
+    country = models.ForeignKey("accounting.Country", on_delete=models.PROTECT, related_name="country_currencies")
+    currency = models.ForeignKey("accounting.Currency", on_delete=models.PROTECT, related_name="country_currencies")
+    is_default = models.BooleanField(default=False)
+    active = models.BooleanField(default=True)
+
+    class Meta:
+        db_table = "ga_country_currency"
+        unique_together = (("country", "currency"),)
+        constraints = [
+            models.UniqueConstraint(
+                fields=["country"],
+                condition=models.Q(is_default=True),
+                name="uniq_country_default_currency",
+            )
+        ]
+        ordering = ("country_id", "-is_default", "currency_id")
+
+    def __str__(self) -> str:
+        suffix = " (default)" if self.is_default else ""
+        return f"{self.country.code} - {self.currency.code}{suffix}"
