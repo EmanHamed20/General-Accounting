@@ -6,6 +6,8 @@ from accounting.models import (
     AccountGroupTemplate,
     AccountRoot,
     AccountTemplate,
+    Asset,
+    AssetDepreciationLine,
     Company,
     Country,
     CountryCity,
@@ -416,6 +418,129 @@ class AccountSerializer(serializers.ModelSerializer):
         return attrs
 
 
+class AssetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Asset
+        fields = [
+            "id",
+            "company",
+            "name",
+            "code",
+            "partner",
+            "currency",
+            "asset_account",
+            "depreciation_account",
+            "expense_account",
+            "journal",
+            "acquisition_date",
+            "first_depreciation_date",
+            "original_value",
+            "salvage_value",
+            "method",
+            "method_number",
+            "method_period",
+            "prorata",
+            "state",
+            "active",
+            "note",
+            "created_at",
+            "updated_at",
+        ]
+        read_only_fields = ["id", "created_at", "updated_at"]
+
+    def validate(self, attrs):
+        company = attrs.get("company") or getattr(self.instance, "company", None)
+        partner = attrs.get("partner") if "partner" in attrs else getattr(self.instance, "partner", None)
+        journal = attrs.get("journal") if "journal" in attrs else getattr(self.instance, "journal", None)
+        asset_account = (
+            attrs.get("asset_account")
+            if "asset_account" in attrs
+            else getattr(self.instance, "asset_account", None)
+        )
+        depreciation_account = (
+            attrs.get("depreciation_account")
+            if "depreciation_account" in attrs
+            else getattr(self.instance, "depreciation_account", None)
+        )
+        expense_account = (
+            attrs.get("expense_account")
+            if "expense_account" in attrs
+            else getattr(self.instance, "expense_account", None)
+        )
+        original_value = attrs.get("original_value", getattr(self.instance, "original_value", None))
+        salvage_value = attrs.get("salvage_value", getattr(self.instance, "salvage_value", None))
+        acquisition_date = attrs.get("acquisition_date", getattr(self.instance, "acquisition_date", None))
+        first_depreciation_date = attrs.get(
+            "first_depreciation_date",
+            getattr(self.instance, "first_depreciation_date", None),
+        )
+
+        if company and partner and partner.company_id != company.id:
+            raise serializers.ValidationError({"partner": "Partner company must match asset company."})
+        if company and journal and journal.company_id != company.id:
+            raise serializers.ValidationError({"journal": "Journal company must match asset company."})
+        if company and asset_account and asset_account.company_id != company.id:
+            raise serializers.ValidationError({"asset_account": "Asset account company must match asset company."})
+        if company and depreciation_account and depreciation_account.company_id != company.id:
+            raise serializers.ValidationError(
+                {"depreciation_account": "Depreciation account company must match asset company."}
+            )
+        if company and expense_account and expense_account.company_id != company.id:
+            raise serializers.ValidationError({"expense_account": "Expense account company must match asset company."})
+
+        if original_value is not None and original_value <= 0:
+            raise serializers.ValidationError({"original_value": "Original value must be greater than zero."})
+        if salvage_value is not None and salvage_value < 0:
+            raise serializers.ValidationError({"salvage_value": "Salvage value cannot be negative."})
+        if (
+            original_value is not None
+            and salvage_value is not None
+            and salvage_value >= original_value
+        ):
+            raise serializers.ValidationError({"salvage_value": "Salvage value must be lower than original value."})
+        if first_depreciation_date and acquisition_date and first_depreciation_date < acquisition_date:
+            raise serializers.ValidationError(
+                {"first_depreciation_date": "First depreciation date cannot be before acquisition date."}
+            )
+        return attrs
+
+
+class AssetDepreciationLineSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AssetDepreciationLine
+        fields = [
+            "id",
+            "asset",
+            "move",
+            "sequence",
+            "date",
+            "amount",
+            "depreciated_value",
+            "residual_value",
+            "state",
+            "created_at",
+            "updated_at",
+        ]
+        read_only_fields = ["id", "created_at", "updated_at"]
+
+    def validate(self, attrs):
+        asset = attrs.get("asset") or getattr(self.instance, "asset", None)
+        move = attrs.get("move") if "move" in attrs else getattr(self.instance, "move", None)
+        state = attrs.get("state", getattr(self.instance, "state", None))
+        amount = attrs.get("amount", getattr(self.instance, "amount", None))
+        residual_value = attrs.get("residual_value", getattr(self.instance, "residual_value", None))
+
+        if amount is not None and amount <= 0:
+            raise serializers.ValidationError({"amount": "Depreciation amount must be greater than zero."})
+        if residual_value is not None and residual_value < 0:
+            raise serializers.ValidationError({"residual_value": "Residual value cannot be negative."})
+        if asset and move and move.company_id != asset.company_id:
+            raise serializers.ValidationError({"move": "Depreciation move company must match asset company."})
+        if state == "posted" and not move:
+            raise serializers.ValidationError({"move": "Posted depreciation line requires a move."})
+        return attrs
+
+
 class JournalGroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = JournalGroup
@@ -552,4 +677,3 @@ class PaymentMethodLineSerializer(serializers.ModelSerializer):
         model = PaymentMethodLine
         fields = ["id", "journal", "payment_method", "sequence", "active", "created_at", "updated_at"]
         read_only_fields = ["id", "created_at", "updated_at"]
-    InvoiceLine,

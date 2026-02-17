@@ -1,4 +1,5 @@
 from .base import AccountingBaseModel
+from .assets import Asset, AssetDepreciationLine
 from .chart_templates import AccountGroupTemplate, AccountTemplate
 from .core import Company, Partner
 from .entries import Move, MoveLine
@@ -19,6 +20,8 @@ from .products import ProductCategory
 
 __all__ = [
     "AccountingBaseModel",
+    "Asset",
+    "AssetDepreciationLine",
     "AccountGroupTemplate",
     "AccountTemplate",
     "Company",
