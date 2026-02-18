@@ -29,6 +29,21 @@ from accounting.models import (
     TaxGroup,
     Tax,
     TaxRepartitionLine,
+    AccountingSettings,
+    FollowupLevel,
+    BankAccount,
+    ReconciliationModel,
+    ReconciliationModelLine,
+    FiscalPosition,
+    FiscalPositionTaxMap,
+    FiscalPositionAccountMap,
+    Ledger,
+    FinancialBudget,
+    FinancialBudgetLine,
+    AssetModel,
+    DisallowedExpenseCategory,
+    PaymentProvider,
+    PaymentProviderMethod,
 )
 
 
@@ -727,4 +742,262 @@ class PaymentMethodLineSerializer(serializers.ModelSerializer):
     class Meta:
         model = PaymentMethodLine
         fields = ["id", "journal", "payment_method", "sequence", "active", "created_at", "updated_at"]
+        read_only_fields = ["id", "created_at", "updated_at"]
+
+
+class AccountingSettingsSerializer(serializers.ModelSerializer):
+    sale_tax = serializers.PrimaryKeyRelatedField(
+        source="default_sales_tax",
+        queryset=Tax.objects.all(),
+        required=False,
+        allow_null=True,
+    )
+    purchase_tax = serializers.PrimaryKeyRelatedField(
+        source="default_purchase_tax",
+        queryset=Tax.objects.all(),
+        required=False,
+        allow_null=True,
+    )
+    tax_calculation_rounding_method = serializers.ChoiceField(
+        source="tax_rounding_method",
+        choices=AccountingSettings.TAX_ROUNDING_METHOD_CHOICES,
+        required=False,
+    )
+
+    class Meta:
+        model = AccountingSettings
+        fields = [
+            "id",
+            "company",
+            "country_code",
+            "fiscal_localization_country",
+            "chart_template_country",
+            "account_fiscal_country",
+            "chart_template",
+            "has_chart_of_accounts",
+            "has_accounting_entries",
+            "currency",
+            "group_multi_currency",
+            "module_currency_rate_live",
+            "default_sales_tax",
+            "default_purchase_tax",
+            "sale_tax",
+            "purchase_tax",
+            "tax_return_periodicity",
+            "tax_return_reminder_days",
+            "tax_return_journal",
+            "tax_rounding_method",
+            "tax_calculation_rounding_method",
+            "account_price_include",
+            "currency_exchange_journal",
+            "income_currency_exchange_account",
+            "expense_currency_exchange_account",
+            "bank_suspense_account",
+            "account_journal_suspense_account",
+            "transfer_account",
+            "tax_exigibility",
+            "tax_cash_basis_journal",
+            "account_cash_basis_base_account",
+            "account_discount_expense_allocation",
+            "account_discount_income_allocation",
+            "account_journal_early_pay_discount_gain_account",
+            "account_journal_early_pay_discount_loss_account",
+            "default_sale_payment_term",
+            "default_purchase_payment_term",
+            "fiscalyear_last_day",
+            "fiscalyear_last_month",
+            "use_anglo_saxon",
+            "invoicing_switch_threshold",
+            "predict_bill_product",
+            "followup_enabled",
+            "multi_ledger_enabled",
+            "budgets_enabled",
+            "assets_enabled",
+            "online_payments_enabled",
+            "quick_edit_mode",
+            "check_account_audit_trail",
+            "autopost_bills",
+            "account_use_credit_limit",
+            "account_default_credit_limit",
+            "account_storno",
+            "qr_code",
+            "module_l10n_eu_oss",
+            "module_snailmail_account",
+            "group_sale_delivery_address",
+            "group_warning_account",
+            "group_cash_rounding",
+            "module_account_intrastat",
+            "incoterm",
+            "group_show_sale_receipts",
+            "terms_type",
+            "preview_ready",
+            "display_invoice_amount_total_words",
+            "display_invoice_tax_company_currency",
+            "group_uom",
+            "module_account_payment",
+            "module_account_batch_payment",
+            "module_account_sepa_direct_debit",
+            "group_show_purchase_receipts",
+            "module_account_check_printing",
+            "module_account_iso20022",
+            "module_account_extract",
+            "module_account_bank_statement_import_csv",
+            "module_account_bank_statement_import_qif",
+            "module_account_bank_statement_import_ofx",
+            "module_account_bank_statement_import_camt",
+            "module_account_reports",
+            "group_analytic_accounting",
+            "module_account_budget",
+            "module_product_margin",
+            "is_account_peppol_eligible",
+            "module_account_peppol",
+            "invoice_terms",
+            "use_invoice_terms",
+            "deferred_expense_journal",
+            "deferred_expense_account",
+            "generate_deferred_expense_entries_method",
+            "deferred_expense_amount_computation_method",
+            "deferred_revenue_journal",
+            "deferred_revenue_account",
+            "generate_deferred_revenue_entries_method",
+            "deferred_revenue_amount_computation_method",
+            "created_at",
+            "updated_at",
+        ]
+        read_only_fields = ["id", "created_at", "updated_at"]
+
+
+class FollowupLevelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FollowupLevel
+        fields = ["id", "company", "name", "delay_days", "action", "active", "created_at", "updated_at"]
+        read_only_fields = ["id", "created_at", "updated_at"]
+
+
+class BankAccountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BankAccount
+        fields = [
+            "id",
+            "company",
+            "journal",
+            "bank_name",
+            "account_holder",
+            "iban",
+            "swift",
+            "account_number",
+            "active",
+            "created_at",
+            "updated_at",
+        ]
+        read_only_fields = ["id", "created_at", "updated_at"]
+
+
+class ReconciliationModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ReconciliationModel
+        fields = ["id", "company", "name", "journal", "auto_reconcile", "active", "created_at", "updated_at"]
+        read_only_fields = ["id", "created_at", "updated_at"]
+
+
+class ReconciliationModelLineSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ReconciliationModelLine
+        fields = [
+            "id",
+            "reconciliation_model",
+            "sequence",
+            "label",
+            "account",
+            "tax",
+            "amount_type",
+            "amount",
+            "created_at",
+            "updated_at",
+        ]
+        read_only_fields = ["id", "created_at", "updated_at"]
+
+
+class FiscalPositionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FiscalPosition
+        fields = ["id", "company", "name", "country", "auto_apply", "vat_required", "active", "created_at", "updated_at"]
+        read_only_fields = ["id", "created_at", "updated_at"]
+
+
+class FiscalPositionTaxMapSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FiscalPositionTaxMap
+        fields = ["id", "fiscal_position", "tax_src", "tax_dest", "created_at", "updated_at"]
+        read_only_fields = ["id", "created_at", "updated_at"]
+
+
+class FiscalPositionAccountMapSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FiscalPositionAccountMap
+        fields = ["id", "fiscal_position", "account_src", "account_dest", "created_at", "updated_at"]
+        read_only_fields = ["id", "created_at", "updated_at"]
+
+
+class LedgerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ledger
+        fields = ["id", "company", "currency", "name", "code", "is_default", "active", "created_at", "updated_at"]
+        read_only_fields = ["id", "created_at", "updated_at"]
+
+
+class FinancialBudgetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FinancialBudget
+        fields = ["id", "company", "name", "date_from", "date_to", "state", "created_at", "updated_at"]
+        read_only_fields = ["id", "created_at", "updated_at"]
+
+
+class FinancialBudgetLineSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FinancialBudgetLine
+        fields = ["id", "budget", "account", "name", "planned_amount", "practical_amount", "created_at", "updated_at"]
+        read_only_fields = ["id", "created_at", "updated_at"]
+
+
+class AssetModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AssetModel
+        fields = [
+            "id",
+            "company",
+            "name",
+            "method",
+            "method_number",
+            "method_period_months",
+            "prorata",
+            "account_asset",
+            "account_depreciation",
+            "account_expense",
+            "journal",
+            "active",
+            "created_at",
+            "updated_at",
+        ]
+        read_only_fields = ["id", "created_at", "updated_at"]
+
+
+class DisallowedExpenseCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DisallowedExpenseCategory
+        fields = ["id", "company", "name", "disallow_percent", "expense_account", "active", "created_at", "updated_at"]
+        read_only_fields = ["id", "created_at", "updated_at"]
+
+
+class PaymentProviderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PaymentProvider
+        fields = ["id", "company", "journal", "name", "code", "state", "active", "created_at", "updated_at"]
+        read_only_fields = ["id", "created_at", "updated_at"]
+
+
+class PaymentProviderMethodSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PaymentProviderMethod
+        fields = ["id", "provider", "payment_method", "active", "created_at", "updated_at"]
         read_only_fields = ["id", "created_at", "updated_at"]
