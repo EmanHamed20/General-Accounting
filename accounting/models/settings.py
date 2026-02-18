@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.apps import apps
 
 from .base import AccountingBaseModel
 
@@ -374,6 +375,20 @@ class AccountingSettings(AccountingBaseModel):
         for journal in journal_fields:
             if journal and journal.company_id != self.company_id:
                 raise ValidationError("All settings journals must belong to the same company.")
+
+        if self.tax_exigibility:
+            if not self.tax_cash_basis_journal_id:
+                raise ValidationError("Cash basis journal is required when tax exigibility is enabled.")
+            if not self.account_cash_basis_base_account_id:
+                raise ValidationError("Cash basis base account is required when tax exigibility is enabled.")
+
+        if self.pk:
+            previous = AccountingSettings.objects.filter(pk=self.pk).only("check_account_audit_trail").first()
+            if previous and previous.check_account_audit_trail and not self.check_account_audit_trail:
+                MoveLine = apps.get_model("accounting", "MoveLine")
+                has_journal_items = MoveLine.objects.filter(move__company_id=self.company_id).exists()
+                if has_journal_items:
+                    raise ValidationError("Audit Trail cannot be disabled once journal items exist.")
 
         if self.fiscalyear_last_day < 1 or self.fiscalyear_last_day > 31:
             raise ValidationError("Fiscal year last day must be between 1 and 31.")

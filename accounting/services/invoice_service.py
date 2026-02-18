@@ -2,6 +2,7 @@ from decimal import Decimal
 
 from django.core.exceptions import ValidationError
 from django.db import transaction
+from django.utils import timezone
 
 from accounting.models import Move, MoveLine
 from accounting.services.move_service import post_move
@@ -106,3 +107,85 @@ def generate_journal_lines_and_post_invoice(*, invoice: Move) -> dict:
     post_stats["generated_lines"] = created_lines
     post_stats["invoice_total"] = str(total_amount)
     return post_stats
+
+
+@transaction.atomic
+def reverse_invoice_to_credit_note(*, invoice: Move, date=None, reason: str = "") -> Move:
+    if invoice.move_type not in {"out_invoice", "in_invoice"}:
+        raise ValidationError("Only customer invoices and vendor bills can be reversed from this action.")
+    if invoice.state != "posted":
+        raise ValidationError("Only posted invoices can be reversed.")
+
+    reverse_move_type = "out_refund" if invoice.move_type == "out_invoice" else "in_refund"
+    reverse_date = date or timezone.localdate()
+    reverse_reference = f"Reversal of {invoice.name or invoice.id}"
+    if reason:
+        reverse_reference = f"{reverse_reference} - {reason}"
+
+    credit_note = Move.objects.create(
+        company=invoice.company,
+        journal=invoice.journal,
+        partner=invoice.partner,
+        currency=invoice.currency,
+        payment_term=invoice.payment_term,
+        reference=reverse_reference,
+        name="",
+        invoice_date=reverse_date,
+        date=reverse_date,
+        state="draft",
+        move_type=reverse_move_type,
+        reversed_entry=invoice,
+    )
+
+    for line in invoice.invoice_lines.select_related("account", "tax").all():
+        credit_note.invoice_lines.create(
+            account=line.account,
+            tax=line.tax,
+            name=line.name,
+            quantity=line.quantity,
+            unit_price=line.unit_price,
+            discount_percent=line.discount_percent,
+        )
+
+    return credit_note
+
+
+@transaction.atomic
+def create_debit_note_from_invoice(*, invoice: Move, date=None, reason: str = "") -> Move:
+    if invoice.move_type not in {"out_invoice", "in_invoice"}:
+        raise ValidationError("Only customer invoices and vendor bills can generate debit notes.")
+    if invoice.state != "posted":
+        raise ValidationError("Only posted invoices can generate debit notes.")
+
+    debit_date = date or timezone.localdate()
+    debit_reference = f"Debit note for {invoice.name or invoice.id}"
+    if reason:
+        debit_reference = f"{debit_reference} - {reason}"
+
+    debit_note = Move.objects.create(
+        company=invoice.company,
+        journal=invoice.journal,
+        partner=invoice.partner,
+        currency=invoice.currency,
+        payment_term=invoice.payment_term,
+        reference=debit_reference,
+        name="",
+        invoice_date=debit_date,
+        date=debit_date,
+        state="draft",
+        move_type=invoice.move_type,
+        debit_origin=invoice,
+        is_debit_note=True,
+    )
+
+    for line in invoice.invoice_lines.select_related("account", "tax").all():
+        debit_note.invoice_lines.create(
+            account=line.account,
+            tax=line.tax,
+            name=line.name,
+            quantity=line.quantity,
+            unit_price=line.unit_price,
+            discount_percent=line.discount_percent,
+        )
+
+    return debit_note

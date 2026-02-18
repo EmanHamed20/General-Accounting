@@ -1,4 +1,10 @@
 from .base import AccountingBaseModel
+from .analytics import (
+    AnalyticAccount,
+    AnalyticDistributionModel,
+    AnalyticDistributionModelLine,
+    AnalyticPlan,
+)
 from .assets import Asset, AssetDepreciationLine
 from .chart_templates import AccountGroupTemplate, AccountTemplate
 from .core import Company, Partner
@@ -32,11 +38,15 @@ from .ledger import Account, AccountGroup, AccountRoot
 from .localization import Country, CountryCity, CountryCurrency, CountryState, Currency
 from .invoicing import InvoiceLine
 from .payments import FullReconcile, PartialReconcile, Payment, PaymentMethod, PaymentMethodLine
-from .products import ProductCategory
+from .products import Product, ProductCategory
 from .settings import AccountingSettings
 
 __all__ = [
     "AccountingBaseModel",
+    "AnalyticPlan",
+    "AnalyticAccount",
+    "AnalyticDistributionModel",
+    "AnalyticDistributionModelLine",
     "Asset",
     "AssetDepreciationLine",
     "AccountGroupTemplate",
@@ -81,5 +91,6 @@ __all__ = [
     "FullReconcile",
     "PartialReconcile",
     "ProductCategory",
+    "Product",
     "AccountingSettings",
 ]

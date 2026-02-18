@@ -184,6 +184,42 @@
     {
       "key": "payment_provider_method_id",
       "value": "1"
+    },
+    {
+      "key": "analytic_plan_id",
+      "value": "1"
+    },
+    {
+      "key": "analytic_account_id",
+      "value": "1"
+    },
+    {
+      "key": "analytic_distribution_model_id",
+      "value": "1"
+    },
+    {
+      "key": "analytic_distribution_model_line_id",
+      "value": "1"
+    },
+    {
+      "key": "customer_id",
+      "value": "1"
+    },
+    {
+      "key": "product_id",
+      "value": "1"
+    },
+    {
+      "key": "credit_note_id",
+      "value": "1"
+    },
+    {
+      "key": "debit_note_id",
+      "value": "1"
+    },
+    {
+      "key": "payment_id",
+      "value": "1"
     }
   ],
   "item": [
@@ -1809,6 +1845,251 @@
               }
             }
           ]
+        },
+        {
+          "name": "Analytic Accounting",
+          "item": [
+            {
+              "name": "Analytic Plans",
+              "item": [
+                {
+                  "name": "List Analytic Plans",
+                  "request": {
+                    "method": "GET",
+                    "url": "{{base_url}}/api/analytic-plans/?company_id={{company_id}}"
+                  }
+                },
+                {
+                  "name": "Create Analytic Plan",
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"company\": {{company_id}},\n  \"parent\": null,\n  \"name\": \"Default Plan\",\n  \"default_applicability\": \"optional\",\n  \"color\": 0,\n  \"active\": true\n}"
+                    },
+                    "url": "{{base_url}}/api/analytic-plans/"
+                  }
+                },
+                {
+                  "name": "Get Analytic Plan",
+                  "request": {
+                    "method": "GET",
+                    "url": "{{base_url}}/api/analytic-plans/{{analytic_plan_id}}/"
+                  }
+                },
+                {
+                  "name": "Update Analytic Plan",
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"company\": {{company_id}},\n  \"parent\": null,\n  \"name\": \"Default Plan Updated\",\n  \"default_applicability\": \"mandatory\",\n  \"color\": 2,\n  \"active\": true\n}"
+                    },
+                    "url": "{{base_url}}/api/analytic-plans/{{analytic_plan_id}}/"
+                  }
+                },
+                {
+                  "name": "Delete Analytic Plan",
+                  "request": {
+                    "method": "DELETE",
+                    "url": "{{base_url}}/api/analytic-plans/{{analytic_plan_id}}/"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Analytic Accounts",
+              "item": [
+                {
+                  "name": "List Analytic Accounts",
+                  "request": {
+                    "method": "GET",
+                    "url": "{{base_url}}/api/analytic-accounts/?company_id={{company_id}}&plan_id={{analytic_plan_id}}"
+                  }
+                },
+                {
+                  "name": "Create Analytic Account",
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"company\": {{company_id}},\n  \"plan\": {{analytic_plan_id}},\n  \"partner\": null,\n  \"name\": \"Marketing\",\n  \"code\": \"MKT\",\n  \"active\": true\n}"
+                    },
+                    "url": "{{base_url}}/api/analytic-accounts/"
+                  }
+                },
+                {
+                  "name": "Get Analytic Account",
+                  "request": {
+                    "method": "GET",
+                    "url": "{{base_url}}/api/analytic-accounts/{{analytic_account_id}}/"
+                  }
+                },
+                {
+                  "name": "Update Analytic Account",
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"company\": {{company_id}},\n  \"plan\": {{analytic_plan_id}},\n  \"partner\": null,\n  \"name\": \"Marketing Updated\",\n  \"code\": \"MKT-01\",\n  \"active\": true\n}"
+                    },
+                    "url": "{{base_url}}/api/analytic-accounts/{{analytic_account_id}}/"
+                  }
+                },
+                {
+                  "name": "Delete Analytic Account",
+                  "request": {
+                    "method": "DELETE",
+                    "url": "{{base_url}}/api/analytic-accounts/{{analytic_account_id}}/"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Analytic Distribution Models",
+              "item": [
+                {
+                  "name": "List Analytic Distribution Models",
+                  "request": {
+                    "method": "GET",
+                    "url": "{{base_url}}/api/analytic-distribution-models/?company_id={{company_id}}"
+                  }
+                },
+                {
+                  "name": "Create Analytic Distribution Model",
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"company\": {{company_id}},\n  \"name\": \"Sales Revenue Split\",\n  \"partner\": null,\n  \"product_category\": null,\n  \"account_prefix\": \"4\",\n  \"active\": true\n}"
+                    },
+                    "url": "{{base_url}}/api/analytic-distribution-models/"
+                  }
+                },
+                {
+                  "name": "Get Analytic Distribution Model",
+                  "request": {
+                    "method": "GET",
+                    "url": "{{base_url}}/api/analytic-distribution-models/{{analytic_distribution_model_id}}/"
+                  }
+                },
+                {
+                  "name": "Update Analytic Distribution Model",
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"company\": {{company_id}},\n  \"name\": \"Sales Revenue Split Updated\",\n  \"partner\": null,\n  \"product_category\": null,\n  \"account_prefix\": \"4\",\n  \"active\": true\n}"
+                    },
+                    "url": "{{base_url}}/api/analytic-distribution-models/{{analytic_distribution_model_id}}/"
+                  }
+                },
+                {
+                  "name": "Delete Analytic Distribution Model",
+                  "request": {
+                    "method": "DELETE",
+                    "url": "{{base_url}}/api/analytic-distribution-models/{{analytic_distribution_model_id}}/"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Analytic Distribution Model Lines",
+              "item": [
+                {
+                  "name": "List Analytic Distribution Model Lines",
+                  "request": {
+                    "method": "GET",
+                    "url": "{{base_url}}/api/analytic-distribution-model-lines/?model_id={{analytic_distribution_model_id}}"
+                  }
+                },
+                {
+                  "name": "Create Analytic Distribution Model Line",
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"model\": {{analytic_distribution_model_id}},\n  \"analytic_account\": {{analytic_account_id}},\n  \"percentage\": \"100.0000\"\n}"
+                    },
+                    "url": "{{base_url}}/api/analytic-distribution-model-lines/"
+                  }
+                },
+                {
+                  "name": "Get Analytic Distribution Model Line",
+                  "request": {
+                    "method": "GET",
+                    "url": "{{base_url}}/api/analytic-distribution-model-lines/{{analytic_distribution_model_line_id}}/"
+                  }
+                },
+                {
+                  "name": "Update Analytic Distribution Model Line",
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"model\": {{analytic_distribution_model_id}},\n  \"analytic_account\": {{analytic_account_id}},\n  \"percentage\": \"60.0000\"\n}"
+                    },
+                    "url": "{{base_url}}/api/analytic-distribution-model-lines/{{analytic_distribution_model_line_id}}/"
+                  }
+                },
+                {
+                  "name": "Delete Analytic Distribution Model Line",
+                  "request": {
+                    "method": "DELETE",
+                    "url": "{{base_url}}/api/analytic-distribution-model-lines/{{analytic_distribution_model_line_id}}/"
+                  }
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -2129,10 +2410,301 @@
               }
             },
             {
+              "name": "Create Debit Note From Invoice",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"Additional charge\",\n  \"date\": \"2026-02-18\"\n}"
+                },
+                "url": "{{base_url}}/api/invoices/{{invoice_id}}/create-debit-note/"
+              }
+            },
+            {
+              "name": "Cancel Invoice",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/invoices/{{invoice_id}}/cancel/"
+              }
+            },
+            {
+              "name": "Reset Invoice To Draft",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/invoices/{{invoice_id}}/reset-to-draft/"
+              }
+            },
+            {
+              "name": "Reverse Invoice To Credit Note",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"Customer requested credit\",\n  \"date\": \"2026-02-18\"\n}"
+                },
+                "url": "{{base_url}}/api/invoices/{{invoice_id}}/reverse/"
+              }
+            },
+            {
               "name": "Delete Invoice",
               "request": {
                 "method": "DELETE",
                 "url": "{{base_url}}/api/invoices/{{invoice_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Credit Notes",
+          "item": [
+            {
+              "name": "List Credit Notes",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/credit-notes/?company_id={{company_id}}"
+              }
+            },
+            {
+              "name": "Create Credit Note",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": {{company_id}},\n  \"journal\": {{journal_id}},\n  \"partner\": {{customer_id}},\n  \"currency\": {{currency_id}},\n  \"payment_term\": {{payment_term_id}},\n  \"reference\": \"CN-001\",\n  \"invoice_date\": \"2026-02-18\",\n  \"date\": \"2026-02-18\",\n  \"move_type\": \"out_refund\"\n}"
+                },
+                "url": "{{base_url}}/api/credit-notes/"
+              }
+            },
+            {
+              "name": "Get Credit Note",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/credit-notes/{{credit_note_id}}/"
+              }
+            },
+            {
+              "name": "Update Credit Note",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": {{company_id}},\n  \"journal\": {{journal_id}},\n  \"partner\": {{customer_id}},\n  \"currency\": {{currency_id}},\n  \"payment_term\": {{payment_term_id}},\n  \"reference\": \"CN-001-UPDATED\",\n  \"invoice_date\": \"2026-02-18\",\n  \"date\": \"2026-02-18\",\n  \"move_type\": \"out_refund\"\n}"
+                },
+                "url": "{{base_url}}/api/credit-notes/{{credit_note_id}}/"
+              }
+            },
+            {
+              "name": "Post Credit Note",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/credit-notes/{{credit_note_id}}/post/"
+              }
+            },
+            {
+              "name": "Cancel Credit Note",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/credit-notes/{{credit_note_id}}/cancel/"
+              }
+            },
+            {
+              "name": "Reset Credit Note To Draft",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/credit-notes/{{credit_note_id}}/reset-to-draft/"
+              }
+            },
+            {
+              "name": "Delete Credit Note",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/credit-notes/{{credit_note_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Debit Notes",
+          "item": [
+            {
+              "name": "List Debit Notes",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/debit-notes/?company_id={{company_id}}"
+              }
+            },
+            {
+              "name": "Create Debit Note",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": {{company_id}},\n  \"journal\": {{journal_id}},\n  \"partner\": {{customer_id}},\n  \"currency\": {{currency_id}},\n  \"payment_term\": {{payment_term_id}},\n  \"reference\": \"DN-001\",\n  \"invoice_date\": \"2026-02-18\",\n  \"date\": \"2026-02-18\",\n  \"move_type\": \"out_invoice\"\n}"
+                },
+                "url": "{{base_url}}/api/debit-notes/"
+              }
+            },
+            {
+              "name": "Get Debit Note",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/debit-notes/{{debit_note_id}}/"
+              }
+            },
+            {
+              "name": "Update Debit Note",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": {{company_id}},\n  \"journal\": {{journal_id}},\n  \"partner\": {{customer_id}},\n  \"currency\": {{currency_id}},\n  \"payment_term\": {{payment_term_id}},\n  \"reference\": \"DN-001-UPDATED\",\n  \"invoice_date\": \"2026-02-18\",\n  \"date\": \"2026-02-18\",\n  \"move_type\": \"out_invoice\"\n}"
+                },
+                "url": "{{base_url}}/api/debit-notes/{{debit_note_id}}/"
+              }
+            },
+            {
+              "name": "Post Debit Note",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/debit-notes/{{debit_note_id}}/post/"
+              }
+            },
+            {
+              "name": "Cancel Debit Note",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/debit-notes/{{debit_note_id}}/cancel/"
+              }
+            },
+            {
+              "name": "Reset Debit Note To Draft",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/debit-notes/{{debit_note_id}}/reset-to-draft/"
+              }
+            },
+            {
+              "name": "Delete Debit Note",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/debit-notes/{{debit_note_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Payments",
+          "item": [
+            {
+              "name": "List Payments",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/payments/?company_id={{company_id}}"
+              }
+            },
+            {
+              "name": "Create Payment",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": {{company_id}},\n  \"partner\": {{customer_id}},\n  \"journal\": {{journal_id}},\n  \"payment_method_line\": {{payment_method_line_id}},\n  \"currency\": {{currency_id}},\n  \"date\": \"2026-02-18\",\n  \"amount\": \"1000.000000\",\n  \"payment_type\": \"inbound\",\n  \"reference\": \"PAY-001\"\n}"
+                },
+                "url": "{{base_url}}/api/payments/"
+              }
+            },
+            {
+              "name": "Get Payment",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/payments/{{payment_id}}/"
+              }
+            },
+            {
+              "name": "Update Payment",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": {{company_id}},\n  \"partner\": {{customer_id}},\n  \"journal\": {{journal_id}},\n  \"payment_method_line\": {{payment_method_line_id}},\n  \"currency\": {{currency_id}},\n  \"date\": \"2026-02-18\",\n  \"amount\": \"1200.000000\",\n  \"payment_type\": \"inbound\",\n  \"reference\": \"PAY-001-UPDATED\"\n}"
+                },
+                "url": "{{base_url}}/api/payments/{{payment_id}}/"
+              }
+            },
+            {
+              "name": "Post Payment",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/payments/{{payment_id}}/post/"
+              }
+            },
+            {
+              "name": "Cancel Payment",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/payments/{{payment_id}}/cancel/"
+              }
+            },
+            {
+              "name": "Reset Payment To Draft",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/payments/{{payment_id}}/reset-to-draft/"
+              }
+            },
+            {
+              "name": "Delete Payment",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/payments/{{payment_id}}/"
               }
             }
           ]
@@ -2196,6 +2768,66 @@
               }
             }
           ]
+        }
+      ]
+    },
+    {
+      "name": "Customers",
+      "item": [
+        {
+          "name": "List Customers",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/customers/?company_id={{company_id}}&active=true"
+          }
+        },
+        {
+          "name": "Create Customer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"company\": {{company_id}},\n  \"parent\": null,\n  \"name\": \"ABC Trading\",\n  \"type\": \"contact\",\n  \"email\": \"customer@example.com\",\n  \"phone\": \"+1-555-0100\",\n  \"mobile\": \"+1-555-0101\",\n  \"street\": \"Main Street 10\",\n  \"street2\": \"Suite 5\",\n  \"city\": \"Riyadh\",\n  \"zip\": \"11564\",\n  \"country\": {{country_id}},\n  \"state\": {{state_id}},\n  \"vat\": \"123456789\",\n  \"is_company\": true,\n  \"customer_rank\": 1,\n  \"supplier_rank\": 0,\n  \"active\": true\n}"
+            },
+            "url": "{{base_url}}/api/customers/"
+          }
+        },
+        {
+          "name": "Get Customer",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/customers/{{customer_id}}/"
+          }
+        },
+        {
+          "name": "Update Customer",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"company\": {{company_id}},\n  \"parent\": null,\n  \"name\": \"ABC Trading Updated\",\n  \"type\": \"contact\",\n  \"email\": \"customer.updated@example.com\",\n  \"phone\": \"+1-555-0100\",\n  \"mobile\": \"+1-555-0101\",\n  \"street\": \"Main Street 10\",\n  \"street2\": \"Suite 5\",\n  \"city\": \"Riyadh\",\n  \"zip\": \"11564\",\n  \"country\": {{country_id}},\n  \"state\": {{state_id}},\n  \"vat\": \"123456789\",\n  \"is_company\": true,\n  \"customer_rank\": 1,\n  \"supplier_rank\": 0,\n  \"active\": true\n}"
+            },
+            "url": "{{base_url}}/api/customers/{{customer_id}}/"
+          }
+        },
+        {
+          "name": "Delete Customer",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/api/customers/{{customer_id}}/"
+          }
         }
       ]
     },
@@ -2588,6 +3220,66 @@
       ]
     },
     {
+      "name": "Products",
+      "item": [
+        {
+          "name": "List Products",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/products/?company_id={{company_id}}&active=true"
+          }
+        },
+        {
+          "name": "Create Product",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"company\": {{company_id}},\n  \"category\": {{product_category_id}},\n  \"name\": \"Consulting Service\",\n  \"default_code\": \"PROD-001\",\n  \"barcode\": \"1234567890123\",\n  \"product_type\": \"service\",\n  \"sale_ok\": true,\n  \"purchase_ok\": true,\n  \"list_price\": \"1000.000000\",\n  \"standard_price\": \"600.000000\",\n  \"income_account\": {{account_id}},\n  \"expense_account\": {{account_id}},\n  \"sale_tax\": {{tax_id}},\n  \"purchase_tax\": {{tax_id}},\n  \"active\": true\n}"
+            },
+            "url": "{{base_url}}/api/products/"
+          }
+        },
+        {
+          "name": "Get Product",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/products/{{product_id}}/"
+          }
+        },
+        {
+          "name": "Update Product",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"company\": {{company_id}},\n  \"category\": {{product_category_id}},\n  \"name\": \"Consulting Service Updated\",\n  \"default_code\": \"PROD-001\",\n  \"barcode\": \"1234567890123\",\n  \"product_type\": \"service\",\n  \"sale_ok\": true,\n  \"purchase_ok\": true,\n  \"list_price\": \"1200.000000\",\n  \"standard_price\": \"700.000000\",\n  \"income_account\": {{account_id}},\n  \"expense_account\": {{account_id}},\n  \"sale_tax\": {{tax_id}},\n  \"purchase_tax\": {{tax_id}},\n  \"active\": true\n}"
+            },
+            "url": "{{base_url}}/api/products/{{product_id}}/"
+          }
+        },
+        {
+          "name": "Delete Product",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/api/products/{{product_id}}/"
+          }
+        }
+      ]
+    },
+    {
       "name": "Account Group Templates",
       "item": [
         {
@@ -2967,6 +3659,40 @@
                   "raw": "{\n  \"company\": {{company_id}},\n  \"fiscal_localization_country\": {{country_id}},\n  \"account_fiscal_country\": {{country_id}},\n  \"chart_template\": \"generic_us\",\n  \"currency\": {{currency_id}},\n  \"tax_return_periodicity\": \"monthly\",\n  \"tax_return_reminder_days\": 7,\n  \"tax_rounding_method\": \"round_per_line\",\n  \"tax_calculation_rounding_method\": \"round_per_line\",\n  \"account_price_include\": \"tax_excluded\",\n  \"group_multi_currency\": true,\n  \"module_account_reports\": true,\n  \"fiscalyear_last_day\": 31,\n  \"fiscalyear_last_month\": \"12\"\n}"
                 },
                 "url": "{{base_url}}/api/accounting-settings/upsert-by-company/"
+              }
+            },
+            {
+              "name": "Reload Template",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": {{company_id}}\n}"
+                },
+                "url": "{{base_url}}/api/accounting-settings/reload-template/"
+              }
+            },
+            {
+              "name": "Update Invoice Terms",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": {{company_id}},\n  \"use_invoice_terms\": true,\n  \"terms_type\": \"html\",\n  \"invoice_terms\": \"Payment due within 30 days.\",\n  \"preview_ready\": true\n}"
+                },
+                "url": "{{base_url}}/api/accounting-settings/update-terms/"
               }
             },
             {

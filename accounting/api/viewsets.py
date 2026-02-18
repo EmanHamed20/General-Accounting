@@ -9,6 +9,10 @@ from rest_framework.response import Response
 from accounting.models import (
     Move,
     MoveLine,
+    AnalyticAccount,
+    AnalyticDistributionModel,
+    AnalyticDistributionModelLine,
+    AnalyticPlan,
     InvoiceLine,
     AccountGroupTemplate,
     Asset,
@@ -26,12 +30,14 @@ from accounting.models import (
     JournalGroup,
     Journal,
     PaymentTerm,
+    Product,
     PaymentTermLine,
     ProductCategory,
     TaxGroup,
     Tax,
     TaxRepartitionLine,
     Partner,
+    Payment,
     PaymentMethod,
     PaymentMethodLine,
     AccountingSettings,
@@ -60,13 +66,20 @@ from accounting.services.asset_service import (
     set_asset_running,
 )
 from accounting.services.chart_template_service import apply_chart_template_to_company
-from accounting.services.invoice_service import generate_journal_lines_and_post_invoice
+from accounting.services.invoice_service import (
+    create_debit_note_from_invoice,
+    generate_journal_lines_and_post_invoice,
+    reverse_invoice_to_credit_note,
+)
 from accounting.services.move_service import post_move
+from accounting.services.payment_service import post_payment
 
 from .serializers import (
     AccountGroupTemplateSerializer,
     AccountTemplateSerializer,
     ApplyChartTemplateSerializer,
+    CreateDebitNoteSerializer,
+    ReverseInvoiceSerializer,
     CompanySerializer,
     CountryCitySerializer,
     CountryCurrencySerializer,
@@ -80,8 +93,13 @@ from .serializers import (
     PartnerSerializer,
     PaymentMethodLineSerializer,
     PaymentMethodSerializer,
+    PaymentSerializer,
     PaymentTermLineSerializer,
     PaymentTermSerializer,
+    AnalyticAccountSerializer,
+    AnalyticDistributionModelLineSerializer,
+    AnalyticDistributionModelSerializer,
+    AnalyticPlanSerializer,
     TaxGroupSerializer,
     TaxRepartitionLineSerializer,
     TaxSerializer,
@@ -108,6 +126,7 @@ from .serializers import (
     InvoiceLineSerializer,
     InvoiceSerializer,
     ProductCategorySerializer,
+    ProductSerializer,
 )
 
 
@@ -252,7 +271,7 @@ class MoveLineViewSet(viewsets.ModelViewSet):
 
 class InvoiceViewSet(viewsets.ModelViewSet):
     queryset = (
-        Move.objects.select_related("company", "journal", "partner", "currency", "payment_term")
+        Move.objects.select_related("company", "journal", "partner", "currency", "payment_term", "reversed_entry")
         .filter(move_type__in=["out_invoice", "in_invoice", "out_refund", "in_refund"])
         .annotate(
             amount_untaxed=Coalesce(Sum("invoice_lines__line_subtotal"), Value(0), output_field=DecimalField(max_digits=24, decimal_places=6)),
@@ -312,6 +331,239 @@ class InvoiceViewSet(viewsets.ModelViewSet):
             return Response(payload, status=status.HTTP_400_BAD_REQUEST)
         return Response(stats, status=status.HTTP_200_OK)
 
+    @action(detail=True, methods=["post"], url_path="cancel")
+    def cancel_invoice(self, request, pk=None):
+        invoice = self.get_object()
+        if invoice.state == "cancelled":
+            return Response({"detail": "Invoice is already cancelled."}, status=status.HTTP_400_BAD_REQUEST)
+        invoice.state = "cancelled"
+        invoice.save(update_fields=["state", "updated_at"])
+        return Response(self.get_serializer(invoice).data, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=["post"], url_path="reset-to-draft")
+    def reset_to_draft(self, request, pk=None):
+        invoice = self.get_object()
+        if invoice.state != "cancelled":
+            return Response({"detail": "Only cancelled invoices can be reset to draft."}, status=status.HTTP_400_BAD_REQUEST)
+        invoice.state = "draft"
+        invoice.posted_at = None
+        invoice.save(update_fields=["state", "posted_at", "updated_at"])
+        return Response(self.get_serializer(invoice).data, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=["post"], url_path="reverse")
+    def reverse_invoice(self, request, pk=None):
+        invoice = self.get_object()
+        payload = ReverseInvoiceSerializer(data=request.data)
+        payload.is_valid(raise_exception=True)
+        try:
+            credit_note = reverse_invoice_to_credit_note(
+                invoice=invoice,
+                date=payload.validated_data.get("date"),
+                reason=payload.validated_data.get("reason", ""),
+            )
+        except DjangoValidationError as exc:
+            result = exc.message_dict if hasattr(exc, "message_dict") else {"detail": exc.messages}
+            return Response(result, status=status.HTTP_400_BAD_REQUEST)
+        return Response(self.get_serializer(credit_note).data, status=status.HTTP_201_CREATED)
+
+    @action(detail=True, methods=["post"], url_path="create-debit-note")
+    def create_debit_note(self, request, pk=None):
+        invoice = self.get_object()
+        payload = CreateDebitNoteSerializer(data=request.data)
+        payload.is_valid(raise_exception=True)
+        try:
+            debit_note = create_debit_note_from_invoice(
+                invoice=invoice,
+                date=payload.validated_data.get("date"),
+                reason=payload.validated_data.get("reason", ""),
+            )
+        except DjangoValidationError as exc:
+            result = exc.message_dict if hasattr(exc, "message_dict") else {"detail": exc.messages}
+            return Response(result, status=status.HTTP_400_BAD_REQUEST)
+        return Response(self.get_serializer(debit_note).data, status=status.HTTP_201_CREATED)
+
+
+class CreditNoteViewSet(InvoiceViewSet):
+    queryset = (
+        Move.objects.select_related("company", "journal", "partner", "currency", "payment_term", "reversed_entry")
+        .filter(move_type__in=["out_refund", "in_refund"])
+        .annotate(
+            amount_untaxed=Coalesce(Sum("invoice_lines__line_subtotal"), Value(0), output_field=DecimalField(max_digits=24, decimal_places=6)),
+            amount_tax=Coalesce(Sum("invoice_lines__line_tax"), Value(0), output_field=DecimalField(max_digits=24, decimal_places=6)),
+            amount_total=Coalesce(Sum("invoice_lines__line_total"), Value(0), output_field=DecimalField(max_digits=24, decimal_places=6)),
+        )
+        .order_by("-date", "-id")
+    )
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        move_type = self.request.query_params.get("move_type")
+        if move_type in {"out_refund", "in_refund"}:
+            queryset = queryset.filter(move_type=move_type)
+        return queryset
+
+    def perform_create(self, serializer):
+        move_type = serializer.validated_data.get("move_type") or "out_refund"
+        if move_type not in {"out_refund", "in_refund"}:
+            raise DRFValidationError({"move_type": "Credit note move_type must be out_refund or in_refund."})
+        instance = serializer.save(state="draft", move_type=move_type)
+        try:
+            instance.full_clean()
+        except DjangoValidationError as exc:
+            raise DRFValidationError(exc.message_dict if hasattr(exc, "message_dict") else exc.messages)
+        instance.save()
+
+    def perform_update(self, serializer):
+        current = self.get_object()
+        if current.state != "draft":
+            raise DRFValidationError("Only draft credit notes can be updated.")
+        new_move_type = serializer.validated_data.get("move_type", current.move_type)
+        if new_move_type not in {"out_refund", "in_refund"}:
+            raise DRFValidationError({"move_type": "Credit note move_type must be out_refund or in_refund."})
+        instance = serializer.save(move_type=new_move_type)
+        try:
+            instance.full_clean()
+        except DjangoValidationError as exc:
+            raise DRFValidationError(exc.message_dict if hasattr(exc, "message_dict") else exc.messages)
+        instance.save()
+
+    @action(detail=True, methods=["post"], url_path="reverse")
+    def reverse_invoice(self, request, pk=None):
+        return Response({"detail": "Reverse is available from invoices endpoint, not credit notes."}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class DebitNoteViewSet(InvoiceViewSet):
+    queryset = (
+        Move.objects.select_related("company", "journal", "partner", "currency", "payment_term", "debit_origin")
+        .filter(move_type__in=["out_invoice", "in_invoice"], is_debit_note=True)
+        .annotate(
+            amount_untaxed=Coalesce(Sum("invoice_lines__line_subtotal"), Value(0), output_field=DecimalField(max_digits=24, decimal_places=6)),
+            amount_tax=Coalesce(Sum("invoice_lines__line_tax"), Value(0), output_field=DecimalField(max_digits=24, decimal_places=6)),
+            amount_total=Coalesce(Sum("invoice_lines__line_total"), Value(0), output_field=DecimalField(max_digits=24, decimal_places=6)),
+        )
+        .order_by("-date", "-id")
+    )
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        move_type = self.request.query_params.get("move_type")
+        if move_type in {"out_invoice", "in_invoice"}:
+            queryset = queryset.filter(move_type=move_type)
+        return queryset
+
+    def perform_create(self, serializer):
+        move_type = serializer.validated_data.get("move_type") or "out_invoice"
+        if move_type not in {"out_invoice", "in_invoice"}:
+            raise DRFValidationError({"move_type": "Debit note move_type must be out_invoice or in_invoice."})
+        instance = serializer.save(state="draft", move_type=move_type, is_debit_note=True)
+        try:
+            instance.full_clean()
+        except DjangoValidationError as exc:
+            raise DRFValidationError(exc.message_dict if hasattr(exc, "message_dict") else exc.messages)
+        instance.save()
+
+    def perform_update(self, serializer):
+        current = self.get_object()
+        if current.state != "draft":
+            raise DRFValidationError("Only draft debit notes can be updated.")
+        new_move_type = serializer.validated_data.get("move_type", current.move_type)
+        if new_move_type not in {"out_invoice", "in_invoice"}:
+            raise DRFValidationError({"move_type": "Debit note move_type must be out_invoice or in_invoice."})
+        instance = serializer.save(move_type=new_move_type, is_debit_note=True)
+        try:
+            instance.full_clean()
+        except DjangoValidationError as exc:
+            raise DRFValidationError(exc.message_dict if hasattr(exc, "message_dict") else exc.messages)
+        instance.save()
+
+    @action(detail=True, methods=["post"], url_path="reverse")
+    def reverse_invoice(self, request, pk=None):
+        return Response({"detail": "Reverse is available from invoices endpoint, not debit notes."}, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=True, methods=["post"], url_path="create-debit-note")
+    def create_debit_note(self, request, pk=None):
+        return Response({"detail": "Already a debit note."}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class PaymentViewSet(viewsets.ModelViewSet):
+    queryset = Payment.objects.select_related("company", "partner", "journal", "payment_method_line", "move", "currency").all().order_by(
+        "-date", "-id"
+    )
+    serializer_class = PaymentSerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        company_id = self.request.query_params.get("company_id")
+        state = self.request.query_params.get("state")
+        payment_type = self.request.query_params.get("payment_type")
+        journal_id = self.request.query_params.get("journal_id")
+        partner_id = self.request.query_params.get("partner_id")
+        if company_id:
+            queryset = queryset.filter(company_id=company_id)
+        if state:
+            queryset = queryset.filter(state=state)
+        if payment_type:
+            queryset = queryset.filter(payment_type=payment_type)
+        if journal_id:
+            queryset = queryset.filter(journal_id=journal_id)
+        if partner_id:
+            queryset = queryset.filter(partner_id=partner_id)
+        return queryset
+
+    def perform_create(self, serializer):
+        payment = serializer.save(state="draft")
+        try:
+            payment.full_clean()
+        except DjangoValidationError as exc:
+            raise DRFValidationError(exc.message_dict if hasattr(exc, "message_dict") else exc.messages)
+        payment.save()
+
+    def perform_update(self, serializer):
+        if self.get_object().state != "draft":
+            raise DRFValidationError("Only draft payments can be updated.")
+        payment = serializer.save()
+        try:
+            payment.full_clean()
+        except DjangoValidationError as exc:
+            raise DRFValidationError(exc.message_dict if hasattr(exc, "message_dict") else exc.messages)
+        payment.save()
+
+    def perform_destroy(self, instance):
+        if instance.state != "draft":
+            raise DRFValidationError("Only draft payments can be deleted.")
+        instance.delete()
+
+    @action(detail=True, methods=["post"], url_path="post")
+    def post_action(self, request, pk=None):
+        payment = self.get_object()
+        try:
+            result = post_payment(payment=payment)
+        except DjangoValidationError as exc:
+            payload = exc.message_dict if hasattr(exc, "message_dict") else {"detail": exc.messages}
+            return Response(payload, status=status.HTTP_400_BAD_REQUEST)
+        return Response(result, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=["post"], url_path="cancel")
+    def cancel_action(self, request, pk=None):
+        payment = self.get_object()
+        if payment.state == "cancelled":
+            return Response({"detail": "Payment is already cancelled."}, status=status.HTTP_400_BAD_REQUEST)
+        payment.state = "cancelled"
+        payment.save(update_fields=["state", "updated_at"])
+        if payment.move_id and payment.move.state == "posted":
+            payment.move.state = "cancelled"
+            payment.move.save(update_fields=["state", "updated_at"])
+        return Response(self.get_serializer(payment).data, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=["post"], url_path="reset-to-draft")
+    def reset_to_draft(self, request, pk=None):
+        payment = self.get_object()
+        if payment.state != "cancelled":
+            return Response({"detail": "Only cancelled payments can be reset to draft."}, status=status.HTTP_400_BAD_REQUEST)
+        payment.state = "draft"
+        payment.save(update_fields=["state", "updated_at"])
+        return Response(self.get_serializer(payment).data, status=status.HTTP_200_OK)
+
 
 class InvoiceLineViewSet(viewsets.ModelViewSet):
     queryset = InvoiceLine.objects.select_related("move", "account", "tax").all().order_by("move_id", "id")
@@ -350,14 +602,43 @@ class InvoiceLineViewSet(viewsets.ModelViewSet):
 
 
 class PartnerViewSet(viewsets.ModelViewSet):
-    queryset = Partner.objects.select_related("company").all().order_by("company_id", "name")
+    queryset = Partner.objects.select_related("company", "parent", "country", "state").all().order_by("company_id", "name")
     serializer_class = PartnerSerializer
 
     def get_queryset(self):
         queryset = super().get_queryset()
         company_id = self.request.query_params.get("company_id")
-        if company_id: queryset = queryset.filter(company_id=company_id)
+        active = self.request.query_params.get("active")
+        if company_id:
+            queryset = queryset.filter(company_id=company_id)
+        if active is not None:
+            queryset = queryset.filter(active=active.lower() in {"1", "true", "yes"})
         return queryset
+
+
+class CustomerViewSet(viewsets.ModelViewSet):
+    queryset = Partner.objects.select_related("company", "parent", "country", "state").filter(customer_rank__gt=0).order_by(
+        "company_id", "name"
+    )
+    serializer_class = PartnerSerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        company_id = self.request.query_params.get("company_id")
+        active = self.request.query_params.get("active")
+        is_company = self.request.query_params.get("is_company")
+        if company_id:
+            queryset = queryset.filter(company_id=company_id)
+        if active is not None:
+            queryset = queryset.filter(active=active.lower() in {"1", "true", "yes"})
+        if is_company is not None:
+            queryset = queryset.filter(is_company=is_company.lower() in {"1", "true", "yes"})
+        return queryset
+
+    def perform_create(self, serializer):
+        payload = dict(serializer.validated_data)
+        payload["customer_rank"] = max(1, int(payload.get("customer_rank") or 1))
+        serializer.save(**payload)
 
 
 class AccountRootViewSet(viewsets.ModelViewSet):
@@ -729,6 +1010,89 @@ class PaymentMethodLineViewSet(viewsets.ModelViewSet):
         return queryset
 
 
+class AnalyticPlanViewSet(viewsets.ModelViewSet):
+    queryset = AnalyticPlan.objects.select_related("company", "parent").all().order_by("company_id", "name")
+    serializer_class = AnalyticPlanSerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        company_id = self.request.query_params.get("company_id")
+        parent_id = self.request.query_params.get("parent_id")
+        active = self.request.query_params.get("active")
+        if company_id:
+            queryset = queryset.filter(company_id=company_id)
+        if parent_id:
+            if parent_id.lower() == "null":
+                queryset = queryset.filter(parent__isnull=True)
+            else:
+                queryset = queryset.filter(parent_id=parent_id)
+        if active is not None:
+            queryset = queryset.filter(active=active.lower() in {"1", "true", "yes"})
+        return queryset
+
+
+class AnalyticAccountViewSet(viewsets.ModelViewSet):
+    queryset = AnalyticAccount.objects.select_related("company", "plan", "partner").all().order_by("company_id", "name")
+    serializer_class = AnalyticAccountSerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        company_id = self.request.query_params.get("company_id")
+        plan_id = self.request.query_params.get("plan_id")
+        partner_id = self.request.query_params.get("partner_id")
+        active = self.request.query_params.get("active")
+        if company_id:
+            queryset = queryset.filter(company_id=company_id)
+        if plan_id:
+            queryset = queryset.filter(plan_id=plan_id)
+        if partner_id:
+            queryset = queryset.filter(partner_id=partner_id)
+        if active is not None:
+            queryset = queryset.filter(active=active.lower() in {"1", "true", "yes"})
+        return queryset
+
+
+class AnalyticDistributionModelViewSet(viewsets.ModelViewSet):
+    queryset = AnalyticDistributionModel.objects.select_related("company", "partner", "product_category").all().order_by(
+        "company_id", "name"
+    )
+    serializer_class = AnalyticDistributionModelSerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        company_id = self.request.query_params.get("company_id")
+        partner_id = self.request.query_params.get("partner_id")
+        product_category_id = self.request.query_params.get("product_category_id")
+        active = self.request.query_params.get("active")
+        if company_id:
+            queryset = queryset.filter(company_id=company_id)
+        if partner_id:
+            queryset = queryset.filter(partner_id=partner_id)
+        if product_category_id:
+            queryset = queryset.filter(product_category_id=product_category_id)
+        if active is not None:
+            queryset = queryset.filter(active=active.lower() in {"1", "true", "yes"})
+        return queryset
+
+
+class AnalyticDistributionModelLineViewSet(viewsets.ModelViewSet):
+    queryset = AnalyticDistributionModelLine.objects.select_related("model", "analytic_account").all().order_by("model_id", "id")
+    serializer_class = AnalyticDistributionModelLineSerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        model_id = self.request.query_params.get("model_id")
+        company_id = self.request.query_params.get("company_id")
+        analytic_account_id = self.request.query_params.get("analytic_account_id")
+        if model_id:
+            queryset = queryset.filter(model_id=model_id)
+        if company_id:
+            queryset = queryset.filter(model__company_id=company_id)
+        if analytic_account_id:
+            queryset = queryset.filter(analytic_account_id=analytic_account_id)
+        return queryset
+
+
 class AccountingSettingsViewSet(viewsets.ModelViewSet):
     queryset = AccountingSettings.objects.select_related(
         "company",
@@ -784,6 +1148,65 @@ class AccountingSettingsViewSet(viewsets.ModelViewSet):
             payload = exc.message_dict if hasattr(exc, "message_dict") else {"detail": exc.messages}
             return Response(payload, status=status.HTTP_400_BAD_REQUEST)
         return Response(self.get_serializer(record).data, status=status.HTTP_200_OK)
+
+    @action(detail=False, methods=["post"], url_path="reload-template")
+    def reload_template(self, request):
+        company_id = request.data.get("company")
+        if not company_id:
+            return Response({"company": "This field is required."}, status=status.HTTP_400_BAD_REQUEST)
+
+        settings_obj = AccountingSettings.objects.filter(company_id=company_id).first()
+        if not settings_obj:
+            return Response({"detail": "Accounting settings not found for company."}, status=status.HTTP_404_NOT_FOUND)
+
+        country = settings_obj.chart_template_country or settings_obj.fiscal_localization_country
+        if not country:
+            return Response(
+                {"detail": "Set chart_template_country or fiscal_localization_country first."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        stats = apply_chart_template_to_company(company=settings_obj.company, country=country)
+        settings_obj.has_chart_of_accounts = True
+        settings_obj.save(update_fields=["has_chart_of_accounts", "updated_at"])
+
+        response = {
+            "settings": self.get_serializer(settings_obj).data,
+            "template_reload": stats,
+        }
+        return Response(response, status=status.HTTP_200_OK)
+
+    @action(detail=False, methods=["post"], url_path="update-terms")
+    def update_terms(self, request):
+        company_id = request.data.get("company")
+        if not company_id:
+            return Response({"company": "This field is required."}, status=status.HTTP_400_BAD_REQUEST)
+
+        settings_obj = AccountingSettings.objects.filter(company_id=company_id).first()
+        if not settings_obj:
+            return Response({"detail": "Accounting settings not found for company."}, status=status.HTTP_404_NOT_FOUND)
+
+        allowed = {"use_invoice_terms", "invoice_terms", "terms_type", "preview_ready"}
+        updated_fields = []
+        for field in allowed:
+            if field in request.data:
+                setattr(settings_obj, field, request.data[field])
+                updated_fields.append(field)
+
+        if not updated_fields:
+            return Response(
+                {"detail": "No updatable fields provided. Use one of: use_invoice_terms, invoice_terms, terms_type, preview_ready."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        try:
+            settings_obj.full_clean()
+            settings_obj.save(update_fields=updated_fields + ["updated_at"])
+        except DjangoValidationError as exc:
+            payload = exc.message_dict if hasattr(exc, "message_dict") else {"detail": exc.messages}
+            return Response(payload, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response(self.get_serializer(settings_obj).data, status=status.HTTP_200_OK)
 
 
 class FollowupLevelViewSet(viewsets.ModelViewSet):
@@ -1075,6 +1498,37 @@ class ProductCategoryViewSet(viewsets.ModelViewSet):
                 queryset = queryset.filter(parent__isnull=True)
             else:
                 queryset = queryset.filter(parent_id=parent_id)
+        if active is not None:
+            queryset = queryset.filter(active=active.lower() in {"1", "true", "yes"})
+        return queryset
+
+
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.select_related(
+        "company",
+        "category",
+        "income_account",
+        "expense_account",
+        "sale_tax",
+        "purchase_tax",
+    ).all().order_by("company_id", "name")
+    serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        company_id = self.request.query_params.get("company_id")
+        category_id = self.request.query_params.get("category_id")
+        sale_ok = self.request.query_params.get("sale_ok")
+        purchase_ok = self.request.query_params.get("purchase_ok")
+        active = self.request.query_params.get("active")
+        if company_id:
+            queryset = queryset.filter(company_id=company_id)
+        if category_id:
+            queryset = queryset.filter(category_id=category_id)
+        if sale_ok is not None:
+            queryset = queryset.filter(sale_ok=sale_ok.lower() in {"1", "true", "yes"})
+        if purchase_ok is not None:
+            queryset = queryset.filter(purchase_ok=purchase_ok.lower() in {"1", "true", "yes"})
         if active is not None:
             queryset = queryset.filter(active=active.lower() in {"1", "true", "yes"})
         return queryset

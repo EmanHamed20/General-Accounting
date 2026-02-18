@@ -57,6 +57,22 @@ class Payment(AccountingBaseModel):
         db_table = "ga_payment"
         indexes = [models.Index(fields=["company", "date"]), models.Index(fields=["state"])]
 
+    def clean(self) -> None:
+        if self.amount <= 0:
+            raise ValidationError("Payment amount must be greater than zero.")
+        if self.partner_id and self.partner.company_id != self.company_id:
+            raise ValidationError("Partner company must match payment company.")
+        if self.journal.company_id != self.company_id:
+            raise ValidationError("Journal company must match payment company.")
+        if self.currency_id and self.currency != self.journal.currency and self.journal.currency_id is not None:
+            raise ValidationError("Payment currency must match journal currency when journal currency is set.")
+        if self.payment_method_line.journal_id != self.journal_id:
+            raise ValidationError("Payment method line must belong to the selected journal.")
+        if self.payment_method_line.payment_method.payment_direction != self.payment_type:
+            raise ValidationError("Payment type must match payment method direction.")
+        if self.move_id and self.move.company_id != self.company_id:
+            raise ValidationError("Payment move company must match payment company.")
+
 
 class FullReconcile(AccountingBaseModel):
     exchange_move = models.ForeignKey("accounting.Move", on_delete=models.PROTECT, null=True, blank=True, related_name="full_reconcile_exchanges")

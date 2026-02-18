@@ -6,6 +6,10 @@ from accounting.models import (
     AccountGroupTemplate,
     AccountRoot,
     AccountTemplate,
+    AnalyticAccount,
+    AnalyticDistributionModel,
+    AnalyticDistributionModelLine,
+    AnalyticPlan,
     Asset,
     AssetDepreciationLine,
     Company,
@@ -18,11 +22,13 @@ from accounting.models import (
     InvoiceLine,
     Move,
     MoveLine,
+    Payment,
     PaymentMethod,
     PaymentMethodLine,
     PaymentTermLine,
     Partner,
     PaymentTerm,
+    Product,
     ProductCategory,
     JournalGroup,
     TaxGroup,
@@ -138,6 +144,63 @@ class ProductCategorySerializer(serializers.ModelSerializer):
         return attrs
 
 
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = [
+            "id",
+            "company",
+            "category",
+            "name",
+            "default_code",
+            "barcode",
+            "product_type",
+            "sale_ok",
+            "purchase_ok",
+            "list_price",
+            "standard_price",
+            "income_account",
+            "expense_account",
+            "sale_tax",
+            "purchase_tax",
+            "active",
+            "created_at",
+            "updated_at",
+        ]
+        read_only_fields = ["id", "created_at", "updated_at"]
+
+    def validate(self, attrs):
+        company = attrs.get("company") or getattr(self.instance, "company", None)
+        category = attrs.get("category") if "category" in attrs else getattr(self.instance, "category", None)
+        income_account = (
+            attrs.get("income_account")
+            if "income_account" in attrs
+            else getattr(self.instance, "income_account", None)
+        )
+        expense_account = (
+            attrs.get("expense_account")
+            if "expense_account" in attrs
+            else getattr(self.instance, "expense_account", None)
+        )
+        sale_tax = attrs.get("sale_tax") if "sale_tax" in attrs else getattr(self.instance, "sale_tax", None)
+        purchase_tax = (
+            attrs.get("purchase_tax")
+            if "purchase_tax" in attrs
+            else getattr(self.instance, "purchase_tax", None)
+        )
+        if company and category and category.company_id != company.id:
+            raise serializers.ValidationError({"category": "Product category company must match product company."})
+        if company and income_account and income_account.company_id != company.id:
+            raise serializers.ValidationError({"income_account": "Income account company must match product company."})
+        if company and expense_account and expense_account.company_id != company.id:
+            raise serializers.ValidationError({"expense_account": "Expense account company must match product company."})
+        if company and sale_tax and sale_tax.company_id != company.id:
+            raise serializers.ValidationError({"sale_tax": "Sale tax company must match product company."})
+        if company and purchase_tax and purchase_tax.company_id != company.id:
+            raise serializers.ValidationError({"purchase_tax": "Purchase tax company must match product company."})
+        return attrs
+
+
 class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
@@ -197,6 +260,16 @@ class ApplyChartTemplateSerializer(serializers.Serializer):
     country_id = serializers.IntegerField()
 
 
+class ReverseInvoiceSerializer(serializers.Serializer):
+    date = serializers.DateField(required=False)
+    reason = serializers.CharField(required=False, allow_blank=True, max_length=255)
+
+
+class CreateDebitNoteSerializer(serializers.Serializer):
+    date = serializers.DateField(required=False)
+    reason = serializers.CharField(required=False, allow_blank=True, max_length=255)
+
+
 class MoveSerializer(serializers.ModelSerializer):
     balance = serializers.DecimalField(max_digits=24, decimal_places=6, read_only=True)
 
@@ -215,12 +288,15 @@ class MoveSerializer(serializers.ModelSerializer):
             "date",
             "state",
             "move_type",
+            "reversed_entry",
+            "debit_origin",
+            "is_debit_note",
             "posted_at",
             "balance",
             "created_at",
             "updated_at",
         ]
-        read_only_fields = ["id", "posted_at", "balance", "created_at", "updated_at"]
+        read_only_fields = ["id", "reversed_entry", "debit_origin", "posted_at", "balance", "created_at", "updated_at"]
 
     def validate(self, attrs):
         company = attrs.get("company") or getattr(self.instance, "company", None)
@@ -292,6 +368,9 @@ class InvoiceSerializer(serializers.ModelSerializer):
             "date",
             "state",
             "move_type",
+            "reversed_entry",
+            "debit_origin",
+            "is_debit_note",
             "posted_at",
             "amount_untaxed",
             "amount_tax",
@@ -301,6 +380,8 @@ class InvoiceSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = [
             "id",
+            "reversed_entry",
+            "debit_origin",
             "state",
             "posted_at",
             "amount_untaxed",
@@ -369,8 +450,42 @@ class InvoiceLineSerializer(serializers.ModelSerializer):
 class PartnerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Partner
-        fields = ["id", "name", "email", "is_company", "company", "created_at", "updated_at"]
+        fields = [
+            "id",
+            "company",
+            "parent",
+            "name",
+            "type",
+            "email",
+            "phone",
+            "mobile",
+            "street",
+            "street2",
+            "city",
+            "zip",
+            "country",
+            "state",
+            "vat",
+            "is_company",
+            "customer_rank",
+            "supplier_rank",
+            "active",
+            "created_at",
+            "updated_at",
+        ]
         read_only_fields = ["id", "created_at", "updated_at"]
+
+    def validate(self, attrs):
+        company = attrs.get("company") or getattr(self.instance, "company", None)
+        parent = attrs.get("parent") if "parent" in attrs else getattr(self.instance, "parent", None)
+        country = attrs.get("country") if "country" in attrs else getattr(self.instance, "country", None)
+        state = attrs.get("state") if "state" in attrs else getattr(self.instance, "state", None)
+
+        if company and parent and parent.company_id != company.id:
+            raise serializers.ValidationError({"parent": "Parent contact company must match contact company."})
+        if country and state and state.country_id != country.id:
+            raise serializers.ValidationError({"state": "State must belong to selected country."})
+        return attrs
 
 
 class AccountRootSerializer(serializers.ModelSerializer):
@@ -692,6 +807,142 @@ class PaymentMethodLineSerializer(serializers.ModelSerializer):
         model = PaymentMethodLine
         fields = ["id", "journal", "payment_method", "sequence", "active", "created_at", "updated_at"]
         read_only_fields = ["id", "created_at", "updated_at"]
+
+
+class PaymentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Payment
+        fields = [
+            "id",
+            "company",
+            "partner",
+            "journal",
+            "payment_method_line",
+            "move",
+            "currency",
+            "date",
+            "amount",
+            "payment_type",
+            "state",
+            "reference",
+            "created_at",
+            "updated_at",
+        ]
+        read_only_fields = ["id", "move", "state", "created_at", "updated_at"]
+
+    def validate(self, attrs):
+        company = attrs.get("company") or getattr(self.instance, "company", None)
+        partner = attrs.get("partner") if "partner" in attrs else getattr(self.instance, "partner", None)
+        journal = attrs.get("journal") if "journal" in attrs else getattr(self.instance, "journal", None)
+        payment_method_line = (
+            attrs.get("payment_method_line")
+            if "payment_method_line" in attrs
+            else getattr(self.instance, "payment_method_line", None)
+        )
+        currency = attrs.get("currency") if "currency" in attrs else getattr(self.instance, "currency", None)
+        payment_type = attrs.get("payment_type") or getattr(self.instance, "payment_type", None)
+        amount = attrs.get("amount") if "amount" in attrs else getattr(self.instance, "amount", None)
+
+        if amount is not None and amount <= 0:
+            raise serializers.ValidationError({"amount": "Payment amount must be greater than zero."})
+        if company and partner and partner.company_id != company.id:
+            raise serializers.ValidationError({"partner": "Partner company must match payment company."})
+        if company and journal and journal.company_id != company.id:
+            raise serializers.ValidationError({"journal": "Journal company must match payment company."})
+        if journal and payment_method_line and payment_method_line.journal_id != journal.id:
+            raise serializers.ValidationError({"payment_method_line": "Payment method line must belong to selected journal."})
+        if payment_method_line and payment_type and payment_method_line.payment_method.payment_direction != payment_type:
+            raise serializers.ValidationError({"payment_type": "Payment type must match payment method direction."})
+        if journal and currency and journal.currency_id and journal.currency_id != currency.id:
+            raise serializers.ValidationError({"currency": "Currency must match journal currency when journal currency is set."})
+        return attrs
+
+
+class AnalyticPlanSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AnalyticPlan
+        fields = [
+            "id",
+            "company",
+            "parent",
+            "name",
+            "default_applicability",
+            "color",
+            "active",
+            "created_at",
+            "updated_at",
+        ]
+        read_only_fields = ["id", "created_at", "updated_at"]
+
+
+class AnalyticAccountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AnalyticAccount
+        fields = ["id", "company", "plan", "partner", "name", "code", "active", "created_at", "updated_at"]
+        read_only_fields = ["id", "created_at", "updated_at"]
+
+    def validate(self, attrs):
+        company = attrs.get("company") or getattr(self.instance, "company", None)
+        plan = attrs.get("plan") if "plan" in attrs else getattr(self.instance, "plan", None)
+        partner = attrs.get("partner") if "partner" in attrs else getattr(self.instance, "partner", None)
+        if company and plan and plan.company_id != company.id:
+            raise serializers.ValidationError({"plan": "Analytic plan company must match analytic account company."})
+        if company and partner and partner.company_id != company.id:
+            raise serializers.ValidationError({"partner": "Partner company must match analytic account company."})
+        return attrs
+
+
+class AnalyticDistributionModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AnalyticDistributionModel
+        fields = [
+            "id",
+            "company",
+            "name",
+            "partner",
+            "product_category",
+            "account_prefix",
+            "active",
+            "created_at",
+            "updated_at",
+        ]
+        read_only_fields = ["id", "created_at", "updated_at"]
+
+    def validate(self, attrs):
+        company = attrs.get("company") or getattr(self.instance, "company", None)
+        partner = attrs.get("partner") if "partner" in attrs else getattr(self.instance, "partner", None)
+        product_category = (
+            attrs.get("product_category")
+            if "product_category" in attrs
+            else getattr(self.instance, "product_category", None)
+        )
+        if company and partner and partner.company_id != company.id:
+            raise serializers.ValidationError({"partner": "Partner company must match distribution model company."})
+        if company and product_category and product_category.company_id != company.id:
+            raise serializers.ValidationError(
+                {"product_category": "Product category company must match distribution model company."}
+            )
+        return attrs
+
+
+class AnalyticDistributionModelLineSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AnalyticDistributionModelLine
+        fields = ["id", "model", "analytic_account", "percentage", "created_at", "updated_at"]
+        read_only_fields = ["id", "created_at", "updated_at"]
+
+    def validate(self, attrs):
+        model = attrs.get("model") or getattr(self.instance, "model", None)
+        analytic_account = (
+            attrs.get("analytic_account")
+            if "analytic_account" in attrs
+            else getattr(self.instance, "analytic_account", None)
+        )
+        if model and analytic_account and model.company_id != analytic_account.company_id:
+            raise serializers.ValidationError(
+                {"analytic_account": "Analytic account company must match distribution model company."}
+            )
+        return attrs
 
 
 class AccountingSettingsSerializer(serializers.ModelSerializer):

@@ -2,7 +2,9 @@ from django.urls import include, path
 
 urlpatterns = [
     path("", include("accounting.api.routes.company")),
+    path("", include("accounting.api.routes.customers")),
     path("", include("accounting.api.routes.configuration")),
+    path("", include("accounting.api.routes.analytics")),
     path("", include("accounting.api.routes.assets")),
     path("", include("accounting.api.routes.settings")),
     path("", include("accounting.api.routes.localization")),
