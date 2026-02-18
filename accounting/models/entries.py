@@ -33,6 +33,21 @@ class Move(AccountingBaseModel):
     date = models.DateField()
     state = models.CharField(max_length=16, choices=MOVE_STATE_CHOICES, default="draft")
     move_type = models.CharField(max_length=32, choices=MOVE_TYPE_CHOICES, default="entry")
+    reversed_entry = models.ForeignKey(
+        "self",
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="reversal_entries",
+    )
+    debit_origin = models.ForeignKey(
+        "self",
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="debit_note_entries",
+    )
+    is_debit_note = models.BooleanField(default=False)
     posted_at = models.DateTimeField(null=True, blank=True)
 
     class Meta:
@@ -47,6 +62,12 @@ class Move(AccountingBaseModel):
             raise ValidationError("Journal and move company must match.")
         if self.partner and self.company_id and self.partner.company_id != self.company_id:
             raise ValidationError("Partner and move company must match.")
+        if self.reversed_entry_id and self.reversed_entry.company_id != self.company_id:
+            raise ValidationError("Reversed entry and move company must match.")
+        if self.debit_origin_id and self.debit_origin.company_id != self.company_id:
+            raise ValidationError("Debit origin and move company must match.")
+        if self.is_debit_note and self.move_type not in {"out_invoice", "in_invoice"}:
+            raise ValidationError("Debit note must be customer invoice or vendor bill type.")
 
     @property
     def balance(self) -> Decimal:

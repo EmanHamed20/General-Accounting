@@ -56,9 +56,9 @@ class Asset(AccountingBaseModel):
         db_table = "ga_asset"
         unique_together = ("company", "code")
         indexes = [
-            models.Index(fields=["company", "acquisition_date"]),
-            models.Index(fields=["state"]),
-            models.Index(fields=["active"]),
+            models.Index(fields=["company", "acquisition_date"], name="ga_asset_company_bbf708_idx"),
+            models.Index(fields=["state"], name="ga_asset_state_4f0a6c_idx"),
+            models.Index(fields=["active"], name="ga_asset_active_63fdc0_idx"),
         ]
 
     def clean(self) -> None:
@@ -109,8 +109,8 @@ class AssetDepreciationLine(AccountingBaseModel):
         ordering = ("asset_id", "sequence", "id")
         unique_together = ("asset", "sequence")
         indexes = [
-            models.Index(fields=["asset", "date"]),
-            models.Index(fields=["state"]),
+            models.Index(fields=["asset", "date"], name="ga_asset_de_asset_i_077152_idx"),
+            models.Index(fields=["state"], name="ga_asset_de_state_0d2332_idx"),
         ]
 
     def clean(self) -> None:
