@@ -18,6 +18,7 @@ from accounting.models import (
     CountryCurrency,
     CountryState,
     Currency,
+    Incoterm,
     Journal,
     InvoiceLine,
     Move,
@@ -282,6 +283,8 @@ class MoveSerializer(serializers.ModelSerializer):
             "partner",
             "currency",
             "payment_term",
+            "incoterm",
+            "incoterm_location",
             "reference",
             "name",
             "invoice_date",
@@ -362,6 +365,8 @@ class InvoiceSerializer(serializers.ModelSerializer):
             "partner",
             "currency",
             "payment_term",
+            "incoterm",
+            "incoterm_location",
             "reference",
             "name",
             "invoice_date",
@@ -486,6 +491,35 @@ class PartnerSerializer(serializers.ModelSerializer):
         if country and state and state.country_id != country.id:
             raise serializers.ValidationError({"state": "State must belong to selected country."})
         return attrs
+
+
+class VendorSerializer(serializers.ModelSerializer):
+    supplier_invoice_count = serializers.SerializerMethodField()
+    purchase_order_count = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Partner
+        fields = [
+            "id",
+            "name",
+            "email",
+            "is_company",
+            "supplier_rank",
+            "customer_rank",
+            "supplier_invoice_count",
+            "purchase_order_count",
+            "company",
+            "created_at",
+            "updated_at",
+        ]
+        read_only_fields = ["id", "supplier_invoice_count", "purchase_order_count", "created_at", "updated_at"]
+
+    def get_supplier_invoice_count(self, obj):
+        return getattr(obj, "supplier_invoice_count", 0)
+
+    def get_purchase_order_count(self, obj):
+        # Purchase module is not implemented in this project yet.
+        return 0
 
 
 class AccountRootSerializer(serializers.ModelSerializer):
@@ -715,6 +749,13 @@ class PaymentTermSerializer(serializers.ModelSerializer):
     class Meta:
         model = PaymentTerm
         fields = ["id", "company", "name", "active", "created_at", "updated_at"]
+        read_only_fields = ["id", "created_at", "updated_at"]
+
+
+class IncotermSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Incoterm
+        fields = ["id", "code", "name", "active", "created_at", "updated_at"]
         read_only_fields = ["id", "created_at", "updated_at"]
 
 

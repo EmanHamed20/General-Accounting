@@ -26,6 +26,7 @@ from .configuration_extras import (
 )
 from .entries import Move, MoveLine
 from .journals import (
+    Incoterm,
     Journal,
     JournalGroup,
     PaymentTerm,
@@ -77,6 +78,7 @@ __all__ = [
     "Account",
     "JournalGroup",
     "Journal",
+    "Incoterm",
     "PaymentTerm",
     "PaymentTermLine",
     "TaxGroup",

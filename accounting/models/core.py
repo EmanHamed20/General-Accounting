@@ -22,7 +22,6 @@ class Partner(AccountingBaseModel):
         ("delivery", "Delivery Address"),
         ("other", "Other Address"),
     )
-
     company = models.ForeignKey("accounting.Company", on_delete=models.PROTECT, related_name="partners")
     parent = models.ForeignKey("self", on_delete=models.PROTECT, null=True, blank=True, related_name="children")
     name = models.CharField(max_length=255)
