@@ -19,6 +19,8 @@ class Partner(AccountingBaseModel):
     name = models.CharField(max_length=255)
     email = models.EmailField(blank=True)
     is_company = models.BooleanField(default=False)
+    supplier_rank = models.IntegerField(default=0)
+    customer_rank = models.IntegerField(default=0)
     company = models.ForeignKey("accounting.Company", on_delete=models.PROTECT, related_name="partners")
 
     class Meta:

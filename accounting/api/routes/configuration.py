@@ -16,6 +16,9 @@ from accounting.api.viewsets import (
     FollowupLevelViewSet,
     JournalGroupViewSet,
     JournalViewSet,
+    IncotermViewSet,
+    PartnerViewSet,
+    VendorViewSet,
     LedgerViewSet,
     PartnerViewSet,
     PaymentProviderMethodViewSet,
@@ -33,11 +36,13 @@ from accounting.api.viewsets import (
 
 router = DefaultRouter()
 router.register("partners", PartnerViewSet, basename="partner")
+router.register("vendors", VendorViewSet, basename="vendor")
 router.register("account-roots", AccountRootViewSet, basename="account-root")
 router.register("account-groups", AccountGroupViewSet, basename="account-group")
 router.register("accounts", AccountViewSet, basename="account")
 router.register("journal-groups", JournalGroupViewSet, basename="journal-group")
 router.register("journals", JournalViewSet, basename="journal")
+router.register("incoterms", IncotermViewSet, basename="incoterm")
 router.register("payment-terms", PaymentTermViewSet, basename="payment-term")
 router.register("payment-term-lines", PaymentTermLineViewSet, basename="payment-term-line")
 router.register("tax-groups", TaxGroupViewSet, basename="tax-group")

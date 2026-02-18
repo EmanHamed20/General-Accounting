@@ -1,0 +1,383 @@
+{
+  "info": {
+    "_postman_id": "5b2c9e56-4f25-43d4-b2b3-42a9085f90e2",
+    "name": "Accounting 2",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000"
+    },
+    {
+      "key": "company_id",
+      "value": "1"
+    },
+    {
+      "key": "partner_id",
+      "value": "1"
+    },
+    {
+      "key": "currency_id",
+      "value": "1"
+    },
+    {
+      "key": "account_id",
+      "value": "1"
+    },
+    {
+      "key": "journal_id",
+      "value": "1"
+    },
+    {
+      "key": "asset_id",
+      "value": "1"
+    },
+    {
+      "key": "asset_depreciation_line_id",
+      "value": "1"
+    },
+    {
+      "key": "incoterm_id",
+      "value": "1"
+    },
+    {
+      "key": "page",
+      "value": "1"
+    },
+    {
+      "key": "page_size",
+      "value": "20"
+    },
+    {
+      "key": "assets_ordering",
+      "value": "-acquisition_date"
+    },
+    {
+      "key": "income_terms_ordering",
+      "value": "code"
+    },
+    {
+      "key": "vendor_id",
+      "value": "1"
+    },
+    {
+      "key": "vendors_ordering",
+      "value": "-supplier_rank"
+    },
+    {
+      "key": "vendor_search_mode",
+      "value": "supplier"
+    }
+  ],
+  "item": [
+    {
+      "name": "Assets",
+      "item": [
+        {
+          "name": "List Assets",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/assets/?company_id={{company_id}}&page={{page}}&page_size={{page_size}}&ordering={{assets_ordering}}"
+          }
+        },
+        {
+          "name": "Create Asset",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"company\": {{company_id}},\n  \"name\": \"Office Laptop\",\n  \"code\": \"FA-0001\",\n  \"partner\": {{partner_id}},\n  \"currency\": {{currency_id}},\n  \"asset_account\": {{account_id}},\n  \"depreciation_account\": {{account_id}},\n  \"expense_account\": {{account_id}},\n  \"journal\": {{journal_id}},\n  \"acquisition_date\": \"2026-02-17\",\n  \"first_depreciation_date\": \"2026-03-01\",\n  \"original_value\": \"2500.000000\",\n  \"salvage_value\": \"200.000000\",\n  \"method\": \"linear\",\n  \"method_number\": 5,\n  \"method_period\": 12,\n  \"prorata\": false,\n  \"state\": \"draft\",\n  \"active\": true,\n  \"note\": \"Asset created from Accounting 2\"\n}"
+            },
+            "url": "{{base_url}}/api/assets/"
+          }
+        },
+        {
+          "name": "Get Asset",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/assets/{{asset_id}}/"
+          }
+        },
+        {
+          "name": "Update Asset",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"company\": {{company_id}},\n  \"name\": \"Office Laptop Updated\",\n  \"code\": \"FA-0001\",\n  \"partner\": {{partner_id}},\n  \"currency\": {{currency_id}},\n  \"asset_account\": {{account_id}},\n  \"depreciation_account\": {{account_id}},\n  \"expense_account\": {{account_id}},\n  \"journal\": {{journal_id}},\n  \"acquisition_date\": \"2026-02-17\",\n  \"first_depreciation_date\": \"2026-03-01\",\n  \"original_value\": \"2500.000000\",\n  \"salvage_value\": \"250.000000\",\n  \"method\": \"linear\",\n  \"method_number\": 5,\n  \"method_period\": 12,\n  \"prorata\": true,\n  \"state\": \"running\",\n  \"active\": true,\n  \"note\": \"Updated from Accounting 2\"\n}"
+            },
+            "url": "{{base_url}}/api/assets/{{asset_id}}/"
+          }
+        },
+        {
+          "name": "Delete Asset",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/api/assets/{{asset_id}}/"
+          }
+        },
+        {
+          "name": "Compute Depreciation",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/api/assets/{{asset_id}}/compute-depreciation/"
+          }
+        },
+        {
+          "name": "Set Asset Running",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/api/assets/{{asset_id}}/set-running/"
+          }
+        },
+        {
+          "name": "Pause Asset",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/api/assets/{{asset_id}}/pause/"
+          }
+        },
+        {
+          "name": "Resume Asset",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/api/assets/{{asset_id}}/resume/"
+          }
+        },
+        {
+          "name": "Close Asset",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/api/assets/{{asset_id}}/close/"
+          }
+        },
+        {
+          "name": "Cancel Asset",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/api/assets/{{asset_id}}/cancel/"
+          }
+        },
+        {
+          "name": "List Asset Depreciation Lines",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/asset-depreciation-lines/?asset_id={{asset_id}}"
+          }
+        },
+        {
+          "name": "Create Asset Depreciation Line",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"asset\": {{asset_id}},\n  \"move\": null,\n  \"sequence\": 1,\n  \"date\": \"2026-03-01\",\n  \"amount\": \"460.000000\",\n  \"depreciated_value\": \"460.000000\",\n  \"residual_value\": \"2040.000000\",\n  \"state\": \"draft\"\n}"
+            },
+            "url": "{{base_url}}/api/asset-depreciation-lines/"
+          }
+        },
+        {
+          "name": "Get Asset Depreciation Line",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/asset-depreciation-lines/{{asset_depreciation_line_id}}/"
+          }
+        },
+        {
+          "name": "Update Asset Depreciation Line",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"asset\": {{asset_id}},\n  \"move\": null,\n  \"sequence\": 1,\n  \"date\": \"2026-03-01\",\n  \"amount\": \"450.000000\",\n  \"depreciated_value\": \"450.000000\",\n  \"residual_value\": \"2050.000000\",\n  \"state\": \"draft\"\n}"
+            },
+            "url": "{{base_url}}/api/asset-depreciation-lines/{{asset_depreciation_line_id}}/"
+          }
+        },
+        {
+          "name": "Delete Asset Depreciation Line",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/api/asset-depreciation-lines/{{asset_depreciation_line_id}}/"
+          }
+        },
+        {
+          "name": "Post Asset Depreciation Line",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/api/asset-depreciation-lines/{{asset_depreciation_line_id}}/post/"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Income Terms",
+      "item": [
+        {
+          "name": "List Income Terms",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/incoterms/?active=true&page={{page}}&page_size={{page_size}}&ordering={{income_terms_ordering}}"
+          }
+        },
+        {
+          "name": "Create Income Term",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"EXW\",\n  \"name\": \"Ex Works\",\n  \"active\": true\n}"
+            },
+            "url": "{{base_url}}/api/incoterms/"
+          }
+        },
+        {
+          "name": "Get Income Term",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/incoterms/{{incoterm_id}}/"
+          }
+        },
+        {
+          "name": "Update Income Term",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"EXW\",\n  \"name\": \"Ex Works Updated\",\n  \"active\": true\n}"
+            },
+            "url": "{{base_url}}/api/incoterms/{{incoterm_id}}/"
+          }
+        },
+        {
+          "name": "Delete Income Term",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/api/incoterms/{{incoterm_id}}/"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Vendors",
+      "item": [
+        {
+          "name": "List Vendors",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/vendors/?company_id={{company_id}}&res_partner_search_mode={{vendor_search_mode}}&page={{page}}&page_size={{page_size}}&ordering={{vendors_ordering}}"
+          }
+        },
+        {
+          "name": "Create Vendor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"company\": {{company_id}},\n  \"name\": \"Vendor A\",\n  \"email\": \"vendor@example.com\",\n  \"is_company\": true\n}"
+            },
+            "url": "{{base_url}}/api/vendors/"
+          }
+        },
+        {
+          "name": "Get Vendor",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/vendors/{{vendor_id}}/"
+          }
+        },
+        {
+          "name": "Update Vendor",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"company\": {{company_id}},\n  \"name\": \"Vendor A Updated\",\n  \"email\": \"vendor.updated@example.com\",\n  \"is_company\": true,\n  \"supplier_rank\": 1,\n  \"customer_rank\": 0\n}"
+            },
+            "url": "{{base_url}}/api/vendors/{{vendor_id}}/"
+          }
+        },
+        {
+          "name": "Delete Vendor",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/api/vendors/{{vendor_id}}/"
+          }
+        },
+        {
+          "name": "Increase Supplier Rank",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"field\": \"supplier_rank\",\n  \"n\": 1\n}"
+            },
+            "url": "{{base_url}}/api/vendors/{{vendor_id}}/increase-rank/"
+          }
+        },
+        {
+          "name": "List Vendor Bills",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/vendors/{{vendor_id}}/vendor-bills/"
+          }
+        }
+      ]
+    }
+  ]
+}

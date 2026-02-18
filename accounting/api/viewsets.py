@@ -1,9 +1,10 @@
 from django.core.exceptions import ValidationError as DjangoValidationError
-from django.db.models import DecimalField, Sum, Value
+from django.db.models import Count, DecimalField, F, Q, Sum, Value
 from django.db.models.functions import Coalesce
-from rest_framework import status, viewsets
+from rest_framework import filters, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError as DRFValidationError
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
 from accounting.models import (
@@ -25,6 +26,7 @@ from accounting.models import (
     Currency,
     JournalGroup,
     Journal,
+    Incoterm,
     PaymentTerm,
     PaymentTermLine,
     ProductCategory,
@@ -78,8 +80,10 @@ from .serializers import (
     MoveLineSerializer,
     MoveSerializer,
     PartnerSerializer,
+    VendorSerializer,
     PaymentMethodLineSerializer,
     PaymentMethodSerializer,
+    IncotermSerializer,
     PaymentTermLineSerializer,
     PaymentTermSerializer,
     TaxGroupSerializer,
@@ -122,6 +126,12 @@ def _handle_validation(exc: DjangoValidationError) -> Response:
     return Response(payload, status=status.HTTP_400_BAD_REQUEST)
 
 
+class StandardListPagination(PageNumberPagination):
+    page_size = 20
+    page_size_query_param = "page_size"
+    max_page_size = 200
+
+
 # ══════════════════════════════════════════════════════════════
 # UNCHANGED VIEWSETS
 # ══════════════════════════════════════════════════════════════
@@ -152,7 +162,7 @@ class CompanyViewSet(viewsets.ModelViewSet):
 
 class MoveViewSet(viewsets.ModelViewSet):
     queryset = Move.objects.select_related(
-        "company", "journal", "partner", "currency", "payment_term",
+        "company", "journal", "partner", "currency", "payment_term", "incoterm",
     ).all().order_by("-date", "-id")
     serializer_class = MoveSerializer
 
@@ -252,7 +262,7 @@ class MoveLineViewSet(viewsets.ModelViewSet):
 
 class InvoiceViewSet(viewsets.ModelViewSet):
     queryset = (
-        Move.objects.select_related("company", "journal", "partner", "currency", "payment_term")
+        Move.objects.select_related("company", "journal", "partner", "currency", "payment_term", "incoterm")
         .filter(move_type__in=["out_invoice", "in_invoice", "out_refund", "in_refund"])
         .annotate(
             amount_untaxed=Coalesce(Sum("invoice_lines__line_subtotal"), Value(0), output_field=DecimalField(max_digits=24, decimal_places=6)),
@@ -360,6 +370,94 @@ class PartnerViewSet(viewsets.ModelViewSet):
         return queryset
 
 
+class VendorViewSet(viewsets.ModelViewSet):
+    queryset = Partner.objects.select_related("company").filter(supplier_rank__gt=0).order_by("-supplier_rank", "name", "id")
+    serializer_class = VendorSerializer
+    pagination_class = StandardListPagination
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ["id", "name", "email", "supplier_rank", "customer_rank", "created_at"]
+    ordering = ["-supplier_rank", "name", "id"]
+
+    def filter_queryset(self, queryset):
+        if not self.request.query_params.get("ordering"):
+            search_mode = self.request.query_params.get("res_partner_search_mode", "supplier")
+            if search_mode == "customer":
+                self.ordering = ["-customer_rank", "name", "id"]
+            else:
+                self.ordering = ["-supplier_rank", "name", "id"]
+        return super().filter_queryset(queryset)
+
+    def get_queryset(self):
+        queryset = (
+            super()
+            .get_queryset()
+            .annotate(
+                supplier_invoice_count=Count(
+                    "moves",
+                    filter=Q(moves__move_type__in=["in_invoice", "in_refund"]),
+                    distinct=True,
+                )
+            )
+        )
+
+        company_id = self.request.query_params.get("company_id")
+        is_company = self.request.query_params.get("is_company")
+        if company_id:
+            queryset = queryset.filter(company_id=company_id)
+        if is_company is not None:
+            queryset = queryset.filter(is_company=is_company.lower() in {"1", "true", "yes"})
+        return queryset
+
+    def perform_create(self, serializer):
+        defaults = {}
+        if "supplier_rank" not in self.request.data:
+            defaults["supplier_rank"] = 1
+        if "is_company" not in self.request.data:
+            defaults["is_company"] = True
+        instance = serializer.save(**defaults)
+        try:
+            instance.full_clean()
+        except DjangoValidationError as exc:
+            raise DRFValidationError(exc.message_dict if hasattr(exc, "message_dict") else exc.messages)
+        instance.save()
+
+    @action(detail=True, methods=["post"], url_path="increase-rank")
+    def increase_rank(self, request, pk=None):
+        partner = self.get_object()
+        field = request.data.get("field", "supplier_rank")
+        n = request.data.get("n", 1)
+
+        if field not in {"supplier_rank", "customer_rank"}:
+            raise DRFValidationError({"field": "Field must be supplier_rank or customer_rank."})
+
+        try:
+            n = int(n)
+        except (TypeError, ValueError):
+            raise DRFValidationError({"n": "n must be an integer."})
+        if n <= 0:
+            raise DRFValidationError({"n": "n must be greater than 0."})
+
+        Partner.objects.filter(pk=partner.pk).update(**{field: F(field) + n})
+        partner.refresh_from_db()
+        serializer = self.get_serializer(partner)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=["get"], url_path="vendor-bills")
+    def vendor_bills(self, request, pk=None):
+        partner = self.get_object()
+        bills = (
+            Move.objects.select_related("company", "journal", "partner", "currency", "payment_term", "incoterm")
+            .filter(partner_id=partner.id, move_type__in=["in_invoice", "in_refund"])
+            .order_by("-date", "-id")
+        )
+        page = self.paginate_queryset(bills)
+        if page is not None:
+            serializer = MoveSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+        serializer = MoveSerializer(bills, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
 class AccountRootViewSet(viewsets.ModelViewSet):
     queryset = AccountRoot.objects.select_related("company").all().order_by("company_id", "code")
     serializer_class = AccountRootSerializer
@@ -419,6 +517,10 @@ class AssetViewSet(viewsets.ModelViewSet):
         "journal",
     ).all().order_by("company_id", "-acquisition_date", "id")
     serializer_class = AssetSerializer
+    pagination_class = StandardListPagination
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ["id", "name", "code", "acquisition_date", "state", "created_at"]
+    ordering = ["company_id", "-acquisition_date", "id"]
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -637,6 +739,22 @@ class PaymentTermViewSet(viewsets.ModelViewSet):
         company_id = self.request.query_params.get("company_id")
         active     = self.request.query_params.get("active")
         if company_id: queryset = queryset.filter(company_id=company_id)
+        if active is not None:
+            queryset = queryset.filter(active=active.lower() in {"1", "true", "yes"})
+        return queryset
+
+
+class IncotermViewSet(viewsets.ModelViewSet):
+    queryset = Incoterm.objects.all().order_by("code")
+    serializer_class = IncotermSerializer
+    pagination_class = StandardListPagination
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ["id", "code", "name", "active", "created_at"]
+    ordering = ["code"]
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        active = self.request.query_params.get("active")
         if active is not None:
             queryset = queryset.filter(active=active.lower() in {"1", "true", "yes"})
         return queryset
