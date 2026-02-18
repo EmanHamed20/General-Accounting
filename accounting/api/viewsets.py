@@ -151,16 +151,22 @@ class StandardListPagination(PageNumberPagination):
     max_page_size = 200
 
 
+class BaseModelViewSet(viewsets.ModelViewSet):
+    pagination_class = StandardListPagination
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = "__all__"
+
+
 # ══════════════════════════════════════════════════════════════
 # UNCHANGED VIEWSETS
 # ══════════════════════════════════════════════════════════════
 
-class CurrencyViewSet(viewsets.ModelViewSet):
+class CurrencyViewSet(BaseModelViewSet):
     queryset = Currency.objects.all().order_by("code")
     serializer_class = CurrencySerializer
 
 
-class CompanyViewSet(viewsets.ModelViewSet):
+class CompanyViewSet(BaseModelViewSet):
     queryset = Company.objects.all().order_by("name")
     serializer_class = CompanySerializer
 
@@ -179,7 +185,7 @@ class CompanyViewSet(viewsets.ModelViewSet):
         return Response(stats, status=status.HTTP_200_OK)
 
 
-class MoveViewSet(viewsets.ModelViewSet):
+class MoveViewSet(BaseModelViewSet):
     queryset = Move.objects.select_related(
         "company", "journal", "partner", "currency", "payment_term", "incoterm",
     ).all().order_by("-date", "-id")
@@ -235,7 +241,7 @@ class MoveViewSet(viewsets.ModelViewSet):
         return Response(stats, status=status.HTTP_200_OK)
 
 
-class MoveLineViewSet(viewsets.ModelViewSet):
+class MoveLineViewSet(BaseModelViewSet):
     queryset = MoveLine.objects.select_related(
         "move", "account", "partner", "currency", "tax", "tax_repartition_line",
     ).all().order_by("-date", "-id")
@@ -279,7 +285,7 @@ class MoveLineViewSet(viewsets.ModelViewSet):
         instance.delete()
 
 
-class InvoiceViewSet(viewsets.ModelViewSet):
+class InvoiceViewSet(BaseModelViewSet):
     queryset = (
         Move.objects.select_related("company", "journal", "partner", "currency", "payment_term", "incoterm", "reversed_entry")
         .filter(move_type__in=["out_invoice", "in_invoice", "out_refund", "in_refund"])
@@ -575,7 +581,7 @@ class PaymentViewSet(viewsets.ModelViewSet):
         return Response(self.get_serializer(payment).data, status=status.HTTP_200_OK)
 
 
-class InvoiceLineViewSet(viewsets.ModelViewSet):
+class InvoiceLineViewSet(BaseModelViewSet):
     queryset = InvoiceLine.objects.select_related("move", "account", "tax").all().order_by("move_id", "id")
     serializer_class = InvoiceLineSerializer
 
@@ -611,8 +617,11 @@ class InvoiceLineViewSet(viewsets.ModelViewSet):
         instance.delete()
 
 
-class PartnerViewSet(viewsets.ModelViewSet):
-    queryset = Partner.objects.select_related("company", "parent", "country", "state").all().order_by("company_id", "name")
+
+class PartnerViewSet(BaseModelViewSet):
+    queryset = Partner.objects.select_related("company").all().order_by("company_id", "name")
+# class PartnerViewSet(viewsets.ModelViewSet):
+#     queryset = Partner.objects.select_related("company", "parent", "country", "state").all().order_by("company_id", "name")
     serializer_class = PartnerSerializer
 
     def get_queryset(self):
@@ -626,6 +635,7 @@ class PartnerViewSet(viewsets.ModelViewSet):
         return queryset
 
 
+class VendorViewSet(BaseModelViewSet):
 class CustomerViewSet(viewsets.ModelViewSet):
     queryset = Partner.objects.select_related("company", "parent", "country", "state").filter(customer_rank__gt=0).order_by(
         "company_id", "name"
@@ -744,7 +754,7 @@ class VendorViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-class AccountRootViewSet(viewsets.ModelViewSet):
+class AccountRootViewSet(BaseModelViewSet):
     queryset = AccountRoot.objects.select_related("company").all().order_by("company_id", "code")
     serializer_class = AccountRootSerializer
 
@@ -755,7 +765,7 @@ class AccountRootViewSet(viewsets.ModelViewSet):
         return queryset
 
 
-class AccountGroupViewSet(viewsets.ModelViewSet):
+class AccountGroupViewSet(BaseModelViewSet):
     queryset = AccountGroup.objects.select_related("company", "parent").all().order_by("company_id", "code_prefix_start")
     serializer_class = AccountGroupSerializer
 
@@ -772,7 +782,7 @@ class AccountGroupViewSet(viewsets.ModelViewSet):
         return queryset
 
 
-class AccountViewSet(viewsets.ModelViewSet):
+class AccountViewSet(BaseModelViewSet):
     queryset = Account.objects.select_related("company", "root", "group", "currency").all().order_by("company_id", "code")
     serializer_class = AccountSerializer
 
@@ -792,7 +802,7 @@ class AccountViewSet(viewsets.ModelViewSet):
 # ✅ AssetViewSet — CRUD + 6 NEW ACTIONS
 # ══════════════════════════════════════════════════════════════
 
-class AssetViewSet(viewsets.ModelViewSet):
+class AssetViewSet(BaseModelViewSet):
     queryset = Asset.objects.select_related(
         "company",
         "partner",
@@ -923,7 +933,7 @@ class AssetViewSet(viewsets.ModelViewSet):
 # ✅ AssetDepreciationLineViewSet — CRUD + 1 NEW ACTION
 # ══════════════════════════════════════════════════════════════
 
-class AssetDepreciationLineViewSet(viewsets.ModelViewSet):
+class AssetDepreciationLineViewSet(BaseModelViewSet):
     queryset = AssetDepreciationLine.objects.select_related(
         "asset", "move"
     ).all().order_by("asset_id", "sequence", "id")
@@ -989,7 +999,7 @@ class AssetDepreciationLineViewSet(viewsets.ModelViewSet):
 # UNCHANGED VIEWSETS (CONTINUED)
 # ══════════════════════════════════════════════════════════════
 
-class JournalGroupViewSet(viewsets.ModelViewSet):
+class JournalGroupViewSet(BaseModelViewSet):
     queryset = JournalGroup.objects.select_related("company").all().order_by("company_id", "name")
     serializer_class = JournalGroupSerializer
 
@@ -1000,7 +1010,7 @@ class JournalGroupViewSet(viewsets.ModelViewSet):
         return queryset
 
 
-class JournalViewSet(viewsets.ModelViewSet):
+class JournalViewSet(BaseModelViewSet):
     queryset = Journal.objects.select_related("company", "group", "currency", "default_account").all().order_by("company_id", "code")
     serializer_class = JournalSerializer
 
@@ -1016,7 +1026,7 @@ class JournalViewSet(viewsets.ModelViewSet):
         return queryset
 
 
-class PaymentTermViewSet(viewsets.ModelViewSet):
+class PaymentTermViewSet(BaseModelViewSet):
     queryset = PaymentTerm.objects.select_related("company").all().order_by("company_id", "name")
     serializer_class = PaymentTermSerializer
 
@@ -1030,7 +1040,7 @@ class PaymentTermViewSet(viewsets.ModelViewSet):
         return queryset
 
 
-class IncotermViewSet(viewsets.ModelViewSet):
+class IncotermViewSet(BaseModelViewSet):
     queryset = Incoterm.objects.all().order_by("code")
     serializer_class = IncotermSerializer
     pagination_class = StandardListPagination
@@ -1046,7 +1056,7 @@ class IncotermViewSet(viewsets.ModelViewSet):
         return queryset
 
 
-class PaymentTermLineViewSet(viewsets.ModelViewSet):
+class PaymentTermLineViewSet(BaseModelViewSet):
     queryset = PaymentTermLine.objects.select_related("payment_term").all().order_by("payment_term_id", "sequence", "id")
     serializer_class = PaymentTermLineSerializer
 
@@ -1059,7 +1069,7 @@ class PaymentTermLineViewSet(viewsets.ModelViewSet):
         return queryset
 
 
-class TaxGroupViewSet(viewsets.ModelViewSet):
+class TaxGroupViewSet(BaseModelViewSet):
     queryset = TaxGroup.objects.select_related("company").all().order_by("company_id", "name")
     serializer_class = TaxGroupSerializer
 
@@ -1070,7 +1080,7 @@ class TaxGroupViewSet(viewsets.ModelViewSet):
         return queryset
 
 
-class TaxViewSet(viewsets.ModelViewSet):
+class TaxViewSet(BaseModelViewSet):
     queryset = Tax.objects.select_related("company", "tax_group", "account").all().order_by("company_id", "name")
     serializer_class = TaxSerializer
 
@@ -1086,7 +1096,7 @@ class TaxViewSet(viewsets.ModelViewSet):
         return queryset
 
 
-class TaxRepartitionLineViewSet(viewsets.ModelViewSet):
+class TaxRepartitionLineViewSet(BaseModelViewSet):
     queryset = TaxRepartitionLine.objects.select_related("tax", "account").all().order_by("tax_id", "document_type", "sequence", "id")
     serializer_class = TaxRepartitionLineSerializer
 
@@ -1101,7 +1111,7 @@ class TaxRepartitionLineViewSet(viewsets.ModelViewSet):
         return queryset
 
 
-class PaymentMethodViewSet(viewsets.ModelViewSet):
+class PaymentMethodViewSet(BaseModelViewSet):
     queryset = PaymentMethod.objects.all().order_by("name")
     serializer_class = PaymentMethodSerializer
 
@@ -1115,7 +1125,7 @@ class PaymentMethodViewSet(viewsets.ModelViewSet):
         return queryset
 
 
-class PaymentMethodLineViewSet(viewsets.ModelViewSet):
+class PaymentMethodLineViewSet(BaseModelViewSet):
     queryset = PaymentMethodLine.objects.select_related("journal", "payment_method").all().order_by("journal_id", "sequence", "id")
     serializer_class = PaymentMethodLineSerializer
 
@@ -1554,12 +1564,12 @@ class PaymentProviderMethodViewSet(viewsets.ModelViewSet):
         return queryset
 
 
-class CountryViewSet(viewsets.ModelViewSet):
+class CountryViewSet(BaseModelViewSet):
     queryset = Country.objects.all().order_by("name")
     serializer_class = CountrySerializer
 
 
-class CountryStateViewSet(viewsets.ModelViewSet):
+class CountryStateViewSet(BaseModelViewSet):
     queryset = CountryState.objects.select_related("country").all().order_by("country__name", "name")
     serializer_class = CountryStateSerializer
 
@@ -1570,7 +1580,7 @@ class CountryStateViewSet(viewsets.ModelViewSet):
         return queryset
 
 
-class CountryCityViewSet(viewsets.ModelViewSet):
+class CountryCityViewSet(BaseModelViewSet):
     queryset = CountryCity.objects.select_related("country", "state").all().order_by("country__name", "name")
     serializer_class = CountryCitySerializer
 
@@ -1583,7 +1593,7 @@ class CountryCityViewSet(viewsets.ModelViewSet):
         return queryset
 
 
-class CountryCurrencyViewSet(viewsets.ModelViewSet):
+class CountryCurrencyViewSet(BaseModelViewSet):
     queryset = CountryCurrency.objects.select_related("country", "currency").all().order_by(
         "country__name", "-is_default", "currency__code"
     )
@@ -1604,7 +1614,7 @@ class CountryCurrencyViewSet(viewsets.ModelViewSet):
         return queryset
 
 
-class ProductCategoryViewSet(viewsets.ModelViewSet):
+class ProductCategoryViewSet(BaseModelViewSet):
     queryset = ProductCategory.objects.select_related(
         "company", "parent", "income_account", "expense_account", "valuation_account",
     ).all().order_by("company_id", "name")
@@ -1626,38 +1636,7 @@ class ProductCategoryViewSet(viewsets.ModelViewSet):
         return queryset
 
 
-class ProductViewSet(viewsets.ModelViewSet):
-    queryset = Product.objects.select_related(
-        "company",
-        "category",
-        "income_account",
-        "expense_account",
-        "sale_tax",
-        "purchase_tax",
-    ).all().order_by("company_id", "name")
-    serializer_class = ProductSerializer
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
-        category_id = self.request.query_params.get("category_id")
-        sale_ok = self.request.query_params.get("sale_ok")
-        purchase_ok = self.request.query_params.get("purchase_ok")
-        active = self.request.query_params.get("active")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
-        if category_id:
-            queryset = queryset.filter(category_id=category_id)
-        if sale_ok is not None:
-            queryset = queryset.filter(sale_ok=sale_ok.lower() in {"1", "true", "yes"})
-        if purchase_ok is not None:
-            queryset = queryset.filter(purchase_ok=purchase_ok.lower() in {"1", "true", "yes"})
-        if active is not None:
-            queryset = queryset.filter(active=active.lower() in {"1", "true", "yes"})
-        return queryset
-
-
-class AccountGroupTemplateViewSet(viewsets.ModelViewSet):
+class AccountGroupTemplateViewSet(BaseModelViewSet):
     queryset = AccountGroupTemplate.objects.select_related("country", "parent").all().order_by(
         "country__name", "code_prefix_start", "id"
     )
@@ -1670,7 +1649,7 @@ class AccountGroupTemplateViewSet(viewsets.ModelViewSet):
         return queryset
 
 
-class AccountTemplateViewSet(viewsets.ModelViewSet):
+class AccountTemplateViewSet(BaseModelViewSet):
     queryset = AccountTemplate.objects.select_related("country", "group").all().order_by("country__name", "code")
     serializer_class = AccountTemplateSerializer
 
@@ -1681,3 +1660,4 @@ class AccountTemplateViewSet(viewsets.ModelViewSet):
         if country_id: queryset = queryset.filter(country_id=country_id)
         if group_id:   queryset = queryset.filter(group_id=group_id)
         return queryset
+
