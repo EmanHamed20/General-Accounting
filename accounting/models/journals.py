@@ -50,6 +50,16 @@ class PaymentTerm(AccountingBaseModel):
         unique_together = ("company", "name")
 
 
+class Incoterm(AccountingBaseModel):
+    code = models.CharField(max_length=16, unique=True)
+    name = models.CharField(max_length=255)
+    active = models.BooleanField(default=True)
+
+    class Meta:
+        db_table = "ga_incoterm"
+        ordering = ("code",)
+
+
 class PaymentTermLine(AccountingBaseModel):
     VALUE_TYPE_CHOICES = (
         ("percent", "Percent"),

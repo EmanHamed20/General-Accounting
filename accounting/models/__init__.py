@@ -4,6 +4,7 @@ from .chart_templates import AccountGroupTemplate, AccountTemplate
 from .core import Company, Partner
 from .entries import Move, MoveLine
 from .journals import (
+    Incoterm,
     Journal,
     JournalGroup,
     PaymentTerm,
@@ -36,6 +37,7 @@ __all__ = [
     "Account",
     "JournalGroup",
     "Journal",
+    "Incoterm",
     "PaymentTerm",
     "PaymentTermLine",
     "TaxGroup",

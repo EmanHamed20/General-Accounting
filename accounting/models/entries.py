@@ -25,6 +25,8 @@ class Move(AccountingBaseModel):
     partner = models.ForeignKey("accounting.Partner", on_delete=models.PROTECT, null=True, blank=True, related_name="moves")
     currency = models.ForeignKey("accounting.Currency", on_delete=models.PROTECT, related_name="moves")
     payment_term = models.ForeignKey("accounting.PaymentTerm", on_delete=models.PROTECT, null=True, blank=True, related_name="moves")
+    incoterm = models.ForeignKey("accounting.Incoterm", on_delete=models.PROTECT, null=True, blank=True, related_name="moves")
+    incoterm_location = models.CharField(max_length=255, blank=True)
     reference = models.CharField(max_length=255, blank=True)
     name = models.CharField(max_length=64, blank=True)
     invoice_date = models.DateField(null=True, blank=True)
