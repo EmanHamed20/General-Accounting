@@ -73,7 +73,7 @@ from accounting.services.invoice_service import (
     generate_journal_lines_and_post_invoice,
     reverse_invoice_to_credit_note,
 )
-from accounting.services.move_service import post_move
+from accounting.services.move_service import cancel_move, post_move, reverse_move, set_move_to_draft
 from accounting.services.payment_service import post_payment
 
 from ..serializers import (
@@ -81,7 +81,10 @@ from ..serializers import (
     AccountTemplateSerializer,
     ApplyChartTemplateSerializer,
     CreateDebitNoteSerializer,
+    JournalEntryLineSerializer,
+    JournalEntrySerializer,
     ReverseInvoiceSerializer,
+    ReverseMoveSerializer,
     CompanySerializer,
     CountryCitySerializer,
     CountryCurrencySerializer,

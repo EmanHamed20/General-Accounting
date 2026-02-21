@@ -51,6 +51,28 @@ class ProductViewSet(BaseModelViewSet):
         instance.save()
 
 
+class VendorProductViewSet(ProductViewSet):
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(purchase_ok=True)
+
+    def perform_create(self, serializer):
+        instance = serializer.save(purchase_ok=True)
+        try:
+            instance.full_clean()
+        except DjangoValidationError as exc:
+            raise DRFValidationError(exc.message_dict if hasattr(exc, "message_dict") else exc.messages)
+        instance.save()
+
+    def perform_update(self, serializer):
+        instance = serializer.save(purchase_ok=True)
+        try:
+            instance.full_clean()
+        except DjangoValidationError as exc:
+            raise DRFValidationError(exc.message_dict if hasattr(exc, "message_dict") else exc.messages)
+        instance.save()
+
+
 class ProductCategoryViewSet(BaseModelViewSet):
     queryset = ProductCategory.objects.select_related(
         "company", "parent", "income_account", "expense_account", "valuation_account",

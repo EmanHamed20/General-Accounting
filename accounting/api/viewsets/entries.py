@@ -110,3 +110,71 @@ class MoveLineViewSet(BaseModelViewSet):
         if instance.move.state != "draft":
             raise DRFValidationError("Cannot delete lines of a posted/cancelled move.")
         instance.delete()
+
+
+class JournalEntryViewSet(MoveViewSet):
+    queryset = Move.objects.select_related(
+        "company", "journal", "partner", "currency", "payment_term", "incoterm",
+    ).filter(move_type="entry").order_by("-date", "-id")
+    serializer_class = JournalEntrySerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(move_type="entry")
+
+    def perform_create(self, serializer):
+        instance = serializer.save(move_type="entry")
+        try:
+            instance.full_clean()
+        except DjangoValidationError as exc:
+            raise DRFValidationError(exc.message_dict if hasattr(exc, "message_dict") else exc.messages)
+        instance.save()
+
+    @action(detail=True, methods=["post"], url_path="set-draft")
+    def set_draft(self, request, pk=None):
+        move = self.get_object()
+        try:
+            set_move_to_draft(move=move)
+        except DjangoValidationError as exc:
+            payload = exc.message_dict if hasattr(exc, "message_dict") else {"detail": exc.messages}
+            return Response(payload, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"id": move.id, "state": move.state, "posted_at": move.posted_at}, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=["post"], url_path="cancel")
+    def cancel(self, request, pk=None):
+        move = self.get_object()
+        try:
+            cancel_move(move=move)
+        except DjangoValidationError as exc:
+            payload = exc.message_dict if hasattr(exc, "message_dict") else {"detail": exc.messages}
+            return Response(payload, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"id": move.id, "state": move.state}, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=["post"], url_path="reverse")
+    def reverse(self, request, pk=None):
+        move = self.get_object()
+        payload = ReverseMoveSerializer(data=request.data)
+        payload.is_valid(raise_exception=True)
+        try:
+            reversed_move = reverse_move(
+                move=move,
+                date=payload.validated_data.get("date"),
+                reason=payload.validated_data.get("reason", ""),
+                post=payload.validated_data.get("post", False),
+            )
+        except DjangoValidationError as exc:
+            error_payload = exc.message_dict if hasattr(exc, "message_dict") else {"detail": exc.messages}
+            return Response(error_payload, status=status.HTTP_400_BAD_REQUEST)
+        data = JournalEntrySerializer(reversed_move, context=self.get_serializer_context()).data
+        return Response(data, status=status.HTTP_201_CREATED)
+
+
+class JournalEntryLineViewSet(MoveLineViewSet):
+    queryset = MoveLine.objects.select_related(
+        "move", "account", "partner", "currency", "tax", "tax_repartition_line",
+    ).filter(move__move_type="entry").order_by("-date", "-id")
+    serializer_class = JournalEntryLineSerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(move__move_type="entry")
