@@ -1,7 +1,17 @@
 from .base import BaseModelViewSet, StandardListPagination
 from .company import CompanyViewSet, CurrencyViewSet
-from .entries import MoveViewSet, MoveLineViewSet
-from .invoicing import CreditNoteViewSet, DebitNoteViewSet, InvoiceLineViewSet, InvoiceViewSet, PaymentViewSet
+from .entries import JournalEntryLineViewSet, JournalEntryViewSet, MoveViewSet, MoveLineViewSet
+from .invoicing import (
+    CreditNoteViewSet,
+    DebitNoteViewSet,
+    InvoiceLineViewSet,
+    InvoiceViewSet,
+    PaymentViewSet,
+    VendorBillViewSet,
+    VendorRefundViewSet,
+    VendorDebitNoteViewSet,
+    VendorPaymentViewSet,
+)
 from .partners import CustomerViewSet, PartnerViewSet, VendorViewSet
 from .configuration import (
     AccountGroupViewSet,
@@ -43,7 +53,7 @@ from .settings import (
     ReconciliationModelViewSet,
 )
 from .localization import CountryCityViewSet, CountryCurrencyViewSet, CountryStateViewSet, CountryViewSet
-from .products import ProductCategoryViewSet, ProductViewSet
+from .products import ProductCategoryViewSet, ProductViewSet, VendorProductViewSet
 from .templates import AccountGroupTemplateViewSet, AccountTemplateViewSet
 
 __all__ = [
@@ -53,10 +63,16 @@ __all__ = [
     "CompanyViewSet",
     "MoveViewSet",
     "MoveLineViewSet",
+    "JournalEntryViewSet",
+    "JournalEntryLineViewSet",
     "InvoiceViewSet",
     "CreditNoteViewSet",
     "DebitNoteViewSet",
     "PaymentViewSet",
+    "VendorBillViewSet",
+    "VendorRefundViewSet",
+    "VendorDebitNoteViewSet",
+    "VendorPaymentViewSet",
     "InvoiceLineViewSet",
     "PartnerViewSet",
     "CustomerViewSet",
@@ -100,6 +116,7 @@ __all__ = [
     "CountryCityViewSet",
     "CountryCurrencyViewSet",
     "ProductViewSet",
+    "VendorProductViewSet",
     "ProductCategoryViewSet",
     "AccountGroupTemplateViewSet",
     "AccountTemplateViewSet",

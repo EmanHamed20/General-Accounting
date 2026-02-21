@@ -121,6 +121,107 @@ class InvoiceViewSet(BaseModelViewSet):
         return Response(self.get_serializer(debit_note).data, status=status.HTTP_201_CREATED)
 
 
+class VendorBillViewSet(InvoiceViewSet):
+    queryset = (
+        Move.objects.select_related("company", "journal", "partner", "currency", "payment_term", "incoterm", "reversed_entry")
+        .filter(move_type="in_invoice", is_debit_note=False)
+        .annotate(
+            amount_untaxed=Coalesce(Sum("invoice_lines__line_subtotal"), Value(0), output_field=DecimalField(max_digits=24, decimal_places=6)),
+            amount_tax=Coalesce(Sum("invoice_lines__line_tax"), Value(0), output_field=DecimalField(max_digits=24, decimal_places=6)),
+            amount_total=Coalesce(Sum("invoice_lines__line_total"), Value(0), output_field=DecimalField(max_digits=24, decimal_places=6)),
+        )
+        .order_by("-date", "-id")
+    )
+
+    def perform_create(self, serializer):
+        instance = serializer.save(state="draft", move_type="in_invoice", is_debit_note=False)
+        try:
+            instance.full_clean()
+        except DjangoValidationError as exc:
+            raise DRFValidationError(exc.message_dict if hasattr(exc, "message_dict") else exc.messages)
+        instance.save()
+
+    def perform_update(self, serializer):
+        if self.get_object().state != "draft":
+            raise DRFValidationError("Only draft vendor bills can be updated.")
+        instance = serializer.save(move_type="in_invoice", is_debit_note=False)
+        try:
+            instance.full_clean()
+        except DjangoValidationError as exc:
+            raise DRFValidationError(exc.message_dict if hasattr(exc, "message_dict") else exc.messages)
+        instance.save()
+
+
+class VendorRefundViewSet(InvoiceViewSet):
+    queryset = (
+        Move.objects.select_related("company", "journal", "partner", "currency", "payment_term", "reversed_entry")
+        .filter(move_type="in_refund")
+        .annotate(
+            amount_untaxed=Coalesce(Sum("invoice_lines__line_subtotal"), Value(0), output_field=DecimalField(max_digits=24, decimal_places=6)),
+            amount_tax=Coalesce(Sum("invoice_lines__line_tax"), Value(0), output_field=DecimalField(max_digits=24, decimal_places=6)),
+            amount_total=Coalesce(Sum("invoice_lines__line_total"), Value(0), output_field=DecimalField(max_digits=24, decimal_places=6)),
+        )
+        .order_by("-date", "-id")
+    )
+
+    def perform_create(self, serializer):
+        instance = serializer.save(state="draft", move_type="in_refund")
+        try:
+            instance.full_clean()
+        except DjangoValidationError as exc:
+            raise DRFValidationError(exc.message_dict if hasattr(exc, "message_dict") else exc.messages)
+        instance.save()
+
+    def perform_update(self, serializer):
+        if self.get_object().state != "draft":
+            raise DRFValidationError("Only draft vendor refunds can be updated.")
+        instance = serializer.save(move_type="in_refund")
+        try:
+            instance.full_clean()
+        except DjangoValidationError as exc:
+            raise DRFValidationError(exc.message_dict if hasattr(exc, "message_dict") else exc.messages)
+        instance.save()
+
+    @action(detail=True, methods=["post"], url_path="create-debit-note")
+    def create_debit_note(self, request, pk=None):
+        return Response({"detail": "Debit notes are created from vendor bills."}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class VendorDebitNoteViewSet(InvoiceViewSet):
+    queryset = (
+        Move.objects.select_related("company", "journal", "partner", "currency", "payment_term", "debit_origin")
+        .filter(move_type="in_invoice", is_debit_note=True)
+        .annotate(
+            amount_untaxed=Coalesce(Sum("invoice_lines__line_subtotal"), Value(0), output_field=DecimalField(max_digits=24, decimal_places=6)),
+            amount_tax=Coalesce(Sum("invoice_lines__line_tax"), Value(0), output_field=DecimalField(max_digits=24, decimal_places=6)),
+            amount_total=Coalesce(Sum("invoice_lines__line_total"), Value(0), output_field=DecimalField(max_digits=24, decimal_places=6)),
+        )
+        .order_by("-date", "-id")
+    )
+
+    def perform_create(self, serializer):
+        raise DRFValidationError("Create debit notes from vendor bills using /vendor-bills/{id}/create-debit-note.")
+
+    def perform_update(self, serializer):
+        current = self.get_object()
+        if current.state != "draft":
+            raise DRFValidationError("Only draft vendor debit notes can be updated.")
+        instance = serializer.save(move_type="in_invoice", is_debit_note=True)
+        try:
+            instance.full_clean()
+        except DjangoValidationError as exc:
+            raise DRFValidationError(exc.message_dict if hasattr(exc, "message_dict") else exc.messages)
+        instance.save()
+
+    @action(detail=True, methods=["post"], url_path="reverse")
+    def reverse_invoice(self, request, pk=None):
+        return Response({"detail": "Reverse is available from vendor bills."}, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=True, methods=["post"], url_path="create-debit-note")
+    def create_debit_note(self, request, pk=None):
+        return Response({"detail": "Already a debit note."}, status=status.HTTP_400_BAD_REQUEST)
+
+
 class CreditNoteViewSet(InvoiceViewSet):
     queryset = (
         Move.objects.select_related("company", "journal", "partner", "currency", "payment_term", "reversed_entry")
@@ -292,6 +393,30 @@ class PaymentViewSet(viewsets.ModelViewSet):
             payment.move.state = "cancelled"
             payment.move.save(update_fields=["state", "updated_at"])
         return Response(self.get_serializer(payment).data, status=status.HTTP_200_OK)
+
+
+class VendorPaymentViewSet(PaymentViewSet):
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(payment_type="outbound")
+
+    def perform_create(self, serializer):
+        payment = serializer.save(state="draft", payment_type="outbound")
+        try:
+            payment.full_clean()
+        except DjangoValidationError as exc:
+            raise DRFValidationError(exc.message_dict if hasattr(exc, "message_dict") else exc.messages)
+        payment.save()
+
+    def perform_update(self, serializer):
+        if self.get_object().state != "draft":
+            raise DRFValidationError("Only draft payments can be updated.")
+        payment = serializer.save(payment_type="outbound")
+        try:
+            payment.full_clean()
+        except DjangoValidationError as exc:
+            raise DRFValidationError(exc.message_dict if hasattr(exc, "message_dict") else exc.messages)
+        payment.save()
 
     @action(detail=True, methods=["post"], url_path="reset-to-draft")
     def reset_to_draft(self, request, pk=None):

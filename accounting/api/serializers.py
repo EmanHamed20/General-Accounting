@@ -266,6 +266,12 @@ class ReverseInvoiceSerializer(serializers.Serializer):
     reason = serializers.CharField(required=False, allow_blank=True, max_length=255)
 
 
+class ReverseMoveSerializer(serializers.Serializer):
+    date = serializers.DateField(required=False)
+    reason = serializers.CharField(required=False, allow_blank=True, max_length=255)
+    post = serializers.BooleanField(required=False, default=False)
+
+
 class CreateDebitNoteSerializer(serializers.Serializer):
     date = serializers.DateField(required=False)
     reason = serializers.CharField(required=False, allow_blank=True, max_length=255)
@@ -348,6 +354,31 @@ class MoveLineSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({"account": "Account company must match move company."})
         if move and partner and move.company_id != partner.company_id:
             raise serializers.ValidationError({"partner": "Partner company must match move company."})
+        return attrs
+
+
+class JournalEntrySerializer(MoveSerializer):
+    class Meta(MoveSerializer.Meta):
+        read_only_fields = list(MoveSerializer.Meta.read_only_fields) + ["move_type"]
+
+    def validate(self, attrs):
+        attrs = super().validate(attrs)
+        move_type = attrs.get("move_type") or getattr(self.instance, "move_type", "entry")
+        if move_type != "entry":
+            raise serializers.ValidationError({"move_type": "Journal entry move_type must be entry."})
+        return attrs
+
+    def create(self, validated_data):
+        validated_data["move_type"] = "entry"
+        return super().create(validated_data)
+
+
+class JournalEntryLineSerializer(MoveLineSerializer):
+    def validate(self, attrs):
+        attrs = super().validate(attrs)
+        move = attrs.get("move") or getattr(self.instance, "move", None)
+        if move and move.move_type != "entry":
+            raise serializers.ValidationError({"move": "Journal entry line requires a move with move_type=entry."})
         return attrs
 
 
