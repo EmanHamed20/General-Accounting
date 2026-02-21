@@ -220,6 +220,10 @@
     {
       "key": "payment_id",
       "value": "1"
+    },
+    {
+      "key": "report_date",
+      "value": "2026-02-21"
     }
   ],
   "item": [
@@ -3700,6 +3704,30 @@
               "request": {
                 "method": "DELETE",
                 "url": "{{base_url}}/api/accounting-settings/{{accounting_settings_id}}/"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Reports",
+      "item": [
+        {
+          "name": "Balance Sheet",
+          "item": [
+            {
+              "name": "Get Balance Sheet (Posted Only)",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/reports/balance-sheet/?company_id={{company_id}}&date_to={{report_date}}&posted_only=true&include_current_year_earnings=true"
+              }
+            },
+            {
+              "name": "Get Balance Sheet (Include Draft)",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/reports/balance-sheet/?company_id={{company_id}}&date_to={{report_date}}&posted_only=false&include_current_year_earnings=true"
               }
             }
           ]

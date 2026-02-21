@@ -45,6 +45,7 @@ from .settings import (
 from .localization import CountryCityViewSet, CountryCurrencyViewSet, CountryStateViewSet, CountryViewSet
 from .products import ProductCategoryViewSet, ProductViewSet
 from .templates import AccountGroupTemplateViewSet, AccountTemplateViewSet
+from .reports import BalanceSheetReportView
 
 __all__ = [
     "BaseModelViewSet",
@@ -103,4 +104,5 @@ __all__ = [
     "ProductCategoryViewSet",
     "AccountGroupTemplateViewSet",
     "AccountTemplateViewSet",
+    "BalanceSheetReportView",
 ]

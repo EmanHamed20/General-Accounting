@@ -12,4 +12,5 @@ urlpatterns = [
     path("", include("accounting.api.routes.products")),
     path("", include("accounting.api.routes.entries")),
     path("", include("accounting.api.routes.invoicing")),
+    path("", include("accounting.api.routes.reports")),
 ]
