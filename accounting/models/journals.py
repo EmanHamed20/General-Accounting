@@ -86,6 +86,30 @@ class PaymentTermLine(AccountingBaseModel):
 class TaxGroup(AccountingBaseModel):
     company = models.ForeignKey("accounting.Company", on_delete=models.PROTECT, related_name="tax_groups")
     name = models.CharField(max_length=255)
+    description = models.CharField(max_length=255, blank=True)
+    sequence = models.PositiveIntegerField(default=10)
+    country = models.ForeignKey(
+        "accounting.Country",
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="tax_groups",
+    )
+    tax_payable_account = models.ForeignKey(
+        "accounting.Account",
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="tax_groups_payable",
+    )
+    tax_receivable_account = models.ForeignKey(
+        "accounting.Account",
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="tax_groups_receivable",
+    )
+    active = models.BooleanField(default=True)
 
     class Meta:
         db_table = "ga_tax_group"

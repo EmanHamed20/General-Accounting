@@ -74,10 +74,6 @@
       "value": "1"
     },
     {
-      "key": "account_root_id",
-      "value": "1"
-    },
-    {
       "key": "account_group_id",
       "value": "1"
     },
@@ -224,6 +220,10 @@
     {
       "key": "report_date",
       "value": "2026-02-21"
+    },
+    {
+      "key": "report_date_from",
+      "value": "2026-01-01"
     }
   ],
   "item": [
@@ -286,66 +286,6 @@
               "request": {
                 "method": "DELETE",
                 "url": "{{base_url}}/api/partners/{{partner_id}}/"
-              }
-            }
-          ]
-        },
-        {
-          "name": "Account Roots",
-          "item": [
-            {
-              "name": "List Account Roots",
-              "request": {
-                "method": "GET",
-                "url": "{{base_url}}/api/account-roots/?company_id={{company_id}}"
-              }
-            },
-            {
-              "name": "Create Account Root",
-              "request": {
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"company\": {{company_id}},\n  \"code\": \"1\",\n  \"name\": \"Balance Sheet\"\n}"
-                },
-                "url": "{{base_url}}/api/account-roots/"
-              }
-            },
-            {
-              "name": "Get Account Root",
-              "request": {
-                "method": "GET",
-                "url": "{{base_url}}/api/account-roots/{{account_root_id}}/"
-              }
-            },
-            {
-              "name": "Update Account Root",
-              "request": {
-                "method": "PUT",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"company\": {{company_id}},\n  \"code\": \"1\",\n  \"name\": \"Balance Sheet Updated\"\n}"
-                },
-                "url": "{{base_url}}/api/account-roots/{{account_root_id}}/"
-              }
-            },
-            {
-              "name": "Delete Account Root",
-              "request": {
-                "method": "DELETE",
-                "url": "{{base_url}}/api/account-roots/{{account_root_id}}/"
               }
             }
           ]
@@ -432,7 +372,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"company\": {{company_id}},\n  \"root\": {{account_root_id}},\n  \"group\": {{account_group_id}},\n  \"currency\": {{currency_id}},\n  \"code\": \"101000\",\n  \"name\": \"Cash\",\n  \"account_type\": \"asset\",\n  \"reconcile\": false,\n  \"deprecated\": false\n}"
+                  "raw": "{\n  \"company\": {{company_id}},\n  \"group\": {{account_group_id}},\n  \"currency\": {{currency_id}},\n  \"code\": \"101000\",\n  \"name\": \"Cash\",\n  \"account_type\": \"asset\",\n  \"reconcile\": false,\n  \"deprecated\": false\n}"
                 },
                 "url": "{{base_url}}/api/accounts/"
               }
@@ -456,7 +396,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"company\": {{company_id}},\n  \"root\": {{account_root_id}},\n  \"group\": {{account_group_id}},\n  \"currency\": {{currency_id}},\n  \"code\": \"101000\",\n  \"name\": \"Cash Updated\",\n  \"account_type\": \"asset\",\n  \"reconcile\": true,\n  \"deprecated\": false\n}"
+                  "raw": "{\n  \"company\": {{company_id}},\n  \"group\": {{account_group_id}},\n  \"currency\": {{currency_id}},\n  \"code\": \"101000\",\n  \"name\": \"Cash Updated\",\n  \"account_type\": \"asset\",\n  \"reconcile\": true,\n  \"deprecated\": false\n}"
                 },
                 "url": "{{base_url}}/api/accounts/{{account_id}}/"
               }
@@ -721,6 +661,13 @@
               }
             },
             {
+              "name": "Filter Tax Groups",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/tax-groups/?company_id={{company_id}}&country_id={{country_id}}&active=true"
+              }
+            },
+            {
               "name": "Create Tax Group",
               "request": {
                 "method": "POST",
@@ -732,7 +679,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"company\": {{company_id}},\n  \"name\": \"VAT\"\n}"
+                  "raw": "{\n  \"company\": {{company_id}},\n  \"name\": \"VAT\",\n  \"description\": \"Value Added Tax\",\n  \"sequence\": 10,\n  \"country\": {{country_id}},\n  \"tax_payable_account\": {{account_id}},\n  \"tax_receivable_account\": {{account_id}},\n  \"active\": true\n}"
                 },
                 "url": "{{base_url}}/api/tax-groups/"
               }
@@ -756,7 +703,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"company\": {{company_id}},\n  \"name\": \"VAT Updated\"\n}"
+                  "raw": "{\n  \"company\": {{company_id}},\n  \"name\": \"VAT Updated\",\n  \"description\": \"VAT Group Updated\",\n  \"sequence\": 20,\n  \"country\": {{country_id}},\n  \"tax_payable_account\": {{account_id}},\n  \"tax_receivable_account\": {{account_id}},\n  \"active\": true\n}"
                 },
                 "url": "{{base_url}}/api/tax-groups/{{tax_group_id}}/"
               }
@@ -2119,7 +2066,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Main Company\",\n  \"code\": \"MAIN\",\n  \"lock_date\": null\n}"
+              "raw": "{\n  \"name\": \"My Company\",\n  \"code\": \"MYCO\",\n  \"legal_name\": \"My Company LLC\",\n  \"email\": \"info@myco.com\",\n  \"phone\": \"+1-555-1000\",\n  \"website\": \"https://myco.com\",\n  \"street\": \"Main St 1\",\n  \"city\": \"Riyadh\",\n  \"country\": {{country_id}},\n  \"state\": {{state_id}},\n  \"zip\": \"12345\",\n  \"vat\": \"123456789\",\n  \"document_layout\": \"standard\",\n  \"email_header_color\": \"#000000\",\n  \"email_button_color\": \"#875A7B\",\n  \"lock_date\": null\n}"
             },
             "url": "{{base_url}}/api/companies/"
           }
@@ -2143,7 +2090,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Main Company Updated\",\n  \"code\": \"MAIN\",\n  \"lock_date\": null\n}"
+              "raw": "{\n  \"name\": \"My Company Updated\",\n  \"code\": \"MYCO\",\n  \"legal_name\": \"My Company LLC\",\n  \"email\": \"accounting@myco.com\",\n  \"phone\": \"+1-555-1001\",\n  \"website\": \"https://myco.com\",\n  \"street\": \"Main St 2\",\n  \"city\": \"Riyadh\",\n  \"country\": {{country_id}},\n  \"state\": {{state_id}},\n  \"zip\": \"12345\",\n  \"vat\": \"123456789\",\n  \"document_layout\": \"boxed\",\n  \"report_header\": \"My Company Header\",\n  \"report_footer\": \"Thank you\",\n  \"email_header_color\": \"#111111\",\n  \"email_button_color\": \"#875A7B\",\n  \"lock_date\": null\n}"
             },
             "url": "{{base_url}}/api/companies/{{company_id}}/"
           }
@@ -2164,6 +2111,67 @@
             },
             "url": "{{base_url}}/api/companies/{{company_id}}/apply-chart-template/"
           }
+        },
+        {
+          "name": "Update Company Info",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"My Company\",\n  \"legal_name\": \"My Company LLC\",\n  \"email\": \"admin@myco.com\",\n  \"phone\": \"+1-555-1000\",\n  \"website\": \"https://myco.com\",\n  \"street\": \"Street 1\",\n  \"street2\": \"Floor 2\",\n  \"city\": \"Riyadh\",\n  \"zip\": \"12345\",\n  \"country\": {{country_id}},\n  \"state\": {{state_id}},\n  \"vat\": \"123456789\",\n  \"lock_date\": null\n}"
+            },
+            "url": "{{base_url}}/api/companies/{{company_id}}/update-info/"
+          },
+          "description": "UI card: Companies -> Update Info"
+        },
+        {
+          "name": "Configure Document Layout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"document_layout\": \"standard\",\n  \"report_header\": \"My Company Header\",\n  \"report_footer\": \"Thank you for your business\",\n  \"company_details\": \"Company details block\",\n  \"logo_url\": \"https://example.com/logo.png\",\n  \"logo_web_url\": \"https://example.com/logo-web.png\"\n}"
+            },
+            "url": "{{base_url}}/api/companies/{{company_id}}/configure-document-layout/"
+          },
+          "description": "UI card: Document Layout -> Configure / Edit Layout"
+        },
+        {
+          "name": "Preview Document Layout",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/companies/{{company_id}}/preview-document/"
+          }
+        },
+        {
+          "name": "Update Mail Layout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email_header_color\": \"#000000\",\n  \"email_button_color\": \"#875A7B\"\n}"
+            },
+            "url": "{{base_url}}/api/companies/{{company_id}}/update-mail-layout/"
+          },
+          "description": "UI card: Email Templates -> Update Mail Layout"
         },
         {
           "name": "Delete Company",
@@ -3728,6 +3736,98 @@
               "request": {
                 "method": "GET",
                 "url": "{{base_url}}/api/reports/balance-sheet/?company_id={{company_id}}&date_to={{report_date}}&posted_only=false&include_current_year_earnings=true"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Profit and Loss",
+          "item": [
+            {
+              "name": "Get Profit and Loss (YTD Posted)",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/reports/profit-and-loss/?company_id={{company_id}}&date_to={{report_date}}&posted_only=true"
+              }
+            },
+            {
+              "name": "Get Profit and Loss (Custom Period)",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/reports/profit-and-loss/?company_id={{company_id}}&date_from={{report_date_from}}&date_to={{report_date}}&posted_only=true"
+              }
+            },
+            {
+              "name": "Get Profit and Loss (Include Draft)",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/reports/profit-and-loss/?company_id={{company_id}}&date_from={{report_date_from}}&date_to={{report_date}}&posted_only=false"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Trial Balance",
+          "item": [
+            {
+              "name": "Get Trial Balance (YTD Posted)",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/reports/trial-balance/?company_id={{company_id}}&date_to={{report_date}}&posted_only=true"
+              }
+            },
+            {
+              "name": "Get Trial Balance (Custom Period)",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/reports/trial-balance/?company_id={{company_id}}&date_from={{report_date_from}}&date_to={{report_date}}&posted_only=true"
+              }
+            },
+            {
+              "name": "Get Trial Balance (Hide Zero Lines)",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/reports/trial-balance/?company_id={{company_id}}&date_from={{report_date_from}}&date_to={{report_date}}&posted_only=true&hide_zero_lines=true"
+              }
+            },
+            {
+              "name": "Get Trial Balance (Include Draft)",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/reports/trial-balance/?company_id={{company_id}}&date_from={{report_date_from}}&date_to={{report_date}}&posted_only=false"
+              }
+            }
+          ]
+        },
+        {
+          "name": "General Ledger",
+          "item": [
+            {
+              "name": "Get General Ledger (All Accounts, YTD Posted)",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/reports/general-ledger/?company_id={{company_id}}&date_to={{report_date}}&posted_only=true"
+              }
+            },
+            {
+              "name": "Get General Ledger (Single Account)",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/reports/general-ledger/?company_id={{company_id}}&account_id={{account_id}}&date_from={{report_date_from}}&date_to={{report_date}}&posted_only=true"
+              }
+            },
+            {
+              "name": "Get General Ledger (Hide Zero Lines)",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/reports/general-ledger/?company_id={{company_id}}&date_from={{report_date_from}}&date_to={{report_date}}&posted_only=true&hide_zero_lines=true"
+              }
+            },
+            {
+              "name": "Get General Ledger (Include Draft)",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/reports/general-ledger/?company_id={{company_id}}&date_from={{report_date_from}}&date_to={{report_date}}&posted_only=false"
               }
             }
           ]

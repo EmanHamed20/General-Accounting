@@ -205,8 +205,42 @@ class ProductSerializer(serializers.ModelSerializer):
 class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
-        fields = ["id", "name", "code", "lock_date", "created_at", "updated_at"]
+        fields = [
+            "id",
+            "name",
+            "code",
+            "legal_name",
+            "email",
+            "phone",
+            "mobile",
+            "website",
+            "street",
+            "street2",
+            "city",
+            "zip",
+            "country",
+            "state",
+            "vat",
+            "document_layout",
+            "report_header",
+            "report_footer",
+            "company_details",
+            "logo_url",
+            "logo_web_url",
+            "email_header_color",
+            "email_button_color",
+            "lock_date",
+            "created_at",
+            "updated_at",
+        ]
         read_only_fields = ["id", "created_at", "updated_at"]
+
+    def validate(self, attrs):
+        country = attrs.get("country") if "country" in attrs else getattr(self.instance, "country", None)
+        state = attrs.get("state") if "state" in attrs else getattr(self.instance, "state", None)
+        if country and state and state.country_id != country.id:
+            raise serializers.ValidationError({"state": "State must belong to selected country."})
+        return attrs
 
 
 class AccountGroupTemplateSerializer(serializers.ModelSerializer):
@@ -810,8 +844,42 @@ class PaymentTermLineSerializer(serializers.ModelSerializer):
 class TaxGroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = TaxGroup
-        fields = ["id", "company", "name", "created_at", "updated_at"]
+        fields = [
+            "id",
+            "company",
+            "name",
+            "description",
+            "sequence",
+            "country",
+            "tax_payable_account",
+            "tax_receivable_account",
+            "active",
+            "created_at",
+            "updated_at",
+        ]
         read_only_fields = ["id", "created_at", "updated_at"]
+
+    def validate(self, attrs):
+        company = attrs.get("company") or getattr(self.instance, "company", None)
+        tax_payable_account = (
+            attrs.get("tax_payable_account")
+            if "tax_payable_account" in attrs
+            else getattr(self.instance, "tax_payable_account", None)
+        )
+        tax_receivable_account = (
+            attrs.get("tax_receivable_account")
+            if "tax_receivable_account" in attrs
+            else getattr(self.instance, "tax_receivable_account", None)
+        )
+        if company and tax_payable_account and tax_payable_account.company_id != company.id:
+            raise serializers.ValidationError(
+                {"tax_payable_account": "Payable account company must match tax group company."}
+            )
+        if company and tax_receivable_account and tax_receivable_account.company_id != company.id:
+            raise serializers.ValidationError(
+                {"tax_receivable_account": "Receivable account company must match tax group company."}
+            )
+        return attrs
 
 
 class TaxSerializer(serializers.ModelSerializer):

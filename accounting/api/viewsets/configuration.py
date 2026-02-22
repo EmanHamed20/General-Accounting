@@ -1,3 +1,5 @@
+from django.db.models.deletion import ProtectedError
+
 from .shared import *
 
 
@@ -38,15 +40,98 @@ class AccountViewSet(BaseModelViewSet):
     def get_queryset(self):
         queryset = super().get_queryset()
         company_id = self.request.query_params.get("company_id")
+        root_id = self.request.query_params.get("root_id")
+        group_id = self.request.query_params.get("group_id")
         account_type = self.request.query_params.get("account_type")
+        code = self.request.query_params.get("code")
+        name = self.request.query_params.get("name")
+        reconcile = self.request.query_params.get("reconcile")
         deprecated = self.request.query_params.get("deprecated")
+        q = self.request.query_params.get("q")
         if company_id:
             queryset = queryset.filter(company_id=company_id)
+        if root_id:
+            if root_id.lower() == "null":
+                queryset = queryset.filter(root__isnull=True)
+            else:
+                queryset = queryset.filter(root_id=root_id)
+        if group_id:
+            if group_id.lower() == "null":
+                queryset = queryset.filter(group__isnull=True)
+            else:
+                queryset = queryset.filter(group_id=group_id)
         if account_type:
             queryset = queryset.filter(account_type=account_type)
+        if code:
+            queryset = queryset.filter(code__icontains=code)
+        if name:
+            queryset = queryset.filter(name__icontains=name)
+        if reconcile is not None:
+            queryset = queryset.filter(reconcile=reconcile.lower() in {"1", "true", "yes"})
         if deprecated is not None:
             queryset = queryset.filter(deprecated=deprecated.lower() in {"1", "true", "yes"})
+        if q:
+            queryset = queryset.filter(Q(code__icontains=q) | Q(name__icontains=q))
         return queryset
+
+    def perform_create(self, serializer):
+        instance = serializer.save()
+        try:
+            instance.full_clean()
+        except DjangoValidationError as exc:
+            raise DRFValidationError(exc.message_dict if hasattr(exc, "message_dict") else exc.messages)
+        instance.save()
+
+    def perform_update(self, serializer):
+        current = self.get_object()
+        if current.move_lines.exists():
+            immutable_fields = {"company", "code", "account_type"}
+            changed = [field for field in immutable_fields if field in serializer.validated_data]
+            for field in changed:
+                new_value = serializer.validated_data.get(field)
+                old_value = getattr(current, field)
+                old_comp = getattr(old_value, "id", old_value)
+                new_comp = getattr(new_value, "id", new_value)
+                if old_comp != new_comp:
+                    raise DRFValidationError(
+                        {field: "Cannot change this field after the account has journal entries."}
+                    )
+        instance = serializer.save()
+        try:
+            instance.full_clean()
+        except DjangoValidationError as exc:
+            raise DRFValidationError(exc.message_dict if hasattr(exc, "message_dict") else exc.messages)
+        instance.save()
+
+    def perform_destroy(self, instance):
+        if instance.move_lines.exists():
+            raise DRFValidationError(
+                "Account has journal entry lines. Archive it instead by setting deprecated=true or using /archive/."
+            )
+        try:
+            instance.delete()
+        except ProtectedError as exc:
+            raise DRFValidationError(
+                {"detail": f"Account is referenced by other records and cannot be deleted: {exc}"}
+            ) from exc
+
+    @action(detail=True, methods=["post"], url_path="archive")
+    def archive(self, request, pk=None):
+        account = self.get_object()
+        if account.deprecated:
+            return Response({"detail": "Account is already archived."}, status=status.HTTP_400_BAD_REQUEST)
+        account.deprecated = True
+        account.save(update_fields=["deprecated", "updated_at"])
+        return Response(self.get_serializer(account).data, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=["post"], url_path="unarchive")
+    def unarchive(self, request, pk=None):
+        account = self.get_object()
+        if not account.deprecated:
+            return Response({"detail": "Account is already active."}, status=status.HTTP_400_BAD_REQUEST)
+        account.deprecated = False
+        account.save(update_fields=["deprecated", "updated_at"])
+        return Response(self.get_serializer(account).data, status=status.HTTP_200_OK)
 
 
 class JournalGroupViewSet(BaseModelViewSet):
@@ -132,9 +217,15 @@ class TaxGroupViewSet(BaseModelViewSet):
     def get_queryset(self):
         queryset = super().get_queryset()
         company_id = self.request.query_params.get("company_id")
+        country_id = self.request.query_params.get("country_id")
+        active = self.request.query_params.get("active")
         if company_id:
             queryset = queryset.filter(company_id=company_id)
-        return queryset
+        if country_id:
+            queryset = queryset.filter(country_id=country_id)
+        if active is not None:
+            queryset = queryset.filter(active=active.lower() in {"1", "true", "yes"})
+        return queryset.order_by("company_id", "sequence", "name")
 
 
 class TaxViewSet(BaseModelViewSet):

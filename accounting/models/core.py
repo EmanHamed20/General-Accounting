@@ -6,6 +6,38 @@ from .base import AccountingBaseModel
 class Company(AccountingBaseModel):
     name = models.CharField(max_length=255, unique=True)
     code = models.CharField(max_length=32, unique=True)
+    legal_name = models.CharField(max_length=255, blank=True)
+    email = models.EmailField(blank=True)
+    phone = models.CharField(max_length=64, blank=True)
+    mobile = models.CharField(max_length=64, blank=True)
+    website = models.CharField(max_length=255, blank=True)
+    street = models.CharField(max_length=255, blank=True)
+    street2 = models.CharField(max_length=255, blank=True)
+    city = models.CharField(max_length=128, blank=True)
+    zip = models.CharField(max_length=24, blank=True)
+    country = models.ForeignKey(
+        "accounting.Country",
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="companies",
+    )
+    state = models.ForeignKey(
+        "accounting.CountryState",
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="companies",
+    )
+    vat = models.CharField(max_length=64, blank=True)
+    document_layout = models.CharField(max_length=32, default="standard")
+    report_header = models.TextField(blank=True)
+    report_footer = models.TextField(blank=True)
+    company_details = models.TextField(blank=True)
+    logo_url = models.CharField(max_length=500, blank=True)
+    logo_web_url = models.CharField(max_length=500, blank=True)
+    email_header_color = models.CharField(max_length=7, default="#000000")
+    email_button_color = models.CharField(max_length=7, default="#875A7B")
     lock_date = models.DateField(null=True, blank=True)
 
     class Meta:
