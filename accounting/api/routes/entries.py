@@ -11,6 +11,7 @@ from accounting.api.viewsets import (
 router = DefaultRouter()
 router.register("moves", MoveViewSet, basename="move")
 router.register("move-lines", MoveLineViewSet, basename="move-line")
+router.register("journal-items", MoveLineViewSet, basename="journal-item")
 router.register("journal-entries", JournalEntryViewSet, basename="journal-entry")
 router.register("journal-entry-lines", JournalEntryLineViewSet, basename="journal-entry-line")
 

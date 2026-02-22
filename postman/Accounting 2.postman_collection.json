@@ -74,7 +74,7 @@
                          "value":  "code"
                      },
                      {
-                         "key":  "move_line_id",
+                         "key":  "journal_item_id",
                          "value":  "1"
                      },
                      {
@@ -199,6 +199,22 @@
                      },
                      {
                          "key":  "journal_entry_line_id",
+                         "value":  "1"
+                     },
+                     {
+                         "key":  "analytic_account_id",
+                         "value":  "1"
+                     },
+                     {
+                         "key":  "analytic_item_id",
+                         "value":  "1"
+                     },
+                     {
+                         "key":  "transfer_model_id",
+                         "value":  "1"
+                     },
+                     {
+                         "key":  "transfer_model_line_id",
                          "value":  "1"
                      }
                  ],
@@ -1150,24 +1166,24 @@
                               ]
                  },
                  {
-                     "name":  "Move Lines",
+                     "name":  "Journal Items",
                      "item":  [
                                   {
-                                      "name":  "List Move Lines",
+                                      "name":  "List Journal Items",
                                       "request":  {
                                                       "method":  "GET",
-                                                      "url":  "{{base_url}}/api/move-lines/?page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                      "url":  "{{base_url}}/api/journal-items/?page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
                                                   }
                                   },
                                   {
-                                      "name":  "Filter Move Lines",
+                                      "name":  "Filter Journal Items",
                                       "request":  {
                                                       "method":  "GET",
-                                                      "url":  "{{base_url}}/api/move-lines/?move_id={{move_id}}\u0026company_id={{company_id}}\u0026account_id={{account_id}}"
+                                                      "url":  "{{base_url}}/api/journal-items/?move_id={{move_id}}\u0026company_id={{company_id}}\u0026account_id={{account_id}}"
                                                   }
                                   },
                                   {
-                                      "name":  "Create Move Line (Debit)",
+                                      "name":  "Create Journal Item (Debit)",
                                       "request":  {
                                                       "method":  "POST",
                                                       "header":  [
@@ -1178,13 +1194,13 @@
                                                                  ],
                                                       "body":  {
                                                                    "mode":  "raw",
-                                                                   "raw":  "{\n  \"move\": {{move_id}},\n  \"account\": {{account_id}},\n  \"partner\": {{partner_id}},\n  \"currency\": {{currency_id}},\n  \"tax\": null,\n  \"tax_repartition_line\": null,\n  \"name\": \"Debit line\",\n  \"date\": \"2026-02-15\",\n  \"debit\": \"100.00\",\n  \"credit\": \"0.00\",\n  \"amount_currency\": \"100.00\"\n}"
+                                                                   "raw":  "{\n  \"move\": {{move_id}},\n  \"account\": {{account_id}},\n  \"partner\": {{partner_id}},\n  \"currency\": {{currency_id}},\n  \"analytic_account\": {{analytic_account_id}},\n  \"analytic_distribution\": {\"{{analytic_account_id}}\": 100.0},\n  \"tax\": null,\n  \"tax_repartition_line\": null,\n  \"name\": \"Debit line\",\n  \"date\": \"2026-02-15\",\n  \"debit\": \"100.00\",\n  \"credit\": \"0.00\",\n  \"amount_currency\": \"100.00\"\n}"
                                                                },
-                                                      "url":  "{{base_url}}/api/move-lines/"
+                                                      "url":  "{{base_url}}/api/journal-items/"
                                                   }
                                   },
                                   {
-                                      "name":  "Create Move Line (Credit)",
+                                      "name":  "Create Journal Item (Credit)",
                                       "request":  {
                                                       "method":  "POST",
                                                       "header":  [
@@ -1195,20 +1211,20 @@
                                                                  ],
                                                       "body":  {
                                                                    "mode":  "raw",
-                                                                   "raw":  "{\n  \"move\": {{move_id}},\n  \"account\": {{account_id}},\n  \"partner\": {{partner_id}},\n  \"currency\": {{currency_id}},\n  \"tax\": null,\n  \"tax_repartition_line\": null,\n  \"name\": \"Credit line\",\n  \"date\": \"2026-02-15\",\n  \"debit\": \"0.00\",\n  \"credit\": \"100.00\",\n  \"amount_currency\": \"-100.00\"\n}"
+                                                                   "raw":  "{\n  \"move\": {{move_id}},\n  \"account\": {{account_id}},\n  \"partner\": {{partner_id}},\n  \"currency\": {{currency_id}},\n  \"analytic_account\": {{analytic_account_id}},\n  \"analytic_distribution\": {\"{{analytic_account_id}}\": 100.0},\n  \"tax\": null,\n  \"tax_repartition_line\": null,\n  \"name\": \"Credit line\",\n  \"date\": \"2026-02-15\",\n  \"debit\": \"0.00\",\n  \"credit\": \"100.00\",\n  \"amount_currency\": \"-100.00\"\n}"
                                                                },
-                                                      "url":  "{{base_url}}/api/move-lines/"
+                                                      "url":  "{{base_url}}/api/journal-items/"
                                                   }
                                   },
                                   {
-                                      "name":  "Get Move Line",
+                                      "name":  "Get Journal Item",
                                       "request":  {
                                                       "method":  "GET",
-                                                      "url":  "{{base_url}}/api/move-lines/{{move_line_id}}/"
+                                                      "url":  "{{base_url}}/api/journal-items/{{journal_item_id}}/"
                                                   }
                                   },
                                   {
-                                      "name":  "Update Move Line",
+                                      "name":  "Update Journal Item",
                                       "request":  {
                                                       "method":  "PUT",
                                                       "header":  [
@@ -1219,16 +1235,16 @@
                                                                  ],
                                                       "body":  {
                                                                    "mode":  "raw",
-                                                                   "raw":  "{\n  \"move\": {{move_id}},\n  \"account\": {{account_id}},\n  \"partner\": {{partner_id}},\n  \"currency\": {{currency_id}},\n  \"tax\": null,\n  \"tax_repartition_line\": null,\n  \"name\": \"Updated line\",\n  \"date\": \"2026-02-15\",\n  \"debit\": \"120.00\",\n  \"credit\": \"0.00\",\n  \"amount_currency\": \"120.00\"\n}"
+                                                                   "raw":  "{\n  \"move\": {{move_id}},\n  \"account\": {{account_id}},\n  \"partner\": {{partner_id}},\n  \"currency\": {{currency_id}},\n  \"analytic_account\": {{analytic_account_id}},\n  \"analytic_distribution\": {\"{{analytic_account_id}}\": 100.0},\n  \"tax\": null,\n  \"tax_repartition_line\": null,\n  \"name\": \"Updated line\",\n  \"date\": \"2026-02-15\",\n  \"debit\": \"120.00\",\n  \"credit\": \"0.00\",\n  \"amount_currency\": \"120.00\"\n}"
                                                                },
-                                                      "url":  "{{base_url}}/api/move-lines/{{move_line_id}}/"
+                                                      "url":  "{{base_url}}/api/journal-items/{{journal_item_id}}/"
                                                   }
                                   },
                                   {
-                                      "name":  "Delete Move Line",
+                                      "name":  "Delete Journal Item",
                                       "request":  {
                                                       "method":  "DELETE",
-                                                      "url":  "{{base_url}}/api/move-lines/{{move_line_id}}/"
+                                                      "url":  "{{base_url}}/api/journal-items/{{journal_item_id}}/"
                                                   }
                                   }
                               ]
@@ -2723,7 +2739,7 @@
                                                                  ],
                                                       "body":  {
                                                                    "mode":  "raw",
-                                                                   "raw":  "{\n  \"company\": {{company_id}},\n  \"journal\": {{journal_id}},\n  \"partner\": {{partner_id}},\n  \"currency\": {{currency_id}},\n  \"payment_term\": {{payment_term_id}},\n  \"reference\": \"JE-POSTMAN-001\",\n  \"name\": \"\",\n  \"invoice_date\": null,\n  \"date\": \"2026-02-21\"\n}"
+                                                                   "raw":  "{\n  \"company\": {{company_id}},\n  \"journal\": {{journal_id}},\n  \"partner\": {{partner_id}},\n  \"currency\": {{currency_id}},\n  \"payment_term\": {{payment_term_id}},\n  \"transfer_model\": null,\n  \"reference\": \"JE-POSTMAN-001\",\n  \"name\": \"\",\n  \"invoice_date\": null,\n  \"date\": \"2026-02-21\"\n}"
                                                                },
                                                       "url":  "{{base_url}}/api/journal-entries/"
                                                   }
@@ -2747,7 +2763,7 @@
                                                                  ],
                                                       "body":  {
                                                                    "mode":  "raw",
-                                                                   "raw":  "{\n  \"company\": {{company_id}},\n  \"journal\": {{journal_id}},\n  \"partner\": {{partner_id}},\n  \"currency\": {{currency_id}},\n  \"payment_term\": {{payment_term_id}},\n  \"reference\": \"JE-POSTMAN-001-UPD\",\n  \"name\": \"\",\n  \"invoice_date\": null,\n  \"date\": \"2026-02-21\"\n}"
+                                                                   "raw":  "{\n  \"company\": {{company_id}},\n  \"journal\": {{journal_id}},\n  \"partner\": {{partner_id}},\n  \"currency\": {{currency_id}},\n  \"payment_term\": {{payment_term_id}},\n  \"transfer_model\": null,\n  \"reference\": \"JE-POSTMAN-001-UPD\",\n  \"name\": \"\",\n  \"invoice_date\": null,\n  \"date\": \"2026-02-21\"\n}"
                                                                },
                                                       "url":  "{{base_url}}/api/journal-entries/{{journal_entry_id}}/"
                                                   }
@@ -2858,7 +2874,7 @@
                                                                  ],
                                                       "body":  {
                                                                    "mode":  "raw",
-                                                                   "raw":  "{\n  \"move\": {{journal_entry_id}},\n  \"account\": {{account_id}},\n  \"partner\": {{partner_id}},\n  \"currency\": {{currency_id}},\n  \"tax\": null,\n  \"tax_repartition_line\": null,\n  \"name\": \"Journal debit line\",\n  \"date\": \"2026-02-21\",\n  \"debit\": \"150.00\",\n  \"credit\": \"0.00\",\n  \"amount_currency\": \"150.00\"\n}"
+                                                                   "raw":  "{\n  \"move\": {{journal_entry_id}},\n  \"account\": {{account_id}},\n  \"partner\": {{partner_id}},\n  \"currency\": {{currency_id}},\n  \"analytic_account\": {{analytic_account_id}},\n  \"analytic_distribution\": {\"{{analytic_account_id}}\": 100.0},\n  \"tax\": null,\n  \"tax_repartition_line\": null,\n  \"name\": \"Journal debit line\",\n  \"date\": \"2026-02-21\",\n  \"debit\": \"150.00\",\n  \"credit\": \"0.00\",\n  \"amount_currency\": \"150.00\"\n}"
                                                                },
                                                       "url":  "{{base_url}}/api/journal-entry-lines/"
                                                   }
@@ -2875,7 +2891,7 @@
                                                                  ],
                                                       "body":  {
                                                                    "mode":  "raw",
-                                                                   "raw":  "{\n  \"move\": {{journal_entry_id}},\n  \"account\": {{account_id}},\n  \"partner\": {{partner_id}},\n  \"currency\": {{currency_id}},\n  \"tax\": null,\n  \"tax_repartition_line\": null,\n  \"name\": \"Journal credit line\",\n  \"date\": \"2026-02-21\",\n  \"debit\": \"0.00\",\n  \"credit\": \"150.00\",\n  \"amount_currency\": \"-150.00\"\n}"
+                                                                   "raw":  "{\n  \"move\": {{journal_entry_id}},\n  \"account\": {{account_id}},\n  \"partner\": {{partner_id}},\n  \"currency\": {{currency_id}},\n  \"analytic_account\": {{analytic_account_id}},\n  \"analytic_distribution\": {\"{{analytic_account_id}}\": 100.0},\n  \"tax\": null,\n  \"tax_repartition_line\": null,\n  \"name\": \"Journal credit line\",\n  \"date\": \"2026-02-21\",\n  \"debit\": \"0.00\",\n  \"credit\": \"150.00\",\n  \"amount_currency\": \"-150.00\"\n}"
                                                                },
                                                       "url":  "{{base_url}}/api/journal-entry-lines/"
                                                   }
@@ -2899,7 +2915,7 @@
                                                                  ],
                                                       "body":  {
                                                                    "mode":  "raw",
-                                                                   "raw":  "{\n  \"move\": {{journal_entry_id}},\n  \"account\": {{account_id}},\n  \"partner\": {{partner_id}},\n  \"currency\": {{currency_id}},\n  \"tax\": null,\n  \"tax_repartition_line\": null,\n  \"name\": \"Journal line updated\",\n  \"date\": \"2026-02-21\",\n  \"debit\": \"175.00\",\n  \"credit\": \"0.00\",\n  \"amount_currency\": \"175.00\"\n}"
+                                                                   "raw":  "{\n  \"move\": {{journal_entry_id}},\n  \"account\": {{account_id}},\n  \"partner\": {{partner_id}},\n  \"currency\": {{currency_id}},\n  \"analytic_account\": {{analytic_account_id}},\n  \"analytic_distribution\": {\"{{analytic_account_id}}\": 100.0},\n  \"tax\": null,\n  \"tax_repartition_line\": null,\n  \"name\": \"Journal line updated\",\n  \"date\": \"2026-02-21\",\n  \"debit\": \"175.00\",\n  \"credit\": \"0.00\",\n  \"amount_currency\": \"175.00\"\n}"
                                                                },
                                                       "url":  "{{base_url}}/api/journal-entry-lines/{{journal_entry_line_id}}/"
                                                   }
@@ -2909,6 +2925,292 @@
                                       "request":  {
                                                       "method":  "DELETE",
                                                       "url":  "{{base_url}}/api/journal-entry-lines/{{journal_entry_line_id}}/"
+                                                  }
+                                  }
+                              ]
+                 },
+                 {
+                     "name":  "Analytic Items",
+                     "item":  [
+                                  {
+                                      "name":  "List Analytic Items",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  "{{base_url}}/api/analytic-items/?company_id={{company_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Filter Analytic Items",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  "{{base_url}}/api/analytic-items/?company_id={{company_id}}\u0026analytic_account_id={{analytic_account_id}}\u0026partner_id={{partner_id}}\u0026date_from=2026-01-01\u0026date_to=2026-12-31"
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Create Analytic Item",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"company\": {{company_id}},\n  \"name\": \"Analytic item from Postman\",\n  \"date\": \"2026-02-22\",\n  \"amount\": \"250.000000\",\n  \"unit_amount\": \"2.000000\",\n  \"uom_name\": \"Units\",\n  \"ref\": \"ANL-001\",\n  \"partner\": {{partner_id}},\n  \"product\": {{product_id}},\n  \"journal\": {{journal_id}},\n  \"move_line\": {{journal_item_id}},\n  \"general_account\": {{account_id}},\n  \"analytic_account\": {{analytic_account_id}},\n  \"analytic_distribution\": {\"{{analytic_account_id}}\": 100.0},\n  \"project\": \"Implementation\",\n  \"task\": \"API\"\n}"
+                                                               },
+                                                      "url":  "{{base_url}}/api/analytic-items/"
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Get Analytic Item",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  "{{base_url}}/api/analytic-items/{{analytic_item_id}}/"
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Update Analytic Item",
+                                      "request":  {
+                                                      "method":  "PUT",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"company\": {{company_id}},\n  \"name\": \"Analytic item updated\",\n  \"date\": \"2026-02-22\",\n  \"amount\": \"300.000000\",\n  \"unit_amount\": \"3.000000\",\n  \"uom_name\": \"Units\",\n  \"ref\": \"ANL-001-UPD\",\n  \"partner\": {{partner_id}},\n  \"product\": {{product_id}},\n  \"journal\": {{journal_id}},\n  \"move_line\": {{journal_item_id}},\n  \"general_account\": {{account_id}},\n  \"analytic_account\": {{analytic_account_id}},\n  \"analytic_distribution\": {\"{{analytic_account_id}}\": 100.0},\n  \"project\": \"Implementation\",\n  \"task\": \"API-Updated\"\n}"
+                                                               },
+                                                      "url":  "{{base_url}}/api/analytic-items/{{analytic_item_id}}/"
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Delete Analytic Item",
+                                      "request":  {
+                                                      "method":  "DELETE",
+                                                      "url":  "{{base_url}}/api/analytic-items/{{analytic_item_id}}/"
+                                                  }
+                                  }
+                              ]
+                 },
+                 {
+                     "name":  "Transfer Models",
+                     "item":  [
+                                  {
+                                      "name":  "List Transfer Models",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  "{{base_url}}/api/transfer-models/?company_id={{company_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Filter Transfer Models",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  "{{base_url}}/api/transfer-models/?company_id={{company_id}}\u0026state=disabled\u0026journal_id={{journal_id}}"
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Create Transfer Model",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"name\": \"AUTO-TR-001\",\n  \"active\": true,\n  \"journal\": {{journal_id}},\n  \"company\": {{company_id}},\n  \"date_start\": \"2026-01-01\",\n  \"date_stop\": null,\n  \"frequency\": \"month\",\n  \"accounts\": [{{account_id}}],\n  \"state\": \"disabled\"\n}"
+                                                               },
+                                                      "url":  "{{base_url}}/api/transfer-models/"
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Get Transfer Model",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  "{{base_url}}/api/transfer-models/{{transfer_model_id}}/"
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Update Transfer Model",
+                                      "request":  {
+                                                      "method":  "PUT",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"name\": \"AUTO-TR-001-UPD\",\n  \"active\": true,\n  \"journal\": {{journal_id}},\n  \"company\": {{company_id}},\n  \"date_start\": \"2026-01-01\",\n  \"date_stop\": null,\n  \"frequency\": \"month\",\n  \"accounts\": [{{account_id}}],\n  \"state\": \"disabled\"\n}"
+                                                               },
+                                                      "url":  "{{base_url}}/api/transfer-models/{{transfer_model_id}}/"
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Activate Transfer Model",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{}"
+                                                               },
+                                                      "url":  "{{base_url}}/api/transfer-models/{{transfer_model_id}}/activate/"
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Disable Transfer Model",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{}"
+                                                               },
+                                                      "url":  "{{base_url}}/api/transfer-models/{{transfer_model_id}}/disable/"
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Archive Transfer Model",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{}"
+                                                               },
+                                                      "url":  "{{base_url}}/api/transfer-models/{{transfer_model_id}}/archive/"
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Perform Auto Transfer",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{}"
+                                                               },
+                                                      "url":  "{{base_url}}/api/transfer-models/{{transfer_model_id}}/perform-auto-transfer/"
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Cron Auto Transfer",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{}"
+                                                               },
+                                                      "url":  "{{base_url}}/api/transfer-models/cron-auto-transfer/"
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Delete Transfer Model",
+                                      "request":  {
+                                                      "method":  "DELETE",
+                                                      "url":  "{{base_url}}/api/transfer-models/{{transfer_model_id}}/"
+                                                  }
+                                  }
+                              ]
+                 },
+                 {
+                     "name":  "Transfer Model Lines",
+                     "item":  [
+                                  {
+                                      "name":  "List Transfer Model Lines",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  "{{base_url}}/api/transfer-model-lines/?transfer_model_id={{transfer_model_id}}\u0026company_id={{company_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Filter Transfer Model Lines",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  "{{base_url}}/api/transfer-model-lines/?transfer_model_id={{transfer_model_id}}\u0026company_id={{company_id}}"
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Create Transfer Model Line",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"transfer_model\": {{transfer_model_id}},\n  \"account\": {{account_id}},\n  \"percent\": \"100.0\",\n  \"analytic_accounts\": [],\n  \"partners\": [],\n  \"sequence\": 10\n}"
+                                                               },
+                                                      "url":  "{{base_url}}/api/transfer-model-lines/"
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Get Transfer Model Line",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  "{{base_url}}/api/transfer-model-lines/{{transfer_model_line_id}}/"
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Update Transfer Model Line",
+                                      "request":  {
+                                                      "method":  "PUT",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"transfer_model\": {{transfer_model_id}},\n  \"account\": {{account_id}},\n  \"percent\": \"50.0\",\n  \"analytic_accounts\": [],\n  \"partners\": [],\n  \"sequence\": 10\n}"
+                                                               },
+                                                      "url":  "{{base_url}}/api/transfer-model-lines/{{transfer_model_line_id}}/"
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Delete Transfer Model Line",
+                                      "request":  {
+                                                      "method":  "DELETE",
+                                                      "url":  "{{base_url}}/api/transfer-model-lines/{{transfer_model_line_id}}/"
                                                   }
                                   }
                               ]

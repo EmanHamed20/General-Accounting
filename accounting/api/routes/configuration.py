@@ -32,6 +32,8 @@ from accounting.api.viewsets import (
     TaxGroupViewSet,
     TaxRepartitionLineViewSet,
     TaxViewSet,
+    TransferModelLineViewSet,
+    TransferModelViewSet,
 )
 
 router = DefaultRouter()
@@ -50,6 +52,8 @@ router.register("taxes", TaxViewSet, basename="tax")
 router.register("tax-repartition-lines", TaxRepartitionLineViewSet, basename="tax-repartition-line")
 router.register("payment-methods", PaymentMethodViewSet, basename="payment-method")
 router.register("payment-method-lines", PaymentMethodLineViewSet, basename="payment-method-line")
+router.register("transfer-models", TransferModelViewSet, basename="transfer-model")
+router.register("transfer-model-lines", TransferModelLineViewSet, basename="transfer-model-line")
 router.register("followup-levels", FollowupLevelViewSet, basename="followup-level")
 router.register("bank-accounts", BankAccountViewSet, basename="bank-account")
 router.register("reconciliation-models", ReconciliationModelViewSet, basename="reconciliation-model")

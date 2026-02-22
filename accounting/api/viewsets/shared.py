@@ -10,6 +10,7 @@ from rest_framework.response import Response
 from accounting.models import (
     Move,
     MoveLine,
+    AnalyticLine,
     AnalyticAccount,
     AnalyticDistributionModel,
     AnalyticDistributionModelLine,
@@ -57,6 +58,8 @@ from accounting.models import (
     DisallowedExpenseCategory,
     PaymentProvider,
     PaymentProviderMethod,
+    TransferModel,
+    TransferModelLine,
 )
 from accounting.services.asset_service import (
     cancel_asset,
@@ -104,6 +107,7 @@ from ..serializers import (
     PaymentTermLineSerializer,
     PaymentTermSerializer,
     AnalyticAccountSerializer,
+    AnalyticLineSerializer,
     AnalyticDistributionModelLineSerializer,
     AnalyticDistributionModelSerializer,
     AnalyticPlanSerializer,
@@ -134,6 +138,8 @@ from ..serializers import (
     InvoiceSerializer,
     ProductCategorySerializer,
     ProductSerializer,
+    TransferModelSerializer,
+    TransferModelLineSerializer,
 )
 
 

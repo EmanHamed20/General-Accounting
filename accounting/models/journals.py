@@ -1,6 +1,7 @@
 from decimal import Decimal
 
 from django.db import models
+from django.apps import apps
 
 from .base import AccountingBaseModel
 
@@ -38,6 +39,14 @@ class Journal(AccountingBaseModel):
 
     def __str__(self) -> str:
         return f"{self.code} - {self.name}"
+
+    def _unlink_cascade_transfer_model(self) -> None:
+        TransferModel = apps.get_model("accounting", "TransferModel")
+        TransferModel.objects.filter(journal_id=self.id).delete()
+
+    def delete(self, using=None, keep_parents=False):
+        self._unlink_cascade_transfer_model()
+        return super().delete(using=using, keep_parents=keep_parents)
 
 
 class PaymentTerm(AccountingBaseModel):

@@ -298,3 +298,82 @@ class PaymentMethodLineViewSet(BaseModelViewSet):
         if active is not None:
             queryset = queryset.filter(active=active.lower() in {"1", "true", "yes"})
         return queryset
+
+
+class TransferModelViewSet(BaseModelViewSet):
+    queryset = (
+        TransferModel.objects.select_related("company", "journal")
+        .prefetch_related("accounts")
+        .all()
+        .order_by("-id")
+    )
+    serializer_class = TransferModelSerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        company_id = self.request.query_params.get("company_id")
+        journal_id = self.request.query_params.get("journal_id")
+        state = self.request.query_params.get("state")
+        active = self.request.query_params.get("active")
+        if company_id:
+            queryset = queryset.filter(company_id=company_id)
+        if journal_id:
+            queryset = queryset.filter(journal_id=journal_id)
+        if state:
+            queryset = queryset.filter(state=state)
+        if active is not None:
+            queryset = queryset.filter(active=active.lower() in {"1", "true", "yes"})
+        return queryset
+
+    @action(detail=True, methods=["post"], url_path="activate")
+    def activate(self, request, pk=None):
+        instance = self.get_object()
+        instance.action_activate()
+        return Response(self.get_serializer(instance).data, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=["post"], url_path="disable")
+    def disable(self, request, pk=None):
+        instance = self.get_object()
+        instance.action_disable()
+        return Response(self.get_serializer(instance).data, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=["post"], url_path="archive")
+    def archive(self, request, pk=None):
+        instance = self.get_object()
+        instance.action_archive()
+        return Response(self.get_serializer(instance).data, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=["post"], url_path="perform-auto-transfer")
+    def perform_auto_transfer(self, request, pk=None):
+        instance = self.get_object()
+        try:
+            instance.action_perform_auto_transfer()
+        except DjangoValidationError as exc:
+            payload = exc.message_dict if hasattr(exc, "message_dict") else {"detail": exc.messages}
+            return Response(payload, status=status.HTTP_400_BAD_REQUEST)
+        return Response(self.get_serializer(instance).data, status=status.HTTP_200_OK)
+
+    @action(detail=False, methods=["post"], url_path="cron-auto-transfer")
+    def cron_auto_transfer(self, request):
+        TransferModel.action_cron_auto_transfer()
+        return Response({"detail": "Auto transfer cron executed."}, status=status.HTTP_200_OK)
+
+
+class TransferModelLineViewSet(BaseModelViewSet):
+    queryset = (
+        TransferModelLine.objects.select_related("transfer_model", "account")
+        .prefetch_related("analytic_accounts", "partners")
+        .all()
+        .order_by("transfer_model_id", "sequence", "id")
+    )
+    serializer_class = TransferModelLineSerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        transfer_model_id = self.request.query_params.get("transfer_model_id")
+        company_id = self.request.query_params.get("company_id")
+        if transfer_model_id:
+            queryset = queryset.filter(transfer_model_id=transfer_model_id)
+        if company_id:
+            queryset = queryset.filter(transfer_model__company_id=company_id)
+        return queryset
