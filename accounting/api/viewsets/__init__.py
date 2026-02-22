@@ -27,10 +27,13 @@ from .configuration import (
     TaxGroupViewSet,
     TaxRepartitionLineViewSet,
     TaxViewSet,
+    TransferModelLineViewSet,
+    TransferModelViewSet,
 )
 from .assets import AssetDepreciationLineViewSet, AssetViewSet
 from .analytics import (
     AnalyticAccountViewSet,
+    AnalyticItemViewSet,
     AnalyticDistributionModelLineViewSet,
     AnalyticDistributionModelViewSet,
     AnalyticPlanViewSet,
@@ -93,7 +96,10 @@ __all__ = [
     "TaxRepartitionLineViewSet",
     "PaymentMethodViewSet",
     "PaymentMethodLineViewSet",
+    "TransferModelViewSet",
+    "TransferModelLineViewSet",
     "AnalyticPlanViewSet",
+    "AnalyticItemViewSet",
     "AnalyticAccountViewSet",
     "AnalyticDistributionModelViewSet",
     "AnalyticDistributionModelLineViewSet",
