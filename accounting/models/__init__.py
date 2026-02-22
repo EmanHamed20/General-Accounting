@@ -1,5 +1,6 @@
 from .base import AccountingBaseModel
 from .analytics import (
+    AnalyticLine,
     AnalyticAccount,
     AnalyticDistributionModel,
     AnalyticDistributionModelLine,
@@ -41,10 +42,12 @@ from .invoicing import InvoiceLine
 from .payments import FullReconcile, PartialReconcile, Payment, PaymentMethod, PaymentMethodLine
 from .products import Product, ProductCategory
 from .settings import AccountingSettings
+from .transfer_model import TransferModel, TransferModelLine
 
 __all__ = [
     "AccountingBaseModel",
     "AnalyticPlan",
+    "AnalyticLine",
     "AnalyticAccount",
     "AnalyticDistributionModel",
     "AnalyticDistributionModelLine",
@@ -95,4 +98,6 @@ __all__ = [
     "ProductCategory",
     "Product",
     "AccountingSettings",
+    "TransferModel",
+    "TransferModelLine",
 ]

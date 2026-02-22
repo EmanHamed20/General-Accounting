@@ -49,6 +49,13 @@ class Move(AccountingBaseModel):
     )
     is_debit_note = models.BooleanField(default=False)
     posted_at = models.DateTimeField(null=True, blank=True)
+    transfer_model = models.ForeignKey(
+        "accounting.TransferModel",
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="moves",
+    )
 
     class Meta:
         db_table = "ga_move"
@@ -83,6 +90,14 @@ class MoveLine(AccountingBaseModel):
     account = models.ForeignKey("accounting.Account", on_delete=models.PROTECT, related_name="move_lines")
     partner = models.ForeignKey("accounting.Partner", on_delete=models.PROTECT, null=True, blank=True, related_name="move_lines")
     currency = models.ForeignKey("accounting.Currency", on_delete=models.PROTECT, null=True, blank=True, related_name="move_lines")
+    analytic_account = models.ForeignKey(
+        "accounting.AnalyticAccount",
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="move_lines",
+    )
+    analytic_distribution = models.JSONField(default=dict, blank=True)
     tax = models.ForeignKey("accounting.Tax", on_delete=models.PROTECT, null=True, blank=True, related_name="move_lines")
     tax_repartition_line = models.ForeignKey(
         "accounting.TaxRepartitionLine",
@@ -111,3 +126,12 @@ class MoveLine(AccountingBaseModel):
             raise ValidationError("Line cannot have both debit and credit.")
         if self.move_id and self.account_id and self.move.company_id != self.account.company_id:
             raise ValidationError("Move line account company must match move company.")
+        if self.move_id and self.analytic_account_id and self.move.company_id != self.analytic_account.company_id:
+            raise ValidationError("Move line analytic account company must match move company.")
+        if self.analytic_distribution and not isinstance(self.analytic_distribution, dict):
+            raise ValidationError("Analytic distribution must be an object of analytic account percentages.")
+        self._check_auto_transfer_line_ids_tax()
+
+    def _check_auto_transfer_line_ids_tax(self) -> None:
+        if self.move_id and self.move.transfer_model_id and self.tax_id:
+            raise ValidationError("Auto transfer journal items cannot have taxes.")

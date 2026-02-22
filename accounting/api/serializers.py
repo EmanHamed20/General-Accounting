@@ -7,6 +7,7 @@ from accounting.models import (
     AccountRoot,
     AccountTemplate,
     AnalyticAccount,
+    AnalyticLine,
     AnalyticDistributionModel,
     AnalyticDistributionModelLine,
     AnalyticPlan,
@@ -50,6 +51,8 @@ from accounting.models import (
     DisallowedExpenseCategory,
     PaymentProvider,
     PaymentProviderMethod,
+    TransferModel,
+    TransferModelLine,
 )
 
 
@@ -300,6 +303,7 @@ class MoveSerializer(serializers.ModelSerializer):
             "reversed_entry",
             "debit_origin",
             "is_debit_note",
+            "transfer_model",
             "posted_at",
             "balance",
             "created_at",
@@ -312,6 +316,11 @@ class MoveSerializer(serializers.ModelSerializer):
         journal = attrs.get("journal") if "journal" in attrs else getattr(self.instance, "journal", None)
         partner = attrs.get("partner") if "partner" in attrs else getattr(self.instance, "partner", None)
         payment_term = attrs.get("payment_term") if "payment_term" in attrs else getattr(self.instance, "payment_term", None)
+        transfer_model = (
+            attrs.get("transfer_model")
+            if "transfer_model" in attrs
+            else getattr(self.instance, "transfer_model", None)
+        )
 
         if company and journal and journal.company_id != company.id:
             raise serializers.ValidationError({"journal": "Journal company must match move company."})
@@ -319,6 +328,8 @@ class MoveSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({"partner": "Partner company must match move company."})
         if company and payment_term and payment_term.company_id != company.id:
             raise serializers.ValidationError({"payment_term": "Payment term company must match move company."})
+        if company and transfer_model and transfer_model.company_id != company.id:
+            raise serializers.ValidationError({"transfer_model": "Transfer model company must match move company."})
         return attrs
 
 
@@ -331,6 +342,8 @@ class MoveLineSerializer(serializers.ModelSerializer):
             "account",
             "partner",
             "currency",
+            "analytic_account",
+            "analytic_distribution",
             "tax",
             "tax_repartition_line",
             "name",
@@ -347,6 +360,11 @@ class MoveLineSerializer(serializers.ModelSerializer):
         move = attrs.get("move") or getattr(self.instance, "move", None)
         account = attrs.get("account") if "account" in attrs else getattr(self.instance, "account", None)
         partner = attrs.get("partner") if "partner" in attrs else getattr(self.instance, "partner", None)
+        analytic_account = (
+            attrs.get("analytic_account")
+            if "analytic_account" in attrs
+            else getattr(self.instance, "analytic_account", None)
+        )
 
         if move and move.state != "draft":
             raise serializers.ValidationError({"move": "Cannot add or modify lines on a posted/cancelled move."})
@@ -354,6 +372,15 @@ class MoveLineSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({"account": "Account company must match move company."})
         if move and partner and move.company_id != partner.company_id:
             raise serializers.ValidationError({"partner": "Partner company must match move company."})
+        if move and analytic_account and move.company_id != analytic_account.company_id:
+            raise serializers.ValidationError({"analytic_account": "Analytic account company must match move company."})
+        analytic_distribution = (
+            attrs.get("analytic_distribution")
+            if "analytic_distribution" in attrs
+            else getattr(self.instance, "analytic_distribution", None)
+        )
+        if analytic_distribution is not None and not isinstance(analytic_distribution, dict):
+            raise serializers.ValidationError({"analytic_distribution": "Analytic distribution must be an object."})
         return attrs
 
 
@@ -379,6 +406,85 @@ class JournalEntryLineSerializer(MoveLineSerializer):
         move = attrs.get("move") or getattr(self.instance, "move", None)
         if move and move.move_type != "entry":
             raise serializers.ValidationError({"move": "Journal entry line requires a move with move_type=entry."})
+        return attrs
+
+
+class TransferModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TransferModel
+        fields = [
+            "id",
+            "name",
+            "active",
+            "journal",
+            "company",
+            "date_start",
+            "date_stop",
+            "frequency",
+            "accounts",
+            "move_ids_count",
+            "total_percent",
+            "state",
+            "created_at",
+            "updated_at",
+        ]
+        read_only_fields = ["id", "move_ids_count", "total_percent", "created_at", "updated_at"]
+
+    def validate(self, attrs):
+        company = attrs.get("company") or getattr(self.instance, "company", None)
+        journal = attrs.get("journal") if "journal" in attrs else getattr(self.instance, "journal", None)
+        accounts = attrs.get("accounts") if "accounts" in attrs else None
+        date_start = attrs.get("date_start") if "date_start" in attrs else getattr(self.instance, "date_start", None)
+        date_stop = attrs.get("date_stop") if "date_stop" in attrs else getattr(self.instance, "date_stop", None)
+
+        if company and journal and journal.company_id != company.id:
+            raise serializers.ValidationError({"journal": "Journal company must match transfer model company."})
+        if company and accounts:
+            for account in accounts:
+                if account.company_id != company.id:
+                    raise serializers.ValidationError({"accounts": "All source accounts must belong to transfer company."})
+        if date_start and date_stop and date_stop < date_start:
+            raise serializers.ValidationError({"date_stop": "Stop date cannot be before start date."})
+        return attrs
+
+
+class TransferModelLineSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TransferModelLine
+        fields = [
+            "id",
+            "transfer_model",
+            "account",
+            "percent",
+            "analytic_accounts",
+            "partners",
+            "percent_is_readonly",
+            "sequence",
+            "created_at",
+            "updated_at",
+        ]
+        read_only_fields = ["id", "percent_is_readonly", "created_at", "updated_at"]
+
+    def validate(self, attrs):
+        transfer_model = attrs.get("transfer_model") or getattr(self.instance, "transfer_model", None)
+        account = attrs.get("account") if "account" in attrs else getattr(self.instance, "account", None)
+        analytic_accounts = (
+            attrs.get("analytic_accounts")
+            if "analytic_accounts" in attrs
+            else getattr(self.instance, "analytic_accounts", None)
+        )
+        partners = attrs.get("partners") if "partners" in attrs else getattr(self.instance, "partners", None)
+
+        if transfer_model and account and transfer_model.company_id != account.company_id:
+            raise serializers.ValidationError({"account": "Destination account company must match transfer model company."})
+        if transfer_model and analytic_accounts:
+            for analytic_account in analytic_accounts:
+                if analytic_account.company_id != transfer_model.company_id:
+                    raise serializers.ValidationError({"analytic_accounts": "Analytic accounts must belong to transfer company."})
+        if transfer_model and partners:
+            for partner in partners:
+                if partner.company_id != transfer_model.company_id:
+                    raise serializers.ValidationError({"partners": "Partners must belong to transfer company."})
         return attrs
 
 
@@ -945,6 +1051,72 @@ class AnalyticPlanSerializer(serializers.ModelSerializer):
             "updated_at",
         ]
         read_only_fields = ["id", "created_at", "updated_at"]
+
+
+class AnalyticLineSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AnalyticLine
+        fields = [
+            "id",
+            "company",
+            "name",
+            "date",
+            "amount",
+            "unit_amount",
+            "uom_name",
+            "ref",
+            "partner",
+            "product",
+            "journal",
+            "move_line",
+            "general_account",
+            "analytic_account",
+            "auto_account",
+            "analytic_distribution",
+            "project",
+            "task",
+            "created_at",
+            "updated_at",
+        ]
+        read_only_fields = ["id", "auto_account", "created_at", "updated_at"]
+
+    def validate(self, attrs):
+        company = attrs.get("company") or getattr(self.instance, "company", None)
+        partner = attrs.get("partner") if "partner" in attrs else getattr(self.instance, "partner", None)
+        product = attrs.get("product") if "product" in attrs else getattr(self.instance, "product", None)
+        journal = attrs.get("journal") if "journal" in attrs else getattr(self.instance, "journal", None)
+        move_line = attrs.get("move_line") if "move_line" in attrs else getattr(self.instance, "move_line", None)
+        general_account = (
+            attrs.get("general_account")
+            if "general_account" in attrs
+            else getattr(self.instance, "general_account", None)
+        )
+        analytic_account = (
+            attrs.get("analytic_account")
+            if "analytic_account" in attrs
+            else getattr(self.instance, "analytic_account", None)
+        )
+        distribution = (
+            attrs.get("analytic_distribution")
+            if "analytic_distribution" in attrs
+            else getattr(self.instance, "analytic_distribution", None)
+        )
+
+        if company and partner and partner.company_id != company.id:
+            raise serializers.ValidationError({"partner": "Partner company must match analytic item company."})
+        if company and product and product.company_id != company.id:
+            raise serializers.ValidationError({"product": "Product company must match analytic item company."})
+        if company and journal and journal.company_id != company.id:
+            raise serializers.ValidationError({"journal": "Journal company must match analytic item company."})
+        if company and move_line and move_line.move.company_id != company.id:
+            raise serializers.ValidationError({"move_line": "Journal item company must match analytic item company."})
+        if company and general_account and general_account.company_id != company.id:
+            raise serializers.ValidationError({"general_account": "Financial account company must match analytic item company."})
+        if company and analytic_account and analytic_account.company_id != company.id:
+            raise serializers.ValidationError({"analytic_account": "Analytic account company must match analytic item company."})
+        if distribution is not None and not isinstance(distribution, dict):
+            raise serializers.ValidationError({"analytic_distribution": "Analytic distribution must be an object."})
+        return attrs
 
 
 class AnalyticAccountSerializer(serializers.ModelSerializer):
