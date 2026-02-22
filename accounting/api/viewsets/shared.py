@@ -4,9 +4,9 @@ from django.db.models.functions import Coalesce
 from rest_framework import filters, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError as DRFValidationError
-from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
+from accounting.api.pagination import StandardListPagination
 from accounting.models import (
     Move,
     MoveLine,
@@ -146,12 +146,6 @@ from ..serializers import (
 def _handle_validation(exc: DjangoValidationError) -> Response:
     payload = exc.message_dict if hasattr(exc, "message_dict") else {"detail": exc.messages}
     return Response(payload, status=status.HTTP_400_BAD_REQUEST)
-
-
-class StandardListPagination(PageNumberPagination):
-    page_size = 20
-    page_size_query_param = "page_size"
-    max_page_size = 200
 
 
 class BaseModelViewSet(viewsets.ModelViewSet):

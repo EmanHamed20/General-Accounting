@@ -229,7 +229,7 @@
                                                        "name":  "List Partners",
                                                        "request":  {
                                                                        "method":  "GET",
-                                                                       "url":  "{{base_url}}/api/partners/?company_id={{company_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                                       "url":  "{{base_url}}/api/partners/?company_id={{company_id}}\u0026ordering={{list_ordering}}"
                                                                    }
                                                    },
                                                    {
@@ -289,7 +289,7 @@
                                                        "name":  "List Account Roots",
                                                        "request":  {
                                                                        "method":  "GET",
-                                                                       "url":  "{{base_url}}/api/account-roots/?company_id={{company_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                                       "url":  "{{base_url}}/api/account-roots/?company_id={{company_id}}\u0026ordering={{list_ordering}}"
                                                                    }
                                                    },
                                                    {
@@ -349,7 +349,7 @@
                                                        "name":  "List Account Groups",
                                                        "request":  {
                                                                        "method":  "GET",
-                                                                       "url":  "{{base_url}}/api/account-groups/?company_id={{company_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                                       "url":  "{{base_url}}/api/account-groups/?company_id={{company_id}}\u0026ordering={{list_ordering}}"
                                                                    }
                                                    },
                                                    {
@@ -409,7 +409,7 @@
                                                        "name":  "List Accounts",
                                                        "request":  {
                                                                        "method":  "GET",
-                                                                       "url":  "{{base_url}}/api/accounts/?company_id={{company_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                                       "url":  "{{base_url}}/api/accounts/?company_id={{company_id}}\u0026ordering={{list_ordering}}"
                                                                    }
                                                    },
                                                    {
@@ -469,7 +469,7 @@
                                                        "name":  "List Journal Groups",
                                                        "request":  {
                                                                        "method":  "GET",
-                                                                       "url":  "{{base_url}}/api/journal-groups/?company_id={{company_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                                       "url":  "{{base_url}}/api/journal-groups/?company_id={{company_id}}\u0026ordering={{list_ordering}}"
                                                                    }
                                                    },
                                                    {
@@ -529,7 +529,7 @@
                                                        "name":  "List Journals",
                                                        "request":  {
                                                                        "method":  "GET",
-                                                                       "url":  "{{base_url}}/api/journals/?company_id={{company_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                                       "url":  "{{base_url}}/api/journals/?company_id={{company_id}}\u0026ordering={{list_ordering}}"
                                                                    }
                                                    },
                                                    {
@@ -589,7 +589,7 @@
                                                        "name":  "List Payment Terms",
                                                        "request":  {
                                                                        "method":  "GET",
-                                                                       "url":  "{{base_url}}/api/payment-terms/?company_id={{company_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                                       "url":  "{{base_url}}/api/payment-terms/?company_id={{company_id}}\u0026ordering={{list_ordering}}"
                                                                    }
                                                    },
                                                    {
@@ -649,7 +649,7 @@
                                                        "name":  "List Payment Term Lines",
                                                        "request":  {
                                                                        "method":  "GET",
-                                                                       "url":  "{{base_url}}/api/payment-term-lines/?payment_term_id={{payment_term_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                                       "url":  "{{base_url}}/api/payment-term-lines/?payment_term_id={{payment_term_id}}\u0026ordering={{list_ordering}}"
                                                                    }
                                                    },
                                                    {
@@ -709,7 +709,7 @@
                                                        "name":  "List Tax Groups",
                                                        "request":  {
                                                                        "method":  "GET",
-                                                                       "url":  "{{base_url}}/api/tax-groups/?company_id={{company_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                                       "url":  "{{base_url}}/api/tax-groups/?company_id={{company_id}}\u0026ordering={{list_ordering}}"
                                                                    }
                                                    },
                                                    {
@@ -769,7 +769,7 @@
                                                        "name":  "List Taxes",
                                                        "request":  {
                                                                        "method":  "GET",
-                                                                       "url":  "{{base_url}}/api/taxes/?company_id={{company_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                                       "url":  "{{base_url}}/api/taxes/?company_id={{company_id}}\u0026ordering={{list_ordering}}"
                                                                    }
                                                    },
                                                    {
@@ -829,7 +829,7 @@
                                                        "name":  "List Tax Repartition Lines",
                                                        "request":  {
                                                                        "method":  "GET",
-                                                                       "url":  "{{base_url}}/api/tax-repartition-lines/?tax_id={{tax_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                                       "url":  "{{base_url}}/api/tax-repartition-lines/?tax_id={{tax_id}}\u0026ordering={{list_ordering}}"
                                                                    }
                                                    },
                                                    {
@@ -889,7 +889,7 @@
                                                        "name":  "List Payment Methods",
                                                        "request":  {
                                                                        "method":  "GET",
-                                                                       "url":  "{{base_url}}/api/payment-methods/?active=true\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                                       "url":  "{{base_url}}/api/payment-methods/?active=true\u0026ordering={{list_ordering}}"
                                                                    }
                                                    },
                                                    {
@@ -949,7 +949,7 @@
                                                        "name":  "List Payment Method Lines",
                                                        "request":  {
                                                                        "method":  "GET",
-                                                                       "url":  "{{base_url}}/api/payment-method-lines/?journal_id={{journal_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                                       "url":  "{{base_url}}/api/payment-method-lines/?journal_id={{journal_id}}\u0026ordering={{list_ordering}}"
                                                                    }
                                                    },
                                                    {
@@ -1011,7 +1011,7 @@
                                       "name":  "List Companies",
                                       "request":  {
                                                       "method":  "GET",
-                                                      "url":  "{{base_url}}/api/companies/?page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                      "url":  "{{base_url}}/api/companies/?ordering={{list_ordering}}"
                                                   }
                                   },
                                   {
@@ -1088,7 +1088,7 @@
                                       "name":  "List Moves",
                                       "request":  {
                                                       "method":  "GET",
-                                                      "url":  "{{base_url}}/api/moves/?page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                      "url":  "{{base_url}}/api/moves/?ordering={{list_ordering}}"
                                                   }
                                   },
                                   {
@@ -1172,7 +1172,7 @@
                                       "name":  "List Journal Items",
                                       "request":  {
                                                       "method":  "GET",
-                                                      "url":  "{{base_url}}/api/journal-items/?page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                      "url":  "{{base_url}}/api/journal-items/?ordering={{list_ordering}}"
                                                   }
                                   },
                                   {
@@ -1259,7 +1259,7 @@
                                                        "name":  "List Invoices",
                                                        "request":  {
                                                                        "method":  "GET",
-                                                                       "url":  "{{base_url}}/api/invoices/?company_id={{company_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                                       "url":  "{{base_url}}/api/invoices/?company_id={{company_id}}\u0026ordering={{list_ordering}}"
                                                                    }
                                                    },
                                                    {
@@ -1336,7 +1336,7 @@
                                                        "name":  "List Invoice Lines",
                                                        "request":  {
                                                                        "method":  "GET",
-                                                                       "url":  "{{base_url}}/api/invoice-lines/?move_id={{invoice_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                                       "url":  "{{base_url}}/api/invoice-lines/?move_id={{invoice_id}}\u0026ordering={{list_ordering}}"
                                                                    }
                                                    },
                                                    {
@@ -1396,7 +1396,7 @@
                                                        "name":  "List Vendor Bills",
                                                        "request":  {
                                                                        "method":  "GET",
-                                                                       "url":  "{{base_url}}/api/vendor-bills/?company_id={{company_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                                       "url":  "{{base_url}}/api/vendor-bills/?company_id={{company_id}}\u0026ordering={{list_ordering}}"
                                                                    }
                                                    },
                                                    {
@@ -1507,7 +1507,7 @@
                                                        "name":  "List Vendor Refunds",
                                                        "request":  {
                                                                        "method":  "GET",
-                                                                       "url":  "{{base_url}}/api/vendor-refunds/?company_id={{company_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                                       "url":  "{{base_url}}/api/vendor-refunds/?company_id={{company_id}}\u0026ordering={{list_ordering}}"
                                                                    }
                                                    },
                                                    {
@@ -1584,7 +1584,7 @@
                                                        "name":  "List Vendor Debit Notes",
                                                        "request":  {
                                                                        "method":  "GET",
-                                                                       "url":  "{{base_url}}/api/vendor-debit-notes/?company_id={{company_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                                       "url":  "{{base_url}}/api/vendor-debit-notes/?company_id={{company_id}}\u0026ordering={{list_ordering}}"
                                                                    }
                                                    },
                                                    {
@@ -1644,7 +1644,7 @@
                                                        "name":  "List Vendor Payments",
                                                        "request":  {
                                                                        "method":  "GET",
-                                                                       "url":  "{{base_url}}/api/vendor-payments/?company_id={{company_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                                       "url":  "{{base_url}}/api/vendor-payments/?company_id={{company_id}}\u0026ordering={{list_ordering}}"
                                                                    }
                                                    },
                                                    {
@@ -1757,7 +1757,7 @@
                                       "name":  "List Currencies",
                                       "request":  {
                                                       "method":  "GET",
-                                                      "url":  "{{base_url}}/api/currencies/?page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                      "url":  "{{base_url}}/api/currencies/?ordering={{list_ordering}}"
                                                   }
                                   },
                                   {
@@ -1817,7 +1817,7 @@
                                       "name":  "List Countries",
                                       "request":  {
                                                       "method":  "GET",
-                                                      "url":  "{{base_url}}/api/countries/?page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                      "url":  "{{base_url}}/api/countries/?ordering={{list_ordering}}"
                                                   }
                                   },
                                   {
@@ -1877,14 +1877,14 @@
                                       "name":  "List States",
                                       "request":  {
                                                       "method":  "GET",
-                                                      "url":  "{{base_url}}/api/states/?page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                      "url":  "{{base_url}}/api/states/?ordering={{list_ordering}}"
                                                   }
                                   },
                                   {
                                       "name":  "List States By Country",
                                       "request":  {
                                                       "method":  "GET",
-                                                      "url":  "{{base_url}}/api/states/?country_id={{country_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                      "url":  "{{base_url}}/api/states/?country_id={{country_id}}\u0026ordering={{list_ordering}}"
                                                   }
                                   },
                                   {
@@ -1944,14 +1944,14 @@
                                       "name":  "List Cities",
                                       "request":  {
                                                       "method":  "GET",
-                                                      "url":  "{{base_url}}/api/cities/?page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                      "url":  "{{base_url}}/api/cities/?ordering={{list_ordering}}"
                                                   }
                                   },
                                   {
                                       "name":  "List Cities By Country/State",
                                       "request":  {
                                                       "method":  "GET",
-                                                      "url":  "{{base_url}}/api/cities/?country_id={{country_id}}\u0026state_id={{state_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                      "url":  "{{base_url}}/api/cities/?country_id={{country_id}}\u0026state_id={{state_id}}\u0026ordering={{list_ordering}}"
                                                   }
                                   },
                                   {
@@ -2011,7 +2011,7 @@
                                       "name":  "List Country Currencies",
                                       "request":  {
                                                       "method":  "GET",
-                                                      "url":  "{{base_url}}/api/country-currencies/?page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                      "url":  "{{base_url}}/api/country-currencies/?ordering={{list_ordering}}"
                                                   }
                                   },
                                   {
@@ -2078,7 +2078,7 @@
                                       "name":  "List Products",
                                       "request":  {
                                                       "method":  "GET",
-                                                      "url":  "{{base_url}}/api/products/?company_id={{company_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                      "url":  "{{base_url}}/api/products/?company_id={{company_id}}\u0026ordering={{list_ordering}}"
                                                   }
                                   },
                                   {
@@ -2138,7 +2138,7 @@
                                       "name":  "List Vendor Products",
                                       "request":  {
                                                       "method":  "GET",
-                                                      "url":  "{{base_url}}/api/vendor-products/?company_id={{company_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                      "url":  "{{base_url}}/api/vendor-products/?company_id={{company_id}}\u0026ordering={{list_ordering}}"
                                                   }
                                   },
                                   {
@@ -2198,7 +2198,7 @@
                                       "name":  "List Product Categories",
                                       "request":  {
                                                       "method":  "GET",
-                                                      "url":  "{{base_url}}/api/product-categories/?page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                      "url":  "{{base_url}}/api/product-categories/?ordering={{list_ordering}}"
                                                   }
                                   },
                                   {
@@ -2265,7 +2265,7 @@
                                       "name":  "List Account Group Templates",
                                       "request":  {
                                                       "method":  "GET",
-                                                      "url":  "{{base_url}}/api/account-group-templates/?page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                      "url":  "{{base_url}}/api/account-group-templates/?ordering={{list_ordering}}"
                                                   }
                                   },
                                   {
@@ -2332,7 +2332,7 @@
                                       "name":  "List Account Templates",
                                       "request":  {
                                                       "method":  "GET",
-                                                      "url":  "{{base_url}}/api/account-templates/?page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                      "url":  "{{base_url}}/api/account-templates/?ordering={{list_ordering}}"
                                                   }
                                   },
                                   {
@@ -2402,7 +2402,7 @@
                                                        "name":  "List Assets",
                                                        "request":  {
                                                                        "method":  "GET",
-                                                                       "url":  "{{base_url}}/api/assets/?company_id={{company_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{assets_ordering}}"
+                                                                       "url":  "{{base_url}}/api/assets/?company_id={{company_id}}\u0026ordering={{assets_ordering}}"
                                                                    }
                                                    },
                                                    {
@@ -2504,7 +2504,7 @@
                                                        "name":  "List Asset Depreciation Lines",
                                                        "request":  {
                                                                        "method":  "GET",
-                                                                       "url":  "{{base_url}}/api/asset-depreciation-lines/?asset_id={{asset_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{asset_depreciation_lines_ordering}}"
+                                                                       "url":  "{{base_url}}/api/asset-depreciation-lines/?asset_id={{asset_id}}\u0026ordering={{asset_depreciation_lines_ordering}}"
                                                                    }
                                                    },
                                                    {
@@ -2573,7 +2573,7 @@
                                       "name":  "List Income Terms",
                                       "request":  {
                                                       "method":  "GET",
-                                                      "url":  "{{base_url}}/api/incoterms/?active=true\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{income_terms_ordering}}"
+                                                      "url":  "{{base_url}}/api/incoterms/?active=true\u0026ordering={{income_terms_ordering}}"
                                                   }
                                   },
                                   {
@@ -2633,7 +2633,7 @@
                                       "name":  "List Vendors",
                                       "request":  {
                                                       "method":  "GET",
-                                                      "url":  "{{base_url}}/api/vendors/?company_id={{company_id}}\u0026res_partner_search_mode={{vendor_search_mode}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{vendors_ordering}}"
+                                                      "url":  "{{base_url}}/api/vendors/?company_id={{company_id}}\u0026res_partner_search_mode={{vendor_search_mode}}\u0026ordering={{vendors_ordering}}"
                                                   }
                                   },
                                   {
@@ -2705,7 +2705,7 @@
                                       "name":  "List Vendor Bills",
                                       "request":  {
                                                       "method":  "GET",
-                                                      "url":  "{{base_url}}/api/vendors/{{vendor_id}}/vendor-bills/?page={{page}}\u0026page_size={{page_size}}\u0026ordering={{vendor_bills_ordering}}"
+                                                      "url":  "{{base_url}}/api/vendors/{{vendor_id}}/vendor-bills/?ordering={{vendor_bills_ordering}}"
                                                   }
                                   }
                               ]
@@ -2717,7 +2717,7 @@
                                       "name":  "List Journal Entries",
                                       "request":  {
                                                       "method":  "GET",
-                                                      "url":  "{{base_url}}/api/journal-entries/?company_id={{company_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                      "url":  "{{base_url}}/api/journal-entries/?company_id={{company_id}}\u0026ordering={{list_ordering}}"
                                                   }
                                   },
                                   {
@@ -2852,7 +2852,7 @@
                                       "name":  "List Journal Entry Lines",
                                       "request":  {
                                                       "method":  "GET",
-                                                      "url":  "{{base_url}}/api/journal-entry-lines/?move_id={{journal_entry_id}}\u0026company_id={{company_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                      "url":  "{{base_url}}/api/journal-entry-lines/?move_id={{journal_entry_id}}\u0026company_id={{company_id}}\u0026ordering={{list_ordering}}"
                                                   }
                                   },
                                   {
@@ -2936,7 +2936,7 @@
                                       "name":  "List Analytic Items",
                                       "request":  {
                                                       "method":  "GET",
-                                                      "url":  "{{base_url}}/api/analytic-items/?company_id={{company_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                      "url":  "{{base_url}}/api/analytic-items/?company_id={{company_id}}\u0026ordering={{list_ordering}}"
                                                   }
                                   },
                                   {
@@ -3003,7 +3003,7 @@
                                       "name":  "List Transfer Models",
                                       "request":  {
                                                       "method":  "GET",
-                                                      "url":  "{{base_url}}/api/transfer-models/?company_id={{company_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                      "url":  "{{base_url}}/api/transfer-models/?company_id={{company_id}}\u0026ordering={{list_ordering}}"
                                                   }
                                   },
                                   {
@@ -3155,7 +3155,7 @@
                                       "name":  "List Transfer Model Lines",
                                       "request":  {
                                                       "method":  "GET",
-                                                      "url":  "{{base_url}}/api/transfer-model-lines/?transfer_model_id={{transfer_model_id}}\u0026company_id={{company_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026ordering={{list_ordering}}"
+                                                      "url":  "{{base_url}}/api/transfer-model-lines/?transfer_model_id={{transfer_model_id}}\u0026company_id={{company_id}}\u0026ordering={{list_ordering}}"
                                                   }
                                   },
                                   {
