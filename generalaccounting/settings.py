@@ -121,3 +121,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "accounting.api.pagination.StandardListPagination",
+}
