@@ -884,13 +884,20 @@ class JournalGroupSerializer(serializers.ModelSerializer):
 
 
 class JournalSerializer(serializers.ModelSerializer):
+    company_name = serializers.CharField(source="company.name", read_only=True)
+    group_name = serializers.CharField(source="group.name", read_only=True)
+    currency_name = serializers.CharField(source="currency.name", read_only=True)
+
     class Meta:
         model = Journal
         fields = [
             "id",
             "company",
+            "company_name",
             "group",
+            "group_name",
             "currency",
+            "currency_name",
             "default_account",
             "code",
             "name",
