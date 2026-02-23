@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.db import models
 
 from .base import AccountingBaseModel
@@ -95,3 +97,35 @@ class Partner(AccountingBaseModel):
 
     def __str__(self) -> str:
         return self.name
+
+
+class UserCompanyAccess(AccountingBaseModel):
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="company_access",
+    )
+    current_company = models.ForeignKey(
+        "accounting.Company",
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="current_for_users",
+    )
+    allowed_companies = models.ManyToManyField(
+        "accounting.Company",
+        blank=True,
+        related_name="allowed_for_users",
+    )
+
+    class Meta:
+        db_table = "ga_user_company_access"
+
+    def clean(self):
+        if not self.pk:
+            return
+        if self.current_company_id and not self.allowed_companies.filter(id=self.current_company_id).exists():
+            raise ValidationError("Current company must be included in allowed companies.")
+
+    def __str__(self) -> str:
+        return f"{self.user} company access"

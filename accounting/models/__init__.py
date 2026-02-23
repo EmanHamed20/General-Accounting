@@ -8,7 +8,7 @@ from .analytics import (
 )
 from .assets import Asset, AssetDepreciationLine
 from .chart_templates import AccountGroupTemplate, AccountTemplate
-from .core import Company, Partner
+from .core import Company, Partner, UserCompanyAccess
 from .configuration_extras import (
     AssetModel,
     BankAccount,
@@ -57,6 +57,7 @@ __all__ = [
     "AccountTemplate",
     "Company",
     "Partner",
+    "UserCompanyAccess",
     "FollowupLevel",
     "BankAccount",
     "ReconciliationModel",

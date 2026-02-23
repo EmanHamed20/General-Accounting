@@ -1,6 +1,7 @@
 from django.urls import include, path
 
 urlpatterns = [
+    path("", include("accounting.api.routes.session")),
     path("", include("accounting.api.routes.company")),
     path("", include("accounting.api.routes.customers")),
     path("", include("accounting.api.routes.configuration")),
