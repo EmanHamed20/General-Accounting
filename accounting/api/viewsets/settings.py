@@ -39,6 +39,123 @@ class AccountingSettingsViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(company_id=company_id)
         return queryset
 
+    def _build_configuration_payload(self, company):
+        settings_obj = (
+            AccountingSettings.objects.select_related(
+                "company",
+                "fiscal_localization_country",
+                "chart_template_country",
+                "account_fiscal_country",
+                "currency",
+            )
+            .filter(company_id=company.id)
+            .first()
+        )
+
+        settings_currency = settings_obj.currency if settings_obj and settings_obj.currency_id else None
+        default_country_currency = None
+        if company.country_id:
+            default_country_currency = (
+                CountryCurrency.objects.select_related("currency")
+                .filter(country_id=company.country_id, is_default=True, active=True)
+                .first()
+            )
+
+        effective_currency = settings_currency or (
+            default_country_currency.currency if default_country_currency else None
+        )
+
+        return {
+            "company": {
+                "id": company.id,
+                "name": company.name,
+                "code": company.code,
+                "country": (
+                    {
+                        "id": company.country.id,
+                        "code": company.country.code,
+                        "name": company.country.name,
+                    }
+                    if company.country_id
+                    else None
+                ),
+                "currency": (
+                    {
+                        "id": effective_currency.id,
+                        "code": effective_currency.code,
+                        "name": effective_currency.name,
+                        "symbol": effective_currency.symbol,
+                    }
+                    if effective_currency
+                    else None
+                ),
+            },
+            "settings": self.get_serializer(settings_obj).data if settings_obj else None,
+            "derived": {
+                "currency_source": (
+                    "settings.currency"
+                    if settings_currency
+                    else ("country_default_currency" if default_country_currency else None)
+                )
+            },
+        }
+
+    @action(detail=False, methods=["get"], url_path="configuration")
+    def configuration(self, request):
+        company_id = request.query_params.get("company_id")
+        if not company_id:
+            return Response({"company_id": "This query param is required."}, status=status.HTTP_400_BAD_REQUEST)
+
+        company = Company.objects.select_related("country").filter(id=company_id).first()
+        if not company:
+            return Response({"detail": "Company not found."}, status=status.HTTP_404_NOT_FOUND)
+
+        payload = self._build_configuration_payload(company)
+        return Response(payload, status=status.HTTP_200_OK)
+
+    @action(detail=False, methods=["get"], url_path="my-configuration")
+    def my_configuration(self, request):
+        if not request.user or not request.user.is_authenticated:
+            return Response({"detail": "Authentication required."}, status=status.HTTP_401_UNAUTHORIZED)
+
+        company_id = None
+
+        # Preferred: user-company mapping if present in your auth model.
+        if hasattr(request.user, "company_id") and request.user.company_id:
+            company_id = request.user.company_id
+        elif hasattr(request.user, "company") and getattr(request.user, "company", None):
+            company_id = request.user.company.id
+
+        # Fallback: explicit header from frontend session context.
+        if not company_id:
+            header_company_id = request.headers.get("X-Company-Id")
+            if header_company_id:
+                company_id = header_company_id
+
+        # Last fallback: if there is exactly one company in system.
+        if not company_id:
+            total_companies = Company.objects.count()
+            if total_companies == 1:
+                company_id = Company.objects.values_list("id", flat=True).first()
+            else:
+                return Response(
+                    {
+                        "detail": (
+                            "Cannot resolve company for current user. "
+                            "Configure user->company mapping, send X-Company-Id header, "
+                            "or use /api/accounting-settings/configuration/?company_id=<id>."
+                        )
+                    },
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+        company = Company.objects.select_related("country").filter(id=company_id).first()
+        if not company:
+            return Response({"detail": "Company not found."}, status=status.HTTP_404_NOT_FOUND)
+
+        payload = self._build_configuration_payload(company)
+        return Response(payload, status=status.HTTP_200_OK)
+
     @action(detail=False, methods=["post"], url_path="upsert-by-company")
     def upsert_by_company(self, request):
         company_id = request.data.get("company")

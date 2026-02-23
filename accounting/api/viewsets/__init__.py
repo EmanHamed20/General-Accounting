@@ -59,6 +59,7 @@ from .localization import CountryCityViewSet, CountryCurrencyViewSet, CountrySta
 from .products import ProductCategoryViewSet, ProductViewSet, VendorProductViewSet
 from .templates import AccountGroupTemplateViewSet, AccountTemplateViewSet
 from .reports import BalanceSheetReportView, GeneralLedgerReportView, ProfitAndLossReportView, TrialBalanceReportView
+from .session import SessionViewSet
 
 __all__ = [
     "BaseModelViewSet",
@@ -131,4 +132,5 @@ __all__ = [
     "ProfitAndLossReportView",
     "TrialBalanceReportView",
     "GeneralLedgerReportView",
+    "SessionViewSet",
 ]

@@ -3214,6 +3214,86 @@
                                                   }
                                   }
                               ]
+                 },
+                 {
+                     "name":  "Session",
+                     "item":  [
+                                  {
+                                      "name":  "Authenticate Session",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"username\": \"admin\",\n  \"password\": \"admin\"\n}"
+                                                               },
+                                                      "url":  "{{base_url}}/api/session/authenticate/"
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Signup",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"username\": \"newuser\",\n  \"password\": \"Pass@12345\",\n  \"email\": \"newuser@example.com\",\n  \"first_name\": \"New\",\n  \"last_name\": \"User\",\n  \"company_name\": \"New Company\",\n  \"country_id\": {{country_id}},\n  \"currency_id\": {{currency_id}}\n}"
+                                                               },
+                                                      "url":  "{{base_url}}/api/session/signup/"
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Get Session Info",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  "{{base_url}}/api/session/get-session-info/"
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Switch Company",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"company_id\": {{company_id}}\n}"
+                                                               },
+                                                      "url":  "{{base_url}}/api/session/switch-company/"
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Logout Session",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{}"
+                                                               },
+                                                      "url":  "{{base_url}}/api/session/logout/"
+                                                  }
+                                  }
+                              ]
                  }
              ]
 }
