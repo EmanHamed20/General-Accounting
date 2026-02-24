@@ -5,6 +5,7 @@ echo "== Deploy started =="
 
 : "${DEPLOY_PATH:?DEPLOY_PATH is required}"
 : "${VENV_PATH:?VENV_PATH is required}"
+: "${SERVICE_NAME:?SERVICE_NAME is required}"   # <-- add this
 
 SRC_DIR="$(pwd)"
 TARGET_DIR="$DEPLOY_PATH"
@@ -14,9 +15,6 @@ mkdir -p "$TARGET_DIR"
 
 echo "== Sync code to target (excluding migrations .py files) =="
 
-# Important:
-# - We keep migrations/__init__.py
-# - We exclude other migration python files like 0001_initial.py, etc.
 rsync -a --delete \
   --exclude ".git/" \
   --exclude "__pycache__/" \
@@ -44,12 +42,13 @@ pip install -r "$TARGET_DIR/requirements.txt"
 echo "== Django migrate =="
 cd "$TARGET_DIR"
 
-# If your manage.py needs env vars, export them here:
-# export DJANGO_SETTINGS_MODULE="yourproject.settings"
-# export SECRET_KEY="..."
-# export DEBUG="0"
-
 python manage.py makemigrations
 python manage.py migrate
+
+echo "== Restart service: $SERVICE_NAME =="
+sudo systemctl restart "$SERVICE_NAME"
+
+echo "== Check service status =="
+sudo systemctl --no-pager --full status "$SERVICE_NAME" || true
 
 echo "== Deploy finished =="
