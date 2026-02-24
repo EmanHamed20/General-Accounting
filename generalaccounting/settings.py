@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+from importlib.util import find_spec
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -132,9 +133,14 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+default_auth_classes = []
+if find_spec("rest_framework_simplejwt") is not None:
+    default_auth_classes.append("rest_framework_simplejwt.authentication.JWTAuthentication")
+else:
+    # Local-dev fallback when simplejwt is not installed yet.
+    default_auth_classes.append("rest_framework.authentication.SessionAuthentication")
+
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "accounting.api.pagination.StandardListPagination",
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
-    ),
+    "DEFAULT_AUTHENTICATION_CLASSES": tuple(default_auth_classes),
 }

@@ -59,7 +59,10 @@ from .localization import CountryCityViewSet, CountryCurrencyViewSet, CountrySta
 from .products import ProductCategoryViewSet, ProductViewSet, VendorProductViewSet
 from .templates import AccountGroupTemplateViewSet, AccountTemplateViewSet
 from .reports import BalanceSheetReportView, GeneralLedgerReportView, ProfitAndLossReportView, TrialBalanceReportView
-from .session import SessionViewSet
+try:
+    from .session import SessionViewSet
+except ImportError:
+    SessionViewSet = None
 
 __all__ = [
     "BaseModelViewSet",
@@ -132,5 +135,6 @@ __all__ = [
     "ProfitAndLossReportView",
     "TrialBalanceReportView",
     "GeneralLedgerReportView",
-    "SessionViewSet",
 ]
+if SessionViewSet is not None:
+    __all__.append("SessionViewSet")
