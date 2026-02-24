@@ -4,6 +4,16 @@
     "name": "Accounting 2",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{access_token}}",
+        "type": "string"
+      }
+    ]
+  },
   "variable": [
     {
       "key": "account_group_id",
@@ -354,6 +364,9 @@
               ],
               "request": {
                 "method": "POST",
+                "auth": {
+                  "type": "noauth"
+                },
                 "url": "{{base_url}}/api/session/authenticate/",
                 "header": [
                   {
@@ -384,6 +397,9 @@
               ],
               "request": {
                 "method": "POST",
+                "auth": {
+                  "type": "noauth"
+                },
                 "url": "{{base_url}}/api/session/signup/",
                 "header": [
                   {
@@ -414,6 +430,9 @@
               ],
               "request": {
                 "method": "POST",
+                "auth": {
+                  "type": "noauth"
+                },
                 "url": "{{base_url}}/api/session/refresh/",
                 "header": [
                   {
@@ -431,12 +450,6 @@
               "name": "Get Session Info",
               "request": {
                 "method": "GET",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{access_token}}"
-                  }
-                ],
                 "url": "{{base_url}}/api/session/get-session-info/"
               }
             },
@@ -449,10 +462,6 @@
                   {
                     "key": "Content-Type",
                     "value": "application/json"
-                  },
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{access_token}}"
                   }
                 ],
                 "body": {
@@ -470,10 +479,6 @@
                   {
                     "key": "Content-Type",
                     "value": "application/json"
-                  },
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{access_token}}"
                   }
                 ],
                 "body": {
