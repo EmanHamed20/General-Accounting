@@ -1,9 +1,11 @@
 from django.conf import settings as django_settings
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
 from django.db import transaction
 from rest_framework import permissions, viewsets
 from rest_framework.decorators import action
+from rest_framework_simplejwt.exceptions import TokenError
+from rest_framework_simplejwt.tokens import RefreshToken
 
 from accounting.models import UserCompanyAccess
 
@@ -11,6 +13,15 @@ from .shared import *
 
 
 class SessionViewSet(viewsets.ViewSet):
+    def _build_auth_response(self, request, user):
+        refresh = RefreshToken.for_user(user)
+        payload = self._build_session_info(request, user)
+        payload["tokens"] = {
+            "access": str(refresh.access_token),
+            "refresh": str(refresh),
+        }
+        return payload
+
     def _generate_unique_company_name(self, base_name):
         name = (base_name or "").strip()
         if not name:
@@ -162,8 +173,7 @@ class SessionViewSet(viewsets.ViewSet):
         if not user.is_active:
             return Response({"detail": "User is inactive."}, status=status.HTTP_403_FORBIDDEN)
 
-        login(request, user)
-        return Response(self._build_session_info(request, user), status=status.HTTP_200_OK)
+        return Response(self._build_auth_response(request, user), status=status.HTTP_200_OK)
 
     @action(detail=False, methods=["post"], url_path="signup", permission_classes=[permissions.AllowAny])
     def signup(self, request):
@@ -242,8 +252,27 @@ class SessionViewSet(viewsets.ViewSet):
                 currency=currency,
             )
 
-        login(request, user)
-        return Response(self._build_session_info(request, user), status=status.HTTP_201_CREATED)
+        return Response(self._build_auth_response(request, user), status=status.HTTP_201_CREATED)
+
+    @action(detail=False, methods=["post"], url_path="refresh", permission_classes=[permissions.AllowAny])
+    def refresh(self, request):
+        refresh_token = request.data.get("refresh")
+        if not refresh_token:
+            return Response({"refresh": "This field is required."}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            refresh = RefreshToken(refresh_token)
+        except TokenError:
+            return Response({"detail": "Invalid refresh token."}, status=status.HTTP_401_UNAUTHORIZED)
+
+        return Response(
+            {
+                "tokens": {
+                    "access": str(refresh.access_token),
+                    "refresh": str(refresh),
+                }
+            },
+            status=status.HTTP_200_OK,
+        )
 
     @action(detail=False, methods=["get"], url_path="get-session-info")
     def get_session_info(self, request):
@@ -273,6 +302,4 @@ class SessionViewSet(viewsets.ViewSet):
 
     @action(detail=False, methods=["post"], url_path="logout")
     def logout_session(self, request):
-        if request.user and request.user.is_authenticated:
-            logout(request)
-        return Response({"detail": "Logged out."}, status=status.HTTP_200_OK)
+        return Response({"detail": "Logged out. Remove tokens on client side."}, status=status.HTTP_200_OK)
