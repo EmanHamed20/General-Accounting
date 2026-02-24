@@ -1116,12 +1116,17 @@ class PaymentSerializer(serializers.ModelSerializer):
 
 
 class AnalyticPlanSerializer(serializers.ModelSerializer):
+    company_name = serializers.CharField(source="company.name", read_only=True)
+    parent_name = serializers.CharField(source="parent.name", read_only=True)
+
     class Meta:
         model = AnalyticPlan
         fields = [
             "id",
             "company",
+            "company_name",
             "parent",
+            "parent_name",
             "name",
             "default_applicability",
             "color",
