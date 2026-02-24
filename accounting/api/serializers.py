@@ -1204,9 +1204,26 @@ class AnalyticLineSerializer(serializers.ModelSerializer):
 
 
 class AnalyticAccountSerializer(serializers.ModelSerializer):
+    company_name = serializers.CharField(source="company.name", read_only=True)
+    plan_name = serializers.CharField(source="plan.name", read_only=True)
+    partner_name = serializers.CharField(source="partner.name", read_only=True)
+
     class Meta:
         model = AnalyticAccount
-        fields = ["id", "company", "plan", "partner", "name", "code", "active", "created_at", "updated_at"]
+        fields = [
+            "id",
+            "company",
+            "company_name",
+            "plan",
+            "plan_name",
+            "partner",
+            "partner_name",
+            "name",
+            "code",
+            "active",
+            "created_at",
+            "updated_at",
+        ]
         read_only_fields = ["id", "created_at", "updated_at"]
 
     def validate(self, attrs):
