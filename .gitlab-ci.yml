@@ -1,17 +1,12 @@
 stages:
-  - deploy
+  - test
 
-deploy_to_ubuntu_80:
-  stage: deploy
+smoke_runner:
+  stage: test
   tags:
     - aitsp
-
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "mirror-main"'
-
   script:
-    - 'echo "Deploying branch: $CI_COMMIT_BRANCH"'
-    - 'export DEPLOY_PATH="/www/wwwroot/api.mtis.com"'
-    - 'export VENV_PATH="/www/wwwroot/api.mtis.com/venv"'
-    - 'export SERVICE_NAME="api-mtis.service"'
-    - 'bash deploy/deploy.sh'
+    - 'whoami'
+    - 'hostname'
+    - 'pwd'
+    - 'ls -la'
