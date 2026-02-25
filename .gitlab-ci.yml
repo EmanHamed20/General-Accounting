@@ -1,0 +1,15 @@
+stages:
+  - deploy
+
+deploy_to_ubuntu_80:
+  stage: deploy
+  tags:
+    - deploy80
+  only:
+    - deploy-prod
+  script:
+    - echo "Deploying branch: $CI_COMMIT_REF_NAME"
+    - export DEPLOY_PATH="$DEPLOY_PATH"
+    - export VENV_PATH="$VENV_PATH"
+    - export SERVICE_NAME="general_accounting_api.service"
+    - bash deploy/deploy.sh
