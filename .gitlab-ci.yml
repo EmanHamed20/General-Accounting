@@ -1,17 +1,6 @@
-stages:
-  - deploy
-
-deploy_to_ubuntu_80:
+test_job:
   stage: deploy
+  script:
+    - echo "Hello World"
   tags:
     - aitsp
-
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "mirror-main"'
-
-  script:
-    - 'echo "Deploying branch: $CI_COMMIT_BRANCH"'
-    - 'export DEPLOY_PATH="/www/wwwroot/api.mtis.com"'
-    - 'export VENV_PATH="/www/wwwroot/api.mtis.com/venv"'
-    - 'export SERVICE_NAME="api-mtis.service"'
-    - 'bash deploy/deploy.sh'
