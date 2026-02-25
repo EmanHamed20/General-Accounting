@@ -5,8 +5,10 @@ deploy_to_ubuntu_80:
   stage: deploy
   tags:
     - aitsp
+
   rules:
     - if: '$CI_COMMIT_BRANCH == "deploy-prod"'
+
   script:
     - echo "Deploying branch: $CI_COMMIT_BRANCH"
     - export DEPLOY_PATH="/www/wwwroot/api.mtis.com"
