@@ -10,8 +10,8 @@ deploy_to_ubuntu_80:
     - if: '$CI_COMMIT_BRANCH == "deploy-prod"'
 
   script:
-    - echo "Deploying branch: $CI_COMMIT_BRANCH"
-    - export DEPLOY_PATH="/www/wwwroot/api.mtis.com"
-    - export VENV_PATH="/www/wwwroot/api.mtis.com/venv"
-    - export SERVICE_NAME="api-mtis.service"
-    - bash deploy/deploy.sh
+    - 'echo "Deploying branch: $CI_COMMIT_BRANCH"'
+    - 'export DEPLOY_PATH="/www/wwwroot/api.mtis.com"'
+    - 'export VENV_PATH="/www/wwwroot/api.mtis.com/venv"'
+    - 'export SERVICE_NAME="api-mtis.service"'
+    - 'bash deploy/deploy.sh'
