@@ -1,6 +1,7 @@
 stages:
   - deploy
 
+
 deploy_to_ubuntu_80:
   stage: deploy
   tags:
