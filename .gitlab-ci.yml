@@ -1,12 +1,7 @@
-stages:
-  - test
+stages: [test]
 
 smoke_runner:
   stage: test
-  tags:
-    - aitsp
   script:
     - 'whoami'
     - 'hostname'
-    - 'pwd'
-    - 'ls -la'
