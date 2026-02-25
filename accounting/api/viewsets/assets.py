@@ -20,13 +20,11 @@ class AssetViewSet(BaseModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
         state = self.request.query_params.get("state")
         method = self.request.query_params.get("method")
         active = self.request.query_params.get("active")
         asset_account_id = self.request.query_params.get("asset_account_id")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         if state:
             queryset = queryset.filter(state=state)
         if method:
@@ -123,14 +121,12 @@ class AssetDepreciationLineViewSet(BaseModelViewSet):
     def get_queryset(self):
         queryset = super().get_queryset()
         asset_id = self.request.query_params.get("asset_id")
-        company_id = self.request.query_params.get("company_id")
         state = self.request.query_params.get("state")
         date_from = self.request.query_params.get("date_from")
         date_to = self.request.query_params.get("date_to")
         if asset_id:
             queryset = queryset.filter(asset_id=asset_id)
-        if company_id:
-            queryset = queryset.filter(asset__company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "asset__company_id")
         if state:
             queryset = queryset.filter(state=state)
         if date_from:

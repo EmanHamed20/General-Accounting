@@ -16,7 +16,6 @@ class AnalyticItemViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
         analytic_account_id = self.request.query_params.get("analytic_account_id")
         partner_id = self.request.query_params.get("partner_id")
         product_id = self.request.query_params.get("product_id")
@@ -27,8 +26,7 @@ class AnalyticItemViewSet(viewsets.ModelViewSet):
         date_to = self.request.query_params.get("date_to")
         project = self.request.query_params.get("project")
         task = self.request.query_params.get("task")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         if analytic_account_id:
             queryset = queryset.filter(analytic_account_id=analytic_account_id)
         if partner_id:
@@ -58,11 +56,9 @@ class AnalyticPlanViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
         parent_id = self.request.query_params.get("parent_id")
         active = self.request.query_params.get("active")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         if parent_id:
             if parent_id.lower() == "null":
                 queryset = queryset.filter(parent__isnull=True)
@@ -79,12 +75,10 @@ class AnalyticAccountViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
         plan_id = self.request.query_params.get("plan_id")
         partner_id = self.request.query_params.get("partner_id")
         active = self.request.query_params.get("active")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         if plan_id:
             queryset = queryset.filter(plan_id=plan_id)
         if partner_id:
@@ -102,12 +96,10 @@ class AnalyticDistributionModelViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
         partner_id = self.request.query_params.get("partner_id")
         product_category_id = self.request.query_params.get("product_category_id")
         active = self.request.query_params.get("active")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         if partner_id:
             queryset = queryset.filter(partner_id=partner_id)
         if product_category_id:
@@ -124,12 +116,10 @@ class AnalyticDistributionModelLineViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = super().get_queryset()
         model_id = self.request.query_params.get("model_id")
-        company_id = self.request.query_params.get("company_id")
         analytic_account_id = self.request.query_params.get("analytic_account_id")
         if model_id:
             queryset = queryset.filter(model_id=model_id)
-        if company_id:
-            queryset = queryset.filter(model__company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "model__company_id")
         if analytic_account_id:
             queryset = queryset.filter(analytic_account_id=analytic_account_id)
         return queryset

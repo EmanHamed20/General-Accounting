@@ -16,14 +16,12 @@ class InvoiceViewSet(BaseModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
         state = self.request.query_params.get("state")
         move_type = self.request.query_params.get("move_type")
         journal_id = self.request.query_params.get("journal_id")
         date_from = self.request.query_params.get("date_from")
         date_to = self.request.query_params.get("date_to")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         if state:
             queryset = queryset.filter(state=state)
         if move_type:
@@ -332,13 +330,11 @@ class PaymentViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
         state = self.request.query_params.get("state")
         payment_type = self.request.query_params.get("payment_type")
         journal_id = self.request.query_params.get("journal_id")
         partner_id = self.request.query_params.get("partner_id")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         if state:
             queryset = queryset.filter(state=state)
         if payment_type:
@@ -435,11 +431,9 @@ class InvoiceLineViewSet(BaseModelViewSet):
     def get_queryset(self):
         queryset = super().get_queryset()
         move_id = self.request.query_params.get("move_id")
-        company_id = self.request.query_params.get("company_id")
         if move_id:
             queryset = queryset.filter(move_id=move_id)
-        if company_id:
-            queryset = queryset.filter(move__company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "move__company_id")
         return queryset
 
     def perform_create(self, serializer):
