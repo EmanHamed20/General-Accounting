@@ -60,6 +60,7 @@ from accounting.models import (
     PaymentProviderMethod,
     TransferModel,
     TransferModelLine,
+    UserCompanyAccess,
 )
 from accounting.services.asset_service import (
     cancel_asset,
@@ -146,6 +147,48 @@ from ..serializers import (
 def _handle_validation(exc: DjangoValidationError) -> Response:
     payload = exc.message_dict if hasattr(exc, "message_dict") else {"detail": exc.messages}
     return Response(payload, status=status.HTTP_400_BAD_REQUEST)
+
+
+def get_company_ids_from_request(request, required=False):
+    raw_ids = []
+    company_ids_raw = request.query_params.getlist("company_ids")
+    for item in company_ids_raw:
+        if item is None:
+            continue
+        parts = [p.strip() for p in str(item).split(",")]
+        raw_ids.extend([p for p in parts if p])
+
+    company_id_raw = request.query_params.get("company_id")
+    if company_id_raw:
+        raw_ids.extend([p.strip() for p in str(company_id_raw).split(",") if p.strip()])
+
+    if not raw_ids:
+        if required:
+            raise DRFValidationError({"company_id": "This query parameter is required."})
+        return []
+
+    company_ids = []
+    for raw in raw_ids:
+        try:
+            value = int(raw)
+        except (TypeError, ValueError) as exc:
+            raise DRFValidationError({"company_ids": f"Invalid company id: {raw}"}) from exc
+        if value not in company_ids:
+            company_ids.append(value)
+    return company_ids
+
+
+def apply_company_filter(queryset, request, field_lookup="company_id"):
+    company_ids = get_company_ids_from_request(request, required=False)
+    if not company_ids and getattr(request, "user", None) and request.user.is_authenticated:
+        access = UserCompanyAccess.objects.filter(user_id=request.user.id).first()
+        if access:
+            company_ids = list(access.active_companies.values_list("id", flat=True))
+            if not company_ids:
+                company_ids = list(access.allowed_companies.values_list("id", flat=True))
+    if not company_ids:
+        return queryset
+    return queryset.filter(**{f"{field_lookup}__in": company_ids})
 
 
 class BaseModelViewSet(viewsets.ModelViewSet):

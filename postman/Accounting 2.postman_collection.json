@@ -409,7 +409,24 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"username\": \"newuser\",\n  \"password\": \"Pass@12345\",\n  \"company_name\": \"New Company\",\n  \"country_id\": {{country_id}},\n  \"currency_id\": {{currency_id}}\n}"
+                  "raw": "{\n  \"username\": \"newuser\",\n  \"password\": \"Pass@12345\",\n  \"companies\": [\n    {\n      \"name\": \"New Company 1\",\n      \"country_id\": {{country_id}},\n      \"currency_id\": {{currency_id}},\n      \"is_active\": true\n    },\n    {\n      \"name\": \"New Company 2\",\n      \"country_id\": {{country_id}},\n      \"currency_id\": {{currency_id}},\n      \"is_active\": true\n    }\n  ]\n}"
+                }
+              }
+            },
+            {
+              "name": "Set Active Companies",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/session/set-active-companies/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_ids\": [{{company_id}}]\n}"
                 }
               }
             },
@@ -484,6 +501,57 @@
                 "body": {
                   "mode": "raw",
                   "raw": "{}"
+                }
+              }
+            },
+            {
+              "name": "PATCH Update Profile",
+              "request": {
+                "method": "PATCH",
+                "url": "{{base_url}}/api/session/update-profile/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\",\n  \"email\": \"john@example.com\",\n  \"company_ids\": [{{company_id}}],\n  \"current_company_id\": {{company_id}}\n}"
+                }
+              }
+            },
+            {
+              "name": "POST Add Company",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/session/add-company/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Another Company\",\n  \"country_id\": {{country_id}},\n  \"currency_id\": {{currency_id}},\n  \"is_active\": true,\n  \"set_current\": false\n}"
+                }
+              }
+            },
+            {
+              "name": "POST Attach Existing Company",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/session/attach-existing-company/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_id\": {{company_id}},\n  \"is_active\": true,\n  \"set_current\": false\n}"
                 }
               }
             }

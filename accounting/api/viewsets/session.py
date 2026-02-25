@@ -56,6 +56,9 @@ class SessionViewSet(viewsets.ViewSet):
         if access:
             if access.current_company_id:
                 return access.current_company
+            first_active = access.active_companies.select_related("country").order_by("id").first()
+            if first_active:
+                return first_active
             first_allowed = access.allowed_companies.select_related("country").order_by("id").first()
             if first_allowed:
                 return first_allowed
@@ -99,15 +102,33 @@ class SessionViewSet(viewsets.ViewSet):
         )
 
         if access:
-            allowed_companies_qs = access.allowed_companies.all().order_by("name")
+            allowed_companies_qs = access.allowed_companies.select_related("country").all().order_by("name")
+            active_company_ids = set(access.active_companies.values_list("id", flat=True))
         elif company:
-            allowed_companies_qs = Company.objects.filter(id=company.id).order_by("name")
+            allowed_companies_qs = Company.objects.select_related("country").filter(id=company.id).order_by("name")
+            active_company_ids = {company.id}
         else:
             allowed_companies_qs = Company.objects.none()
+            active_company_ids = set()
         allowed_companies = [
-            {"id": c.id, "name": c.name, "code": c.code}
+            {
+                "id": c.id,
+                "name": c.name,
+                "code": c.code,
+                "country": (
+                    {
+                        "id": c.country.id,
+                        "code": c.country.code,
+                        "name": c.country.name,
+                    }
+                    if c.country_id
+                    else None
+                ),
+                "is_active": c.id in active_company_ids,
+            }
             for c in allowed_companies_qs
         ]
+        active_companies = [c for c in allowed_companies if c["is_active"]]
         current_company = None
         if company:
             current_company = next((c for c in allowed_companies if c["id"] == company.id), None)
@@ -152,26 +173,103 @@ class SessionViewSet(viewsets.ViewSet):
             "settings": AccountingSettingsSerializer(settings_obj).data if settings_obj else None,
             "user_companies": {
                 "current_company": current_company,
+                "active_companies": active_companies,
                 "allowed_companies": allowed_companies,
                 "disallowed_ancestor_companies": [],
             },
         }
 
+    def _resolve_country_and_currency(self, country_id, currency_id):
+        country = None
+        if country_id is not None:
+            country = Country.objects.filter(id=country_id).first()
+            if not country:
+                raise DRFValidationError({"country_id": "Country not found."})
+
+        currency = None
+        if currency_id is not None:
+            currency = Currency.objects.filter(id=currency_id).first()
+            if not currency:
+                raise DRFValidationError({"currency_id": "Currency not found."})
+
+        if not currency and country:
+            default_country_currency = (
+                CountryCurrency.objects.select_related("currency")
+                .filter(country_id=country.id, is_default=True, active=True)
+                .first()
+            )
+            if default_country_currency:
+                currency = default_country_currency.currency
+
+        return country, currency
+
+    def _create_signup_company(self, company_data):
+        company_name_raw = (company_data.get("name") or "").strip()
+        if not company_name_raw:
+            raise DRFValidationError({"companies": "Each company requires a non-empty name."})
+
+        country, currency = self._resolve_country_and_currency(
+            company_data.get("country_id"),
+            company_data.get("currency_id"),
+        )
+
+        company_name = self._generate_unique_company_name(company_name_raw)
+        company_code = self._generate_unique_company_code(company_name)
+
+        company = Company.objects.create(
+            name=company_name,
+            code=company_code,
+            legal_name=company_name,
+            country=country,
+        )
+
+        AccountingSettings.objects.create(
+            company=company,
+            country_code=(country.code if country else ""),
+            fiscal_localization_country=country,
+            chart_template_country=country,
+            account_fiscal_country=country,
+            currency=currency,
+        )
+        return company
+
+    def _normalize_company_ids(self, company_ids):
+        if not isinstance(company_ids, list) or not company_ids:
+            raise DRFValidationError({"company_ids": "Must be a non-empty list."})
+
+        normalized_ids = []
+        for raw in company_ids:
+            try:
+                value = int(raw)
+            except (TypeError, ValueError) as exc:
+                raise DRFValidationError({"company_ids": f"Invalid company id: {raw}"}) from exc
+            if value not in normalized_ids:
+                normalized_ids.append(value)
+        return normalized_ids
+
     @action(detail=False, methods=["post"], url_path="authenticate", permission_classes=[permissions.AllowAny])
     def authenticate_session(self, request):
-        username = request.data.get("username")
+        username = (request.data.get("username") or "").strip()
         password = request.data.get("password")
-        if not username or not password:
-            return Response(
-                {"detail": "username and password are required."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
+        errors = {}
+        if not username:
+            errors["username"] = "Username is required."
+        if not password:
+            errors["password"] = "Password is required."
+        if errors:
+            return Response(errors, status=status.HTTP_400_BAD_REQUEST)
 
         user = authenticate(request, username=username, password=password)
         if not user:
-            return Response({"detail": "Invalid credentials."}, status=status.HTTP_401_UNAUTHORIZED)
+            UserModel = get_user_model()
+            if not UserModel.objects.filter(username=username).exists():
+                return Response({"username": "Username not found."}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({"password": "Incorrect password."}, status=status.HTTP_401_UNAUTHORIZED)
         if not user.is_active:
-            return Response({"detail": "User is inactive."}, status=status.HTTP_403_FORBIDDEN)
+            return Response(
+                {"detail": "User is inactive. Please contact administrator."},
+                status=status.HTTP_403_FORBIDDEN,
+            )
 
         return Response(self._build_auth_response(request, user), status=status.HTTP_200_OK)
 
@@ -182,16 +280,12 @@ class SessionViewSet(viewsets.ViewSet):
         email = (request.data.get("email") or "").strip()
         first_name = (request.data.get("first_name") or "").strip()
         last_name = (request.data.get("last_name") or "").strip()
-        company_name_raw = (request.data.get("company_name") or "").strip()
-        country_id = request.data.get("country_id")
-        currency_id = request.data.get("currency_id")
+        companies_payload = request.data.get("companies")
 
         if not username:
             return Response({"username": "This field is required."}, status=status.HTTP_400_BAD_REQUEST)
         if not password:
             return Response({"password": "This field is required."}, status=status.HTTP_400_BAD_REQUEST)
-        if not company_name_raw:
-            return Response({"company_name": "This field is required."}, status=status.HTTP_400_BAD_REQUEST)
 
         UserModel = get_user_model()
         if UserModel.objects.filter(username=username).exists():
@@ -199,20 +293,24 @@ class SessionViewSet(viewsets.ViewSet):
         if email and UserModel.objects.filter(email=email).exists():
             return Response({"email": "Email already exists."}, status=status.HTTP_400_BAD_REQUEST)
 
-        country = None
-        if country_id is not None:
-            country = Country.objects.filter(id=country_id).first()
-            if not country:
-                return Response({"country_id": "Country not found."}, status=status.HTTP_400_BAD_REQUEST)
+        if companies_payload is None:
+            company_name_raw = (request.data.get("company_name") or "").strip()
+            if not company_name_raw:
+                return Response(
+                    {"companies": "Provide companies list, or legacy company_name field."},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+            companies_payload = [
+                {
+                    "name": company_name_raw,
+                    "country_id": request.data.get("country_id"),
+                    "currency_id": request.data.get("currency_id"),
+                    "is_active": True,
+                }
+            ]
 
-        currency = None
-        if currency_id is not None:
-            currency = Currency.objects.filter(id=currency_id).first()
-            if not currency:
-                return Response({"currency_id": "Currency not found."}, status=status.HTTP_400_BAD_REQUEST)
-
-        company_name = self._generate_unique_company_name(company_name_raw)
-        company_code = self._generate_unique_company_code(company_name)
+        if not isinstance(companies_payload, list) or not companies_payload:
+            return Response({"companies": "Must be a non-empty list."}, status=status.HTTP_400_BAD_REQUEST)
 
         with transaction.atomic():
             user = UserModel.objects.create_user(
@@ -222,35 +320,29 @@ class SessionViewSet(viewsets.ViewSet):
                 first_name=first_name,
                 last_name=last_name,
             )
-            company = Company.objects.create(
-                name=company_name,
-                code=company_code,
-                legal_name=company_name,
-                country=country,
-            )
+
+            created_companies = []
+            active_companies = []
+            for item in companies_payload:
+                if not isinstance(item, dict):
+                    raise DRFValidationError({"companies": "Each item must be an object."})
+                company = self._create_signup_company(item)
+                created_companies.append(company)
+                if item.get("is_active", True):
+                    active_companies.append(company)
+
+            if not created_companies:
+                raise DRFValidationError({"companies": "At least one company is required."})
+            if not active_companies:
+                active_companies = [created_companies[0]]
+
+            current_company = active_companies[0]
             access = UserCompanyAccess.objects.create(
                 user=user,
-                current_company=company,
+                current_company=current_company,
             )
-            access.allowed_companies.add(company)
-
-            if not currency and country:
-                default_country_currency = (
-                    CountryCurrency.objects.select_related("currency")
-                    .filter(country_id=country.id, is_default=True, active=True)
-                    .first()
-                )
-                if default_country_currency:
-                    currency = default_country_currency.currency
-
-            AccountingSettings.objects.create(
-                company=company,
-                country_code=(country.code if country else ""),
-                fiscal_localization_country=country,
-                chart_template_country=country,
-                account_fiscal_country=country,
-                currency=currency,
-            )
+            access.allowed_companies.set(created_companies)
+            access.active_companies.set(active_companies)
 
         return Response(self._build_auth_response(request, user), status=status.HTTP_201_CREATED)
 
@@ -296,8 +388,180 @@ class SessionViewSet(viewsets.ViewSet):
                 status=status.HTTP_403_FORBIDDEN,
             )
 
+        if not access.active_companies.filter(id=company_id).exists():
+            access.active_companies.add(company_id)
         access.current_company_id = company_id
         access.save(update_fields=["current_company", "updated_at"])
+        return Response(self._build_session_info(request, request.user), status=status.HTTP_200_OK)
+
+    @action(detail=False, methods=["post"], url_path="set-active-companies")
+    def set_active_companies(self, request):
+        if not request.user or not request.user.is_authenticated:
+            return Response({"detail": "Authentication required."}, status=status.HTTP_401_UNAUTHORIZED)
+
+        try:
+            normalized_ids = self._normalize_company_ids(request.data.get("company_ids"))
+        except DRFValidationError as exc:
+            return Response(exc.detail, status=status.HTTP_400_BAD_REQUEST)
+
+        access, _ = UserCompanyAccess.objects.get_or_create(user=request.user)
+        allowed_ids = set(access.allowed_companies.values_list("id", flat=True))
+        invalid = [cid for cid in normalized_ids if cid not in allowed_ids]
+        if invalid:
+            return Response(
+                {"company_ids": f"Not allowed for current user: {invalid}"},
+                status=status.HTTP_403_FORBIDDEN,
+            )
+
+        access.active_companies.set(normalized_ids)
+        if not access.current_company_id or access.current_company_id not in normalized_ids:
+            access.current_company_id = normalized_ids[0]
+            access.save(update_fields=["current_company", "updated_at"])
+        return Response(self._build_session_info(request, request.user), status=status.HTTP_200_OK)
+
+    @action(detail=False, methods=["patch"], url_path="update-profile")
+    def update_profile(self, request):
+        if not request.user or not request.user.is_authenticated:
+            return Response({"detail": "Authentication required."}, status=status.HTTP_401_UNAUTHORIZED)
+
+        user = request.user
+        payload = request.data if isinstance(request.data, dict) else {}
+        allowed_fields = {"first_name", "last_name", "email", "password", "username"}
+        changed = False
+
+        UserModel = get_user_model()
+
+        if "username" in payload:
+            username = (payload.get("username") or "").strip()
+            if not username:
+                return Response({"username": "Username cannot be empty."}, status=status.HTTP_400_BAD_REQUEST)
+            if UserModel.objects.exclude(id=user.id).filter(username=username).exists():
+                return Response({"username": "Username already exists."}, status=status.HTTP_400_BAD_REQUEST)
+            user.username = username
+            changed = True
+
+        if "email" in payload:
+            email = (payload.get("email") or "").strip()
+            if email and UserModel.objects.exclude(id=user.id).filter(email=email).exists():
+                return Response({"email": "Email already exists."}, status=status.HTTP_400_BAD_REQUEST)
+            user.email = email
+            changed = True
+
+        if "first_name" in payload:
+            user.first_name = (payload.get("first_name") or "").strip()
+            changed = True
+        if "last_name" in payload:
+            user.last_name = (payload.get("last_name") or "").strip()
+            changed = True
+        if "password" in payload:
+            password = payload.get("password")
+            if not password:
+                return Response({"password": "Password cannot be empty."}, status=status.HTTP_400_BAD_REQUEST)
+            user.set_password(password)
+            changed = True
+
+        access, _ = UserCompanyAccess.objects.get_or_create(user=user)
+
+        if "company_ids" in payload:
+            try:
+                normalized_ids = self._normalize_company_ids(payload.get("company_ids"))
+            except DRFValidationError as exc:
+                return Response(exc.detail, status=status.HTTP_400_BAD_REQUEST)
+
+            allowed_ids = set(access.allowed_companies.values_list("id", flat=True))
+            invalid = [cid for cid in normalized_ids if cid not in allowed_ids]
+            if invalid:
+                return Response(
+                    {"company_ids": f"Not allowed for current user: {invalid}"},
+                    status=status.HTTP_403_FORBIDDEN,
+                )
+            access.active_companies.set(normalized_ids)
+            if not access.current_company_id or access.current_company_id not in normalized_ids:
+                access.current_company_id = normalized_ids[0]
+                access.save(update_fields=["current_company", "updated_at"])
+
+        if "current_company_id" in payload:
+            current_company_id = payload.get("current_company_id")
+            if not current_company_id:
+                return Response({"current_company_id": "This field cannot be empty."}, status=status.HTTP_400_BAD_REQUEST)
+            try:
+                current_company_id = int(current_company_id)
+            except (TypeError, ValueError):
+                return Response({"current_company_id": "Must be an integer."}, status=status.HTTP_400_BAD_REQUEST)
+            if not access.allowed_companies.filter(id=current_company_id).exists():
+                return Response(
+                    {"current_company_id": "This company is not allowed for current user."},
+                    status=status.HTTP_403_FORBIDDEN,
+                )
+            if not access.active_companies.filter(id=current_company_id).exists():
+                access.active_companies.add(current_company_id)
+            access.current_company_id = current_company_id
+            access.save(update_fields=["current_company", "updated_at"])
+
+        if changed:
+            update_fields = [f for f in allowed_fields if f in payload and f != "password"]
+            if "password" in payload:
+                user.save()
+            elif update_fields:
+                user.save(update_fields=update_fields)
+            else:
+                user.save()
+
+        return Response(self._build_session_info(request, user), status=status.HTTP_200_OK)
+
+    @action(detail=False, methods=["post"], url_path="add-company")
+    def add_company(self, request):
+        if not request.user or not request.user.is_authenticated:
+            return Response({"detail": "Authentication required."}, status=status.HTTP_401_UNAUTHORIZED)
+
+        company_data = request.data if isinstance(request.data, dict) else {}
+        if not (company_data.get("name") or "").strip():
+            return Response({"name": "This field is required."}, status=status.HTTP_400_BAD_REQUEST)
+
+        with transaction.atomic():
+            company = self._create_signup_company(company_data)
+            access, _ = UserCompanyAccess.objects.get_or_create(user=request.user)
+            access.allowed_companies.add(company)
+
+            make_active = company_data.get("is_active", True)
+            if make_active:
+                access.active_companies.add(company)
+            if company_data.get("set_current", False) or not access.current_company_id:
+                if not access.active_companies.filter(id=company.id).exists():
+                    access.active_companies.add(company)
+                access.current_company = company
+                access.save(update_fields=["current_company", "updated_at"])
+
+        return Response(self._build_session_info(request, request.user), status=status.HTTP_201_CREATED)
+
+    @action(detail=False, methods=["post"], url_path="attach-existing-company")
+    def attach_existing_company(self, request):
+        if not request.user or not request.user.is_authenticated:
+            return Response({"detail": "Authentication required."}, status=status.HTTP_401_UNAUTHORIZED)
+
+        company_id = request.data.get("company_id")
+        if not company_id:
+            return Response({"company_id": "This field is required."}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            company_id = int(company_id)
+        except (TypeError, ValueError):
+            return Response({"company_id": "Must be an integer."}, status=status.HTTP_400_BAD_REQUEST)
+
+        company = Company.objects.filter(id=company_id).first()
+        if not company:
+            return Response({"company_id": "Company not found."}, status=status.HTTP_404_NOT_FOUND)
+
+        access, _ = UserCompanyAccess.objects.get_or_create(user=request.user)
+        access.allowed_companies.add(company)
+
+        if request.data.get("is_active", True):
+            access.active_companies.add(company)
+        if request.data.get("set_current", False) or not access.current_company_id:
+            if not access.active_companies.filter(id=company.id).exists():
+                access.active_companies.add(company)
+            access.current_company = company
+            access.save(update_fields=["current_company", "updated_at"])
+
         return Response(self._build_session_info(request, request.user), status=status.HTTP_200_OK)
 
     @action(detail=False, methods=["post"], url_path="logout")

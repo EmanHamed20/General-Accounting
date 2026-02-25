@@ -1,0 +1,4725 @@
+{
+  "info": {
+    "_postman_id": "1aa5a3af-fc52-4bf4-84e5-65867b24dbc0",
+    "name": "General Accounting 2",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{access_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000"
+    },
+    {
+      "key": "access_token",
+      "value": ""
+    },
+    {
+      "key": "refresh_token",
+      "value": ""
+    },
+    {
+      "key": "page",
+      "value": "1"
+    },
+    {
+      "key": "page_size",
+      "value": "20"
+    },
+    {
+      "key": "company_id",
+      "value": "1"
+    },
+    {
+      "key": "company_ids",
+      "value": "1,2"
+    },
+    {
+      "key": "account_group_id",
+      "value": "1"
+    },
+    {
+      "key": "account_group_template_id",
+      "value": "1"
+    },
+    {
+      "key": "account_id",
+      "value": "1"
+    },
+    {
+      "key": "account_root_id",
+      "value": "1"
+    },
+    {
+      "key": "account_template_id",
+      "value": "1"
+    },
+    {
+      "key": "accounting_settings_id",
+      "value": "1"
+    },
+    {
+      "key": "analytic_account_id",
+      "value": "1"
+    },
+    {
+      "key": "analytic_distribution_model_id",
+      "value": "1"
+    },
+    {
+      "key": "analytic_distribution_model_line_id",
+      "value": "1"
+    },
+    {
+      "key": "analytic_item_id",
+      "value": "1"
+    },
+    {
+      "key": "analytic_plan_id",
+      "value": "1"
+    },
+    {
+      "key": "asset_depreciation_line_id",
+      "value": "1"
+    },
+    {
+      "key": "asset_id",
+      "value": "1"
+    },
+    {
+      "key": "asset_model_id",
+      "value": "1"
+    },
+    {
+      "key": "bank_account_id",
+      "value": "1"
+    },
+    {
+      "key": "country_city_id",
+      "value": "1"
+    },
+    {
+      "key": "country_currency_id",
+      "value": "1"
+    },
+    {
+      "key": "country_id",
+      "value": "1"
+    },
+    {
+      "key": "country_state_id",
+      "value": "1"
+    },
+    {
+      "key": "credit_note_id",
+      "value": "1"
+    },
+    {
+      "key": "currency_id",
+      "value": "1"
+    },
+    {
+      "key": "customer_id",
+      "value": "1"
+    },
+    {
+      "key": "debit_note_id",
+      "value": "1"
+    },
+    {
+      "key": "disallowed_expense_category_id",
+      "value": "1"
+    },
+    {
+      "key": "financial_budget_id",
+      "value": "1"
+    },
+    {
+      "key": "financial_budget_line_id",
+      "value": "1"
+    },
+    {
+      "key": "fiscal_position_account_map_id",
+      "value": "1"
+    },
+    {
+      "key": "fiscal_position_id",
+      "value": "1"
+    },
+    {
+      "key": "fiscal_position_tax_map_id",
+      "value": "1"
+    },
+    {
+      "key": "followup_level_id",
+      "value": "1"
+    },
+    {
+      "key": "incoterm_id",
+      "value": "1"
+    },
+    {
+      "key": "invoice_id",
+      "value": "1"
+    },
+    {
+      "key": "invoice_line_id",
+      "value": "1"
+    },
+    {
+      "key": "journal_entry_id",
+      "value": "1"
+    },
+    {
+      "key": "journal_entry_line_id",
+      "value": "1"
+    },
+    {
+      "key": "journal_group_id",
+      "value": "1"
+    },
+    {
+      "key": "journal_id",
+      "value": "1"
+    },
+    {
+      "key": "journal_item_id",
+      "value": "1"
+    },
+    {
+      "key": "ledger_id",
+      "value": "1"
+    },
+    {
+      "key": "move_id",
+      "value": "1"
+    },
+    {
+      "key": "move_line_id",
+      "value": "1"
+    },
+    {
+      "key": "partner_id",
+      "value": "1"
+    },
+    {
+      "key": "payment_id",
+      "value": "1"
+    },
+    {
+      "key": "payment_method_id",
+      "value": "1"
+    },
+    {
+      "key": "payment_method_line_id",
+      "value": "1"
+    },
+    {
+      "key": "payment_provider_id",
+      "value": "1"
+    },
+    {
+      "key": "payment_provider_method_id",
+      "value": "1"
+    },
+    {
+      "key": "payment_term_id",
+      "value": "1"
+    },
+    {
+      "key": "payment_term_line_id",
+      "value": "1"
+    },
+    {
+      "key": "product_category_id",
+      "value": "1"
+    },
+    {
+      "key": "product_id",
+      "value": "1"
+    },
+    {
+      "key": "reconciliation_model_id",
+      "value": "1"
+    },
+    {
+      "key": "reconciliation_model_line_id",
+      "value": "1"
+    },
+    {
+      "key": "session_id",
+      "value": "1"
+    },
+    {
+      "key": "tax_group_id",
+      "value": "1"
+    },
+    {
+      "key": "tax_id",
+      "value": "1"
+    },
+    {
+      "key": "tax_repartition_line_id",
+      "value": "1"
+    },
+    {
+      "key": "transfer_model_id",
+      "value": "1"
+    },
+    {
+      "key": "transfer_model_line_id",
+      "value": "1"
+    },
+    {
+      "key": "vendor_bill_id",
+      "value": "1"
+    },
+    {
+      "key": "vendor_debit_note_id",
+      "value": "1"
+    },
+    {
+      "key": "vendor_id",
+      "value": "1"
+    },
+    {
+      "key": "vendor_payment_id",
+      "value": "1"
+    },
+    {
+      "key": "vendor_product_id",
+      "value": "1"
+    },
+    {
+      "key": "vendor_refund_id",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Analytics",
+      "item": [
+        {
+          "name": "Analytic Items",
+          "item": [
+            {
+              "name": "List Analytic Items",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/analytic-items/?analytic_account_id={{analytic_account_id}}&date_from={{date_from}}&date_to={{date_to}}&general_account_id={{general_account_id}}&journal_id={{journal_id}}&move_line_id={{move_line_id}}&page={{page}}&page_size={{page_size}}&partner_id={{partner_id}}&product_id={{product_id}}&project={{project}}&task={{task}}"
+              }
+            },
+            {
+              "name": "Create Analytic Item",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/analytic-items/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"name\": \"\",\n  \"date\": \"2026-01-01\",\n  \"amount\": 1,\n  \"unit_amount\": 1,\n  \"uom_name\": \"\",\n  \"ref\": \"\",\n  \"partner\": 1,\n  \"product\": 1,\n  \"journal\": 1,\n  \"move_line\": \"\",\n  \"general_account\": \"\",\n  \"analytic_account\": \"\",\n  \"analytic_distribution\": \"\",\n  \"project\": \"\",\n  \"task\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Analytic Item",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/analytic-items/{{analytic_item_id}}/"
+              }
+            },
+            {
+              "name": "Update Analytic Item",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/analytic-items/{{analytic_item_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"name\": \"\",\n  \"date\": \"2026-01-01\",\n  \"amount\": 1,\n  \"unit_amount\": 1,\n  \"uom_name\": \"\",\n  \"ref\": \"\",\n  \"partner\": 1,\n  \"product\": 1,\n  \"journal\": 1,\n  \"move_line\": \"\",\n  \"general_account\": \"\",\n  \"analytic_account\": \"\",\n  \"analytic_distribution\": \"\",\n  \"project\": \"\",\n  \"task\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Analytic Item",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/analytic-items/{{analytic_item_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Analytic Plans",
+          "item": [
+            {
+              "name": "List Analytic Plans",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/analytic-plans/?active={{active}}&page={{page}}&page_size={{page_size}}&parent_id={{parent_id}}"
+              }
+            },
+            {
+              "name": "Create Analytic Plan",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/analytic-plans/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"company_name\": \"\",\n  \"parent\": \"\",\n  \"parent_name\": \"\",\n  \"name\": \"\",\n  \"default_applicability\": \"\",\n  \"color\": 1,\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Analytic Plan",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/analytic-plans/{{analytic_plan_id}}/"
+              }
+            },
+            {
+              "name": "Update Analytic Plan",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/analytic-plans/{{analytic_plan_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"company_name\": \"\",\n  \"parent\": \"\",\n  \"parent_name\": \"\",\n  \"name\": \"\",\n  \"default_applicability\": \"\",\n  \"color\": 1,\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Analytic Plan",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/analytic-plans/{{analytic_plan_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Analytic Accounts",
+          "item": [
+            {
+              "name": "List Analytic Accounts",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/analytic-accounts/?active={{active}}&page={{page}}&page_size={{page_size}}&partner_id={{partner_id}}&plan_id={{plan_id}}"
+              }
+            },
+            {
+              "name": "Create Analytic Account",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/analytic-accounts/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"company_name\": \"\",\n  \"plan\": 1,\n  \"plan_name\": \"\",\n  \"partner\": 1,\n  \"partner_name\": \"\",\n  \"name\": \"\",\n  \"code\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Analytic Account",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/analytic-accounts/{{analytic_account_id}}/"
+              }
+            },
+            {
+              "name": "Update Analytic Account",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/analytic-accounts/{{analytic_account_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"company_name\": \"\",\n  \"plan\": 1,\n  \"plan_name\": \"\",\n  \"partner\": 1,\n  \"partner_name\": \"\",\n  \"name\": \"\",\n  \"code\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Analytic Account",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/analytic-accounts/{{analytic_account_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Analytic Distribution Models",
+          "item": [
+            {
+              "name": "List Analytic Distribution Models",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/analytic-distribution-models/?active={{active}}&page={{page}}&page_size={{page_size}}&partner_id={{partner_id}}&product_category_id={{product_category_id}}"
+              }
+            },
+            {
+              "name": "Create Analytic Distribution Model",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/analytic-distribution-models/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"name\": \"\",\n  \"partner\": 1,\n  \"product_category\": \"\",\n  \"account_prefix\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Analytic Distribution Model",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/analytic-distribution-models/{{analytic_distribution_model_id}}/"
+              }
+            },
+            {
+              "name": "Update Analytic Distribution Model",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/analytic-distribution-models/{{analytic_distribution_model_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"name\": \"\",\n  \"partner\": 1,\n  \"product_category\": \"\",\n  \"account_prefix\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Analytic Distribution Model",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/analytic-distribution-models/{{analytic_distribution_model_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Analytic Distribution Model Lines",
+          "item": [
+            {
+              "name": "List Analytic Distribution Model Lines",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/analytic-distribution-model-lines/?analytic_account_id={{analytic_account_id}}&model_id={{model_id}}&page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create Analytic Distribution Model Line",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/analytic-distribution-model-lines/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"\",\n  \"analytic_account\": \"\",\n  \"percentage\": 1\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Analytic Distribution Model Line",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/analytic-distribution-model-lines/{{analytic_distribution_model_line_id}}/"
+              }
+            },
+            {
+              "name": "Update Analytic Distribution Model Line",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/analytic-distribution-model-lines/{{analytic_distribution_model_line_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"\",\n  \"analytic_account\": \"\",\n  \"percentage\": 1\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Analytic Distribution Model Line",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/analytic-distribution-model-lines/{{analytic_distribution_model_line_id}}/"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Assets",
+      "item": [
+        {
+          "name": "Assets",
+          "item": [
+            {
+              "name": "List Assets",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/assets/?active={{active}}&asset_account_id={{asset_account_id}}&method={{method}}&page={{page}}&page_size={{page_size}}&state={{state}}"
+              }
+            },
+            {
+              "name": "Create Asset",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/assets/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"name\": \"\",\n  \"code\": \"\",\n  \"partner\": 1,\n  \"currency\": 1,\n  \"asset_account\": \"\",\n  \"depreciation_account\": \"\",\n  \"expense_account\": \"\",\n  \"journal\": 1,\n  \"acquisition_date\": \"2026-01-01\",\n  \"first_depreciation_date\": \"2026-01-01\",\n  \"original_value\": \"\",\n  \"salvage_value\": \"\",\n  \"method\": \"\",\n  \"method_number\": \"\",\n  \"method_period\": \"\",\n  \"prorata\": \"\",\n  \"state\": 1,\n  \"active\": true,\n  \"note\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Asset",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/assets/{{asset_id}}/"
+              }
+            },
+            {
+              "name": "Update Asset",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/assets/{{asset_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"name\": \"\",\n  \"code\": \"\",\n  \"partner\": 1,\n  \"currency\": 1,\n  \"asset_account\": \"\",\n  \"depreciation_account\": \"\",\n  \"expense_account\": \"\",\n  \"journal\": 1,\n  \"acquisition_date\": \"2026-01-01\",\n  \"first_depreciation_date\": \"2026-01-01\",\n  \"original_value\": \"\",\n  \"salvage_value\": \"\",\n  \"method\": \"\",\n  \"method_number\": \"\",\n  \"method_period\": \"\",\n  \"prorata\": \"\",\n  \"state\": 1,\n  \"active\": true,\n  \"note\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Asset",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/assets/{{asset_id}}/"
+              }
+            },
+            {
+              "name": "POST Compute Depreciation",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/assets/{{asset_id}}/compute-depreciation/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            },
+            {
+              "name": "POST Set Running",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/assets/{{asset_id}}/set-running/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            },
+            {
+              "name": "POST Pause",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/assets/{{asset_id}}/pause/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            },
+            {
+              "name": "POST Resume",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/assets/{{asset_id}}/resume/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            },
+            {
+              "name": "POST Close",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/assets/{{asset_id}}/close/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            },
+            {
+              "name": "POST Cancel",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/assets/{{asset_id}}/cancel/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Asset Depreciation Lines",
+          "item": [
+            {
+              "name": "List Asset Depreciation Lines",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/asset-depreciation-lines/?asset_id={{asset_id}}&date_from={{date_from}}&date_to={{date_to}}&page={{page}}&page_size={{page_size}}&state={{state}}"
+              }
+            },
+            {
+              "name": "Create Asset Depreciation Line",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/asset-depreciation-lines/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"asset\": \"\",\n  \"move\": 1,\n  \"sequence\": \"\",\n  \"date\": \"2026-01-01\",\n  \"amount\": 1,\n  \"depreciated_value\": \"\",\n  \"residual_value\": \"\",\n  \"state\": 1\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Asset Depreciation Line",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/asset-depreciation-lines/{{asset_depreciation_line_id}}/"
+              }
+            },
+            {
+              "name": "Update Asset Depreciation Line",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/asset-depreciation-lines/{{asset_depreciation_line_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"asset\": \"\",\n  \"move\": 1,\n  \"sequence\": \"\",\n  \"date\": \"2026-01-01\",\n  \"amount\": 1,\n  \"depreciated_value\": \"\",\n  \"residual_value\": \"\",\n  \"state\": 1\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Asset Depreciation Line",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/asset-depreciation-lines/{{asset_depreciation_line_id}}/"
+              }
+            },
+            {
+              "name": "POST Post",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/asset-depreciation-lines/{{asset_depreciation_line_id}}/post/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Company",
+      "item": [
+        {
+          "name": "Companies",
+          "item": [
+            {
+              "name": "List Companies",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/companies/?page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create Companie",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/companies/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"\",\n  \"code\": \"\",\n  \"legal_name\": \"\",\n  \"email\": \"\",\n  \"phone\": \"\",\n  \"mobile\": \"\",\n  \"website\": \"\",\n  \"street\": \"\",\n  \"street2\": \"\",\n  \"city\": \"\",\n  \"zip\": \"\",\n  \"country\": 1,\n  \"state\": 1,\n  \"vat\": \"\",\n  \"document_layout\": \"\",\n  \"report_header\": \"\",\n  \"report_footer\": \"\",\n  \"company_details\": \"\",\n  \"logo_url\": \"\",\n  \"logo_web_url\": \"\",\n  \"email_header_color\": \"\",\n  \"email_button_color\": \"\",\n  \"lock_date\": \"2026-01-01\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Companie",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/companies/{{company_id}}/"
+              }
+            },
+            {
+              "name": "Update Companie",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/companies/{{company_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"\",\n  \"code\": \"\",\n  \"legal_name\": \"\",\n  \"email\": \"\",\n  \"phone\": \"\",\n  \"mobile\": \"\",\n  \"website\": \"\",\n  \"street\": \"\",\n  \"street2\": \"\",\n  \"city\": \"\",\n  \"zip\": \"\",\n  \"country\": 1,\n  \"state\": 1,\n  \"vat\": \"\",\n  \"document_layout\": \"\",\n  \"report_header\": \"\",\n  \"report_footer\": \"\",\n  \"company_details\": \"\",\n  \"logo_url\": \"\",\n  \"logo_web_url\": \"\",\n  \"email_header_color\": \"\",\n  \"email_button_color\": \"\",\n  \"lock_date\": \"2026-01-01\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Companie",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/companies/{{company_id}}/"
+              }
+            },
+            {
+              "name": "POST Update Info",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/companies/{{company_id}}/update-info/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            },
+            {
+              "name": "POST Update Mail Layout",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/companies/{{company_id}}/update-mail-layout/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            },
+            {
+              "name": "POST Configure Document Layout",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/companies/{{company_id}}/configure-document-layout/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            },
+            {
+              "name": "GET Preview Document",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/companies/{{company_id}}/preview-document/"
+              }
+            },
+            {
+              "name": "POST Apply Chart Template",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/companies/{{company_id}}/apply-chart-template/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Configuration",
+      "item": [
+        {
+          "name": "Partners",
+          "item": [
+            {
+              "name": "List Partners",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/partners/?active={{active}}&page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create Partner",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/partners/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"parent\": \"\",\n  \"name\": \"\",\n  \"type\": \"\",\n  \"email\": \"\",\n  \"phone\": \"\",\n  \"mobile\": \"\",\n  \"street\": \"\",\n  \"street2\": \"\",\n  \"city\": \"\",\n  \"zip\": \"\",\n  \"country\": 1,\n  \"state\": 1,\n  \"vat\": \"\",\n  \"is_company\": true,\n  \"customer_rank\": \"\",\n  \"supplier_rank\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Partner",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/partners/{{partner_id}}/"
+              }
+            },
+            {
+              "name": "Update Partner",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/partners/{{partner_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"parent\": \"\",\n  \"name\": \"\",\n  \"type\": \"\",\n  \"email\": \"\",\n  \"phone\": \"\",\n  \"mobile\": \"\",\n  \"street\": \"\",\n  \"street2\": \"\",\n  \"city\": \"\",\n  \"zip\": \"\",\n  \"country\": 1,\n  \"state\": 1,\n  \"vat\": \"\",\n  \"is_company\": true,\n  \"customer_rank\": \"\",\n  \"supplier_rank\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Partner",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/partners/{{partner_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Vendors",
+          "item": [
+            {
+              "name": "List Vendors",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/vendors/?is_company={{is_company}}&page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create Vendor",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/vendors/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"\",\n  \"email\": \"\",\n  \"is_company\": true,\n  \"supplier_rank\": \"\",\n  \"customer_rank\": \"\",\n  \"company\": 1\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Vendor",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/vendors/{{vendor_id}}/"
+              }
+            },
+            {
+              "name": "Update Vendor",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/vendors/{{vendor_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"\",\n  \"email\": \"\",\n  \"is_company\": true,\n  \"supplier_rank\": \"\",\n  \"customer_rank\": \"\",\n  \"company\": 1\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Vendor",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/vendors/{{vendor_id}}/"
+              }
+            },
+            {
+              "name": "POST Increase Rank",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/vendors/{{vendor_id}}/increase-rank/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            },
+            {
+              "name": "GET Vendor Bills",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/vendors/{{vendor_id}}/vendor-bills/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Account Roots",
+          "item": [
+            {
+              "name": "List Account Roots",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/account-roots/?page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create Account Root",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/account-roots/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"code\": \"\",\n  \"name\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Account Root",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/account-roots/{{account_root_id}}/"
+              }
+            },
+            {
+              "name": "Update Account Root",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/account-roots/{{account_root_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"code\": \"\",\n  \"name\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Account Root",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/account-roots/{{account_root_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Account Groups",
+          "item": [
+            {
+              "name": "List Account Groups",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/account-groups/?page={{page}}&page_size={{page_size}}&parent_id={{parent_id}}"
+              }
+            },
+            {
+              "name": "Create Account Group",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/account-groups/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"code_prefix_start\": \"\",\n  \"code_prefix_end\": \"\",\n  \"name\": \"\",\n  \"parent\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Account Group",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/account-groups/{{account_group_id}}/"
+              }
+            },
+            {
+              "name": "Update Account Group",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/account-groups/{{account_group_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"code_prefix_start\": \"\",\n  \"code_prefix_end\": \"\",\n  \"name\": \"\",\n  \"parent\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Account Group",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/account-groups/{{account_group_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Accounts",
+          "item": [
+            {
+              "name": "List Accounts",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/accounts/?account_type={{account_type}}&code={{code}}&deprecated={{deprecated}}&group_id={{group_id}}&name={{name}}&page={{page}}&page_size={{page_size}}&q={{q}}&reconcile={{reconcile}}&root_id={{root_id}}"
+              }
+            },
+            {
+              "name": "Create Account",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/accounts/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"root\": \"\",\n  \"group\": \"\",\n  \"currency\": 1,\n  \"code\": \"\",\n  \"name\": \"\",\n  \"account_type\": \"\",\n  \"reconcile\": true,\n  \"deprecated\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Account",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/accounts/{{account_id}}/"
+              }
+            },
+            {
+              "name": "Update Account",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/accounts/{{account_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"root\": \"\",\n  \"group\": \"\",\n  \"currency\": 1,\n  \"code\": \"\",\n  \"name\": \"\",\n  \"account_type\": \"\",\n  \"reconcile\": true,\n  \"deprecated\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Account",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/accounts/{{account_id}}/"
+              }
+            },
+            {
+              "name": "POST Archive",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/accounts/{{account_id}}/archive/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            },
+            {
+              "name": "POST Unarchive",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/accounts/{{account_id}}/unarchive/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Journal Groups",
+          "item": [
+            {
+              "name": "List Journal Groups",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/journal-groups/?page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create Journal Group",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/journal-groups/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"name\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Journal Group",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/journal-groups/{{journal_group_id}}/"
+              }
+            },
+            {
+              "name": "Update Journal Group",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/journal-groups/{{journal_group_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"name\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Journal Group",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/journal-groups/{{journal_group_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Journals",
+          "item": [
+            {
+              "name": "List Journals",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/journals/?active={{active}}&journal_type={{journal_type}}&page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create Journal",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/journals/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"company_name\": \"\",\n  \"group\": \"\",\n  \"group_name\": \"\",\n  \"currency\": 1,\n  \"currency_name\": \"\",\n  \"default_account\": \"\",\n  \"default_account_name\": \"\",\n  \"default_account_code\": \"\",\n  \"code\": \"\",\n  \"name\": \"\",\n  \"journal_type\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Journal",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/journals/{{journal_id}}/"
+              }
+            },
+            {
+              "name": "Update Journal",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/journals/{{journal_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"company_name\": \"\",\n  \"group\": \"\",\n  \"group_name\": \"\",\n  \"currency\": 1,\n  \"currency_name\": \"\",\n  \"default_account\": \"\",\n  \"default_account_name\": \"\",\n  \"default_account_code\": \"\",\n  \"code\": \"\",\n  \"name\": \"\",\n  \"journal_type\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Journal",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/journals/{{journal_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Incoterms",
+          "item": [
+            {
+              "name": "List Incoterms",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/incoterms/?active={{active}}&page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create Incoterm",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/incoterms/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"code\": \"\",\n  \"name\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Incoterm",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/incoterms/{{incoterm_id}}/"
+              }
+            },
+            {
+              "name": "Update Incoterm",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/incoterms/{{incoterm_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"code\": \"\",\n  \"name\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Incoterm",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/incoterms/{{incoterm_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Payment Terms",
+          "item": [
+            {
+              "name": "List Payment Terms",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/payment-terms/?active={{active}}&page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create Payment Term",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/payment-terms/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"name\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Payment Term",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/payment-terms/{{payment_term_id}}/"
+              }
+            },
+            {
+              "name": "Update Payment Term",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/payment-terms/{{payment_term_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"name\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Payment Term",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/payment-terms/{{payment_term_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Payment Term Lines",
+          "item": [
+            {
+              "name": "List Payment Term Lines",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/payment-term-lines/?page={{page}}&page_size={{page_size}}&payment_term_id={{payment_term_id}}"
+              }
+            },
+            {
+              "name": "Create Payment Term Line",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/payment-term-lines/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payment_term\": 1,\n  \"sequence\": \"\",\n  \"value_type\": \"\",\n  \"value\": \"\",\n  \"due_type\": \"\",\n  \"due_days\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Payment Term Line",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/payment-term-lines/{{payment_term_line_id}}/"
+              }
+            },
+            {
+              "name": "Update Payment Term Line",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/payment-term-lines/{{payment_term_line_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payment_term\": 1,\n  \"sequence\": \"\",\n  \"value_type\": \"\",\n  \"value\": \"\",\n  \"due_type\": \"\",\n  \"due_days\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Payment Term Line",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/payment-term-lines/{{payment_term_line_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Tax Groups",
+          "item": [
+            {
+              "name": "List Tax Groups",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/tax-groups/?active={{active}}&country_id={{country_id}}&page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create Tax Group",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/tax-groups/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"name\": \"\",\n  \"description\": \"\",\n  \"sequence\": \"\",\n  \"country\": 1,\n  \"tax_payable_account\": \"\",\n  \"tax_receivable_account\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Tax Group",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/tax-groups/{{tax_group_id}}/"
+              }
+            },
+            {
+              "name": "Update Tax Group",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/tax-groups/{{tax_group_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"name\": \"\",\n  \"description\": \"\",\n  \"sequence\": \"\",\n  \"country\": 1,\n  \"tax_payable_account\": \"\",\n  \"tax_receivable_account\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Tax Group",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/tax-groups/{{tax_group_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Taxes",
+          "item": [
+            {
+              "name": "List Taxes",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/taxes/?active={{active}}&page={{page}}&page_size={{page_size}}&scope={{scope}}"
+              }
+            },
+            {
+              "name": "Create Taxe",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/taxes/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"tax_group\": \"\",\n  \"account\": 1,\n  \"name\": \"\",\n  \"amount_type\": \"\",\n  \"amount\": 1,\n  \"scope\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Taxe",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/taxes/{{tax_id}}/"
+              }
+            },
+            {
+              "name": "Update Taxe",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/taxes/{{tax_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"tax_group\": \"\",\n  \"account\": 1,\n  \"name\": \"\",\n  \"amount_type\": \"\",\n  \"amount\": 1,\n  \"scope\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Taxe",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/taxes/{{tax_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Tax Repartition Lines",
+          "item": [
+            {
+              "name": "List Tax Repartition Lines",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/tax-repartition-lines/?document_type={{document_type}}&page={{page}}&page_size={{page_size}}&tax_id={{tax_id}}"
+              }
+            },
+            {
+              "name": "Create Tax Repartition Line",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/tax-repartition-lines/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tax\": 1,\n  \"account\": 1,\n  \"document_type\": \"\",\n  \"repartition_type\": \"\",\n  \"factor_percent\": \"\",\n  \"sequence\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Tax Repartition Line",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/tax-repartition-lines/{{tax_repartition_line_id}}/"
+              }
+            },
+            {
+              "name": "Update Tax Repartition Line",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/tax-repartition-lines/{{tax_repartition_line_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tax\": 1,\n  \"account\": 1,\n  \"document_type\": \"\",\n  \"repartition_type\": \"\",\n  \"factor_percent\": \"\",\n  \"sequence\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Tax Repartition Line",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/tax-repartition-lines/{{tax_repartition_line_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Payment Methods",
+          "item": [
+            {
+              "name": "List Payment Methods",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/payment-methods/?active={{active}}&page={{page}}&page_size={{page_size}}&payment_direction={{payment_direction}}"
+              }
+            },
+            {
+              "name": "Create Payment Method",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/payment-methods/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"\",\n  \"code\": \"\",\n  \"payment_direction\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Payment Method",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/payment-methods/{{payment_method_id}}/"
+              }
+            },
+            {
+              "name": "Update Payment Method",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/payment-methods/{{payment_method_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"\",\n  \"code\": \"\",\n  \"payment_direction\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Payment Method",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/payment-methods/{{payment_method_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Payment Method Lines",
+          "item": [
+            {
+              "name": "List Payment Method Lines",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/payment-method-lines/?active={{active}}&journal_id={{journal_id}}&page={{page}}&page_size={{page_size}}&payment_method_id={{payment_method_id}}"
+              }
+            },
+            {
+              "name": "Create Payment Method Line",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/payment-method-lines/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"journal\": 1,\n  \"payment_method\": \"\",\n  \"sequence\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Payment Method Line",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/payment-method-lines/{{payment_method_line_id}}/"
+              }
+            },
+            {
+              "name": "Update Payment Method Line",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/payment-method-lines/{{payment_method_line_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"journal\": 1,\n  \"payment_method\": \"\",\n  \"sequence\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Payment Method Line",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/payment-method-lines/{{payment_method_line_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Transfer Models",
+          "item": [
+            {
+              "name": "List Transfer Models",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/transfer-models/?active={{active}}&journal_id={{journal_id}}&page={{page}}&page_size={{page_size}}&state={{state}}"
+              }
+            },
+            {
+              "name": "Create Transfer Model",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/transfer-models/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"\",\n  \"active\": true,\n  \"journal\": 1,\n  \"company\": 1,\n  \"date_start\": \"2026-01-01\",\n  \"date_stop\": \"2026-01-01\",\n  \"frequency\": \"\",\n  \"accounts\": \"\",\n  \"state\": 1\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Transfer Model",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/transfer-models/{{transfer_model_id}}/"
+              }
+            },
+            {
+              "name": "Update Transfer Model",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/transfer-models/{{transfer_model_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"\",\n  \"active\": true,\n  \"journal\": 1,\n  \"company\": 1,\n  \"date_start\": \"2026-01-01\",\n  \"date_stop\": \"2026-01-01\",\n  \"frequency\": \"\",\n  \"accounts\": \"\",\n  \"state\": 1\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Transfer Model",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/transfer-models/{{transfer_model_id}}/"
+              }
+            },
+            {
+              "name": "POST Activate",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/transfer-models/{{transfer_model_id}}/activate/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            },
+            {
+              "name": "POST Disable",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/transfer-models/{{transfer_model_id}}/disable/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            },
+            {
+              "name": "POST Archive",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/transfer-models/{{transfer_model_id}}/archive/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            },
+            {
+              "name": "POST Perform Auto Transfer",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/transfer-models/{{transfer_model_id}}/perform-auto-transfer/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            },
+            {
+              "name": "POST Cron Auto Transfer",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/transfer-models/cron-auto-transfer/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Transfer Model Lines",
+          "item": [
+            {
+              "name": "List Transfer Model Lines",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/transfer-model-lines/?page={{page}}&page_size={{page_size}}&transfer_model_id={{transfer_model_id}}"
+              }
+            },
+            {
+              "name": "Create Transfer Model Line",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/transfer-model-lines/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transfer_model\": \"\",\n  \"account\": 1,\n  \"percent\": \"\",\n  \"analytic_accounts\": \"\",\n  \"partners\": \"\",\n  \"sequence\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Transfer Model Line",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/transfer-model-lines/{{transfer_model_line_id}}/"
+              }
+            },
+            {
+              "name": "Update Transfer Model Line",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/transfer-model-lines/{{transfer_model_line_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transfer_model\": \"\",\n  \"account\": 1,\n  \"percent\": \"\",\n  \"analytic_accounts\": \"\",\n  \"partners\": \"\",\n  \"sequence\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Transfer Model Line",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/transfer-model-lines/{{transfer_model_line_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Followup Levels",
+          "item": [
+            {
+              "name": "List Followup Levels",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/followup-levels/?page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create Followup Level",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/followup-levels/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"name\": \"\",\n  \"delay_days\": \"\",\n  \"action\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Followup Level",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/followup-levels/{{followup_level_id}}/"
+              }
+            },
+            {
+              "name": "Update Followup Level",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/followup-levels/{{followup_level_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"name\": \"\",\n  \"delay_days\": \"\",\n  \"action\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Followup Level",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/followup-levels/{{followup_level_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Bank Accounts",
+          "item": [
+            {
+              "name": "List Bank Accounts",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/bank-accounts/?journal_id={{journal_id}}&page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create Bank Account",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/bank-accounts/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"journal\": 1,\n  \"bank_name\": \"\",\n  \"account_holder\": \"\",\n  \"iban\": \"\",\n  \"swift\": \"\",\n  \"account_number\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Bank Account",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/bank-accounts/{{bank_account_id}}/"
+              }
+            },
+            {
+              "name": "Update Bank Account",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/bank-accounts/{{bank_account_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"journal\": 1,\n  \"bank_name\": \"\",\n  \"account_holder\": \"\",\n  \"iban\": \"\",\n  \"swift\": \"\",\n  \"account_number\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Bank Account",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/bank-accounts/{{bank_account_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Reconciliation Models",
+          "item": [
+            {
+              "name": "List Reconciliation Models",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/reconciliation-models/?active={{active}}&page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create Reconciliation Model",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/reconciliation-models/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"name\": \"\",\n  \"journal\": 1,\n  \"auto_reconcile\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Reconciliation Model",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/reconciliation-models/{{reconciliation_model_id}}/"
+              }
+            },
+            {
+              "name": "Update Reconciliation Model",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/reconciliation-models/{{reconciliation_model_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"name\": \"\",\n  \"journal\": 1,\n  \"auto_reconcile\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Reconciliation Model",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/reconciliation-models/{{reconciliation_model_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Reconciliation Model Lines",
+          "item": [
+            {
+              "name": "List Reconciliation Model Lines",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/reconciliation-model-lines/?page={{page}}&page_size={{page_size}}&reconciliation_model_id={{reconciliation_model_id}}"
+              }
+            },
+            {
+              "name": "Create Reconciliation Model Line",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/reconciliation-model-lines/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reconciliation_model\": \"\",\n  \"sequence\": \"\",\n  \"label\": \"\",\n  \"account\": 1,\n  \"tax\": 1,\n  \"amount_type\": \"\",\n  \"amount\": 1\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Reconciliation Model Line",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/reconciliation-model-lines/{{reconciliation_model_line_id}}/"
+              }
+            },
+            {
+              "name": "Update Reconciliation Model Line",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/reconciliation-model-lines/{{reconciliation_model_line_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reconciliation_model\": \"\",\n  \"sequence\": \"\",\n  \"label\": \"\",\n  \"account\": 1,\n  \"tax\": 1,\n  \"amount_type\": \"\",\n  \"amount\": 1\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Reconciliation Model Line",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/reconciliation-model-lines/{{reconciliation_model_line_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Fiscal Positions",
+          "item": [
+            {
+              "name": "List Fiscal Positions",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/fiscal-positions/?active={{active}}&page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create Fiscal Position",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/fiscal-positions/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"name\": \"\",\n  \"country\": 1,\n  \"auto_apply\": \"\",\n  \"vat_required\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Fiscal Position",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/fiscal-positions/{{fiscal_position_id}}/"
+              }
+            },
+            {
+              "name": "Update Fiscal Position",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/fiscal-positions/{{fiscal_position_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"name\": \"\",\n  \"country\": 1,\n  \"auto_apply\": \"\",\n  \"vat_required\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Fiscal Position",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/fiscal-positions/{{fiscal_position_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Fiscal Position Tax Maps",
+          "item": [
+            {
+              "name": "List Fiscal Position Tax Maps",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/fiscal-position-tax-maps/?fiscal_position_id={{fiscal_position_id}}&page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create Fiscal Position Tax Map",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/fiscal-position-tax-maps/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fiscal_position\": \"\",\n  \"tax_src\": \"\",\n  \"tax_dest\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Fiscal Position Tax Map",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/fiscal-position-tax-maps/{{fiscal_position_tax_map_id}}/"
+              }
+            },
+            {
+              "name": "Update Fiscal Position Tax Map",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/fiscal-position-tax-maps/{{fiscal_position_tax_map_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fiscal_position\": \"\",\n  \"tax_src\": \"\",\n  \"tax_dest\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Fiscal Position Tax Map",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/fiscal-position-tax-maps/{{fiscal_position_tax_map_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Fiscal Position Account Maps",
+          "item": [
+            {
+              "name": "List Fiscal Position Account Maps",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/fiscal-position-account-maps/?fiscal_position_id={{fiscal_position_id}}&page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create Fiscal Position Account Map",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/fiscal-position-account-maps/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fiscal_position\": \"\",\n  \"account_src\": \"\",\n  \"account_dest\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Fiscal Position Account Map",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/fiscal-position-account-maps/{{fiscal_position_account_map_id}}/"
+              }
+            },
+            {
+              "name": "Update Fiscal Position Account Map",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/fiscal-position-account-maps/{{fiscal_position_account_map_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fiscal_position\": \"\",\n  \"account_src\": \"\",\n  \"account_dest\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Fiscal Position Account Map",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/fiscal-position-account-maps/{{fiscal_position_account_map_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Ledgers",
+          "item": [
+            {
+              "name": "List Ledgers",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/ledgers/?active={{active}}&page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create Ledger",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/ledgers/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"currency\": 1,\n  \"name\": \"\",\n  \"code\": \"\",\n  \"is_default\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Ledger",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/ledgers/{{ledger_id}}/"
+              }
+            },
+            {
+              "name": "Update Ledger",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/ledgers/{{ledger_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"currency\": 1,\n  \"name\": \"\",\n  \"code\": \"\",\n  \"is_default\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Ledger",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/ledgers/{{ledger_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Financial Budgets",
+          "item": [
+            {
+              "name": "List Financial Budgets",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/financial-budgets/?page={{page}}&page_size={{page_size}}&state={{state}}"
+              }
+            },
+            {
+              "name": "Create Financial Budget",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/financial-budgets/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"name\": \"\",\n  \"date_from\": \"2026-01-01\",\n  \"date_to\": \"2026-01-01\",\n  \"state\": 1\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Financial Budget",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/financial-budgets/{{financial_budget_id}}/"
+              }
+            },
+            {
+              "name": "Update Financial Budget",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/financial-budgets/{{financial_budget_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"name\": \"\",\n  \"date_from\": \"2026-01-01\",\n  \"date_to\": \"2026-01-01\",\n  \"state\": 1\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Financial Budget",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/financial-budgets/{{financial_budget_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Financial Budget Lines",
+          "item": [
+            {
+              "name": "List Financial Budget Lines",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/financial-budget-lines/?budget_id={{budget_id}}&page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create Financial Budget Line",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/financial-budget-lines/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"budget\": \"\",\n  \"account\": 1,\n  \"name\": \"\",\n  \"planned_amount\": \"\",\n  \"practical_amount\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Financial Budget Line",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/financial-budget-lines/{{financial_budget_line_id}}/"
+              }
+            },
+            {
+              "name": "Update Financial Budget Line",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/financial-budget-lines/{{financial_budget_line_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"budget\": \"\",\n  \"account\": 1,\n  \"name\": \"\",\n  \"planned_amount\": \"\",\n  \"practical_amount\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Financial Budget Line",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/financial-budget-lines/{{financial_budget_line_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Asset Models",
+          "item": [
+            {
+              "name": "List Asset Models",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/asset-models/?active={{active}}&page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create Asset Model",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/asset-models/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"name\": \"\",\n  \"method\": \"\",\n  \"method_number\": \"\",\n  \"method_period_months\": \"\",\n  \"prorata\": \"\",\n  \"account_asset\": \"\",\n  \"account_depreciation\": \"\",\n  \"account_expense\": \"\",\n  \"journal\": 1,\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Asset Model",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/asset-models/{{asset_model_id}}/"
+              }
+            },
+            {
+              "name": "Update Asset Model",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/asset-models/{{asset_model_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"name\": \"\",\n  \"method\": \"\",\n  \"method_number\": \"\",\n  \"method_period_months\": \"\",\n  \"prorata\": \"\",\n  \"account_asset\": \"\",\n  \"account_depreciation\": \"\",\n  \"account_expense\": \"\",\n  \"journal\": 1,\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Asset Model",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/asset-models/{{asset_model_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Disallowed Expense Categories",
+          "item": [
+            {
+              "name": "List Disallowed Expense Categories",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/disallowed-expense-categories/?active={{active}}&page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create Disallowed Expense Categorie",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/disallowed-expense-categories/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"name\": \"\",\n  \"disallow_percent\": \"\",\n  \"expense_account\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Disallowed Expense Categorie",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/disallowed-expense-categories/{{disallowed_expense_category_id}}/"
+              }
+            },
+            {
+              "name": "Update Disallowed Expense Categorie",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/disallowed-expense-categories/{{disallowed_expense_category_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"name\": \"\",\n  \"disallow_percent\": \"\",\n  \"expense_account\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Disallowed Expense Categorie",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/disallowed-expense-categories/{{disallowed_expense_category_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Payment Providers",
+          "item": [
+            {
+              "name": "List Payment Providers",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/payment-providers/?active={{active}}&page={{page}}&page_size={{page_size}}&state={{state}}"
+              }
+            },
+            {
+              "name": "Create Payment Provider",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/payment-providers/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"journal\": 1,\n  \"name\": \"\",\n  \"code\": \"\",\n  \"state\": 1,\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Payment Provider",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/payment-providers/{{payment_provider_id}}/"
+              }
+            },
+            {
+              "name": "Update Payment Provider",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/payment-providers/{{payment_provider_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"journal\": 1,\n  \"name\": \"\",\n  \"code\": \"\",\n  \"state\": 1,\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Payment Provider",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/payment-providers/{{payment_provider_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Payment Provider Methods",
+          "item": [
+            {
+              "name": "List Payment Provider Methods",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/payment-provider-methods/?page={{page}}&page_size={{page_size}}&provider_id={{provider_id}}"
+              }
+            },
+            {
+              "name": "Create Payment Provider Method",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/payment-provider-methods/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"provider\": 1,\n  \"payment_method\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Payment Provider Method",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/payment-provider-methods/{{payment_provider_method_id}}/"
+              }
+            },
+            {
+              "name": "Update Payment Provider Method",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/payment-provider-methods/{{payment_provider_method_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"provider\": 1,\n  \"payment_method\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Payment Provider Method",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/payment-provider-methods/{{payment_provider_method_id}}/"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Customers",
+      "item": [
+        {
+          "name": "Customers",
+          "item": [
+            {
+              "name": "List Customers",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/customers/?active={{active}}&is_company={{is_company}}&page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create Customer",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/customers/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"parent\": \"\",\n  \"name\": \"\",\n  \"type\": \"\",\n  \"email\": \"\",\n  \"phone\": \"\",\n  \"mobile\": \"\",\n  \"street\": \"\",\n  \"street2\": \"\",\n  \"city\": \"\",\n  \"zip\": \"\",\n  \"country\": 1,\n  \"state\": 1,\n  \"vat\": \"\",\n  \"is_company\": true,\n  \"customer_rank\": \"\",\n  \"supplier_rank\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Customer",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/customers/{{customer_id}}/"
+              }
+            },
+            {
+              "name": "Update Customer",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/customers/{{customer_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"parent\": \"\",\n  \"name\": \"\",\n  \"type\": \"\",\n  \"email\": \"\",\n  \"phone\": \"\",\n  \"mobile\": \"\",\n  \"street\": \"\",\n  \"street2\": \"\",\n  \"city\": \"\",\n  \"zip\": \"\",\n  \"country\": 1,\n  \"state\": 1,\n  \"vat\": \"\",\n  \"is_company\": true,\n  \"customer_rank\": \"\",\n  \"supplier_rank\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Customer",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/customers/{{customer_id}}/"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Entries",
+      "item": [
+        {
+          "name": "Moves",
+          "item": [
+            {
+              "name": "List Moves",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/moves/?date_from={{date_from}}&date_to={{date_to}}&journal_id={{journal_id}}&move_type={{move_type}}&page={{page}}&page_size={{page_size}}&state={{state}}"
+              }
+            },
+            {
+              "name": "Create Move",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/moves/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"journal\": 1,\n  \"partner\": 1,\n  \"currency\": 1,\n  \"payment_term\": 1,\n  \"incoterm\": \"\",\n  \"incoterm_location\": \"\",\n  \"reference\": \"\",\n  \"name\": \"\",\n  \"invoice_date\": \"2026-01-01\",\n  \"date\": \"2026-01-01\",\n  \"state\": 1,\n  \"move_type\": \"\",\n  \"is_debit_note\": \"\",\n  \"transfer_model\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Move",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/moves/{{move_id}}/"
+              }
+            },
+            {
+              "name": "Update Move",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/moves/{{move_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"journal\": 1,\n  \"partner\": 1,\n  \"currency\": 1,\n  \"payment_term\": 1,\n  \"incoterm\": \"\",\n  \"incoterm_location\": \"\",\n  \"reference\": \"\",\n  \"name\": \"\",\n  \"invoice_date\": \"2026-01-01\",\n  \"date\": \"2026-01-01\",\n  \"state\": 1,\n  \"move_type\": \"\",\n  \"is_debit_note\": \"\",\n  \"transfer_model\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Move",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/moves/{{move_id}}/"
+              }
+            },
+            {
+              "name": "POST Post",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/moves/{{move_id}}/post/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Move Lines",
+          "item": [
+            {
+              "name": "List Move Lines",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/move-lines/?account_id={{account_id}}&date_from={{date_from}}&date_to={{date_to}}&move_id={{move_id}}&page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create Move Line",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/move-lines/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"move\": 1,\n  \"account\": 1,\n  \"partner\": 1,\n  \"currency\": 1,\n  \"analytic_account\": \"\",\n  \"analytic_distribution\": \"\",\n  \"tax\": 1,\n  \"tax_repartition_line\": \"\",\n  \"name\": \"\",\n  \"date\": \"2026-01-01\",\n  \"debit\": \"\",\n  \"credit\": \"\",\n  \"amount_currency\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Move Line",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/move-lines/{{move_line_id}}/"
+              }
+            },
+            {
+              "name": "Update Move Line",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/move-lines/{{move_line_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"move\": 1,\n  \"account\": 1,\n  \"partner\": 1,\n  \"currency\": 1,\n  \"analytic_account\": \"\",\n  \"analytic_distribution\": \"\",\n  \"tax\": 1,\n  \"tax_repartition_line\": \"\",\n  \"name\": \"\",\n  \"date\": \"2026-01-01\",\n  \"debit\": \"\",\n  \"credit\": \"\",\n  \"amount_currency\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Move Line",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/move-lines/{{move_line_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Journal Items",
+          "item": [
+            {
+              "name": "List Journal Items",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/journal-items/?account_id={{account_id}}&date_from={{date_from}}&date_to={{date_to}}&move_id={{move_id}}&page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create Journal Item",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/journal-items/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"move\": 1,\n  \"account\": 1,\n  \"partner\": 1,\n  \"currency\": 1,\n  \"analytic_account\": \"\",\n  \"analytic_distribution\": \"\",\n  \"tax\": 1,\n  \"tax_repartition_line\": \"\",\n  \"name\": \"\",\n  \"date\": \"2026-01-01\",\n  \"debit\": \"\",\n  \"credit\": \"\",\n  \"amount_currency\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Journal Item",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/journal-items/{{journal_item_id}}/"
+              }
+            },
+            {
+              "name": "Update Journal Item",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/journal-items/{{journal_item_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"move\": 1,\n  \"account\": 1,\n  \"partner\": 1,\n  \"currency\": 1,\n  \"analytic_account\": \"\",\n  \"analytic_distribution\": \"\",\n  \"tax\": 1,\n  \"tax_repartition_line\": \"\",\n  \"name\": \"\",\n  \"date\": \"2026-01-01\",\n  \"debit\": \"\",\n  \"credit\": \"\",\n  \"amount_currency\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Journal Item",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/journal-items/{{journal_item_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Journal Entries",
+          "item": [
+            {
+              "name": "POST Set Draft",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/journal-entries/{{journal_entry_id}}/set-draft/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            },
+            {
+              "name": "POST Cancel",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/journal-entries/{{journal_entry_id}}/cancel/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            },
+            {
+              "name": "POST Reverse",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/journal-entries/{{journal_entry_id}}/reverse/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Journal Entry Lines",
+          "item": []
+        }
+      ]
+    },
+    {
+      "name": "Invoicing",
+      "item": [
+        {
+          "name": "Invoices",
+          "item": [
+            {
+              "name": "List Invoices",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/invoices/?date_from={{date_from}}&date_to={{date_to}}&journal_id={{journal_id}}&move_type={{move_type}}&page={{page}}&page_size={{page_size}}&state={{state}}"
+              }
+            },
+            {
+              "name": "Create Invoice",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/invoices/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"journal\": 1,\n  \"partner\": 1,\n  \"currency\": 1,\n  \"payment_term\": 1,\n  \"incoterm\": \"\",\n  \"incoterm_location\": \"\",\n  \"reference\": \"\",\n  \"name\": \"\",\n  \"invoice_date\": \"2026-01-01\",\n  \"date\": \"2026-01-01\",\n  \"move_type\": \"\",\n  \"is_debit_note\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Invoice",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/invoices/{{invoice_id}}/"
+              }
+            },
+            {
+              "name": "Update Invoice",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/invoices/{{invoice_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"journal\": 1,\n  \"partner\": 1,\n  \"currency\": 1,\n  \"payment_term\": 1,\n  \"incoterm\": \"\",\n  \"incoterm_location\": \"\",\n  \"reference\": \"\",\n  \"name\": \"\",\n  \"invoice_date\": \"2026-01-01\",\n  \"date\": \"2026-01-01\",\n  \"move_type\": \"\",\n  \"is_debit_note\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Invoice",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/invoices/{{invoice_id}}/"
+              }
+            },
+            {
+              "name": "POST Post",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/invoices/{{invoice_id}}/post/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            },
+            {
+              "name": "POST Cancel",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/invoices/{{invoice_id}}/cancel/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            },
+            {
+              "name": "POST Reset To Draft",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/invoices/{{invoice_id}}/reset-to-draft/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            },
+            {
+              "name": "POST Reverse",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/invoices/{{invoice_id}}/reverse/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            },
+            {
+              "name": "POST Create Debit Note",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/invoices/{{invoice_id}}/create-debit-note/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Vendor Bills",
+          "item": []
+        },
+        {
+          "name": "Vendor Refunds",
+          "item": [
+            {
+              "name": "POST Create Debit Note",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/vendor-refunds/{{vendor_refund_id}}/create-debit-note/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Vendor Debit Notes",
+          "item": [
+            {
+              "name": "POST Reverse",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/vendor-debit-notes/{{vendor_debit_note_id}}/reverse/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            },
+            {
+              "name": "POST Create Debit Note",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/vendor-debit-notes/{{vendor_debit_note_id}}/create-debit-note/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Vendor Payments",
+          "item": [
+            {
+              "name": "POST Reset To Draft",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/vendor-payments/{{vendor_payment_id}}/reset-to-draft/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Credit Notes",
+          "item": [
+            {
+              "name": "POST Reverse",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/credit-notes/{{credit_note_id}}/reverse/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Debit Notes",
+          "item": [
+            {
+              "name": "POST Reverse",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/debit-notes/{{debit_note_id}}/reverse/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            },
+            {
+              "name": "POST Create Debit Note",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/debit-notes/{{debit_note_id}}/create-debit-note/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Payments",
+          "item": [
+            {
+              "name": "List Payments",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/payments/?journal_id={{journal_id}}&page={{page}}&page_size={{page_size}}&partner_id={{partner_id}}&payment_type={{payment_type}}&state={{state}}"
+              }
+            },
+            {
+              "name": "Create Payment",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/payments/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"partner\": 1,\n  \"journal\": 1,\n  \"payment_method_line\": 1,\n  \"currency\": 1,\n  \"date\": \"2026-01-01\",\n  \"amount\": 1,\n  \"payment_type\": \"\",\n  \"reference\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Payment",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/payments/{{payment_id}}/"
+              }
+            },
+            {
+              "name": "Update Payment",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/payments/{{payment_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"partner\": 1,\n  \"journal\": 1,\n  \"payment_method_line\": 1,\n  \"currency\": 1,\n  \"date\": \"2026-01-01\",\n  \"amount\": 1,\n  \"payment_type\": \"\",\n  \"reference\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Payment",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/payments/{{payment_id}}/"
+              }
+            },
+            {
+              "name": "POST Post",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/payments/{{payment_id}}/post/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            },
+            {
+              "name": "POST Cancel",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/payments/{{payment_id}}/cancel/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Invoice Lines",
+          "item": [
+            {
+              "name": "List Invoice Lines",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/invoice-lines/?move_id={{move_id}}&page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create Invoice Line",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/invoice-lines/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"move\": 1,\n  \"account\": 1,\n  \"tax\": 1,\n  \"name\": \"\",\n  \"quantity\": 1,\n  \"unit_price\": \"\",\n  \"discount_percent\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Invoice Line",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/invoice-lines/{{invoice_line_id}}/"
+              }
+            },
+            {
+              "name": "Update Invoice Line",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/invoice-lines/{{invoice_line_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"move\": 1,\n  \"account\": 1,\n  \"tax\": 1,\n  \"name\": \"\",\n  \"quantity\": 1,\n  \"unit_price\": \"\",\n  \"discount_percent\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Invoice Line",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/invoice-lines/{{invoice_line_id}}/"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Localization",
+      "item": [
+        {
+          "name": "Currencies",
+          "item": [
+            {
+              "name": "List Currencies",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/currencies/?page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create Currencie",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/currencies/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"\",\n  \"code\": \"\",\n  \"symbol\": \"\",\n  \"decimal_places\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Currencie",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/currencies/{{currency_id}}/"
+              }
+            },
+            {
+              "name": "Update Currencie",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/currencies/{{currency_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"\",\n  \"code\": \"\",\n  \"symbol\": \"\",\n  \"decimal_places\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Currencie",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/currencies/{{currency_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Countries",
+          "item": [
+            {
+              "name": "List Countries",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/countries/?page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create Countrie",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/countries/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"\",\n  \"code\": \"\",\n  \"phone_code\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Countrie",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/countries/{{country_id}}/"
+              }
+            },
+            {
+              "name": "Update Countrie",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/countries/{{country_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"\",\n  \"code\": \"\",\n  \"phone_code\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Countrie",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/countries/{{country_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "States",
+          "item": [
+            {
+              "name": "List States",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/states/?country_id={{country_id}}&page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create State",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/states/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"country\": 1,\n  \"name\": \"\",\n  \"code\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Get State",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/states/{{country_state_id}}/"
+              }
+            },
+            {
+              "name": "Update State",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/states/{{country_state_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"country\": 1,\n  \"name\": \"\",\n  \"code\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete State",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/states/{{country_state_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Cities",
+          "item": [
+            {
+              "name": "List Cities",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/cities/?country_id={{country_id}}&page={{page}}&page_size={{page_size}}&state_id={{state_id}}"
+              }
+            },
+            {
+              "name": "Create Citie",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/cities/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"country\": 1,\n  \"state\": 1,\n  \"name\": \"\",\n  \"postal_code\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Citie",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/cities/{{country_city_id}}/"
+              }
+            },
+            {
+              "name": "Update Citie",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/cities/{{country_city_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"country\": 1,\n  \"state\": 1,\n  \"name\": \"\",\n  \"postal_code\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Citie",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/cities/{{country_city_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Country Currencies",
+          "item": [
+            {
+              "name": "List Country Currencies",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/country-currencies/?active={{active}}&country_id={{country_id}}&currency_id={{currency_id}}&is_default={{is_default}}&page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create Country Currencie",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/country-currencies/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"country\": 1,\n  \"currency\": 1,\n  \"is_default\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Country Currencie",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/country-currencies/{{country_currency_id}}/"
+              }
+            },
+            {
+              "name": "Update Country Currencie",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/country-currencies/{{country_currency_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"country\": 1,\n  \"currency\": 1,\n  \"is_default\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Country Currencie",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/country-currencies/{{country_currency_id}}/"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "Products",
+          "item": [
+            {
+              "name": "List Products",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/products/?active={{active}}&category_id={{category_id}}&page={{page}}&page_size={{page_size}}&product_type={{product_type}}&purchase_ok={{purchase_ok}}&sale_ok={{sale_ok}}"
+              }
+            },
+            {
+              "name": "Create Product",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/products/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"category\": \"\",\n  \"name\": \"\",\n  \"default_code\": \"\",\n  \"barcode\": \"\",\n  \"product_type\": \"\",\n  \"sale_ok\": true,\n  \"purchase_ok\": true,\n  \"list_price\": \"\",\n  \"standard_price\": \"\",\n  \"income_account\": \"\",\n  \"expense_account\": \"\",\n  \"sale_tax\": \"\",\n  \"purchase_tax\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Product",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/products/{{product_id}}/"
+              }
+            },
+            {
+              "name": "Update Product",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/products/{{product_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"category\": \"\",\n  \"name\": \"\",\n  \"default_code\": \"\",\n  \"barcode\": \"\",\n  \"product_type\": \"\",\n  \"sale_ok\": true,\n  \"purchase_ok\": true,\n  \"list_price\": \"\",\n  \"standard_price\": \"\",\n  \"income_account\": \"\",\n  \"expense_account\": \"\",\n  \"sale_tax\": \"\",\n  \"purchase_tax\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Product",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/products/{{product_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Vendor Products",
+          "item": []
+        },
+        {
+          "name": "Product Categories",
+          "item": [
+            {
+              "name": "List Product Categories",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/product-categories/?active={{active}}&page={{page}}&page_size={{page_size}}&parent_id={{parent_id}}"
+              }
+            },
+            {
+              "name": "Create Product Categorie",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/product-categories/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"parent\": \"\",\n  \"name\": \"\",\n  \"code\": \"\",\n  \"income_account\": \"\",\n  \"expense_account\": \"\",\n  \"valuation_account\": \"\",\n  \"costing_method\": \"\",\n  \"valuation_method\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Product Categorie",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/product-categories/{{product_category_id}}/"
+              }
+            },
+            {
+              "name": "Update Product Categorie",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/product-categories/{{product_category_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"parent\": \"\",\n  \"name\": \"\",\n  \"code\": \"\",\n  \"income_account\": \"\",\n  \"expense_account\": \"\",\n  \"valuation_account\": \"\",\n  \"costing_method\": \"\",\n  \"valuation_method\": \"\",\n  \"active\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Product Categorie",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/product-categories/{{product_category_id}}/"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Session",
+      "item": [
+        {
+          "name": "Session",
+          "item": [
+            {
+              "name": "POST Authenticate",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/session/authenticate/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"admin\"\n}"
+                },
+                "auth": {
+                  "type": "noauth"
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "const data = pm.response.json();",
+                      "pm.collectionVariables.set(\"access_token\", data?.tokens?.access || pm.collectionVariables.get(\"access_token\") || \"\");",
+                      "pm.collectionVariables.set(\"refresh_token\", data?.tokens?.refresh || pm.collectionVariables.get(\"refresh_token\") || \"\");"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "POST Signup",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/session/signup/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"newuser\",\n  \"password\": \"Pass@12345\",\n  \"companies\": [\n    {\n      \"name\": \"New Company 1\",\n      \"country_id\": {{country_id}},\n      \"currency_id\": {{currency_id}},\n      \"is_active\": true\n    },\n    {\n      \"name\": \"New Company 2\",\n      \"country_id\": {{country_id}},\n      \"currency_id\": {{currency_id}},\n      \"is_active\": true\n    }\n  ]\n}"
+                },
+                "auth": {
+                  "type": "noauth"
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "const data = pm.response.json();",
+                      "pm.collectionVariables.set(\"access_token\", data?.tokens?.access || pm.collectionVariables.get(\"access_token\") || \"\");",
+                      "pm.collectionVariables.set(\"refresh_token\", data?.tokens?.refresh || pm.collectionVariables.get(\"refresh_token\") || \"\");"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "POST Refresh",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/session/refresh/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"refresh\": \"{{refresh_token}}\"\n}"
+                },
+                "auth": {
+                  "type": "noauth"
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "const data = pm.response.json();",
+                      "pm.collectionVariables.set(\"access_token\", data?.tokens?.access || pm.collectionVariables.get(\"access_token\") || \"\");",
+                      "pm.collectionVariables.set(\"refresh_token\", data?.tokens?.refresh || pm.collectionVariables.get(\"refresh_token\") || \"\");"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "GET Get Session Info",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/session/get-session-info/"
+              }
+            },
+            {
+              "name": "POST Switch Company",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/session/switch-company/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_id\": {{company_id}}\n}"
+                }
+              }
+            },
+            {
+              "name": "POST Set Active Companies",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/session/set-active-companies/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_ids\": [{{company_id}}]\n}"
+                }
+              }
+            },
+            {
+              "name": "POST Logout",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/session/logout/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                }
+              }
+            },
+            {
+              "name": "PATCH Update Profile",
+              "request": {
+                "method": "PATCH",
+                "url": "{{base_url}}/api/session/update-profile/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\",\n  \"email\": \"john@example.com\",\n  \"company_ids\": [{{company_id}}],\n  \"current_company_id\": {{company_id}}\n}"
+                }
+              }
+            },
+            {
+              "name": "POST Add Company",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/session/add-company/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Another Company\",\n  \"country_id\": {{country_id}},\n  \"currency_id\": {{currency_id}},\n  \"is_active\": true,\n  \"set_current\": false\n}"
+                }
+              }
+            },
+            {
+              "name": "POST Attach Existing Company",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/session/attach-existing-company/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_id\": {{company_id}},\n  \"is_active\": true,\n  \"set_current\": false\n}"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Settings",
+      "item": [
+        {
+          "name": "Accounting Settings",
+          "item": [
+            {
+              "name": "List Accounting Settings",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/accounting-settings/?page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create Accounting Setting",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/accounting-settings/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"country_code\": \"\",\n  \"fiscal_localization_country\": \"\",\n  \"chart_template_country\": \"\",\n  \"account_fiscal_country\": \"\",\n  \"chart_template\": \"\",\n  \"has_chart_of_accounts\": \"\",\n  \"has_accounting_entries\": \"\",\n  \"currency\": 1,\n  \"group_multi_currency\": \"\",\n  \"module_currency_rate_live\": \"\",\n  \"default_sales_tax\": \"\",\n  \"default_purchase_tax\": \"\",\n  \"sale_tax\": \"\",\n  \"purchase_tax\": \"\",\n  \"tax_return_periodicity\": \"\",\n  \"tax_return_reminder_days\": \"\",\n  \"tax_return_journal\": \"\",\n  \"tax_rounding_method\": \"\",\n  \"tax_calculation_rounding_method\": \"\",\n  \"account_price_include\": \"\",\n  \"currency_exchange_journal\": \"\",\n  \"income_currency_exchange_account\": \"\",\n  \"expense_currency_exchange_account\": \"\",\n  \"bank_suspense_account\": \"\",\n  \"account_journal_suspense_account\": \"\",\n  \"transfer_account\": \"\",\n  \"tax_exigibility\": \"\",\n  \"tax_cash_basis_journal\": \"\",\n  \"account_cash_basis_base_account\": \"\",\n  \"account_discount_expense_allocation\": \"\",\n  \"account_discount_income_allocation\": \"\",\n  \"account_journal_early_pay_discount_gain_account\": \"\",\n  \"account_journal_early_pay_discount_loss_account\": \"\",\n  \"default_sale_payment_term\": \"\",\n  \"default_purchase_payment_term\": \"\",\n  \"fiscalyear_last_day\": \"\",\n  \"fiscalyear_last_month\": \"\",\n  \"use_anglo_saxon\": \"\",\n  \"invoicing_switch_threshold\": \"\",\n  \"predict_bill_product\": \"\",\n  \"followup_enabled\": \"\",\n  \"multi_ledger_enabled\": \"\",\n  \"budgets_enabled\": \"\",\n  \"assets_enabled\": \"\",\n  \"online_payments_enabled\": \"\",\n  \"quick_edit_mode\": \"\",\n  \"check_account_audit_trail\": \"\",\n  \"autopost_bills\": \"\",\n  \"account_use_credit_limit\": \"\",\n  \"account_default_credit_limit\": \"\",\n  \"account_storno\": \"\",\n  \"qr_code\": \"\",\n  \"module_l10n_eu_oss\": \"\",\n  \"module_snailmail_account\": \"\",\n  \"group_sale_delivery_address\": \"\",\n  \"group_warning_account\": \"\",\n  \"group_cash_rounding\": \"\",\n  \"module_account_intrastat\": \"\",\n  \"incoterm\": \"\",\n  \"group_show_sale_receipts\": \"\",\n  \"terms_type\": \"\",\n  \"preview_ready\": \"\",\n  \"display_invoice_amount_total_words\": \"\",\n  \"display_invoice_tax_company_currency\": \"\",\n  \"group_uom\": \"\",\n  \"module_account_payment\": \"\",\n  \"module_account_batch_payment\": \"\",\n  \"module_account_sepa_direct_debit\": \"\",\n  \"group_show_purchase_receipts\": \"\",\n  \"module_account_check_printing\": \"\",\n  \"module_account_iso20022\": \"\",\n  \"module_account_extract\": \"\",\n  \"module_account_bank_statement_import_csv\": \"\",\n  \"module_account_bank_statement_import_qif\": \"\",\n  \"module_account_bank_statement_import_ofx\": \"\",\n  \"module_account_bank_statement_import_camt\": \"\",\n  \"module_account_reports\": \"\",\n  \"group_analytic_accounting\": \"\",\n  \"module_account_budget\": \"\",\n  \"module_product_margin\": \"\",\n  \"is_account_peppol_eligible\": \"\",\n  \"module_account_peppol\": \"\",\n  \"invoice_terms\": \"\",\n  \"use_invoice_terms\": \"\",\n  \"deferred_expense_journal\": \"\",\n  \"deferred_expense_account\": \"\",\n  \"generate_deferred_expense_entries_method\": \"\",\n  \"deferred_expense_amount_computation_method\": \"\",\n  \"deferred_revenue_journal\": \"\",\n  \"deferred_revenue_account\": \"\",\n  \"generate_deferred_revenue_entries_method\": \"\",\n  \"deferred_revenue_amount_computation_method\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Accounting Setting",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/accounting-settings/{{accounting_settings_id}}/"
+              }
+            },
+            {
+              "name": "Update Accounting Setting",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/accounting-settings/{{accounting_settings_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": 1,\n  \"country_code\": \"\",\n  \"fiscal_localization_country\": \"\",\n  \"chart_template_country\": \"\",\n  \"account_fiscal_country\": \"\",\n  \"chart_template\": \"\",\n  \"has_chart_of_accounts\": \"\",\n  \"has_accounting_entries\": \"\",\n  \"currency\": 1,\n  \"group_multi_currency\": \"\",\n  \"module_currency_rate_live\": \"\",\n  \"default_sales_tax\": \"\",\n  \"default_purchase_tax\": \"\",\n  \"sale_tax\": \"\",\n  \"purchase_tax\": \"\",\n  \"tax_return_periodicity\": \"\",\n  \"tax_return_reminder_days\": \"\",\n  \"tax_return_journal\": \"\",\n  \"tax_rounding_method\": \"\",\n  \"tax_calculation_rounding_method\": \"\",\n  \"account_price_include\": \"\",\n  \"currency_exchange_journal\": \"\",\n  \"income_currency_exchange_account\": \"\",\n  \"expense_currency_exchange_account\": \"\",\n  \"bank_suspense_account\": \"\",\n  \"account_journal_suspense_account\": \"\",\n  \"transfer_account\": \"\",\n  \"tax_exigibility\": \"\",\n  \"tax_cash_basis_journal\": \"\",\n  \"account_cash_basis_base_account\": \"\",\n  \"account_discount_expense_allocation\": \"\",\n  \"account_discount_income_allocation\": \"\",\n  \"account_journal_early_pay_discount_gain_account\": \"\",\n  \"account_journal_early_pay_discount_loss_account\": \"\",\n  \"default_sale_payment_term\": \"\",\n  \"default_purchase_payment_term\": \"\",\n  \"fiscalyear_last_day\": \"\",\n  \"fiscalyear_last_month\": \"\",\n  \"use_anglo_saxon\": \"\",\n  \"invoicing_switch_threshold\": \"\",\n  \"predict_bill_product\": \"\",\n  \"followup_enabled\": \"\",\n  \"multi_ledger_enabled\": \"\",\n  \"budgets_enabled\": \"\",\n  \"assets_enabled\": \"\",\n  \"online_payments_enabled\": \"\",\n  \"quick_edit_mode\": \"\",\n  \"check_account_audit_trail\": \"\",\n  \"autopost_bills\": \"\",\n  \"account_use_credit_limit\": \"\",\n  \"account_default_credit_limit\": \"\",\n  \"account_storno\": \"\",\n  \"qr_code\": \"\",\n  \"module_l10n_eu_oss\": \"\",\n  \"module_snailmail_account\": \"\",\n  \"group_sale_delivery_address\": \"\",\n  \"group_warning_account\": \"\",\n  \"group_cash_rounding\": \"\",\n  \"module_account_intrastat\": \"\",\n  \"incoterm\": \"\",\n  \"group_show_sale_receipts\": \"\",\n  \"terms_type\": \"\",\n  \"preview_ready\": \"\",\n  \"display_invoice_amount_total_words\": \"\",\n  \"display_invoice_tax_company_currency\": \"\",\n  \"group_uom\": \"\",\n  \"module_account_payment\": \"\",\n  \"module_account_batch_payment\": \"\",\n  \"module_account_sepa_direct_debit\": \"\",\n  \"group_show_purchase_receipts\": \"\",\n  \"module_account_check_printing\": \"\",\n  \"module_account_iso20022\": \"\",\n  \"module_account_extract\": \"\",\n  \"module_account_bank_statement_import_csv\": \"\",\n  \"module_account_bank_statement_import_qif\": \"\",\n  \"module_account_bank_statement_import_ofx\": \"\",\n  \"module_account_bank_statement_import_camt\": \"\",\n  \"module_account_reports\": \"\",\n  \"group_analytic_accounting\": \"\",\n  \"module_account_budget\": \"\",\n  \"module_product_margin\": \"\",\n  \"is_account_peppol_eligible\": \"\",\n  \"module_account_peppol\": \"\",\n  \"invoice_terms\": \"\",\n  \"use_invoice_terms\": \"\",\n  \"deferred_expense_journal\": \"\",\n  \"deferred_expense_account\": \"\",\n  \"generate_deferred_expense_entries_method\": \"\",\n  \"deferred_expense_amount_computation_method\": \"\",\n  \"deferred_revenue_journal\": \"\",\n  \"deferred_revenue_account\": \"\",\n  \"generate_deferred_revenue_entries_method\": \"\",\n  \"deferred_revenue_amount_computation_method\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Accounting Setting",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/accounting-settings/{{accounting_settings_id}}/"
+              }
+            },
+            {
+              "name": "GET Configuration",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/accounting-settings/configuration/"
+              }
+            },
+            {
+              "name": "GET My Configuration",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/accounting-settings/my-configuration/"
+              }
+            },
+            {
+              "name": "POST Upsert By Company",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/accounting-settings/upsert-by-company/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            },
+            {
+              "name": "POST Reload Template",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/accounting-settings/reload-template/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            },
+            {
+              "name": "POST Update Terms",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/accounting-settings/update-terms/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\n}"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Templates",
+      "item": [
+        {
+          "name": "Account Group Templates",
+          "item": [
+            {
+              "name": "List Account Group Templates",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/account-group-templates/?country_id={{country_id}}&page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create Account Group Template",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/account-group-templates/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"country\": 1,\n  \"code_prefix_start\": \"\",\n  \"code_prefix_end\": \"\",\n  \"name\": \"\",\n  \"parent\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Account Group Template",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/account-group-templates/{{account_group_template_id}}/"
+              }
+            },
+            {
+              "name": "Update Account Group Template",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/account-group-templates/{{account_group_template_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"country\": 1,\n  \"code_prefix_start\": \"\",\n  \"code_prefix_end\": \"\",\n  \"name\": \"\",\n  \"parent\": \"\"\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Account Group Template",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/account-group-templates/{{account_group_template_id}}/"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Account Templates",
+          "item": [
+            {
+              "name": "List Account Templates",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/account-templates/?country_id={{country_id}}&group_id={{group_id}}&page={{page}}&page_size={{page_size}}"
+              }
+            },
+            {
+              "name": "Create Account Template",
+              "request": {
+                "method": "POST",
+                "url": "{{base_url}}/api/account-templates/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"country\": 1,\n  \"group\": \"\",\n  \"code\": \"\",\n  \"name\": \"\",\n  \"account_type\": \"\",\n  \"reconcile\": true,\n  \"deprecated\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Get Account Template",
+              "request": {
+                "method": "GET",
+                "url": "{{base_url}}/api/account-templates/{{account_template_id}}/"
+              }
+            },
+            {
+              "name": "Update Account Template",
+              "request": {
+                "method": "PUT",
+                "url": "{{base_url}}/api/account-templates/{{account_template_id}}/",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"country\": 1,\n  \"group\": \"\",\n  \"code\": \"\",\n  \"name\": \"\",\n  \"account_type\": \"\",\n  \"reconcile\": true,\n  \"deprecated\": true\n}"
+                }
+              }
+            },
+            {
+              "name": "Delete Account Template",
+              "request": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/account-templates/{{account_template_id}}/"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Reports",
+      "item": [
+        {
+          "name": "GET Balance Sheet",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/reports/balance-sheet/?company_id={{company_id}}&date_to={{date_to}}&posted_only={{posted_only}}&include_current_year_earnings={{include_current_year_earnings}}"
+          }
+        },
+        {
+          "name": "GET General Ledger",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/reports/general-ledger/?company_id={{company_id}}&date_from={{date_from}}&date_to={{date_to}}&posted_only={{posted_only}}&account_id={{account_id}}&hide_zero_lines={{hide_zero_lines}}"
+          }
+        },
+        {
+          "name": "GET Profit And Loss",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/reports/profit-and-loss/?company_id={{company_id}}&date_from={{date_from}}&date_to={{date_to}}&posted_only={{posted_only}}"
+          }
+        },
+        {
+          "name": "GET Trial Balance",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/reports/trial-balance/?company_id={{company_id}}&date_from={{date_from}}&date_to={{date_to}}&posted_only={{posted_only}}&hide_zero_lines={{hide_zero_lines}}"
+          }
+        }
+      ]
+    }
+  ]
+}

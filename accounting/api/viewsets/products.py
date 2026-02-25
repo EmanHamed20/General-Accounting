@@ -14,14 +14,12 @@ class ProductViewSet(BaseModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
         category_id = self.request.query_params.get("category_id")
         product_type = self.request.query_params.get("product_type")
         sale_ok = self.request.query_params.get("sale_ok")
         purchase_ok = self.request.query_params.get("purchase_ok")
         active = self.request.query_params.get("active")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         if category_id:
             queryset = queryset.filter(category_id=category_id)
         if product_type:
@@ -81,11 +79,9 @@ class ProductCategoryViewSet(BaseModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
         parent_id = self.request.query_params.get("parent_id")
         active = self.request.query_params.get("active")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         if parent_id:
             if parent_id.lower() == "null":
                 queryset = queryset.filter(parent__isnull=True)
