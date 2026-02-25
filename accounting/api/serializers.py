@@ -56,28 +56,96 @@ from accounting.models import (
 )
 
 
-class CurrencySerializer(serializers.ModelSerializer):
+class NameAwareModelSerializer(serializers.ModelSerializer):
+    """Auto-append related name fields for FK/M2M without changing write payloads."""
+
+    RELATED_NAME_ATTRS = ("name", "code", "username", "title")
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        model = getattr(self.Meta, "model", None)
+        if not model:
+            return data
+
+        relation_fields = list(model._meta.fields) + list(model._meta.many_to_many)
+        for field in relation_fields:
+            if field.many_to_many:
+                key = f"{field.name}_names"
+                if key in data:
+                    continue
+                values = []
+                try:
+                    related_items = getattr(instance, field.name).all()
+                except Exception:
+                    related_items = []
+                for rel in related_items:
+                    label = None
+                    for attr in self.RELATED_NAME_ATTRS:
+                        if hasattr(rel, attr):
+                            label = getattr(rel, attr)
+                            if label:
+                                break
+                    if label is None:
+                        label = str(rel)
+                    values.append(label)
+                data[key] = values
+                continue
+
+            if not (field.many_to_one or field.one_to_one):
+                continue
+
+            rel_key = field.name
+            id_key = f"{rel_key}_id"
+
+            out_key = f"{rel_key}_name"
+            if out_key in data:
+                continue
+
+            rel_id = getattr(instance, id_key, None)
+            if rel_id is None:
+                data[out_key] = None
+                continue
+
+            rel_obj = getattr(instance, rel_key, None)
+            if rel_obj is None:
+                data[out_key] = None
+                continue
+
+            label = None
+            for attr in self.RELATED_NAME_ATTRS:
+                if hasattr(rel_obj, attr):
+                    label = getattr(rel_obj, attr)
+                    if label:
+                        break
+            if label is None:
+                label = str(rel_obj)
+            data[out_key] = label
+
+        return data
+
+
+class CurrencySerializer(NameAwareModelSerializer):
     class Meta:
         model = Currency
         fields = ["id", "name", "code", "symbol", "decimal_places", "created_at", "updated_at"]
         read_only_fields = ["id", "created_at", "updated_at"]
 
 
-class CountrySerializer(serializers.ModelSerializer):
+class CountrySerializer(NameAwareModelSerializer):
     class Meta:
         model = Country
         fields = ["id", "name", "code", "phone_code", "active", "created_at", "updated_at"]
         read_only_fields = ["id", "created_at", "updated_at"]
 
 
-class CountryStateSerializer(serializers.ModelSerializer):
+class CountryStateSerializer(NameAwareModelSerializer):
     class Meta:
         model = CountryState
         fields = ["id", "country", "name", "code", "active", "created_at", "updated_at"]
         read_only_fields = ["id", "created_at", "updated_at"]
 
 
-class CountryCitySerializer(serializers.ModelSerializer):
+class CountryCitySerializer(NameAwareModelSerializer):
     class Meta:
         model = CountryCity
         fields = ["id", "country", "state", "name", "postal_code", "active", "created_at", "updated_at"]
@@ -91,14 +159,14 @@ class CountryCitySerializer(serializers.ModelSerializer):
         return attrs
 
 
-class CountryCurrencySerializer(serializers.ModelSerializer):
+class CountryCurrencySerializer(NameAwareModelSerializer):
     class Meta:
         model = CountryCurrency
         fields = ["id", "country", "currency", "is_default", "active", "created_at", "updated_at"]
         read_only_fields = ["id", "created_at", "updated_at"]
 
 
-class ProductCategorySerializer(serializers.ModelSerializer):
+class ProductCategorySerializer(NameAwareModelSerializer):
     class Meta:
         model = ProductCategory
         fields = [
@@ -148,7 +216,7 @@ class ProductCategorySerializer(serializers.ModelSerializer):
         return attrs
 
 
-class ProductSerializer(serializers.ModelSerializer):
+class ProductSerializer(NameAwareModelSerializer):
     class Meta:
         model = Product
         fields = [
@@ -205,7 +273,7 @@ class ProductSerializer(serializers.ModelSerializer):
         return attrs
 
 
-class CompanySerializer(serializers.ModelSerializer):
+class CompanySerializer(NameAwareModelSerializer):
     class Meta:
         model = Company
         fields = [
@@ -246,7 +314,7 @@ class CompanySerializer(serializers.ModelSerializer):
         return attrs
 
 
-class AccountGroupTemplateSerializer(serializers.ModelSerializer):
+class AccountGroupTemplateSerializer(NameAwareModelSerializer):
     class Meta:
         model = AccountGroupTemplate
         fields = [
@@ -269,7 +337,7 @@ class AccountGroupTemplateSerializer(serializers.ModelSerializer):
         return attrs
 
 
-class AccountTemplateSerializer(serializers.ModelSerializer):
+class AccountTemplateSerializer(NameAwareModelSerializer):
     class Meta:
         model = AccountTemplate
         fields = [
@@ -314,7 +382,7 @@ class CreateDebitNoteSerializer(serializers.Serializer):
     reason = serializers.CharField(required=False, allow_blank=True, max_length=255)
 
 
-class MoveSerializer(serializers.ModelSerializer):
+class MoveSerializer(NameAwareModelSerializer):
     balance = serializers.DecimalField(max_digits=24, decimal_places=6, read_only=True)
 
     class Meta:
@@ -367,7 +435,7 @@ class MoveSerializer(serializers.ModelSerializer):
         return attrs
 
 
-class MoveLineSerializer(serializers.ModelSerializer):
+class MoveLineSerializer(NameAwareModelSerializer):
     class Meta:
         model = MoveLine
         fields = [
@@ -443,7 +511,7 @@ class JournalEntryLineSerializer(MoveLineSerializer):
         return attrs
 
 
-class TransferModelSerializer(serializers.ModelSerializer):
+class TransferModelSerializer(NameAwareModelSerializer):
     class Meta:
         model = TransferModel
         fields = [
@@ -482,7 +550,7 @@ class TransferModelSerializer(serializers.ModelSerializer):
         return attrs
 
 
-class TransferModelLineSerializer(serializers.ModelSerializer):
+class TransferModelLineSerializer(NameAwareModelSerializer):
     class Meta:
         model = TransferModelLine
         fields = [
@@ -522,7 +590,7 @@ class TransferModelLineSerializer(serializers.ModelSerializer):
         return attrs
 
 
-class InvoiceSerializer(serializers.ModelSerializer):
+class InvoiceSerializer(NameAwareModelSerializer):
     amount_untaxed = serializers.DecimalField(max_digits=24, decimal_places=6, read_only=True)
     amount_tax = serializers.DecimalField(max_digits=24, decimal_places=6, read_only=True)
     amount_total = serializers.DecimalField(max_digits=24, decimal_places=6, read_only=True)
@@ -587,7 +655,7 @@ class InvoiceSerializer(serializers.ModelSerializer):
         return attrs
 
 
-class InvoiceLineSerializer(serializers.ModelSerializer):
+class InvoiceLineSerializer(NameAwareModelSerializer):
     class Meta:
         model = InvoiceLine
         fields = [
@@ -623,7 +691,7 @@ class InvoiceLineSerializer(serializers.ModelSerializer):
         return attrs
 
 
-class PartnerSerializer(serializers.ModelSerializer):
+class PartnerSerializer(NameAwareModelSerializer):
     class Meta:
         model = Partner
         fields = [
@@ -664,7 +732,7 @@ class PartnerSerializer(serializers.ModelSerializer):
         return attrs
 
 
-class VendorSerializer(serializers.ModelSerializer):
+class VendorSerializer(NameAwareModelSerializer):
     supplier_invoice_count = serializers.SerializerMethodField()
     purchase_order_count = serializers.SerializerMethodField()
 
@@ -693,14 +761,14 @@ class VendorSerializer(serializers.ModelSerializer):
         return 0
 
 
-class AccountRootSerializer(serializers.ModelSerializer):
+class AccountRootSerializer(NameAwareModelSerializer):
     class Meta:
         model = AccountRoot
         fields = ["id", "company", "code", "name", "created_at", "updated_at"]
         read_only_fields = ["id", "created_at", "updated_at"]
 
 
-class AccountGroupSerializer(serializers.ModelSerializer):
+class AccountGroupSerializer(NameAwareModelSerializer):
     class Meta:
         model = AccountGroup
         fields = [
@@ -723,7 +791,7 @@ class AccountGroupSerializer(serializers.ModelSerializer):
         return attrs
 
 
-class AccountSerializer(serializers.ModelSerializer):
+class AccountSerializer(NameAwareModelSerializer):
     class Meta:
         model = Account
         fields = [
@@ -753,7 +821,7 @@ class AccountSerializer(serializers.ModelSerializer):
         return attrs
 
 
-class AssetSerializer(serializers.ModelSerializer):
+class AssetSerializer(NameAwareModelSerializer):
     class Meta:
         model = Asset
         fields = [
@@ -840,7 +908,7 @@ class AssetSerializer(serializers.ModelSerializer):
         return attrs
 
 
-class AssetDepreciationLineSerializer(serializers.ModelSerializer):
+class AssetDepreciationLineSerializer(NameAwareModelSerializer):
     class Meta:
         model = AssetDepreciationLine
         fields = [
@@ -876,14 +944,14 @@ class AssetDepreciationLineSerializer(serializers.ModelSerializer):
         return attrs
 
 
-class JournalGroupSerializer(serializers.ModelSerializer):
+class JournalGroupSerializer(NameAwareModelSerializer):
     class Meta:
         model = JournalGroup
         fields = ["id", "company", "name", "created_at", "updated_at"]
         read_only_fields = ["id", "created_at", "updated_at"]
 
 
-class JournalSerializer(serializers.ModelSerializer):
+class JournalSerializer(NameAwareModelSerializer):
     company_name = serializers.CharField(source="company.name", read_only=True)
     group_name = serializers.CharField(source="group.name", read_only=True)
     currency_name = serializers.CharField(source="currency.name", read_only=True)
@@ -927,21 +995,21 @@ class JournalSerializer(serializers.ModelSerializer):
         return attrs
 
 
-class PaymentTermSerializer(serializers.ModelSerializer):
+class PaymentTermSerializer(NameAwareModelSerializer):
     class Meta:
         model = PaymentTerm
         fields = ["id", "company", "name", "active", "created_at", "updated_at"]
         read_only_fields = ["id", "created_at", "updated_at"]
 
 
-class IncotermSerializer(serializers.ModelSerializer):
+class IncotermSerializer(NameAwareModelSerializer):
     class Meta:
         model = Incoterm
         fields = ["id", "code", "name", "active", "created_at", "updated_at"]
         read_only_fields = ["id", "created_at", "updated_at"]
 
 
-class PaymentTermLineSerializer(serializers.ModelSerializer):
+class PaymentTermLineSerializer(NameAwareModelSerializer):
     class Meta:
         model = PaymentTermLine
         fields = [
@@ -958,7 +1026,7 @@ class PaymentTermLineSerializer(serializers.ModelSerializer):
         read_only_fields = ["id", "created_at", "updated_at"]
 
 
-class TaxGroupSerializer(serializers.ModelSerializer):
+class TaxGroupSerializer(NameAwareModelSerializer):
     class Meta:
         model = TaxGroup
         fields = [
@@ -999,7 +1067,7 @@ class TaxGroupSerializer(serializers.ModelSerializer):
         return attrs
 
 
-class TaxSerializer(serializers.ModelSerializer):
+class TaxSerializer(NameAwareModelSerializer):
     class Meta:
         model = Tax
         fields = [
@@ -1028,7 +1096,7 @@ class TaxSerializer(serializers.ModelSerializer):
         return attrs
 
 
-class TaxRepartitionLineSerializer(serializers.ModelSerializer):
+class TaxRepartitionLineSerializer(NameAwareModelSerializer):
     class Meta:
         model = TaxRepartitionLine
         fields = [
@@ -1052,21 +1120,21 @@ class TaxRepartitionLineSerializer(serializers.ModelSerializer):
         return attrs
 
 
-class PaymentMethodSerializer(serializers.ModelSerializer):
+class PaymentMethodSerializer(NameAwareModelSerializer):
     class Meta:
         model = PaymentMethod
         fields = ["id", "name", "code", "payment_direction", "active", "created_at", "updated_at"]
         read_only_fields = ["id", "created_at", "updated_at"]
 
 
-class PaymentMethodLineSerializer(serializers.ModelSerializer):
+class PaymentMethodLineSerializer(NameAwareModelSerializer):
     class Meta:
         model = PaymentMethodLine
         fields = ["id", "journal", "payment_method", "sequence", "active", "created_at", "updated_at"]
         read_only_fields = ["id", "created_at", "updated_at"]
 
 
-class PaymentSerializer(serializers.ModelSerializer):
+class PaymentSerializer(NameAwareModelSerializer):
     class Meta:
         model = Payment
         fields = [
@@ -1115,7 +1183,7 @@ class PaymentSerializer(serializers.ModelSerializer):
         return attrs
 
 
-class AnalyticPlanSerializer(serializers.ModelSerializer):
+class AnalyticPlanSerializer(NameAwareModelSerializer):
     company_name = serializers.CharField(source="company.name", read_only=True)
     parent_name = serializers.CharField(source="parent.name", read_only=True)
 
@@ -1137,7 +1205,7 @@ class AnalyticPlanSerializer(serializers.ModelSerializer):
         read_only_fields = ["id", "created_at", "updated_at"]
 
 
-class AnalyticLineSerializer(serializers.ModelSerializer):
+class AnalyticLineSerializer(NameAwareModelSerializer):
     class Meta:
         model = AnalyticLine
         fields = [
@@ -1203,7 +1271,7 @@ class AnalyticLineSerializer(serializers.ModelSerializer):
         return attrs
 
 
-class AnalyticAccountSerializer(serializers.ModelSerializer):
+class AnalyticAccountSerializer(NameAwareModelSerializer):
     company_name = serializers.CharField(source="company.name", read_only=True)
     plan_name = serializers.CharField(source="plan.name", read_only=True)
     partner_name = serializers.CharField(source="partner.name", read_only=True)
@@ -1237,15 +1305,22 @@ class AnalyticAccountSerializer(serializers.ModelSerializer):
         return attrs
 
 
-class AnalyticDistributionModelSerializer(serializers.ModelSerializer):
+class AnalyticDistributionModelSerializer(NameAwareModelSerializer):
+    company_name = serializers.CharField(source="company.name", read_only=True)
+    partner_name = serializers.CharField(source="partner.name", read_only=True)
+    product_category_name = serializers.CharField(source="product_category.name", read_only=True)
+
     class Meta:
         model = AnalyticDistributionModel
         fields = [
             "id",
             "company",
+            "company_name",
             "name",
             "partner",
+            "partner_name",
             "product_category",
+            "product_category_name",
             "account_prefix",
             "active",
             "created_at",
@@ -1270,10 +1345,22 @@ class AnalyticDistributionModelSerializer(serializers.ModelSerializer):
         return attrs
 
 
-class AnalyticDistributionModelLineSerializer(serializers.ModelSerializer):
+class AnalyticDistributionModelLineSerializer(NameAwareModelSerializer):
+    model_name = serializers.CharField(source="model.name", read_only=True)
+    analytic_account_name = serializers.CharField(source="analytic_account.name", read_only=True)
+
     class Meta:
         model = AnalyticDistributionModelLine
-        fields = ["id", "model", "analytic_account", "percentage", "created_at", "updated_at"]
+        fields = [
+            "id",
+            "model",
+            "model_name",
+            "analytic_account",
+            "analytic_account_name",
+            "percentage",
+            "created_at",
+            "updated_at",
+        ]
         read_only_fields = ["id", "created_at", "updated_at"]
 
     def validate(self, attrs):
@@ -1290,7 +1377,7 @@ class AnalyticDistributionModelLineSerializer(serializers.ModelSerializer):
         return attrs
 
 
-class AccountingSettingsSerializer(serializers.ModelSerializer):
+class AccountingSettingsSerializer(NameAwareModelSerializer):
     sale_tax = serializers.PrimaryKeyRelatedField(
         source="default_sales_tax",
         queryset=Tax.objects.all(),
@@ -1412,14 +1499,14 @@ class AccountingSettingsSerializer(serializers.ModelSerializer):
         read_only_fields = ["id", "created_at", "updated_at"]
 
 
-class FollowupLevelSerializer(serializers.ModelSerializer):
+class FollowupLevelSerializer(NameAwareModelSerializer):
     class Meta:
         model = FollowupLevel
         fields = ["id", "company", "name", "delay_days", "action", "active", "created_at", "updated_at"]
         read_only_fields = ["id", "created_at", "updated_at"]
 
 
-class BankAccountSerializer(serializers.ModelSerializer):
+class BankAccountSerializer(NameAwareModelSerializer):
     class Meta:
         model = BankAccount
         fields = [
@@ -1438,14 +1525,14 @@ class BankAccountSerializer(serializers.ModelSerializer):
         read_only_fields = ["id", "created_at", "updated_at"]
 
 
-class ReconciliationModelSerializer(serializers.ModelSerializer):
+class ReconciliationModelSerializer(NameAwareModelSerializer):
     class Meta:
         model = ReconciliationModel
         fields = ["id", "company", "name", "journal", "auto_reconcile", "active", "created_at", "updated_at"]
         read_only_fields = ["id", "created_at", "updated_at"]
 
 
-class ReconciliationModelLineSerializer(serializers.ModelSerializer):
+class ReconciliationModelLineSerializer(NameAwareModelSerializer):
     class Meta:
         model = ReconciliationModelLine
         fields = [
@@ -1463,49 +1550,49 @@ class ReconciliationModelLineSerializer(serializers.ModelSerializer):
         read_only_fields = ["id", "created_at", "updated_at"]
 
 
-class FiscalPositionSerializer(serializers.ModelSerializer):
+class FiscalPositionSerializer(NameAwareModelSerializer):
     class Meta:
         model = FiscalPosition
         fields = ["id", "company", "name", "country", "auto_apply", "vat_required", "active", "created_at", "updated_at"]
         read_only_fields = ["id", "created_at", "updated_at"]
 
 
-class FiscalPositionTaxMapSerializer(serializers.ModelSerializer):
+class FiscalPositionTaxMapSerializer(NameAwareModelSerializer):
     class Meta:
         model = FiscalPositionTaxMap
         fields = ["id", "fiscal_position", "tax_src", "tax_dest", "created_at", "updated_at"]
         read_only_fields = ["id", "created_at", "updated_at"]
 
 
-class FiscalPositionAccountMapSerializer(serializers.ModelSerializer):
+class FiscalPositionAccountMapSerializer(NameAwareModelSerializer):
     class Meta:
         model = FiscalPositionAccountMap
         fields = ["id", "fiscal_position", "account_src", "account_dest", "created_at", "updated_at"]
         read_only_fields = ["id", "created_at", "updated_at"]
 
 
-class LedgerSerializer(serializers.ModelSerializer):
+class LedgerSerializer(NameAwareModelSerializer):
     class Meta:
         model = Ledger
         fields = ["id", "company", "currency", "name", "code", "is_default", "active", "created_at", "updated_at"]
         read_only_fields = ["id", "created_at", "updated_at"]
 
 
-class FinancialBudgetSerializer(serializers.ModelSerializer):
+class FinancialBudgetSerializer(NameAwareModelSerializer):
     class Meta:
         model = FinancialBudget
         fields = ["id", "company", "name", "date_from", "date_to", "state", "created_at", "updated_at"]
         read_only_fields = ["id", "created_at", "updated_at"]
 
 
-class FinancialBudgetLineSerializer(serializers.ModelSerializer):
+class FinancialBudgetLineSerializer(NameAwareModelSerializer):
     class Meta:
         model = FinancialBudgetLine
         fields = ["id", "budget", "account", "name", "planned_amount", "practical_amount", "created_at", "updated_at"]
         read_only_fields = ["id", "created_at", "updated_at"]
 
 
-class AssetModelSerializer(serializers.ModelSerializer):
+class AssetModelSerializer(NameAwareModelSerializer):
     class Meta:
         model = AssetModel
         fields = [
@@ -1527,21 +1614,21 @@ class AssetModelSerializer(serializers.ModelSerializer):
         read_only_fields = ["id", "created_at", "updated_at"]
 
 
-class DisallowedExpenseCategorySerializer(serializers.ModelSerializer):
+class DisallowedExpenseCategorySerializer(NameAwareModelSerializer):
     class Meta:
         model = DisallowedExpenseCategory
         fields = ["id", "company", "name", "disallow_percent", "expense_account", "active", "created_at", "updated_at"]
         read_only_fields = ["id", "created_at", "updated_at"]
 
 
-class PaymentProviderSerializer(serializers.ModelSerializer):
+class PaymentProviderSerializer(NameAwareModelSerializer):
     class Meta:
         model = PaymentProvider
         fields = ["id", "company", "journal", "name", "code", "state", "active", "created_at", "updated_at"]
         read_only_fields = ["id", "created_at", "updated_at"]
 
 
-class PaymentProviderMethodSerializer(serializers.ModelSerializer):
+class PaymentProviderMethodSerializer(NameAwareModelSerializer):
     class Meta:
         model = PaymentProviderMethod
         fields = ["id", "provider", "payment_method", "active", "created_at", "updated_at"]

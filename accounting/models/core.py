@@ -117,6 +117,11 @@ class UserCompanyAccess(AccountingBaseModel):
         blank=True,
         related_name="allowed_for_users",
     )
+    active_companies = models.ManyToManyField(
+        "accounting.Company",
+        blank=True,
+        related_name="active_for_users",
+    )
 
     class Meta:
         db_table = "ga_user_company_access"
@@ -126,6 +131,11 @@ class UserCompanyAccess(AccountingBaseModel):
             return
         if self.current_company_id and not self.allowed_companies.filter(id=self.current_company_id).exists():
             raise ValidationError("Current company must be included in allowed companies.")
+        invalid_active_exists = self.active_companies.exclude(id__in=self.allowed_companies.values("id")).exists()
+        if invalid_active_exists:
+            raise ValidationError("Active companies must be included in allowed companies.")
+        if self.current_company_id and not self.active_companies.filter(id=self.current_company_id).exists():
+            raise ValidationError("Current company must be included in active companies.")
 
     def __str__(self) -> str:
         return f"{self.user} company access"

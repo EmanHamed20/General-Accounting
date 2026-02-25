@@ -7,10 +7,8 @@ class PartnerViewSet(BaseModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
         active = self.request.query_params.get("active")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         if active is not None:
             queryset = queryset.filter(active=active.lower() in {"1", "true", "yes"})
         return queryset
@@ -24,11 +22,9 @@ class CustomerViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
         active = self.request.query_params.get("active")
         is_company = self.request.query_params.get("is_company")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         if active is not None:
             queryset = queryset.filter(active=active.lower() in {"1", "true", "yes"})
         if is_company is not None:
@@ -76,10 +72,8 @@ class VendorViewSet(viewsets.ModelViewSet):
             )
         )
 
-        company_id = self.request.query_params.get("company_id")
         is_company = self.request.query_params.get("is_company")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         if is_company is not None:
             queryset = queryset.filter(is_company=is_company.lower() in {"1", "true", "yes"})
         return queryset

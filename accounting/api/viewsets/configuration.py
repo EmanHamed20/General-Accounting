@@ -9,9 +9,7 @@ class AccountRootViewSet(BaseModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         return queryset
 
 
@@ -21,10 +19,8 @@ class AccountGroupViewSet(BaseModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
         parent_id = self.request.query_params.get("parent_id")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         if parent_id:
             if parent_id.lower() == "null":
                 queryset = queryset.filter(parent__isnull=True)
@@ -39,7 +35,6 @@ class AccountViewSet(BaseModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
         root_id = self.request.query_params.get("root_id")
         group_id = self.request.query_params.get("group_id")
         account_type = self.request.query_params.get("account_type")
@@ -48,8 +43,7 @@ class AccountViewSet(BaseModelViewSet):
         reconcile = self.request.query_params.get("reconcile")
         deprecated = self.request.query_params.get("deprecated")
         q = self.request.query_params.get("q")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         if root_id:
             if root_id.lower() == "null":
                 queryset = queryset.filter(root__isnull=True)
@@ -140,9 +134,7 @@ class JournalGroupViewSet(BaseModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         return queryset
 
 
@@ -152,11 +144,9 @@ class JournalViewSet(BaseModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
         journal_type = self.request.query_params.get("journal_type")
         active = self.request.query_params.get("active")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         if journal_type:
             queryset = queryset.filter(journal_type=journal_type)
         if active is not None:
@@ -170,10 +160,8 @@ class PaymentTermViewSet(BaseModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
         active = self.request.query_params.get("active")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         if active is not None:
             queryset = queryset.filter(active=active.lower() in {"1", "true", "yes"})
         return queryset
@@ -202,11 +190,9 @@ class PaymentTermLineViewSet(BaseModelViewSet):
     def get_queryset(self):
         queryset = super().get_queryset()
         payment_term_id = self.request.query_params.get("payment_term_id")
-        company_id = self.request.query_params.get("company_id")
         if payment_term_id:
             queryset = queryset.filter(payment_term_id=payment_term_id)
-        if company_id:
-            queryset = queryset.filter(payment_term__company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "payment_term__company_id")
         return queryset
 
 
@@ -216,11 +202,9 @@ class TaxGroupViewSet(BaseModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
         country_id = self.request.query_params.get("country_id")
         active = self.request.query_params.get("active")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         if country_id:
             queryset = queryset.filter(country_id=country_id)
         if active is not None:
@@ -234,11 +218,9 @@ class TaxViewSet(BaseModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
         scope = self.request.query_params.get("scope")
         active = self.request.query_params.get("active")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         if scope:
             queryset = queryset.filter(scope=scope)
         if active is not None:
@@ -253,12 +235,10 @@ class TaxRepartitionLineViewSet(BaseModelViewSet):
     def get_queryset(self):
         queryset = super().get_queryset()
         tax_id = self.request.query_params.get("tax_id")
-        company_id = self.request.query_params.get("company_id")
         document_type = self.request.query_params.get("document_type")
         if tax_id:
             queryset = queryset.filter(tax_id=tax_id)
-        if company_id:
-            queryset = queryset.filter(tax__company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "tax__company_id")
         if document_type:
             queryset = queryset.filter(document_type=document_type)
         return queryset
@@ -287,14 +267,12 @@ class PaymentMethodLineViewSet(BaseModelViewSet):
         queryset = super().get_queryset()
         journal_id = self.request.query_params.get("journal_id")
         payment_method_id = self.request.query_params.get("payment_method_id")
-        company_id = self.request.query_params.get("company_id")
         active = self.request.query_params.get("active")
         if journal_id:
             queryset = queryset.filter(journal_id=journal_id)
         if payment_method_id:
             queryset = queryset.filter(payment_method_id=payment_method_id)
-        if company_id:
-            queryset = queryset.filter(journal__company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "journal__company_id")
         if active is not None:
             queryset = queryset.filter(active=active.lower() in {"1", "true", "yes"})
         return queryset
@@ -311,12 +289,10 @@ class TransferModelViewSet(BaseModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
         journal_id = self.request.query_params.get("journal_id")
         state = self.request.query_params.get("state")
         active = self.request.query_params.get("active")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         if journal_id:
             queryset = queryset.filter(journal_id=journal_id)
         if state:
@@ -371,9 +347,7 @@ class TransferModelLineViewSet(BaseModelViewSet):
     def get_queryset(self):
         queryset = super().get_queryset()
         transfer_model_id = self.request.query_params.get("transfer_model_id")
-        company_id = self.request.query_params.get("company_id")
         if transfer_model_id:
             queryset = queryset.filter(transfer_model_id=transfer_model_id)
-        if company_id:
-            queryset = queryset.filter(transfer_model__company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "transfer_model__company_id")
         return queryset

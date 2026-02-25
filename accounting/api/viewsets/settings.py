@@ -34,9 +34,7 @@ class AccountingSettingsViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         return queryset
 
     def _build_configuration_payload(self, company):
@@ -240,9 +238,7 @@ class FollowupLevelViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         return queryset
 
 
@@ -252,10 +248,8 @@ class BankAccountViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
         journal_id = self.request.query_params.get("journal_id")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         if journal_id:
             queryset = queryset.filter(journal_id=journal_id)
         return queryset
@@ -267,10 +261,8 @@ class ReconciliationModelViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
         active = self.request.query_params.get("active")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         if active is not None:
             queryset = queryset.filter(active=active.lower() in {"1", "true", "yes"})
         return queryset
@@ -285,11 +277,9 @@ class ReconciliationModelLineViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = super().get_queryset()
         reconciliation_model_id = self.request.query_params.get("reconciliation_model_id")
-        company_id = self.request.query_params.get("company_id")
         if reconciliation_model_id:
             queryset = queryset.filter(reconciliation_model_id=reconciliation_model_id)
-        if company_id:
-            queryset = queryset.filter(reconciliation_model__company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "reconciliation_model__company_id")
         return queryset
 
 
@@ -299,10 +289,8 @@ class FiscalPositionViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
         active = self.request.query_params.get("active")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         if active is not None:
             queryset = queryset.filter(active=active.lower() in {"1", "true", "yes"})
         return queryset
@@ -317,11 +305,9 @@ class FiscalPositionTaxMapViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = super().get_queryset()
         fiscal_position_id = self.request.query_params.get("fiscal_position_id")
-        company_id = self.request.query_params.get("company_id")
         if fiscal_position_id:
             queryset = queryset.filter(fiscal_position_id=fiscal_position_id)
-        if company_id:
-            queryset = queryset.filter(fiscal_position__company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "fiscal_position__company_id")
         return queryset
 
 
@@ -334,11 +320,9 @@ class FiscalPositionAccountMapViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = super().get_queryset()
         fiscal_position_id = self.request.query_params.get("fiscal_position_id")
-        company_id = self.request.query_params.get("company_id")
         if fiscal_position_id:
             queryset = queryset.filter(fiscal_position_id=fiscal_position_id)
-        if company_id:
-            queryset = queryset.filter(fiscal_position__company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "fiscal_position__company_id")
         return queryset
 
 
@@ -348,10 +332,8 @@ class LedgerViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
         active = self.request.query_params.get("active")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         if active is not None:
             queryset = queryset.filter(active=active.lower() in {"1", "true", "yes"})
         return queryset
@@ -363,10 +345,8 @@ class FinancialBudgetViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
         state = self.request.query_params.get("state")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         if state:
             queryset = queryset.filter(state=state)
         return queryset
@@ -379,11 +359,9 @@ class FinancialBudgetLineViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = super().get_queryset()
         budget_id = self.request.query_params.get("budget_id")
-        company_id = self.request.query_params.get("company_id")
         if budget_id:
             queryset = queryset.filter(budget_id=budget_id)
-        if company_id:
-            queryset = queryset.filter(budget__company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "budget__company_id")
         return queryset
 
 
@@ -399,10 +377,8 @@ class AssetModelViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
         active = self.request.query_params.get("active")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         if active is not None:
             queryset = queryset.filter(active=active.lower() in {"1", "true", "yes"})
         return queryset
@@ -414,10 +390,8 @@ class DisallowedExpenseCategoryViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
         active = self.request.query_params.get("active")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         if active is not None:
             queryset = queryset.filter(active=active.lower() in {"1", "true", "yes"})
         return queryset
@@ -429,11 +403,9 @@ class PaymentProviderViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        company_id = self.request.query_params.get("company_id")
         state = self.request.query_params.get("state")
         active = self.request.query_params.get("active")
-        if company_id:
-            queryset = queryset.filter(company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "company_id")
         if state:
             queryset = queryset.filter(state=state)
         if active is not None:
@@ -448,9 +420,7 @@ class PaymentProviderMethodViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = super().get_queryset()
         provider_id = self.request.query_params.get("provider_id")
-        company_id = self.request.query_params.get("company_id")
         if provider_id:
             queryset = queryset.filter(provider_id=provider_id)
-        if company_id:
-            queryset = queryset.filter(provider__company_id=company_id)
+        queryset = apply_company_filter(queryset, self.request, "provider__company_id")
         return queryset
