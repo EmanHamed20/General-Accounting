@@ -18,9 +18,29 @@ class SessionViewSet(viewsets.ViewSet):
         payload = self._build_session_info(request, user)
         payload["tokens"] = {
             "access": str(refresh.access_token),
-            "refresh": str(refresh),
         }
-        return payload
+        return payload, str(refresh)
+
+    def _refresh_cookie_samesite(self):
+        return "Lax" if django_settings.DEBUG else "None"
+
+    def _set_refresh_cookie(self, response, refresh_token):
+        response.set_cookie(
+            key="refresh_token",
+            value=refresh_token,
+            httponly=True,
+            secure=not django_settings.DEBUG,
+            samesite=self._refresh_cookie_samesite(),
+            path="/api/session/",
+            max_age=7 * 24 * 60 * 60,
+        )
+
+    def _clear_refresh_cookie(self, response):
+        response.delete_cookie(
+            key="refresh_token",
+            path="/api/session/",
+            samesite=self._refresh_cookie_samesite(),
+        )
 
     def _generate_unique_company_name(self, base_name):
         name = (base_name or "").strip()
@@ -271,7 +291,10 @@ class SessionViewSet(viewsets.ViewSet):
                 status=status.HTTP_403_FORBIDDEN,
             )
 
-        return Response(self._build_auth_response(request, user), status=status.HTTP_200_OK)
+        payload, refresh_token = self._build_auth_response(request, user)
+        response = Response(payload, status=status.HTTP_200_OK)
+        self._set_refresh_cookie(response, refresh_token)
+        return response
 
     @action(detail=False, methods=["post"], url_path="signup", permission_classes=[permissions.AllowAny])
     def signup(self, request):
@@ -344,27 +367,40 @@ class SessionViewSet(viewsets.ViewSet):
             access.allowed_companies.set(created_companies)
             access.active_companies.set(active_companies)
 
-        return Response(self._build_auth_response(request, user), status=status.HTTP_201_CREATED)
+        payload, refresh_token = self._build_auth_response(request, user)
+        response = Response(payload, status=status.HTTP_201_CREATED)
+        self._set_refresh_cookie(response, refresh_token)
+        return response
 
     @action(detail=False, methods=["post"], url_path="refresh", permission_classes=[permissions.AllowAny])
     def refresh(self, request):
-        refresh_token = request.data.get("refresh")
+        refresh_token = request.COOKIES.get("refresh_token")
         if not refresh_token:
             return Response({"refresh": "This field is required."}, status=status.HTTP_400_BAD_REQUEST)
         try:
-            refresh = RefreshToken(refresh_token)
+            old_refresh = RefreshToken(refresh_token)
         except TokenError:
             return Response({"detail": "Invalid refresh token."}, status=status.HTTP_401_UNAUTHORIZED)
 
-        return Response(
-            {
-                "tokens": {
-                    "access": str(refresh.access_token),
-                    "refresh": str(refresh),
-                }
-            },
+        user_id = old_refresh.get("user_id")
+        UserModel = get_user_model()
+        user = UserModel.objects.filter(id=user_id, is_active=True).first()
+        if not user:
+            return Response({"detail": "Invalid refresh token."}, status=status.HTTP_401_UNAUTHORIZED)
+
+        try:
+            old_refresh.blacklist()
+        except Exception:
+            # Blacklist app can be optional in some local environments.
+            pass
+
+        new_refresh = RefreshToken.for_user(user)
+        response = Response(
+            {"tokens": {"access": str(new_refresh.access_token)}},
             status=status.HTTP_200_OK,
         )
+        self._set_refresh_cookie(response, str(new_refresh))
+        return response
 
     @action(detail=False, methods=["get"], url_path="get-session-info")
     def get_session_info(self, request):
@@ -564,6 +600,14 @@ class SessionViewSet(viewsets.ViewSet):
 
         return Response(self._build_session_info(request, request.user), status=status.HTTP_200_OK)
 
-    @action(detail=False, methods=["post"], url_path="logout")
+    @action(detail=False, methods=["post"], url_path="logout", permission_classes=[permissions.AllowAny])
     def logout_session(self, request):
-        return Response({"detail": "Logged out. Remove tokens on client side."}, status=status.HTTP_200_OK)
+        refresh_token = request.COOKIES.get("refresh_token")
+        if refresh_token:
+            try:
+                RefreshToken(refresh_token).blacklist()
+            except Exception:
+                pass
+        response = Response({"detail": "Logged out."}, status=status.HTTP_200_OK)
+        self._clear_refresh_cookie(response)
+        return response
