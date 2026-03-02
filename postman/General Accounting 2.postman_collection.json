@@ -3170,7 +3170,7 @@
                                                                                   ],
                                                                        "body":  {
                                                                                     "mode":  "raw",
-                                                                                    "raw":  "{\n  \"move\": 1,\n  \"account\": 1,\n  \"partner\": 1,\n  \"currency\": 1,\n  \"analytic_account\": \"\",\n  \"analytic_distribution\": \"\",\n  \"tax\": 1,\n  \"tax_repartition_line\": \"\",\n  \"name\": \"\",\n  \"date\": \"2026-01-01\",\n  \"debit\": \"\",\n  \"credit\": \"\",\n  \"amount_currency\": \"\"\n}"
+                                                                                    "raw":  "{\n  \"move\": 1,\n  \"account\": 1,\n  \"partner\": 1,\n  \"currency\": 1,\n  \"analytic_account\": null,\n  \"analytic_distribution\": {\n    \"1\": 100\n  },\n  \"tax\": null,\n  \"tax_repartition_line\": null,\n  \"name\": \"Journal item line\",\n  \"date\": \"2026-01-01\",\n  \"debit\": 100,\n  \"credit\": 0,\n  \"amount_currency\": 100\n}"
                                                                                 }
                                                                    }
                                                    },
@@ -3194,7 +3194,7 @@
                                                                                   ],
                                                                        "body":  {
                                                                                     "mode":  "raw",
-                                                                                    "raw":  "{\n  \"move\": 1,\n  \"account\": 1,\n  \"partner\": 1,\n  \"currency\": 1,\n  \"analytic_account\": \"\",\n  \"analytic_distribution\": \"\",\n  \"tax\": 1,\n  \"tax_repartition_line\": \"\",\n  \"name\": \"\",\n  \"date\": \"2026-01-01\",\n  \"debit\": \"\",\n  \"credit\": \"\",\n  \"amount_currency\": \"\"\n}"
+                                                                                    "raw":  "{\n  \"move\": 1,\n  \"account\": 1,\n  \"partner\": 1,\n  \"currency\": 1,\n  \"analytic_account\": null,\n  \"analytic_distribution\": {\n    \"1\": 100\n  },\n  \"tax\": null,\n  \"tax_repartition_line\": null,\n  \"name\": \"Updated journal item line\",\n  \"date\": \"2026-01-01\",\n  \"debit\": 0,\n  \"credit\": 100,\n  \"amount_currency\": -100\n}"
                                                                                 }
                                                                    }
                                                    },
@@ -3274,7 +3274,7 @@
                                                        "name":  "List Journal Entries",
                                                        "request":  {
                                                                        "method":  "GET",
-                                                                       "url":  "{{base_url}}/api/journal-entries/"
+                                                                       "url":  "{{base_url}}/api/journal-entries/?date_from={{date_from}}\u0026date_to={{date_to}}\u0026journal_id={{journal_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026state={{state}}"
                                                                    }
                                                    },
                                                    {
@@ -3290,7 +3290,7 @@
                                                                                   ],
                                                                        "body":  {
                                                                                     "mode":  "raw",
-                                                                                    "raw":  "{\n}"
+                                                                                    "raw":  "{\n  \"company\": 1,\n  \"journal\": 1,\n  \"partner\": 1,\n  \"currency\": 1,\n  \"payment_term\": 1,\n  \"incoterm\": null,\n  \"incoterm_location\": \"\",\n  \"reference\": \"\",\n  \"name\": \"\",\n  \"invoice_date\": \"2026-01-01\",\n  \"date\": \"2026-01-01\",\n  \"state\": \"draft\",\n  \"is_debit_note\": false,\n  \"transfer_model\": null\n}"
                                                                                 }
                                                                    }
                                                    },
@@ -3314,7 +3314,7 @@
                                                                                   ],
                                                                        "body":  {
                                                                                     "mode":  "raw",
-                                                                                    "raw":  "{\n}"
+                                                                                    "raw":  "{\n  \"company\": 1,\n  \"journal\": 1,\n  \"partner\": 1,\n  \"currency\": 1,\n  \"payment_term\": 1,\n  \"incoterm\": null,\n  \"incoterm_location\": \"\",\n  \"reference\": \"\",\n  \"name\": \"\",\n  \"invoice_date\": \"2026-01-01\",\n  \"date\": \"2026-01-01\",\n  \"state\": \"draft\",\n  \"is_debit_note\": false,\n  \"transfer_model\": null\n}"
                                                                                 }
                                                                    }
                                                    },
@@ -3372,7 +3372,7 @@
                                                                                   ],
                                                                        "body":  {
                                                                                     "mode":  "raw",
-                                                                                    "raw":  "{\n}"
+                                                                                    "raw":  "{\n  \"date\": \"2026-01-02\",\n  \"reason\": \"Reversal adjustment\",\n  \"post\": false\n}"
                                                                                 }
                                                                    }
                                                    }
@@ -3385,7 +3385,7 @@
                                                        "name":  "List Journal Entry Lines",
                                                        "request":  {
                                                                        "method":  "GET",
-                                                                       "url":  "{{base_url}}/api/journal-entry-lines/"
+                                                                       "url":  "{{base_url}}/api/journal-entry-lines/?account_id={{account_id}}\u0026date_from={{date_from}}\u0026date_to={{date_to}}\u0026move_id={{journal_entry_id}}\u0026page={{page}}\u0026page_size={{page_size}}"
                                                                    }
                                                    },
                                                    {
@@ -3401,7 +3401,7 @@
                                                                                   ],
                                                                        "body":  {
                                                                                     "mode":  "raw",
-                                                                                    "raw":  "{\n}"
+                                                                                    "raw":  "{\n  \"move\": 1,\n  \"account\": 1,\n  \"partner\": 1,\n  \"currency\": 1,\n  \"analytic_account\": null,\n  \"analytic_distribution\": {\n    \"1\": 100\n  },\n  \"tax\": null,\n  \"tax_repartition_line\": null,\n  \"name\": \"Journal entry line\",\n  \"date\": \"2026-01-01\",\n  \"debit\": 100,\n  \"credit\": 0,\n  \"amount_currency\": 100\n}"
                                                                                 }
                                                                    }
                                                    },
@@ -3425,7 +3425,7 @@
                                                                                   ],
                                                                        "body":  {
                                                                                     "mode":  "raw",
-                                                                                    "raw":  "{\n}"
+                                                                                    "raw":  "{\n  \"move\": 1,\n  \"account\": 1,\n  \"partner\": 1,\n  \"currency\": 1,\n  \"analytic_account\": null,\n  \"analytic_distribution\": {\n    \"1\": 100\n  },\n  \"tax\": null,\n  \"tax_repartition_line\": null,\n  \"name\": \"Updated journal entry line\",\n  \"date\": \"2026-01-01\",\n  \"debit\": 0,\n  \"credit\": 100,\n  \"amount_currency\": -100\n}"
                                                                                 }
                                                                    }
                                                    },
