@@ -21,25 +21,44 @@ class SessionViewSet(viewsets.ViewSet):
         }
         return payload, str(refresh)
 
-    def _refresh_cookie_samesite(self):
-        return "Lax" if django_settings.DEBUG else "None"
+    
 
+    # def _set_refresh_cookie(self, response, refresh_token):
+    #     response.set_cookie(
+    #         key="refresh_token",
+    #         value=refresh_token,
+    #         httponly=True,
+    #         # secure=not django_settings.DEBUG,
+    #         # samesite=self._refresh_cookie_samesite(),
+    #          secure=False,        # False for local dev (no HTTPS)
+    #     samesite="None",     # Required for cross-origin
+    #         path="/api/session/",
+    #         max_age=7 * 24 * 60 * 60,
+    #     )
+    def _refresh_cookie_samesite(self):
+       return "Lax" if django_settings.DEBUG else "None"
+    
     def _set_refresh_cookie(self, response, refresh_token):
-        response.set_cookie(
-            key="refresh_token",
-            value=refresh_token,
-            httponly=True,
-            secure=not django_settings.DEBUG,
-            samesite=self._refresh_cookie_samesite(),
-            path="/api/session/",
-            max_age=7 * 24 * 60 * 60,
-        )
+      is_debug = django_settings.DEBUG
+      response.set_cookie(
+        key="refresh_token",
+        value=refresh_token,
+        httponly=True,
+        secure= False,                 # False in dev
+        # samesite="Lax" if is_debug else "None",
+       samesite = "Lax",
+        path="/api/session/",
+        max_age=7 * 24 * 60 * 60,
+    )
+
 
     def _clear_refresh_cookie(self, response):
         response.delete_cookie(
             key="refresh_token",
             path="/api/session/",
-            samesite=self._refresh_cookie_samesite(),
+            # samesite=self._refresh_cookie_samesite(),
+             samesite = "Lax",
+
         )
 
     def _generate_unique_company_name(self, base_name):
