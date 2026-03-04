@@ -2,7 +2,6 @@ stages: [deploy]
 
 test_job:
   stage: deploy
-  
   script:
     - whoami
     - hostname
