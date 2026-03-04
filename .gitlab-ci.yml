@@ -1,6 +1,9 @@
+stages: [deploy]
+
 test_job:
   stage: deploy
+  tags: ["aitsp"]
   script:
+    - whoami
+    - hostname
     - echo "Hello World"
-  tags:
-    - aitsp
