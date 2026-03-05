@@ -1,4 +1,4 @@
-from decimal import Decimal
+from decimal import Decimal, ROUND_HALF_UP
 
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -7,6 +7,7 @@ from .base import AccountingBaseModel
 
 
 class InvoiceLine(AccountingBaseModel):
+    AMOUNT_QUANT = Decimal("0.000001")
     move = models.ForeignKey("accounting.Move", on_delete=models.CASCADE, related_name="invoice_lines")
     account = models.ForeignKey("accounting.Account", on_delete=models.PROTECT, related_name="invoice_lines")
     tax = models.ForeignKey("accounting.Tax", on_delete=models.PROTECT, null=True, blank=True, related_name="invoice_lines")
@@ -48,8 +49,9 @@ class InvoiceLine(AccountingBaseModel):
             elif self.tax.amount_type == "division" and self.tax.amount < Decimal("100"):
                 tax_amount = subtotal * (self.tax.amount / (Decimal("100") - self.tax.amount))
 
-        self.line_subtotal = subtotal
-        self.line_tax = tax_amount
-        self.line_total = subtotal + tax_amount
+        # Keep computed amounts compatible with DecimalField(..., decimal_places=6).
+        self.line_subtotal = subtotal.quantize(self.AMOUNT_QUANT, rounding=ROUND_HALF_UP)
+        self.line_tax = tax_amount.quantize(self.AMOUNT_QUANT, rounding=ROUND_HALF_UP)
+        self.line_total = (self.line_subtotal + self.line_tax).quantize(self.AMOUNT_QUANT, rounding=ROUND_HALF_UP)
 
         super().save(*args, **kwargs)
