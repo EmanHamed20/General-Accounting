@@ -774,7 +774,7 @@
                                                                    }
                                                    }
                                                ]
-                                  },
+                                   },
                                   {
                                       "name":  "Asset Depreciation Lines",
                                       "item":  [
@@ -3749,12 +3749,12 @@
                                                                                   ],
                                                                        "body":  {
                                                                                     "mode":  "raw",
-                                                                                    "raw":  "{\n\n}"
+                                                                                    "raw":  "{\n  \"date\": \"2026-01-02\",\n  \"reason\": \"Vendor refund adjustment\"\n}"
                                                                                 }
                                                                    }
                                                    }
                                                ]
-                                  },
+                                   },
                                   {
                                       "name":  "Vendor Debit Notes",
                                       "item":  [
