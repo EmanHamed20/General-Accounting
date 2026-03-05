@@ -3588,12 +3588,151 @@
                                                    }
                                                ]
                                   },
-                                  {
-                                      "name":  "Vendor Bills",
-                                      "item":  [
-
-                                               ]
-                                  },
+                                   {
+                                       "name":  "Vendor Bills",
+                                       "item":  [
+                                                   {
+                                                       "name":  "List Vendor Bills",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{base_url}}/api/vendor-bills/?date_from={{date_from}}\u0026date_to={{date_to}}\u0026journal_id={{journal_id}}\u0026page={{page}}\u0026page_size={{page_size}}\u0026state={{state}}"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Create Vendor Bill",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{base_url}}/api/vendor-bills/",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{\n  \"company\": 1,\n  \"journal\": 1,\n  \"partner\": 1,\n  \"currency\": 1,\n  \"payment_term\": 1,\n  \"incoterm\": null,\n  \"incoterm_location\": \"\",\n  \"reference\": \"\",\n  \"name\": \"\",\n  \"invoice_date\": \"2026-01-01\",\n  \"date\": \"2026-01-01\"\n}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Get Vendor Bill",
+                                                       "request":  {
+                                                                       "method":  "GET",
+                                                                       "url":  "{{base_url}}/api/vendor-bills/{{vendor_bill_id}}/"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Update Vendor Bill",
+                                                       "request":  {
+                                                                       "method":  "PUT",
+                                                                       "url":  "{{base_url}}/api/vendor-bills/{{vendor_bill_id}}/",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{\n  \"company\": 1,\n  \"journal\": 1,\n  \"partner\": 1,\n  \"currency\": 1,\n  \"payment_term\": 1,\n  \"incoterm\": null,\n  \"incoterm_location\": \"\",\n  \"reference\": \"\",\n  \"name\": \"\",\n  \"invoice_date\": \"2026-01-01\",\n  \"date\": \"2026-01-01\"\n}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "Delete Vendor Bill",
+                                                       "request":  {
+                                                                       "method":  "DELETE",
+                                                                       "url":  "{{base_url}}/api/vendor-bills/{{vendor_bill_id}}/"
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "POST Post",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{base_url}}/api/vendor-bills/{{vendor_bill_id}}/post/",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "POST Cancel",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{base_url}}/api/vendor-bills/{{vendor_bill_id}}/cancel/",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "POST Reset To Draft",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{base_url}}/api/vendor-bills/{{vendor_bill_id}}/reset-to-draft/",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "POST Reverse",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{base_url}}/api/vendor-bills/{{vendor_bill_id}}/reverse/",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{\n  \"date\": \"2026-01-02\",\n  \"reason\": \"Vendor bill reversal\"\n}"
+                                                                                }
+                                                                   }
+                                                   },
+                                                   {
+                                                       "name":  "POST Create Debit Note",
+                                                       "request":  {
+                                                                       "method":  "POST",
+                                                                       "url":  "{{base_url}}/api/vendor-bills/{{vendor_bill_id}}/create-debit-note/",
+                                                                       "header":  [
+                                                                                      {
+                                                                                          "key":  "Content-Type",
+                                                                                          "value":  "application/json"
+                                                                                      }
+                                                                                  ],
+                                                                       "body":  {
+                                                                                    "mode":  "raw",
+                                                                                    "raw":  "{\n  \"date\": \"2026-01-02\",\n  \"reason\": \"Vendor bill adjustment\"\n}"
+                                                                                }
+                                                                   }
+                                                   }
+                                                ]
+                                   },
                                   {
                                       "name":  "Vendor Refunds",
                                       "item":  [

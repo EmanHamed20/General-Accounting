@@ -635,11 +635,26 @@ class InvoiceSerializer(NameAwareModelSerializer):
             "updated_at",
         ]
 
+    def _resolve_default_move_type(self):
+        view = self.context.get("view")
+        if not view:
+            return None
+
+        view_name = view.__class__.__name__
+        defaults = {
+            "VendorBillViewSet": "in_invoice",
+            "VendorRefundViewSet": "in_refund",
+            "CreditNoteViewSet": "out_refund",
+            "DebitNoteViewSet": "out_invoice",
+        }
+        return defaults.get(view_name)
+
     def validate(self, attrs):
         invoice_types = {"out_invoice", "in_invoice", "out_refund", "in_refund"}
-        move_type = attrs.get("move_type") or getattr(self.instance, "move_type", None)
+        move_type = attrs.get("move_type") or getattr(self.instance, "move_type", None) or self._resolve_default_move_type()
         if move_type not in invoice_types:
             raise serializers.ValidationError({"move_type": "Invoice move_type must be out_invoice/in_invoice/out_refund/in_refund."})
+        attrs.setdefault("move_type", move_type)
 
         company = attrs.get("company") or getattr(self.instance, "company", None)
         journal = attrs.get("journal") if "journal" in attrs else getattr(self.instance, "journal", None)
