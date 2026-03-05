@@ -2,6 +2,7 @@ stages: [deploy]
 
 test_job:
   stage: deploy
+  tags: ["aitsp"]
   script:
     - whoami
     - hostname
