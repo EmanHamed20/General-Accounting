@@ -1,4 +1,4 @@
-# Python
+# Python 
 *.py[cod]
 __pycache__/
 *.so
