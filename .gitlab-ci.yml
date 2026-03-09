@@ -28,4 +28,4 @@ deploy_to_server:
     # - sudo systemctl restart gunicorn
     
   only:
-    - main  # Only deploy when you push to the 'main' (or master) branch
+    - mirror-main  # Only deploy when you push to the 'main' (or master) branch
