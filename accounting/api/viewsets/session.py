@@ -286,6 +286,24 @@ class SessionViewSet(viewsets.ViewSet):
                 normalized_ids.append(value)
         return normalized_ids
 
+    def _resolve_request_user(self, request):
+        # Dev fallback: allow APIs to work without login/token by resolving a user context.
+        if getattr(request, "user", None) and request.user.is_authenticated:
+            return request.user
+
+        payload = request.data if hasattr(request, "data") and isinstance(request.data, dict) else {}
+        explicit_user_id = payload.get("user_id") or request.query_params.get("user_id") or request.headers.get("X-User-Id")
+
+        UserModel = get_user_model()
+        if explicit_user_id not in (None, ""):
+            try:
+                explicit_user_id = int(explicit_user_id)
+            except (TypeError, ValueError):
+                return None
+            return UserModel.objects.filter(id=explicit_user_id, is_active=True).first()
+
+        return UserModel.objects.filter(is_active=True).order_by("id").first()
+
     @action(detail=False, methods=["post"], url_path="authenticate", permission_classes=[permissions.AllowAny])
     def authenticate_session(self, request):
         username = (request.data.get("username") or "").strip()
@@ -423,20 +441,26 @@ class SessionViewSet(viewsets.ViewSet):
 
     @action(detail=False, methods=["get"], url_path="get-session-info")
     def get_session_info(self, request):
-        if not request.user or not request.user.is_authenticated:
-            return Response({"detail": "Authentication required."}, status=status.HTTP_401_UNAUTHORIZED)
-        return Response(self._build_session_info(request, request.user), status=status.HTTP_200_OK)
+        # if not request.user or not request.user.is_authenticated:
+        #     return Response({"detail": "Authentication required."}, status=status.HTTP_401_UNAUTHORIZED)
+        user = self._resolve_request_user(request)
+        if not user:
+            return Response({"detail": "No active user available."}, status=status.HTTP_401_UNAUTHORIZED)
+        return Response(self._build_session_info(request, user), status=status.HTTP_200_OK)
 
     @action(detail=False, methods=["post"], url_path="switch-company")
     def switch_company(self, request):
-        if not request.user or not request.user.is_authenticated:
-            return Response({"detail": "Authentication required."}, status=status.HTTP_401_UNAUTHORIZED)
+        # if not request.user or not request.user.is_authenticated:
+        #     return Response({"detail": "Authentication required."}, status=status.HTTP_401_UNAUTHORIZED)
+        user = self._resolve_request_user(request)
+        if not user:
+            return Response({"detail": "No active user available."}, status=status.HTTP_401_UNAUTHORIZED)
 
         company_id = request.data.get("company_id")
         if not company_id:
             return Response({"company_id": "This field is required."}, status=status.HTTP_400_BAD_REQUEST)
 
-        access, _ = UserCompanyAccess.objects.get_or_create(user=request.user)
+        access, _ = UserCompanyAccess.objects.get_or_create(user=user)
         if not access.allowed_companies.filter(id=company_id).exists():
             return Response(
                 {"company_id": "This company is not allowed for current user."},
@@ -447,19 +471,22 @@ class SessionViewSet(viewsets.ViewSet):
             access.active_companies.add(company_id)
         access.current_company_id = company_id
         access.save(update_fields=["current_company", "updated_at"])
-        return Response(self._build_session_info(request, request.user), status=status.HTTP_200_OK)
+        return Response(self._build_session_info(request, user), status=status.HTTP_200_OK)
 
     @action(detail=False, methods=["post"], url_path="set-active-companies")
     def set_active_companies(self, request):
-        if not request.user or not request.user.is_authenticated:
-            return Response({"detail": "Authentication required."}, status=status.HTTP_401_UNAUTHORIZED)
+        # if not request.user or not request.user.is_authenticated:
+        #     return Response({"detail": "Authentication required."}, status=status.HTTP_401_UNAUTHORIZED)
+        user = self._resolve_request_user(request)
+        if not user:
+            return Response({"detail": "No active user available."}, status=status.HTTP_401_UNAUTHORIZED)
 
         try:
             normalized_ids = self._normalize_company_ids(request.data.get("company_ids"))
         except DRFValidationError as exc:
             return Response(exc.detail, status=status.HTTP_400_BAD_REQUEST)
 
-        access, _ = UserCompanyAccess.objects.get_or_create(user=request.user)
+        access, _ = UserCompanyAccess.objects.get_or_create(user=user)
         allowed_ids = set(access.allowed_companies.values_list("id", flat=True))
         invalid = [cid for cid in normalized_ids if cid not in allowed_ids]
         if invalid:
@@ -472,14 +499,15 @@ class SessionViewSet(viewsets.ViewSet):
         if not access.current_company_id or access.current_company_id not in normalized_ids:
             access.current_company_id = normalized_ids[0]
             access.save(update_fields=["current_company", "updated_at"])
-        return Response(self._build_session_info(request, request.user), status=status.HTTP_200_OK)
+        return Response(self._build_session_info(request, user), status=status.HTTP_200_OK)
 
     @action(detail=False, methods=["patch"], url_path="update-profile")
     def update_profile(self, request):
-        if not request.user or not request.user.is_authenticated:
-            return Response({"detail": "Authentication required."}, status=status.HTTP_401_UNAUTHORIZED)
-
-        user = request.user
+        # if not request.user or not request.user.is_authenticated:
+        #     return Response({"detail": "Authentication required."}, status=status.HTTP_401_UNAUTHORIZED)
+        user = self._resolve_request_user(request)
+        if not user:
+            return Response({"detail": "No active user available."}, status=status.HTTP_401_UNAUTHORIZED)
         payload = request.data if isinstance(request.data, dict) else {}
         allowed_fields = {"first_name", "last_name", "email", "password", "username"}
         changed = False
@@ -566,8 +594,11 @@ class SessionViewSet(viewsets.ViewSet):
 
     @action(detail=False, methods=["post"], url_path="add-company")
     def add_company(self, request):
-        if not request.user or not request.user.is_authenticated:
-            return Response({"detail": "Authentication required."}, status=status.HTTP_401_UNAUTHORIZED)
+        # if not request.user or not request.user.is_authenticated:
+        #     return Response({"detail": "Authentication required."}, status=status.HTTP_401_UNAUTHORIZED)
+        user = self._resolve_request_user(request)
+        if not user:
+            return Response({"detail": "No active user available."}, status=status.HTTP_401_UNAUTHORIZED)
 
         company_data = request.data if isinstance(request.data, dict) else {}
         if not (company_data.get("name") or "").strip():
@@ -575,7 +606,7 @@ class SessionViewSet(viewsets.ViewSet):
 
         with transaction.atomic():
             company = self._create_signup_company(company_data)
-            access, _ = UserCompanyAccess.objects.get_or_create(user=request.user)
+            access, _ = UserCompanyAccess.objects.get_or_create(user=user)
             access.allowed_companies.add(company)
 
             make_active = company_data.get("is_active", True)
@@ -587,12 +618,15 @@ class SessionViewSet(viewsets.ViewSet):
                 access.current_company = company
                 access.save(update_fields=["current_company", "updated_at"])
 
-        return Response(self._build_session_info(request, request.user), status=status.HTTP_201_CREATED)
+        return Response(self._build_session_info(request, user), status=status.HTTP_201_CREATED)
 
     @action(detail=False, methods=["post"], url_path="attach-existing-company")
     def attach_existing_company(self, request):
-        if not request.user or not request.user.is_authenticated:
-            return Response({"detail": "Authentication required."}, status=status.HTTP_401_UNAUTHORIZED)
+        # if not request.user or not request.user.is_authenticated:
+        #     return Response({"detail": "Authentication required."}, status=status.HTTP_401_UNAUTHORIZED)
+        user = self._resolve_request_user(request)
+        if not user:
+            return Response({"detail": "No active user available."}, status=status.HTTP_401_UNAUTHORIZED)
 
         company_id = request.data.get("company_id")
         if not company_id:
@@ -606,7 +640,7 @@ class SessionViewSet(viewsets.ViewSet):
         if not company:
             return Response({"company_id": "Company not found."}, status=status.HTTP_404_NOT_FOUND)
 
-        access, _ = UserCompanyAccess.objects.get_or_create(user=request.user)
+        access, _ = UserCompanyAccess.objects.get_or_create(user=user)
         access.allowed_companies.add(company)
 
         if request.data.get("is_active", True):
@@ -617,7 +651,7 @@ class SessionViewSet(viewsets.ViewSet):
             access.current_company = company
             access.save(update_fields=["current_company", "updated_at"])
 
-        return Response(self._build_session_info(request, request.user), status=status.HTTP_200_OK)
+        return Response(self._build_session_info(request, user), status=status.HTTP_200_OK)
 
     @action(detail=False, methods=["post"], url_path="logout", permission_classes=[permissions.AllowAny])
     def logout_session(self, request):
