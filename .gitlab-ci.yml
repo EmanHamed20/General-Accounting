@@ -1,13 +1,3 @@
-stages:
-  - deploy
-
-deploy_job:
-  stage: deploy
-  tags:
-    - deploy
+create_file:
   script:
-    - echo "Deployment starting..."
-    - whoami
-    - pwd
-    - rsync -av --exclude='.git' ./ /mnt/general_accounting/
-    - echo "Done"
+    - echo "buiding..."
