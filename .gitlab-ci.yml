@@ -1,19 +1,14 @@
 stages:
-  - deploy
+  - debug
 
-deploy_to_server:
-  stage: deploy
-  tags:
-    - deploy  # <--- CRITICAL: Go to GitLab UI and check if your runner has this tag!
+test_connection:
+  stage: debug
+  # Remove tags for this test to be 100% sure it's not a tag issue
   script:
-    - echo "Pipeline started!"
-    - rsync -av --exclude='.git' --exclude='venv' ./ /mnt/general_accounting/
-    - cd /mnt/general_accounting
-    - python3 -m venv venv
-    - source venv/bin/activate
-    - pip install --upgrade pip
-    # If you don't have a requirements.txt yet, comment the next line with #
-    - pip install -r requirements.txt
-    - python3 manage.py migrate --noinput
-    - python3 manage.py collectstatic --noinput
-    - echo "Deployment finished successfully"
+    - echo "--- DEBUGGING DATA ---"
+    - echo "Running as user: $(whoami)"
+    - echo "Current directory: $(pwd)"
+    - echo "GitLab Project URL: $CI_PROJECT_URL"
+    - echo "Branch Name: $CI_COMMIT_BRANCH"
+    - echo "Runner Description: $CI_RUNNER_DESCRIPTION"
+    - ls -la /mnt/
