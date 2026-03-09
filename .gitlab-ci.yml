@@ -1,14 +1,13 @@
 stages:
-  - debug
+  - deploy
 
-test_connection:
-  stage: debug
-  # Remove tags for this test to be 100% sure it's not a tag issue
+deploy_job:
+  stage: deploy
+  tags:
+    - deploy
   script:
-    - echo "--- DEBUGGING DATA ---"
-    - echo "Running as user: $(whoami)"
-    - echo "Current directory: $(pwd)"
-    - echo "GitLab Project URL: $CI_PROJECT_URL"
-    - echo "Branch Name: $CI_COMMIT_BRANCH"
-    - echo "Runner Description: $CI_RUNNER_DESCRIPTION"
-    - ls -la /mnt/
+    - echo "Deployment starting..."
+    - whoami
+    - pwd
+    - rsync -av --exclude='.git' ./ /mnt/general_accounting/
+    - echo "Done"
